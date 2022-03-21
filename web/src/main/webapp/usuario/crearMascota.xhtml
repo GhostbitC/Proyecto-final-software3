@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xml:lang="en" lang="en">
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+    <ui:define name="title">Mascota | Crear</ui:define>
+    <ui:define name="content">
+
+        <div class="row">
+
+            <div class="col">
+                <img src="${pageContext.request.contextPath}/resources/img/mascotas.png" alt=""
+                     style="margin-left: 20%;height: 70%;width: 70%; margin-top: 15%"/>
+            </div>
+
+            <div class="col">
+
+                <h:form id="crear-mascota">
+
+                    <p:card styleClass="tarjeta"
+                            style="border-radius: 15px;margin-left: 8%; margin-right: 20%; margin-top: 10%; margin-bottom: 2%; width: 80%;">
+                        <f:facet name="title">
+                            <font color="#000000"
+                                  face="tahoma">¡Regístrese su mascota!</font>
+                        </f:facet>
+
+                        <p><font color="#000000" >¡Hola! en el siguiente formulario puedes indicarnos los datos de tu mascota para poder registrarla y poder disfrutar de todo lo que ofrecemos para ella.</font></p>
+
+                        <h:panelGrid columns="2" cellpadding="3" width="100%">
+
+                            <p:outputLabel for="tipo_mascota" value="Tipo:"/>
+                            <p:selectOneMenu id="tipo_mascota" value="#{mascotaBean.mascota.tipo}" style="width: 100%"
+                                             converter="#{tipoConverter}"
+                                             required="true"
+                                             requiredMessage="El tipo de la mascota es obligatorio">
+                                <f:selectItem itemLabel="Seleccione un tipo" noSelectionOption="true"/>
+                                <f:selectItems var="tipo" itemLabel="#{tipo.nombre}" value="#{mascotaBean.tipos}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="raza_mascota" value="Raza:"/>
+                            <p:inputText id="raza_mascota" value="#{mascotaBean.mascota.raza}" style="width: 100%"
+                                         required="true"
+                                         requiredMessage="La raza de la mascota es obligatorio"/>
+
+                            <p:outputLabel for="nombre_mascota" value="Nombre:"/>
+                            <p:inputText id="nombre_mascota" value="#{mascotaBean.mascota.nombre}" style="width: 100%"
+                                         required="true"
+                                         requiredMessage="El nombre de la mascota es obligatorio"/>
+
+                            <p:outputLabel for="vacunas_mascota" value="Cantidad vacunas:"/>
+                            <p:inputText id="vacunas_mascota" value="#{mascotaBean.mascota.cantidadVacunas}"
+                                         style="width: 100%"/>
+
+                            <p:outputLabel for="peso_mascota" value="Peso:"/>
+                            <p:inputText id="peso_mascota" value="#{mascotaBean.mascota.peso}" style="width: 100%"/>
+
+                            <p:outputLabel for="imagenes_lugar" value="Imagenes: "/>
+                            <p:fileUpload id="imagenes_lugar" listener="#{mascotaBean.subirImagenes}" mode="advanced"
+                                          multiple="true" sizeLimit="1000000" fileLimit="5"
+                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" skinSimple="true"/>
+
+                        </h:panelGrid>
+                        <br></br>
+
+                        <h:panelGrid columns="2" cellpadding="5" width="100%">
+
+                            <p:commandButton action="#{mascotaBean.registrarMascota}" value="Crear" update="@form"
+                                             style="background: #2F8DF1;width: 50%; margin-left: 40%;margin-top: 5%"/>
+
+                            <p:button href="/index.xhtml" value="Volver"
+                                      style="background: #2F8DF1;width: 50%; margin-left: 15%;margin-top: 5%"/>
+
+                        </h:panelGrid>
+
+                        <p:growl showDetail="true"/>
+
+                    </p:card>
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+</ui:composition>
+</html>

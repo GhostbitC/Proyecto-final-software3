@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+
+    <ui:define name="head">
+    </ui:define>
+
+    <ui:define name="title">Producto | Busqueda</ui:define>
+    <ui:define name="content">
+
+        <div style="margin: 2% 5%">
+            <h1 style="text-align: center"> <font color="#2F8DF1">Resultados de busqueda </font></h1>
+            <p:divider></p:divider>
+        </div>
+
+        <div class="row" style="margin-left: 27%;margin-top: -3%">
+            <div class="col">
+                <h:form id="form">
+                <p:carousel id="carusel" value="#{busquedaBean.productos}" var="producto"
+                            itemStyle="text-align:center" numVisible="1" easing="easeOutBounce"
+                            style="width: 500px;display: block; margin: auto;margin: 5%;" circular="true">
+                    <div class="product">
+                        <div class="product-grid-item p-p-5">
+                            <div class="product-grid-item-content" style="margin: 5%">
+                                <div><h2><font color="#2F8DF1"
+                                           face="tahoma">#{producto.nombre}
+                                        </font></h2>
+                                </div>
+                                <div>
+                                    <img src="/uploads/#{producto.imagenPrincipal}" alt=""
+                                         height="300" width="300"/>
+                                </div>
+
+                                <p:commandButton value="Ver detalle" style="margin-top: 20px" action="#{detalleProductoBean.irADetalle(producto.id)}"
+                                                 styleClass="ui-button-raised" icon="pi pi-arrow-right"
+                                                 iconPos="right"/>
+                            </div>
+                        </div>
+                    </div>
+                </p:carousel>
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+</html>

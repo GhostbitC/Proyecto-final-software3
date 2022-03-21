@@ -1,0 +1,133 @@
+#header .btn-buscar {
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+    background: none;
+}
+
+#header .btn-buscar.ui-state-hover {
+    color: black;
+    background: white;
+}
+
+.input-search {
+    width: 250px;
+}
+
+.ui-column-title {
+    text-align: center !important;
+    align-content: center !important;
+}
+
+.ui-datatable {
+    text-align: center;
+    align-content: center;
+}
+
+.container-lg{
+    width: 100%;
+    max-width: 1600px;
+    height: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+
+.container-lg .card{
+    width: 280px;
+    height: 450px;
+    border-radius: 8px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.25s;
+    background: #2F8DF1;
+}
+
+.container-lg .card:hover{
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+.container-lg .card .btn-ver{
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+    background: none;
+}
+
+.container-lg .card .btn-ver:hover{
+    color: black;
+    background: white;
+}
+
+.container-lg .card img{
+    width: 100px;
+    height: 100px;
+    display:block;
+    margin:auto;
+}
+
+
+.container-lg .card h3{
+    font-weight: 400;
+    background: #2F8DF1;
+}
+
+.container-lg .card p{
+    padding: 0 1rem;
+    font-size: 16px;
+    font-weight: 300;
+    background: #2F8DF1;
+}
+
+.container-lg .card a {
+    font-weight: 500;
+    text-decoration: none;
+    color: #2F8DF1;
+    background: #2F8DF1;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .input-search {
+        width: 100%;
+    }
+
+    .ui-card {
+        margin-left: 5% !important;
+        margin-right: 5% !important;
+    }
+
+    .row {
+        display: list-item;
+    }
+
+    .col {
+        margin-top: 5%;
+    }
+
+    .tarjeta {
+        width: 90% !important;
+    }
+
+
+    .ui-dialog {
+        width: 90% !important;
+        margin-left: -25%;
+    }
+
+    #carusel {
+        width: 90% !important;
+    }
+
+    .fotox {
+        margin-top: 50%;
+        margin-left: 270%;
+    }
+
+    .tarjetaUnica {
+        width: 90% !important;
+        margin: 5% !important;
+    }
+}

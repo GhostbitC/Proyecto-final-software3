@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+
+    <ui:define name="title">Guarderia | Detalle</ui:define>
+    <ui:define name="content">
+
+
+        <div class="row">
+        <div style="width: 60%" class="col">
+            <img src="${pageContext.request.contextPath}/resources/img/veterinaria.jpg" alt=""
+                 style="height: 400px;width: 630px; margin: 2%;text-align:center;margin-bottom: 2em; margin-top: 40px;margin-left: 60px"/>
+
+            <p:card style="background: #2F8DF1;width: 630px;height: 270px; margin-left: 60px">
+            <f:facet name="title">
+                <h2> <font color="#FFFFFF"
+                           face="tahoma"> Descripción </font></h2>
+            </f:facet>
+
+                <h5 align="justify">
+                    <font color="#FFFFFF"
+                          face="tahoma">  Trabajamos las 24 horas para brindarle el mejor servicio a tu mascota, un lugar donde se pueda sentir como en casa, brindando una atención con personal 100% capacitado para tu tranquilidad y la de tu querido amigo
+                    </font>
+                </h5>
+                <br></br>
+                <h5 align="justify">
+                    <font color="#FFFFFF"
+                          face="tahoma">
+                        ¡Recuerda!, para adquirir este servicio debes haber ingresado al sistema con anterioridad.
+                    </font>
+                </h5>
+            </p:card>
+        </div>
+
+
+            <div class="col" style="margin-left: 70px;width: 200px;height: 692px;margin-top: 20px">
+                <br></br>
+
+                <p:card style="width: 32rem; margin-bottom: 2em;height: 692px">
+                    <f:facet name="title">
+                        <h1 style="text-align: center;"> <font color="#2F8DF1"
+                                   face="tahoma">Veterinaria CarePet</font> </h1>
+
+                    </f:facet>
+
+                    <h5 align="justify" style="margin-left: 2%;margin-right: 2%">
+                        <font color="#000000"
+                              face="tahoma">Nuestro servicio de veterianaria cuenta con médicos veterinarios expertos en diferentes disciplinas y con la metodología necesaria para llegar a los diagnósticos que permitirán enfocar los tratamientos de manera eficiente y oportuna. </font>
+                    </h5>
+
+                    <br></br>
+
+                    <h5 style="margin-left: 2%;margin-right: 2%"> <font color="#000000"
+                                                                        face="tahoma"> <b>Precio por consulta:</b> #{detalleServicioBean.veterinaria.precio} </font>
+                    </h5>
+                    <br></br>
+                    <h5 style="margin-left: 2%;margin-right: 2%"> <font color="#000000"
+                               face="tahoma"> El costo prodra incrementar dependiendo de las complicaciones de tu mascota</font>
+                    </h5>
+
+                    <br></br>
+
+                    <h5 style="margin-left: 2%;margin-right: 2%"> <font color="#000000"
+                               face="tahoma"> <b>Tefelono de contacto:</b> 3226346138 </font>
+                    </h5>
+                    <br></br>
+
+                    <div align="center">
+                        <img src="resources/img/clinic.png" alt="" style="width: 100px;height: 100px"/>
+                    </div>
+                    <h:panelGrid rendered="#{seguridadBean.autenticado}" style="display: block;text-align: center">
+
+                        <div class="row" align="center" style="margin-top: 2%; margin-bottom: 2%" >
+                            <div class="col">
+                                <p>Para adquirir este servicio por favor presiona el botón y completa los datos solicitados </p>
+                                <p:commandButton rendered="#{seguridadBean.autenticado}" styleClass="ui-button-raised ui-button" value="Adquirir"
+                                                 onclick="PF('dlg1').show()"
+                                                 style="background: #2F8DF1 "/>
+
+                            </div>
+                        </div>
+                    </h:panelGrid>
+                </p:card>
+            </div>
+        </div>
+
+        <h:form>
+            <p:dialog id="dialogo" header="Compra" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
+                      closeOnEscape="true" rendered="#{seguridadBean.autenticado}">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p:outputLabel for="nombre_usuario" value="Nombre:"/>
+                        <p:inputText id="nombre_usuario" value="#{detalleServicioBean.usuario.nombre}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+
+                        <p:outputLabel for="nombre_mascota" value="Nombre de tu mascota:"/>
+                        <p:inputText id="nombre_mascota" value="#{detalleServicioBean.mascota.nombre}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                        <br></br>
+                        <p:outputLabel for="cedula_usuario" value="Cedula:"/>
+                        <p:inputText id="cedula_usuario" value="#{detalleServicioBean.usuario.id}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                        <br></br>
+                        <p:outputLabel for="tarjeta_usuario" value="Tarjeta"/>
+                        <p:inputText id="tarjeta_usuario" value="#{detalleServicioBean.usuario.numeroTarjeta}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+
+                    </div>
+
+                    <div class="col-2">
+                        <div class="fotox">
+                            <img src="resources/img/anadir-al-carrito.png" alt="" style="margin-top: 75px"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <f:facet name="footer">
+                    <p:commandButton style="min-width: 30%" value="Adquirir" action="#{detalleServicioBean.adquirirServicioVeterinaria}"
+                                     styleClass="ui-button-raised ui-button-success ui-button-flat"
+                                     update="@form" />
+
+                    <p:commandButton style="min-width: 30%" value="Registrar tarjeta"
+                                     styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
+                                     onclick="PF('dlg2').show()"/>
+                    <p:growl showDetail="true"/>
+                </f:facet>
+            </p:dialog>
+        </h:form>
+
+        <h:form>
+            <p:dialog header="Registra tu tarjeta" widgetVar="dlg2" Height="400px" width="40%" showEffect="fade"
+                      closeOnEscape="true" >
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <p:outputLabel for="numero_tarjeta" value="Número:" />
+                        <p:inputText id="numero_tarjeta" value="#{usuarioBean.usuario.numeroTarjeta}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                        <br></br>
+                        <p:outputLabel for="fecha_tarjeta" value="Fecha:"/>
+                        <p:inputText id="fecha_tarjeta" value="#{usuarioBean.usuario.fechatarjeta}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                        <br></br>
+                        <p:outputLabel for="codigo_tarjeta" value="Codigo:"/>
+                        <p:inputText id="codigo_tarjeta" value="#{usuarioBean.usuario.codigoTarjeta}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="fotox">
+                            <img src="resources/img/tarjeta-de-credito%20(1).png" alt="" style="margin-top: 75px"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div align="center">
+                <f:facet name="footer" >
+                    <p:commandButton style="min-width: 30%" value="Registrar tarjeta" action="#{usuarioBean.registrarTarjetaUsuario}"
+                                     styleClass="ui-button-raised ui-button-success ui-button-flat"
+                                     update="@form"/>
+                    <p:growl showDetail="true" />
+                </f:facet>
+                </div>
+            </p:dialog>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>

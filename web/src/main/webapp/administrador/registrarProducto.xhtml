@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xml:lang="en" lang="en">
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+    <ui:define name="title">Producto | Crear</ui:define>
+    <ui:define name="content">
+
+        <div class="row">
+
+            <div class="col">
+                <img src="${pageContext.request.contextPath}/resources/img/productos.jpeg" alt=""
+                     style="border-radius: 25px;margin-left: 15%;height: 60%;width: 80%; margin-top: 15%"/>
+            </div>
+
+            <div class="col">
+
+                <h:form id="crear-producto">
+
+                    <p:card styleClass="tarjeta"
+                            style="border-radius: 15px;margin-left: 8%; margin-right: 20%; margin-top: 10%; margin-bottom: 2%; width: 80%;">
+                        <f:facet name="title">
+                            <font color="#34495E" face="arial,tahoma"> ¡Regístre un producto!</font>
+                        </f:facet>
+
+                        <p><font color="#000000" >¡Hola! en el siguiente formulario puedes ingresar los datos del producto a registrar. </font></p>
+
+                        <h:panelGrid columns="2" cellpadding="3" width="100%">
+
+                            <p:outputLabel for="categoria_producto" value="Categoria:"/>
+                            <p:selectOneMenu id="categoria_producto" value="#{administradorBean.producto.categoria}" style="width: 100%"
+                                             converter="#{categoriaConverter}"
+                                             required="true"
+                                             requiredMessage="La categoria es obligatorio">
+                                <f:selectItem itemLabel="Seleccione una categoria" noSelectionOption="true"/>
+                                <f:selectItems var="categoria" itemLabel="#{categoria.nombre}" value="#{administradorBean.categorias}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="nombre_producto" value="Nombre:"/>
+                            <p:inputText id="nombre_producto" value="#{administradorBean.producto.nombre}" style="width: 100%"
+                                         required="true"
+                                         requiredMessage="El nombre de la mascota es obligatorio"/>
+
+                            <p:outputLabel for="descripcion_producto" value="Descripción:"/>
+                            <p:inputTextarea id="descripcion_producto" value="#{administradorBean.producto.descripcion}" style="width: 100%"
+                                         required="true" autoResize="none"
+                                         requiredMessage="La descripcion es obligatorio"/>
+
+                            <p:outputLabel for="precio_producto" value="Precio:"/>
+                            <p:inputText id="precio_producto" value="#{administradorBean.producto.precio}" style="width: 100%"/>
+
+                            <p:outputLabel for="imagenes_producto" value="Imagenes: "/>
+                            <p:fileUpload id="imagenes_producto" listener="#{administradorBean.subirImagenes}" mode="advanced"
+                                          multiple="true" sizeLimit="1000000" fileLimit="5"
+                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" skinSimple="true"/>
+
+                        </h:panelGrid>
+                        <br></br>
+                        <h:panelGrid columns="2" cellpadding="5" width="100%">
+
+                            <p:commandButton action="#{administradorBean.registrarProducto}" value="Registrar" update="@form"
+                                             style="background: #2F8DF1;width: 120px; margin-left: 40%;margin-top: 5%"/>
+
+                            <p:button href="/index.xhtml" value="Volver"
+                                      style="background: #2F8DF1;width: 120px; margin-left: 15%;margin-top: 5%"/>
+
+                        </h:panelGrid>
+
+                        <p:growl showDetail="true"/>
+
+                    </p:card>
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+</ui:composition>
+</html>

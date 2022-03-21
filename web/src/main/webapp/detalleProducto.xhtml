@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xml:lang="en" lang="en">
+
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+
+    <ui:define name="title">Hospitalizaciones | Detalle</ui:define>
+    <ui:define name="content">
+
+        <div class="row">
+            <div class="col" style="margin-top: 20px;margin-left: 60px;margin-right:5%;width: 200px;height: 692px">
+                <br></br>
+
+                <p:card style="margin-right: 5%;width: 600px; margin-bottom: 2em;height: 692px">
+                   <div style="text-align: center;margin: auto;display:block;margin-left: 85px;margin-bottom: 20px">
+                       <p:galleria value="#{detalleProductoBean.urlImagenes}" var="image" panelWidth="400" panelHeight="300"
+                                   showCaption="true" style="height: 300px;width: 400px;text-align: center">
+                           <p:graphicImage url="/uploads/#{image}" title="Imagenes"  style="width: 350px;height: 280px"/>
+                       </p:galleria>
+                   </div>
+
+                    <f:facet name="title" >
+                        <h2 style="text-align: center;"> <font color="#2F8DF1"
+                            face="tahoma">#{detalleProductoBean.producto.nombre}</font> </h2>
+
+                    </f:facet>
+
+                    <h6 align="justify" style="margin-left: 2%;margin-right: 2%">
+                        <font color="#000000"
+                              face="tahoma"> #{detalleProductoBean.producto.descripcion}</font>
+                    </h6>
+
+                    <br></br>
+
+                    <h6 style="margin-left: 2%;margin-right: 2%"> <font color="#000000"
+                               face="tahoma"> <b>Precio:</b> #{detalleProductoBean.producto.precio} </font>
+                    </h6>
+                    <br></br>
+
+                    <h6 style="margin-left: 2%;margin-right: 2%"> <font color="#000000"
+                               face="tahoma"> <b>Categoria:</b> #{detalleProductoBean.producto.categoria.nombre} </font>
+                    </h6>
+
+                    <h:panelGrid rendered="#{seguridadBean.autenticado}" style="margin-top: 5px;margin-left: 70%">
+                        <div class="row" align="center" style="margin-top: 2%; margin-bottom: 2%;text-align: right" >
+                            <div class="col" style="text-align: right;margin-left: 70%">
+                                <p:commandButton rendered="#{seguridadBean.autenticado}" styleClass="ui-button-raised ui-button" value="Comprar"
+                                                 onclick="PF('dlg1').show()"
+                                                 style="background: #2F8DF1;width: 150px"/>
+
+                            </div>
+                        </div>
+                    </h:panelGrid>
+                </p:card>
+            </div>
+
+            <div class="col" style="margin-top: 45px;margin-right: 50px;height: 692px">
+                <p:card style="width: 100%; margin-bottom: 2em;height: 692px">
+                    <f:facet name="title">
+                        <h2> <font color="#2F8DF1" face="tahoma">Reseñas</font></h2>
+                    </f:facet>
+
+                    <h:form>
+                        <p:dataScroller id="resenias_table"  value="#{detalleProductoBean.reseniasDetal}"
+                                        var="resenia" chunkSize="10"
+                                        mode="inline"
+                                        scrollHeight="300">
+
+                            <div class="product">
+                                <div class="product-list-item p-p-5">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <p:graphicImage value="resources/img/usuario.png" height="70" width="70"/>
+                                        </div>
+                                        <div class="col">
+                                            <div class="product-list-detail">
+                                                <div class="product-description">#{resenia.resenia}</div>
+                                                <p:rating readonly="true" value="#{resenia.calificacion}"/>
+                                                <p:divider></p:divider>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:dataScroller>
+
+                        <br></br>
+                        <div class="row" style="margin-top: 2%; margin-bottom: 2%">
+                            <div class="col">
+                                <p:card style="margin-top: 2%" rendered="#{seguridadBean.autenticado}">
+                                    <f:facet name="title">
+                                        <h4><font color="#2F8DF1" face="tahoma"><b>Añade tu reseña</b></font></h4>
+                                    </f:facet>
+                                    <p:inputTextarea rows="2" cols="30" style="width: 100%"
+                                                     value="#{detalleProductoBean.reseniaNueva.resenia}"/>
+                                </p:card>
+                            </div>
+                            <div class="col" style="margin-left: 20px; margin-top: 2%; margin-bottom: 2%">
+                                <p:card style="height: 160px;margin-outside: 40px" rendered="#{seguridadBean.autenticado}">
+
+                                    <f:facet name="title">
+                                        <h4> <font color="#2F8DF1" face="tahoma"><b>Calificación:</b></font> </h4>
+                                    </f:facet>
+
+                                    <p:rating value="#{detalleProductoBean.reseniaNueva.calificacion}"/>
+
+                                </p:card>
+                            </div>
+                        </div>
+                        <p:commandButton icon="pi pi-check" value="Guardar" rendered="#{seguridadBean.autenticado}"
+                                         onclick="PF('dlg3').show()" update="@form"
+                                         style="margin-left: 18%; width: 30%;background: #2F8DF1 ;margin-top: 15px"/>
+
+                        <p:button icon="pi pi-undo" value="Volver" rendered="#{seguridadBean.autenticado}"
+                                  style="margin-left: 35px; width: 30%;background: #2F8DF1 " href="/index.xhtml"/>
+
+                    </h:form>
+                </p:card>
+            </div>
+        </div>
+
+        <p:dialog id="dialogo3" header="Verificación" widgetVar="dlg3" Height="400px" width="40%" showEffect="fade"
+                  closeOnEscape="true">
+            <h:form>
+                <p:card style="width: 100%; margin-bottom: 2em">
+                    <h5>¿Esta seguro de publicar esta reseña?</h5>
+
+                    <div style="margin-top: 5%;margin-left: 25%">
+
+                        <p:commandButton value="Aceptar"
+                                         styleClass="ui-button-outlined ui-button-success"
+                                         action="#{detalleProductoBean.ingresarResenia}" onclick="PF('dlg3').hide()" update="@form"
+                                         style="margin: 5%; width: 100px"/>
+
+                        <p:commandButton style="margin: 5%; width: 100px" value="Cancelar"
+                                         styleClass="ui-button-outlined ui-button-danger"
+                                         onclick="PF('dlg3').hide()" update="@form"/>
+
+                        <p:growl showDetail="true"/>
+                    </div>
+                </p:card>
+            </h:form>
+        </p:dialog>
+
+
+        <h:form>
+            <p:dialog id="dialogo" header="Compra" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
+                      closeOnEscape="true" rendered="#{seguridadBean.autenticado}">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p:outputLabel for="nombre_usuario" value="Nombre:"/>
+                        <p:inputText id="nombre_usuario" value="#{detalleProductoBean.usuario.nombre}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+
+                        <p:outputLabel for="nombre_producto" value="Nombre del producto a comprar:"/>
+                        <p:inputText id="nombre_producto" value="#{detalleProductoBean.productoAux.nombre}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                        <br></br>
+                        <p:outputLabel for="cedula_usuario" value="Cedula:"/>
+                        <p:inputText id="cedula_usuario" value="#{detalleProductoBean.usuario.id}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                        <br></br>
+                        <p:outputLabel for="tarjeta_usuario" value="Tarjeta"/>
+                        <p:inputText id="tarjeta_usuario" value="#{detalleProductoBean.usuario.numeroTarjeta}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+
+                    </div>
+
+                    <div class="col-2">
+                        <div class="fotox">
+                            <img src="resources/img/anadir-al-carrito.png" alt="" style="margin-top: 75px"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <f:facet name="footer">
+                    <p:commandButton style="min-width: 30%" value="Adquirir" action="#{detalleProductoBean.adquirirProducto}"
+                                     styleClass="ui-button-raised ui-button-success ui-button-flat"
+                                     update="@form" />
+
+                    <p:commandButton style="min-width: 30%" value="Registrar tarjeta"
+                                     styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
+                                     onclick="PF('dlg2').show()"/>
+                    <p:growl showDetail="true"/>
+                </f:facet>
+            </p:dialog>
+        </h:form>
+
+        <h:form>
+            <p:dialog header="Registra tu tarjeta" widgetVar="dlg2" Height="400px" width="40%" showEffect="fade"
+                      closeOnEscape="true" >
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <p:outputLabel for="numero_tarjeta" value="Número:" />
+                        <p:inputText id="numero_tarjeta" value="#{usuarioBean.usuario.numeroTarjeta}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                        <br></br>
+                        <p:outputLabel for="fecha_tarjeta" value="Fecha:"/>
+                        <p:inputText id="fecha_tarjeta" value="#{usuarioBean.usuario.fechatarjeta}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                        <br></br>
+                        <p:outputLabel for="codigo_tarjeta" value="Codigo:"/>
+                        <p:inputText id="codigo_tarjeta" value="#{usuarioBean.usuario.codigoTarjeta}" styleClass="p-d-block"
+                                     style="width: 100%"/>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="fotox">
+                            <img src="resources/img/tarjeta-de-credito%20(1).png" alt="" style="margin-top: 75px"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div align="center">
+                <f:facet name="footer" >
+                    <p:commandButton style="min-width: 30%" value="Registrar tarjeta" action="#{usuarioBean.registrarTarjetaUsuario}"
+                                     styleClass="ui-button-raised ui-button-success ui-button-flat"
+                                     update="@form"/>
+                    <p:growl showDetail="true" />
+                </f:facet>
+                </div>
+            </p:dialog>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
