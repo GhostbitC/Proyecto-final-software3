@@ -1,6 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.CategoriaProducto;
+import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaProductoRepo;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class CategoriaProductoServicioImpl implements CategoriaProductoServicio 
     }
 
     @Override
-    public CategoriaProducto registrarCategoria(CategoriaProducto c) throws Exception {
+    public Categoria registrarCategoria(Categoria c) throws Exception {
 
         if (c.getNombre().length() >100){
             throw new Exception("No se puede exceder los 100 caracteres");
@@ -26,9 +26,9 @@ public class CategoriaProductoServicioImpl implements CategoriaProductoServicio 
     }
 
     @Override
-    public void actualizarCategoria(CategoriaProducto c, int id) throws Exception {
+    public void actualizarCategoria(Categoria c, int id) throws Exception {
 
-        CategoriaProducto categoriaEncontrada = obtenerCategoria(id);
+        Categoria categoriaEncontrada = obtenerCategoria(id);
 
         if (categoriaEncontrada!=null){
             categoriaEncontrada.setNombre(c.getNombre());
@@ -41,7 +41,7 @@ public class CategoriaProductoServicioImpl implements CategoriaProductoServicio 
     @Override
     public void eliminarCategoria(int id) throws Exception {
 
-        CategoriaProducto categoriaEncontrada = obtenerCategoria(id);
+        Categoria categoriaEncontrada = obtenerCategoria(id);
 
         if (categoriaEncontrada != null){
 
@@ -54,9 +54,9 @@ public class CategoriaProductoServicioImpl implements CategoriaProductoServicio 
 
 
     @Override
-    public CategoriaProducto obtenerCategoria(int id) throws Exception {
+    public Categoria obtenerCategoria(int id) throws Exception {
 
-        Optional<CategoriaProducto> categoriaEncontrada = categoriaRepo.findById(id);
+        Optional<Categoria> categoriaEncontrada = categoriaRepo.findById(id);
 
         if (categoriaEncontrada.isEmpty()){
             throw new Exception("La categoria a encontrar no existe");
@@ -66,7 +66,7 @@ public class CategoriaProductoServicioImpl implements CategoriaProductoServicio 
     }
 
     @Override
-    public List<CategoriaProducto> listarCategorias() {
+    public List<Categoria> listarCategorias() {
         return categoriaRepo.findAll();
     }
 }

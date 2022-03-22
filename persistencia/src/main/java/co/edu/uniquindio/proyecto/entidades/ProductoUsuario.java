@@ -33,29 +33,33 @@ public class ProductoUsuario {
     @Column(name = "estado", nullable =false)
     private Boolean estado;
 
-    //================================= RELACION CON LA ENTIDAD ADMINISTRADOR =================================//
+    //================================= RELACIÓN CON LA ENTIDAD ADMINISTRADOR =================================//
     @ManyToOne
     private Administrador administrador;
 
-    //================================= RELACION CON LA ENTIDAD CATEGORIAPRODUCTO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD CATEGORÍA =================================//
     @ManyToOne
-    private CategoriaProducto categoria;
+    private Categoria categoria;
 
-    //================================= RELACION CON LA ENTIDAD USUARIO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD USUARIO =================================//
     @ManyToOne
     private Usuario usuario;
 
-    //================================= RELACION CON LA ENTIDAD RESENIA =================================//
+    //================================= RELACIÓN CON LA ENTIDAD VENTA PRODUCTOS USUARIO =================================//
+    @ManyToOne
+    private VentaProductoUsuario ventaProductoUsuario;
+
+    //================================= RELACIÓN CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "productoUsuario")
     @ToString.Exclude
     private List<Comentario> comentarios;
 
-    //================================= RELACION CON LA ENTIDAD IMAGEN =================================//
+    //================================= RELACIÓN CON LA ENTIDAD IMAGEN =================================//
     @OneToMany(mappedBy = "productoUsuario",fetch=FetchType.EAGER)
     @ToString.Exclude
     private List<Imagen> imagenes;
 
-    public ProductoUsuario(String nombre, String descripcion, double precio, Administrador administrador, CategoriaProducto categoria, Usuario usuario) {
+    public ProductoUsuario(String nombre, String descripcion, double precio, Administrador administrador, Categoria categoria, Usuario usuario) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;

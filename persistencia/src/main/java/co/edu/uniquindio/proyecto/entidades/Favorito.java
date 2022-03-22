@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,12 +11,23 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Favorito implements Serializable {
 
+
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id",nullable = false)
+    @EqualsAndHashCode.Include
+    private int id;
+
+    //================================= RELACION CON LA ENTIDAD PRODUCTO =================================//
     @ManyToOne
+    @ToString.Exclude
+    private Producto producto;
+
+    //================================= RELACION CON LA ENTIDAD USUARIO =================================//
+    @ManyToOne
+    @ToString.Exclude
     private Usuario usuario;
 
-    @Id
-    @ManyToOne
-    private Producto producto;
 
 }

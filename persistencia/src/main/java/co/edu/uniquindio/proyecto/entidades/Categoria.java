@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class CategoriaProducto implements Serializable {
+public class Categoria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,22 +29,22 @@ public class CategoriaProducto implements Serializable {
 
     //================================= RELACION CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "categoria")
+    @ToString.Exclude
     private List<Producto> productos;
+
+    //================================= RELACION CON LA ENTIDAD PRODUCTO USUARIO =================================//
+    @OneToMany(mappedBy = "categoria")
+    private List<ProductoUsuario> productosUsuario;
 
     //================================= RELACION CON LA ENTIDAD ADMINISTRADOR =================================//
     @ManyToOne
     private Administrador administrador;
 
-    public CategoriaProducto(String nombre, String descripcion, Administrador administrador) {
+    public Categoria(String nombre, String descripcion, Administrador administrador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.productos = new ArrayList<>();
-        this.administrador = administrador;
-    }
-
-    public CategoriaProducto(String nombre, Administrador administrador) {
-        this.nombre = nombre;
-        this.productos = new ArrayList<>();
+        this.productosUsuario = new ArrayList<>();
         this.administrador = administrador;
     }
 }

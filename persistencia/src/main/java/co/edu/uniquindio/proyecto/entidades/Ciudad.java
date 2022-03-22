@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 public class Ciudad implements Serializable {
 
-    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
@@ -27,9 +27,14 @@ public class Ciudad implements Serializable {
     @NotBlank
     private String nombre;
 
+    //================================= RELACION CON LA ENTIDAD DIRECCIÓN =================================//
+    @OneToMany(mappedBy = "ciudad")
+    @ToString.Exclude
+    private List<Direccion> direcciones;
+
     //================================= CONSTRUCTOR  =================================//
     public Ciudad( String nombre) {
-        super();
         this.nombre = nombre;
+        this.direcciones = new ArrayList<>();
     }
 }

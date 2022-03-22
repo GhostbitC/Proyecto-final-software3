@@ -25,11 +25,11 @@ public class Imagen implements Serializable {
     @NotBlank
     private String url;
 
-    //================================= RELACION CON LA ENTIDAD MASCOTA =================================//
+    //================================= RELACIÓN CON LA ENTIDAD MASCOTA =================================//
     @ManyToOne
     private Producto producto;
 
-    //================================= RELACION CON LA ENTIDAD MASCOTA =================================//
+    //================================= RELACIÓN CON LA ENTIDAD MASCOTA =================================//
     @ManyToOne
     private ProductoUsuario productoUsuario;
 

@@ -5,9 +5,6 @@ import co.edu.uniquindio.proyecto.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Component
 public class InformacionPorDefecto implements CommandLineRunner {
@@ -107,9 +104,9 @@ public class InformacionPorDefecto implements CommandLineRunner {
             tipoServicio.registrarTipo(tipo4);
             tipoServicio.registrarTipo(tipo5);
 
-            CategoriaProducto categoria1 = new CategoriaProducto("Medicamentos",admin1);
-            CategoriaProducto categoria2 = new CategoriaProducto("Alimentos",admin1);
-            CategoriaProducto categoria3 = new CategoriaProducto("Accesorios",admin2);
+            Categoria categoria1 = new Categoria("Medicamentos",admin1);
+            Categoria categoria2 = new Categoria("Alimentos",admin1);
+            Categoria categoria3 = new Categoria("Accesorios",admin2);
 
             categoriaServicio.registrarCategoria(categoria1);
             categoriaServicio.registrarCategoria(categoria2);

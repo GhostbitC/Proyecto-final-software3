@@ -11,7 +11,7 @@ import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -55,7 +55,7 @@ public class AdministradorBean implements Serializable {
     private Servicio servicio;
 
     @Getter @Setter
-    private CategoriaProducto categoria;
+    private Categoria categoria;
 
     @Getter @Setter
     private Producto producto;
@@ -69,7 +69,7 @@ public class AdministradorBean implements Serializable {
 
     @Getter
     @Setter
-    private List<CategoriaProducto> categorias;
+    private List<Categoria> categorias;
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
@@ -79,7 +79,7 @@ public class AdministradorBean implements Serializable {
     public void inicializar() {
         this.trabajador = new Trabajador();
         this.servicio= new Servicio();
-        this.categoria= new CategoriaProducto();
+        this.categoria= new Categoria();
         this.producto = new Producto();
         this.productoN= new Producto();
         this.imagenes = new ArrayList<>();

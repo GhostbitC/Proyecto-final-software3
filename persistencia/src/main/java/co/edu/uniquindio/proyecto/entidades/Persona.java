@@ -20,7 +20,7 @@ import java.io.Serializable;
 @Entity
 public class Persona implements Serializable {
 
-    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id
     @Column(name = "cedula", length = 10)
     @Size(max = 10,message = "El valor ingresado excede los 10 caracteres")

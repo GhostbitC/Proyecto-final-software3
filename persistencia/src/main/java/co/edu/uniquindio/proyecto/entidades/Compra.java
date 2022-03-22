@@ -4,6 +4,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,6 +20,9 @@ public class Compra implements Serializable {
     @Column(name = "id",nullable = false)
     @EqualsAndHashCode.Include
     private int id;
+
+    @Column(name = "valor")
+    private float valor;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_venta", length = 100)
@@ -36,19 +40,13 @@ public class Compra implements Serializable {
     private Usuario usuario;
 
     //================================= RELACION CON LA ENTIDAD PRODUCTO =================================//
-    @ManyToOne
+    @OneToMany(mappedBy = "compra")
     @ToString.Exclude
-    private Producto producto;
+    private List<Producto> productos;
 
+    //================================= RELACION CON LA ENTIDAD ENVIO =================================//
     @ManyToOne
     @ToString.Exclude
     private Envio envio;
 
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
 }

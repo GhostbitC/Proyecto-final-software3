@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.Persona;
-import co.edu.uniquindio.proyecto.entidades.Servicio;
 import co.edu.uniquindio.proyecto.entidades.Usuario;
 import co.edu.uniquindio.proyecto.servicios.ServicioServicio;
 import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;

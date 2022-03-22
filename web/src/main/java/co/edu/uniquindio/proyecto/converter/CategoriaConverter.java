@@ -11,14 +11,14 @@ import javax.faces.convert.Converter;
 import java.io.Serializable;
 
 @Component
-public class CategoriaConverter implements Converter<CategoriaProducto>, Serializable {
+public class CategoriaConverter implements Converter<Categoria>, Serializable {
 
     @Autowired
     private CategoriaProductoServicio categoriaServicio;
 
 
     @Override
-    public CategoriaProducto getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
+    public Categoria getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
 
         try {
             if (s!=null && !"".equals(s)){
@@ -34,7 +34,7 @@ public class CategoriaConverter implements Converter<CategoriaProducto>, Seriali
     }
 
     @Override
-    public String getAsString(FacesContext facesContext, UIComponent uiComponent, CategoriaProducto categoria) {
+    public String getAsString(FacesContext facesContext, UIComponent uiComponent, Categoria categoria) {
 
         if (categoria!=null){
             return ""+categoria.getId();

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,9 +26,19 @@ public class Envio implements Serializable {
     private String tiempoAproximado;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "fecha_envio")
+    @Column(name = "fecha_envio", nullable = false)
     private Date fechaEnvio;
 
     @Column(name = "valor")
     private float valor;
+
+    //================================= RELACION CON LA ENTIDAD COMPRA =================================//
+    @OneToMany(mappedBy = "envio")
+    @ToString.Exclude
+    private List<Compra> compras;
+
+    //================================= RELACION CON LA ENTIDAD VENTA PRODUCTO USUARIO =================================//
+    @OneToMany(mappedBy = "envio")
+    @ToString.Exclude
+    private List<VentaProductoUsuario> ventaProductosUsuarios;
 }

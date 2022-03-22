@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto.entidades;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -40,21 +38,30 @@ public class Producto implements Serializable {
     @ManyToOne
     private Administrador administrador;
 
-    //================================= RELACION CON LA ENTIDAD CATEGORIAPRODUCTO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD CATEGORÍA =================================//
     @ManyToOne
-    private CategoriaProducto categoria;
+    private Categoria categoria;
 
-    //================================= RELACION CON LA ENTIDAD RESENIA =================================//
+    //================================= RELACIÓN CON LA ENTIDAD COMPRA =================================//
+    @ManyToOne
+    private Compra compra;
+
+    //================================= RELACIÓN CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude
     private List<Comentario> comentarios;
 
-    //================================= RELACION CON LA ENTIDAD IMAGEN =================================//
+    //================================= RELACIÓN CON LA ENTIDAD IMAGEN =================================//
     @OneToMany(mappedBy = "producto",fetch=FetchType.EAGER)
     @ToString.Exclude
     private List<Imagen> imagenes;
 
-    public Producto(String nombre, String descripcion, double precio, Administrador administrador, CategoriaProducto categoria) {
+    //================================= RELACIÓN CON LA ENTIDAD FAVORITO =================================//
+    @OneToMany(mappedBy = "producto")
+    @ToString.Exclude
+    private List<Favorito> favoritos;
+
+    public Producto(String nombre, String descripcion, double precio, Administrador administrador, Categoria categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
