@@ -3,7 +3,7 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
-import co.edu.uniquindio.proyecto.repositorios.ReseniaRepo;
+import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +12,9 @@ import java.util.Optional;
 public class ProductoServicioImpl  implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
-    private final ReseniaRepo reseniaRepo;
+    private final ComentarioRepo reseniaRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, ReseniaRepo reseniaRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo reseniaRepo) {
         this.productoRepo = productoRepo;
         this.reseniaRepo = reseniaRepo;
     }

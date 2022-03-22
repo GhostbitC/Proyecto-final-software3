@@ -10,13 +10,13 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
     private final MascotaRepo mascotaRepo;
-    private final CompraProductoRepo compraProductoRepo;
+    private final VentaProductoUsuarioRepo compraProductoRepo;
     private final ServicioServicio servicioServicio;
     private final CompraRepo compraRepo;
     private final ProductoRepo productoRepo;
 
 
-    public UsuarioServicioImpl(UsuarioRepo usuarioRepo, MascotaRepo mascotaRepo, CompraProductoRepo compraProductoRepo, ServicioServicio servicioServicio, CompraRepo compraRepo, ProductoRepo productoRepo) {
+    public UsuarioServicioImpl(UsuarioRepo usuarioRepo, MascotaRepo mascotaRepo, VentaProductoUsuarioRepo compraProductoRepo, ServicioServicio servicioServicio, CompraRepo compraRepo, ProductoRepo productoRepo) {
         this.usuarioRepo = usuarioRepo;
         this.mascotaRepo = mascotaRepo;
         this.compraProductoRepo = compraProductoRepo;

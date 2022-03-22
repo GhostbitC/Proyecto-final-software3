@@ -10,5 +10,5 @@ Este proyeto representa el codigo que desarrollamos para dar solucion al proyect
 
 ## Amazing Store
 
-Inserte descripcion del proyecto aquí
+Amazing Store es una tienda de venta de perifericos la cual permite a sus compradores vender sus diferentes productos enfocados en el mundo electronico, principalmente se enfoca en la venta de perifericos y dispositivos vinculados con el mundo computacional.
 

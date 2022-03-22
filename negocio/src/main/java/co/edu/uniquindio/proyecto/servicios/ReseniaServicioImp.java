@@ -2,7 +2,7 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.Comentario;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
-import co.edu.uniquindio.proyecto.repositorios.ReseniaRepo;
+import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.List;
 @Service
 public class ReseniaServicioImp implements ReseniaServicio {
 
-    private final ReseniaRepo reseniaRepo;
+    private final ComentarioRepo reseniaRepo;
     private final ProductoRepo productoRepo;
 
-    public ReseniaServicioImp(ReseniaRepo reseniaRepo,ProductoRepo productoRepo) {
+    public ReseniaServicioImp(ComentarioRepo reseniaRepo, ProductoRepo productoRepo) {
         this.reseniaRepo = reseniaRepo;
         this.productoRepo = productoRepo;
     }
