@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoriaProductoServicioImpl implements CategoriaProductoServicio {
+public class CategoriaProductoImpl implements CategoriaProducto {
 
     private final CategoriaProductoRepo categoriaRepo;
 
-    public CategoriaProductoServicioImpl(CategoriaProductoRepo categoriaRepo) {
+    public CategoriaProductoImpl(CategoriaProductoRepo categoriaRepo) {
         this.categoriaRepo = categoriaRepo;
     }
 

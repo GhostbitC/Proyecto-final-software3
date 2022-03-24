@@ -31,7 +31,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
     private ProductoServicio productoServicio;
 
     @Autowired
-    private CategoriaProductoServicio categoriaServicio;
+    private CategoriaProducto categoriaServicio;
 
     @Override
     public void run(String... args) throws Exception{

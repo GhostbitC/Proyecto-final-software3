@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.converter;
 
 import co.edu.uniquindio.proyecto.entidades.*;
-import co.edu.uniquindio.proyecto.servicios.CategoriaProductoServicio;
+import co.edu.uniquindio.proyecto.servicios.CategoriaProducto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class CategoriaConverter implements Converter<Categoria>, Serializable {
 
     @Autowired
-    private CategoriaProductoServicio categoriaServicio;
+    private CategoriaProducto categoriaServicio;
 
 
     @Override

@@ -34,7 +34,7 @@ public class AdministradorBean implements Serializable {
     private ServicioServicio servicioServicio;
 
     @Autowired
-    private CategoriaProductoServicio categoriaServicio;
+    private CategoriaProducto categoriaServicio;
 
     @Autowired
     private ProductoServicio productoServicio;
