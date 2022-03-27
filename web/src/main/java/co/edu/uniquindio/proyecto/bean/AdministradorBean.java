@@ -28,12 +28,6 @@ import java.util.List;
 public class AdministradorBean implements Serializable {
 
     @Autowired
-    private TrabajadorServicio trabajadorServicio;
-
-    @Autowired
-    private ServicioServicio servicioServicio;
-
-    @Autowired
     private CategoriaProducto categoriaServicio;
 
     @Autowired
@@ -47,12 +41,6 @@ public class AdministradorBean implements Serializable {
 
     @Getter @Setter
     private Administrador administrador;
-
-    @Getter @Setter
-    private Trabajador trabajador;
-
-    @Getter @Setter
-    private Servicio servicio;
 
     @Getter @Setter
     private Categoria categoria;
@@ -77,8 +65,6 @@ public class AdministradorBean implements Serializable {
 
     @PostConstruct
     public void inicializar() {
-        this.trabajador = new Trabajador();
-        this.servicio= new Servicio();
         this.categoria= new Categoria();
         this.producto = new Producto();
         this.productoN= new Producto();
@@ -100,7 +86,7 @@ public class AdministradorBean implements Serializable {
 
             try{
 
-                administradorEncontrado = administradorServicio.obtenerAdministrador(personaLogin.getId());
+                administradorEncontrado = administradorServicio.obtenerAdministrador(personaLogin.getCedula());
                 personaLogin.toString();
 
             }catch (Exception e){
@@ -110,130 +96,6 @@ public class AdministradorBean implements Serializable {
         }
         return administradorEncontrado;
     }
-
-
-    public void registrarTrabajador() {
-        try {
-            if (personaLogin != null) {
-                trabajador.setAdministrador((Administrador) personaLogin);
-                trabajadorServicio.registrarTrabajador(trabajador);
-
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el trabajador se ha creado con exito");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-            }
-        } catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-        }
-    }
-
-
-    public void eliminarTrabajador(){
-
-        try {
-            if (personaLogin!=null ) {
-                trabajador.setAdministrador(null);
-                trabajadorServicio.eliminarTrabajador(trabajador.getEmail(), trabajador.getPassword());
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el trabajador ha sido eliminado con exito");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-            }
-
-        }catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-        }
-    }
-
-    public void actualizarTrabajador(){
-
-        try{
-            if(personaLogin!=null){
-
-                Trabajador trabajadorAux= trabajadorServicio.obtenerTrabajador(trabajador.getId());
-
-                if (trabajadorAux!=null){
-
-                    trabajador.setAdministrador((Administrador) personaLogin);
-                    trabajadorServicio.actualizarTrabajador(trabajador,trabajadorAux.getEmail(),trabajadorAux.getPassword());
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el trabajador se actualizo con exito");
-                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-                }else {
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No hemos podido encontrar el trabajador");
-                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-                }
-            }
-
-        }catch(Exception e){
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-        }
-    }
-
-
-    public void registrarServicio() {
-        try {
-            if (personaLogin != null) {
-                servicio.setAdministrador((Administrador) personaLogin);
-                servicioServicio.registrarServicio(servicio);
-
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el servicio se ha creado con exito");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-            }
-        } catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-        }
-    }
-
-
-    public void eliminarServicio(){
-
-        try {
-            if (personaLogin!=null ) {
-                servicio.setAdministrador(null);
-                servicioServicio.eliminarServicio(servicio.getId());
-
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el servicio ha sido eliminado con exito");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-            }
-
-        }catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-        }
-    }
-
-    public void actualizarServicio(){
-
-        try{
-            if(personaLogin!=null){
-
-                Servicio servicioAux = servicioServicio.obtenerServicio(servicio.getId());
-
-                if (servicioAux!=null){
-
-                    servicio.setAdministrador((Administrador) personaLogin);
-                    servicioServicio.actualizarServicio(servicio,servicioAux.getId());
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el servicio se actualizo con exito");
-                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-                }else {
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No hemos podido encontrar el servicio");
-                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-                }
-            }
-
-        }catch(Exception e){
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-        }
-    }
-
 
 
     public String registrarProducto() {
@@ -277,7 +139,7 @@ public class AdministradorBean implements Serializable {
 
                 productoServicio.actualizarProducto(productoAux);
 
-                List<Imagen> imagenes = imagenServicio.obtenerImagenesProducto(productoAux.getId());
+                List<Imagen> imagenes = imagenServicio.obtenerImagenesProducto(productoAux.getCodigoProducto());
 
                 for (Imagen i : imagenes) {
                     imagenServicio.eliminarImagen(i.getId());

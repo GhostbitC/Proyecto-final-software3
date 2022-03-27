@@ -29,8 +29,8 @@ public class DetalleProductoBean implements Serializable {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @Autowired
-    private ReseniaServicio reseniaServicio;
+//    @Autowired
+//    private ReseniaServicio reseniaServicio;
 
     @Getter
     @Setter
@@ -66,14 +66,14 @@ public class DetalleProductoBean implements Serializable {
         this.productos = productoServicio.listarProductos();
         this.usuario = new Usuario();
         this.productoAux = new Producto();
-        this.reseniaNueva = new Comentario();
+//        this.reseniaNueva = new Comentario();
 
         if (idproducto!=null && !"".equals(idproducto)){
             try {
                 int id = Integer.parseInt(idproducto);
 
                 this.producto = productoServicio.obtenerProducto(id);
-                this.reseniasDetal =  obtenerResenias();
+//                this.reseniasDetal =  obtenerResenias();
                 this.urlImagenes = new ArrayList<>();
 
                 List<Imagen>imagenes = producto.getImagenes();
@@ -112,10 +112,10 @@ public class DetalleProductoBean implements Serializable {
 
             try {
 
-                usuario = usuarioServicio.obtenerUsuario(personaLogin.getId());
+                usuario = usuarioServicio.obtenerUsuario(personaLogin.getCedula());
                 productoEncontrado = productoServicio.obtenerProductoNombre(producto.getNombre());
 
-                usuarioServicio.adquirirProducto(productoEncontrado,usuario.getNombre(),usuario.getId(),usuario.getNumeroTarjeta());
+//                usuarioServicio.adquirirProducto(productoEncontrado,usuario.getNombre(),usuario.getId(),usuario.getNumeroTarjeta());
 
 
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! has adquirido el producto");
@@ -128,26 +128,26 @@ public class DetalleProductoBean implements Serializable {
         }
     }
 
-    public List<Comentario> obtenerResenias(){
-
-        List<Comentario> resenias;
-
-        if (idproducto!=null){
-
-            int id = Integer.parseInt(idproducto);
-
-            try {
-                resenias = reseniaServicio.obtenerReseniasProducto(id);
-
-                return resenias;
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-
-        return null;
-    }
+//    public List<Comentario> obtenerResenias(){
+//
+//        List<Comentario> resenias;
+//
+//        if (idproducto!=null){
+//
+//            int id = Integer.parseInt(idproducto);
+//
+//            try {
+//                resenias = reseniaServicio.obtenerReseniasProducto(id);
+//
+//                return resenias;
+//
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        return null;
+//    }
 
 
     public String ingresarResenia(){

@@ -12,11 +12,11 @@ import java.util.Optional;
 public class ProductoServicioImpl  implements ProductoServicio {
 
     private final ProductoRepo productoRepo;
-    private final ComentarioRepo reseniaRepo;
+    private final ComentarioRepo comentarioRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo reseniaRepo) {
+    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo comentarioRepo) {
         this.productoRepo = productoRepo;
-        this.reseniaRepo = reseniaRepo;
+        this.comentarioRepo = comentarioRepo;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class ProductoServicioImpl  implements ProductoServicio {
             if (producto != null) {
 
                 r.setProducto(producto);
-                reseniaRepo.save(r);
+                comentarioRepo.save(r);
 
             }
         }catch (Exception e){

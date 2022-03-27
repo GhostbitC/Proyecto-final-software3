@@ -45,7 +45,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario registrarUsuario(Usuario u) throws Exception {
+    public Usuario registrarUsuario(Usuario u, Direccion direccionUsuario) throws Exception {
 
         if (u.getCedula().length()>10){
             throw new Exception("La cedula solo puede tener 10 caracteres");
@@ -81,6 +81,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("El usuario ya existe");
         }
 
+        u.setDireccion(direccionUsuario);
+        u.setSaldo(0);
+
         return usuarioRepo.save(u);
     }
 
@@ -103,29 +106,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     }
 
-//    @Override
-//    public void actualizar(String id,Usuario u){
-//
-//        try {
-//            Usuario usuarioEncontrado = obtenerUsuario(id);
-//
-//            if (usuarioEncontrado!=null){
-//
-//                usuarioEncontrado.setNombre(u.getNombre());
-//                usuarioEncontrado.setNickname(u.getNickname());
-//                usuarioEncontrado.setPassword(u.getPassword());
-//                usuarioEncontrado.setCiudad(u.getCiudad());
-//                usuarioEncontrado.setEmail(u.getEmail());
-//
-//                usuarioRepo.save(usuarioEncontrado);
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-//
 
     @Override
     public void eliminarUsuario(String email,String password) throws Exception {
@@ -139,63 +119,19 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
     }
 
-//    @Override
-//    public Usuario obtenerUsuario(String id) throws Exception {
-//
-//        Optional<Usuario> usuario = usuarioRepo.findById(id);
-//
-//        if(usuario.isEmpty()){
-//            throw new Exception("No existe un usuario con el id dado");
-//        }
-//
-//        return usuario.get();
-//    }
+    @Override
+    public Usuario obtenerUsuario(String id) throws Exception {
 
-//    @Override
-//    public Mascota obtenerMascotaUsuario(String nombreMascota, String idUsuario) throws Exception {
-//
-//        Mascota mascotaEncontrada = mascotaRepo.obtenerMascotaPorUsuario(nombreMascota,idUsuario);
-//
-//        if (mascotaEncontrada == null){
-//
-//            throw new Exception("El usuario no tiene mascota alguna registrado con el nombre dado");
-//        }
-//
-//        return mascotaEncontrada;
-//    }
-//
-//    @Override
-//    public List<Mascota> obtenerMascotasPorUsuario(String idUsuario) throws Exception {
-//
-//        List<Mascota> mascotasU = mascotaRepo.obtenerMascotasPorUsuario(idUsuario);
-//
-//        return mascotasU;
-//    }
-//
-//    @Override
-//    public List<Compra> obtenerHistorialServicios(String cedulaU){
-//
-//        List<Compra> historialServicio = compraRepo.obtenerhistorialServiciosUsuario(cedulaU);
-//
-//        return historialServicio;
-//    }
-//
-//    @Override
-//    public List<Compra> obtenerServiciosActivos(String cedulaU)  {
-//
-//        List<Compra> serviciosActivos = compraRepo.obtenerServiciosActivosUsuario(cedulaU);
-//
-//        return serviciosActivos;
-//    }
-//
-//    @Override
-//    public List<CompraProducto> obtenerProductosUsuario(String cedulaU)  {
-//
-//        List<CompraProducto> productosU = compraProductoRepo.obtenerhistorialCompraUsuario(cedulaU);
-//
-//        return productosU;
-//    }
-//
+        Optional<Usuario> usuario = usuarioRepo.findById(id);
+
+        if(usuario.isEmpty()){
+            throw new Exception("No existe un usuario con el id dado");
+        }
+
+        return usuario.get();
+    }
+
+
 //    @Override
 //    public void adquirirProducto(Producto producto,String nombreUsuario,String cedulaUsuario, String numeroTarjeta) throws Exception {
 //

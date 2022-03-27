@@ -11,5 +11,13 @@ import java.util.List;
 public interface ProductoRepo extends JpaRepository<Producto,Integer> {
 
     //================================= REPOSITORIO DE PRODUCTO =================================//
+    @Query("select i from Producto p join p.imagenes i where p.codigoProducto = :idProducto")
+    List<Imagen> obtenerImagenes(int idProducto);
+
+    @Query("select p from Producto p where p.nombre =:nombreProducto")
+    Producto obtenerProductoNombre(String nombreProducto);
+
+    @Query("select p from Producto p where p.nombre like concat('%',:cadena,'%')")
+    List<Producto> busquedaProductosNombre(String cadena);
 
 }

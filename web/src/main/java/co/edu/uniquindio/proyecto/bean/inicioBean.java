@@ -14,16 +14,16 @@ import java.util.List;
 @ViewScoped
 public class inicioBean implements Serializable {
 
-    @Autowired
-    private MascotaServicio mascotaServicio;
-
-    @Getter @Setter
-    private List<Mascota> mascotas;
+//    @Autowired
+//    private MascotaServicio mascotaServicio;
+//
+//    @Getter @Setter
+//    private List<Mascota> mascotas;
 
     @PostConstruct
     public void inicializar(){
 
-        this.mascotas = mascotaServicio.listarMascotas();
+//        this.mascotas = mascotaServicio.listarMascotas();
 
     }
 

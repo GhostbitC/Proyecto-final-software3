@@ -32,6 +32,9 @@ public class UsuarioBean implements Serializable {
     private Usuario usuario;
 
     @Getter @Setter
+    private Direccion direccionUsuario;
+
+    @Getter @Setter
     private Usuario usuarioAux;
 
     @Value(value = "#{seguridadBean.persona}")
@@ -59,6 +62,7 @@ public class UsuarioBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         this.usuario  = new Usuario();
+        this.direccionUsuario = new Direccion();
 //        this.usuarioAux = obtenerUsuario();
         this.ciudades = ciudadServicio.listarCiudades();
 //        this.mascotasUsuario = obtenerMascotasUsuario();
@@ -69,7 +73,7 @@ public class UsuarioBean implements Serializable {
 
     public void registrarUsuario() {
         try {
-            usuarioServicio.registrarUsuario(usuario);
+            usuarioServicio.registrarUsuario(usuario, direccionUsuario);
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! te registramos correctamente");
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
