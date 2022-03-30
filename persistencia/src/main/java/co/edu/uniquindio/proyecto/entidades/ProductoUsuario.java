@@ -3,6 +3,8 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 @Entity
 @NoArgsConstructor
@@ -10,11 +12,11 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class ProductoUsuario {
+public class ProductoUsuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_producto_usuario",nullable = false)
+    @Column(name = "id",nullable = false)
     @EqualsAndHashCode.Include
     private int codigoProductoUsuario;
 
@@ -55,7 +57,7 @@ public class ProductoUsuario {
     private List<Comentario> comentarios;
 
     //================================= RELACIÓN CON LA ENTIDAD IMAGEN =================================//
-    @OneToMany(mappedBy = "productoUsuario",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "productoUsuario",fetch=FetchType.LAZY)
     @ToString.Exclude
     private List<Imagen> imagenes;
 
@@ -66,6 +68,8 @@ public class ProductoUsuario {
         this.administrador = administrador;
         this.categoria = categoria;
         this.usuario = usuario;
+        this.imagenes = new ArrayList<>();
+        this.comentarios = new ArrayList<>();
     }
 
     public String getImagenPrincipal(){

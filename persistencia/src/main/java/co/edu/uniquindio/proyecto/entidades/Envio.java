@@ -13,12 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-
 public class Envio implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_envio",nullable = false)
+    @Column(name = "id",nullable = false)
     @EqualsAndHashCode.Include
     private int codigoEnvio;
 

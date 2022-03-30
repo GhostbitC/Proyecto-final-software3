@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_producto",nullable = false)
+    @Column(name = "id",nullable = false)
     @EqualsAndHashCode.Include
     private int codigoProducto;
 
@@ -52,7 +53,7 @@ public class Producto implements Serializable {
     private List<Comentario> comentarios;
 
     //================================= RELACIÓN CON LA ENTIDAD IMAGEN =================================//
-    @OneToMany(mappedBy = "producto",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "producto",fetch=FetchType.LAZY)
     @ToString.Exclude
     private List<Imagen> imagenes;
 
@@ -67,6 +68,7 @@ public class Producto implements Serializable {
         this.precio = precio;
         this.administrador = administrador;
         this.categoria = categoria;
+        this.imagenes = new ArrayList<>();
     }
 
     public String getImagenPrincipal(){

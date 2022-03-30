@@ -17,9 +17,9 @@ public class Direccion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo_direccion",nullable = false)
+    @Column(name = "id",nullable = false)
     @EqualsAndHashCode.Include
-    private int codigo_direccion;
+    private int codigoDireccion;
 
     @Column(name = "calle",length = 50,nullable = false)
     @NotBlank

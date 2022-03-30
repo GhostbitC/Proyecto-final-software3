@@ -41,8 +41,9 @@ public class Usuario extends Persona implements Serializable {
     //================================= CONSTRUCTOR  =================================//
     public Usuario(String id, String nombre, String nickname, String password, String email) {
         super(id, nombre, nickname, password, email);
-        compras= new ArrayList<>();
-        favoritos= new ArrayList<>();
+        this.compras= new ArrayList<>();
+        this.favoritos= new ArrayList<>();
+        this.comentarios = new ArrayList<>();
     }
 
 }
