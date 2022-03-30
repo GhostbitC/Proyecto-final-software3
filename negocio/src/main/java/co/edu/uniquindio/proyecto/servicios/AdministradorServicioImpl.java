@@ -24,7 +24,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     @Override
     public Administrador registrarAdministrador(Administrador a) throws Exception {
 
-        if (a.getId().length()>10){
+        if (a.getCedula().length()>10){
             throw new Exception("La cedula solo puede tener 10 caracteres");
         }
 
@@ -63,12 +63,13 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         Administrador administradorObtenido = obtenerEmailPassword(email,password);
 
         if(administradorObtenido!= null){
-            administradorObtenido.setId(a.getId());
+            administradorObtenido.setCedula(a.getCedula());
             administradorObtenido.setEmail(a.getEmail());
             administradorObtenido.setNickname(a.getNickname());
             administradorObtenido.setNombre(a.getNombre());
             administradorObtenido.setPassword(a.getPassword());
-            administradorObtenido.setTrabajadores(a.getTrabajadores());
+            administradorObtenido.setProductos(a.getProductos());
+            administradorObtenido.setProductosUsuarios(a.getProductosUsuarios());
 
             administradorRepo.save(administradorObtenido);
         }

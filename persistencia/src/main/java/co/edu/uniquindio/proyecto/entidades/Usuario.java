@@ -16,8 +16,8 @@ import java.util.List;
 @ToString
 public class Usuario extends Persona implements Serializable {
 
-    @Column(name = "saldo")
-    private float saldo;
+    @Column(name = "saldo", length = 10)
+    private double saldo;
 
     //================================= RELACION CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "usuario")

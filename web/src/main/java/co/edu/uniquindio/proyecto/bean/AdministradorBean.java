@@ -28,16 +28,7 @@ import java.util.List;
 public class AdministradorBean implements Serializable {
 
     @Autowired
-    private CategoriaProducto categoriaServicio;
-
-    @Autowired
-    private ProductoServicio productoServicio;
-
-    @Autowired
     private AdministradorServicio administradorServicio;
-
-    @Autowired
-    private ImagenServicio imagenServicio;
 
     @Getter @Setter
     private Administrador administrador;
@@ -69,7 +60,6 @@ public class AdministradorBean implements Serializable {
         this.producto = new Producto();
         this.productoN= new Producto();
         this.imagenes = new ArrayList<>();
-        this.categorias = categoriaServicio.listarCategorias();
         this.administrador = obtenerAdministrador();
 
     }
@@ -95,86 +85,6 @@ public class AdministradorBean implements Serializable {
 
         }
         return administradorEncontrado;
-    }
-
-
-    public String registrarProducto() {
-
-        try {
-            if (personaLogin != null) {
-                if (!imagenes.isEmpty()){
-
-                    producto.setAdministrador((Administrador) personaLogin);
-
-                    Producto productoCreado = productoServicio.registrarProducto(this.producto);
-
-                    for (Imagen i : imagenes) {
-                        i.setProducto(productoCreado);
-                        imagenServicio.registrarImagen(i);
-                    }
-
-                   productoCreado.setImagenes(imagenes);
-
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se creo correctamente");
-                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-
-        return null;
-    }
-
-
-    public void eliminarProducto(){
-
-
-        if (personaLogin != null) {
-            try {
-
-                Producto productoAux = productoServicio.obtenerProductoNombre(producto.getNombre());
-
-                productoServicio.actualizarProducto(productoAux);
-
-                List<Imagen> imagenes = imagenServicio.obtenerImagenesProducto(productoAux.getCodigoProducto());
-
-                for (Imagen i : imagenes) {
-                    imagenServicio.eliminarImagen(i.getId());
-                }
-
-                productoServicio.eliminarProducto(productoAux.getNombre());
-
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se elimino correctamente");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-            } catch (Exception e) {
-
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No pudimos eliminar el producto");
-                FacesContext.getCurrentInstance().addMessage(null, msg);
-            }
-        }
-    }
-
-    public void actualizarProducto() {
-
-        if (personaLogin != null) {
-
-            try {
-
-                productoServicio.actualizarProducto(producto, productoN.getNombre());
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se actualizo correctamente");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-
-            } catch (Exception e) {
-
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No pudimos actualizar el producto");
-                FacesContext.getCurrentInstance().addMessage(null, msg);
-
-            }
-        }
     }
 
     public void subirImagenes(FileUploadEvent event) {

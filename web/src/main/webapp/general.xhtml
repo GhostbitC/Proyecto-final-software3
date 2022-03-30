@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+
+    <ui:define name="title">Amazing Store</ui:define>
+    <ui:define name="content">
+
+        <div class="row">
+            <div class="col">
+                <img src="${pageContext.request.contextPath}/resources/img/index.jpg" alt=""
+                     style="height: 320px;width: 600px; margin: 2%;margin-bottom: 2em; margin-top: 40px;margin-left: 60px"/>
+            </div>
+
+            <div class="col" >
+
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <h1 align="left" style="margin-left: 30px;margin-top: 30px"><font color="#2F8DF1"
+                                                                                  face="tahoma"> Bienvenidos a CarePet</font>
+                </h1>
+
+                <h4 align="left" style="margin-left: 30px"><font size="4" face="tahoma">
+                    Somos una veterinaria responsable, la cual bela por el bienestar de tus mascotas
+                </font>
+                </h4>
+
+                <h4 align="left" style="margin-left: 30px"> <font size="4" face="tahoma">
+                    Puedes iniciar sesión para adquirir todos los servicios que manejamos
+                </font>
+                </h4>
+            </div>
+        </div>
+
+        <p:card style="text-align: justify;margin-left: 60px; width: 91%;height: 180px; background:#2F8DF1 ">
+            <h1 style="margin-top: -12px">
+                <font color="FFFFFF" face="tahoma"> Servicios disponibles</font>
+            </h1>
+
+            <h4 > <font size="4" color="#FFFFFF" face="tahoma">
+                Una clínica veterinaria puede especializarse en muchos servicios. Más allá de las consultas generales y de las vacunaciones, los animales pueden necesitar de tratamientos más específicos para sus dolencias o productos para su diversión. De ahí que sea importante conocer cuáles son las especialidades y servicios de nuestra veterinaria.
+            </font>
+            </h4>
+
+        </p:card>
+
+        <br></br>
+
+        <div class="container-lg">
+
+            <div class="card">
+                <img src="${pageContext.request.contextPath}/resources/img/health.png" alt=""/>
+                <h3><font color="#FDFEFE" face="tahoma">Hospitalizaciones</font></h3>
+                <p><font size="2" color="#FDFEFE"
+                         face="tahoma">La veterinaria cuenta con un área de hospitalización especialmente diseñada para dar confort a sus pacientes. Los gatos están separados física y acústicamente de los perros para reducir su estrés.</font>
+                </p>
+
+                <p:button styleClass="btn btn-outline-light btn-ver" href="/detalleHospital.xhtml" value="Ver más"
+                          style="width: 50%;margin: 10%;margin-left: 70px"/>
+            </div>
+
+            <div class="card">
+                <img src="${pageContext.request.contextPath}/resources/img/pet-house.png" alt=""/>
+                <h3><font color="#FDFEFE" face="tahoma">Guarderia</font></h3>
+                <p><font size="2" color="#FDFEFE"
+                         face="tahoma">Nuestro servicio de guardería es muy hogareño, tu mascota podrá socializar con compañeros de su misma y de diferente especie, todos con su  carné  de vacunación al día.                            </font>
+                </p>
+                <br></br>
+                <p:button  styleClass="btn btn-outline-light btn-ver" href="/detalleGuarderia.xhtml" value="Ver más"
+                           style="width: 50%;margin: 10%;margin-left: 70px"/>
+
+            </div>
+
+            <div class="card">
+                <img src="${pageContext.request.contextPath}/resources/img/clinic.png" alt=""/>
+                <h3><font color="#FDFEFE" face="tahoma">Veterinaria</font></h3>
+                <p><font size="2" color="#FDFEFE"
+                         face="tahoma">Para nosotros es importante la salud y el bienestar de tu mascota, por ello prestamos un servicio clínico y médico de alta calidad pensando en ti y tu mascota como parte de la familia.            </font>
+                </p>
+                <br></br>
+                <p:button styleClass="btn btn-outline-light btn-ver" href="/detalleVeterinaria.xhtml" value="Ver más"
+                          style="width: 50%;margin: 10%;margin-left: 70px"/>
+            </div>
+
+            <div class="card">
+                <img src="${pageContext.request.contextPath}/resources/img/pet-food.png" alt=""/>
+                <h3><font color="#FDFEFE" face="tahoma">Venta de productos</font></h3>
+                <p><font size="2" color="#FDFEFE"
+                         face="tahoma">Ofrecemos diferentes productos para tu mascota como desinfectantes, juguetes, desparasitantes y productos de aseo.                                                                                  </font>
+                </p>
+                <br></br>
+                <br></br>
+                <br></br>
+                <p:button styleClass="btn btn-outline-light btn-ver" href="/catalogoProductos.xhtml" value="Ver más"
+                          style="width: 50%;margin: 10%;margin-left: 70px"/>
+            </div>
+
+        </div>
+
+
+    </ui:define>
+</ui:composition>
+</html>

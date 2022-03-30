@@ -38,14 +38,6 @@
                     <div class="collapse navbar-collapse" id="navbarColor02">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                            <li class="nav-item"
-                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
-                                <a class="nav-link active" aria-current="page" href="/usuario/perfilUsuario.xhtml"
-                                   jsf:rendered="#{seguridadBean.autenticado}">
-                                    <i class="pi pi-id-card"/>
-                                    <font face="tahoma">Perfil</font>
-                                </a>
-                            </li>
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -56,84 +48,14 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="/registrarUsuario.xhtml"><i
                                             class="pi pi-user-plus" style="margin-right: 10px"/>Registrarse</a></li>
-                                    <li><a class="dropdown-item" href="/usuario/eliminarUsuario.xhtml"
-                                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-minus"
-                                                                                          style="margin-right: 15px"/>Eliminar</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="/usuario/actualizarUsuario.xhtml"
-                                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-edit"
-                                                                                          style="margin-right: 15px"/>Actualizar</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown"
-                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_lugar" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-dog"></i>
-                                    <font face="tahoma">Mascotas</font>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                    <li><a class="dropdown-item" href="/usuario/crearMascota.xhtml"><i
-                                            class="pi pi-plus-circle" style="margin-right: 15px"/><font face="tahoma">Registrar</font></a></li>
-                                    <li><a class="dropdown-item" href="/usuario/eliminarMascota.xhtml"><i
-                                            class="pi pi-minus-circle" style="margin-right: 15px"/><font face="tahoma">Eliminar</font></a></li>
-                                    <li><a class="dropdown-item" href="/usuario/actualizarMascota.xhtml"><i
-                                            class="pi pi-pencil" style="margin-right: 15px"/><font face="tahoma">Actualizar</font></a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown"
-                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user-md"></i>
-                                    <font face="tahoma">Veterinarios </font>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown_lugar">
-                                    <li><a class="dropdown-item" href="/administrador/registrarTrabajador.xhtml"><i
-                                            class="pi pi-user-plus" style="margin-right: 15px"/><font face="tahoma">Registrar</font></a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                           href="/administrador/eliminarTrabajador.xhtml"><i class="pi pi-user-minus"
-                                                                                             style="margin-right: 15px"/><font face="tahoma">Eliminar</font></a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                           href="/administrador/actualizarTrabajador.xhtml"><i class="pi pi-user-edit"
-                                                                                               style="margin-right: 15px"/><font face="tahoma">Actualizar</font></a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown"
-                                jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_productos" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-bone"></i>
-                                    <font face="tahoma">Productos </font>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown_productos">
-                                    <li><a class="dropdown-item" href="/administrador/registrarProducto.xhtml"><i
-                                            class="pi pi-plus-circle" style="margin-right: 15px"/><font face="tahoma">Registrar</font></a></li>
-                                    <li><a class="dropdown-item" href="/administrador/eliminarProducto.xhtml"><i
-                                            class="pi pi-minus-circle" style="margin-right: 15px"/><font face="tahoma">Eliminar</font></a></li>
-                                    <li><a class="dropdown-item" href="/administrador/actualizarProducto.xhtml"><i
-                                            class="pi pi-pencil" style="margin-right: 15px"/><font face="tahoma">Actualizar</font></a>
-                                    </li>
                                 </ul>
                             </li>
 
                         </ul>
                         <div class="d-flex">
-                            <h:form class="d-flex me-2">
-                                <p:inputText styleClass="form-control me-2 input-search"
-                                             placeholder="¿Qué producto está buscando?"
-                                             value="#{busquedaBean.busqueda}"/>
-                                <p:commandButton styleClass="btn btn-outline-light btn-buscar" value="Buscar"
-                                                 action="#{busquedaBean.buscar}"/>
-                            </h:form>
+
+                            <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Registrar"
+                                             style="background: #34495E"/>
                             <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Login"
                                              onclick="PF('dlg1').show()" icon="pi pi-sign-in" iconPos="left"
                                              rendered="#{!seguridadBean.autenticado}" style="background: #34495E"/>
@@ -229,7 +151,7 @@
             <div class="py-4 bg-light" align="center">
                 <div class="justify-content-center">
                     <div class="col-10">
-                        <span>Universidad del Quindío - Software 2 - 2021</span>
+                        <span>Universidad del Quindío - Software 3 - 2022</span>
                     </div>
                 </div>
             </div>
