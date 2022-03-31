@@ -20,13 +20,13 @@ public class Administrador extends Persona implements Serializable {
     //================================= RELACION CON LA ENTIDAD PRODUCTO USUARIO =================================//
     @OneToMany(mappedBy = "administrador")
     @ToString.Exclude
-    private List<ProductoUsuario> productosUsuarios;
+    private List<ProductoUsuario> productosAprobadosUsuarios;
 
     //================================= CONSTRUCTOR  =================================//
     public Administrador(String id, String nombre, String nickname, String password, String email) {
         super(id, nombre, nickname, password, email);
         productos= new ArrayList<>();
-        productosUsuarios = new ArrayList<>();
+        productosAprobadosUsuarios = new ArrayList<>();
     }
 
 

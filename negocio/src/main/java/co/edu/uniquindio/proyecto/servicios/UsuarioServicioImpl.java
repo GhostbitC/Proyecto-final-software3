@@ -131,6 +131,76 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuario.get();
     }
 
+    @Override
+    public void crearCompra(String cedulaUsuario, int idProducto) throws Exception {
+
+        Compra compraNueva = new Compra();
+        Usuario usuario = obtenerUsuario(cedulaUsuario);
+        Optional<Producto> producto = productoRepo.findById(idProducto);
+
+        if(usuario!=null && producto!=null){
+
+            compraNueva.setUsuario(usuario);
+            compraNueva.getProductos().add(producto.get());
+            compraNueva.setValor((float) producto.get().getPrecio());
+            compraNueva.setEstado(false);
+            compraNueva.setFechaVenta(new Date());
+            usuario.getCompras().add(compraNueva);
+
+            usuarioRepo.save(usuario);
+            compraRepo.save(compraNueva);
+        }
+
+    }
+
+    @Override
+    public void agregarProductoCompra(String cedulaUsuario, int idCompra, int idProducto) throws Exception {
+
+        Compra compra = compraRepo.obtenerCompraUsuario(idCompra, cedulaUsuario);
+        Usuario usuario = obtenerUsuario(cedulaUsuario);
+        Optional<Producto> producto = productoRepo.findById(idProducto);
+
+        if(usuario!=null && compra != null){
+
+            compra.setValor((float) (compra.getValor() + producto.get().getPrecio()));
+            compra.getProductos().add(producto.get());
+
+            compraRepo.save(compra);
+        }
+
+    }
+
+    @Override
+    public void eliminarCompra(String cedulaUsuario, int idCompra) throws Exception {
+
+        Compra compra = compraRepo.obtenerCompraUsuario(idCompra, cedulaUsuario);
+        Usuario usuario = obtenerUsuario(cedulaUsuario);
+
+        if(usuario!=null && compra != null){
+
+            usuario.getCompras().remove(compra);
+            compraRepo.delete(compra);
+            usuarioRepo.save(usuario);
+        }
+
+    }
+
+    @Override
+    public void eliminarProductosCompra(String cedulaUsuario, int idCompra, int idProducto) throws Exception {
+
+        Compra compra = compraRepo.obtenerCompraUsuario(idCompra, cedulaUsuario);
+        Usuario usuario = obtenerUsuario(cedulaUsuario);
+        Optional<Producto> producto = productoRepo.findById(idProducto);
+
+        if(usuario!=null && compra != null && producto!=null){
+
+            //usuario.getCompras().get(compra.getId()).getProductos().remove(producto);
+            compra.getProductos().remove(producto);
+            usuarioRepo.save(usuario);
+            compraRepo.save(compra);
+        }
+    }
+
 
 //    @Override
 //    public void adquirirProducto(Producto producto,String nombreUsuario,String cedulaUsuario, String numeroTarjeta) throws Exception {
@@ -169,18 +239,18 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 //        }
 //    }
 //
-//    @Override
-//    public Compra obtenerCompra(int id) throws Exception {
-//
-//        Optional<Compra> compra = compraRepo.findById(id);
-//
-//        if (compra.isEmpty()){
-//
-//            throw new Exception("No se encontro la compra");
-//        }
-//
-//        return compra.get();
-//    }
+    @Override
+    public Compra obtenerCompra(int id) throws Exception {
+
+        Optional<Compra> compra = compraRepo.findById(id);
+
+        if (compra.isEmpty()){
+
+            throw new Exception("No se encontro la compra");
+        }
+
+        return compra.get();
+    }
 
     @Override
     public List<Usuario> listarUsuarios() {

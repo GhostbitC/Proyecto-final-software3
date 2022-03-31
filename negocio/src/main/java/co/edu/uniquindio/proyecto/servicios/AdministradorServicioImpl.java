@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.AdministradorRepo;
+import co.edu.uniquindio.proyecto.repositorios.ProductoUsuarioRepo;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -10,9 +11,11 @@ import java.util.Optional;
 public class AdministradorServicioImpl implements AdministradorServicio{
 
     private final AdministradorRepo administradorRepo;
+    private final ProductoUsuarioRepo productoUsuarioRepo;
 
-    public AdministradorServicioImpl(AdministradorRepo administradorRepo) {
+    public AdministradorServicioImpl(AdministradorRepo administradorRepo, ProductoUsuarioRepo productoUsuarioRepo) {
         this.administradorRepo = administradorRepo;
+        this.productoUsuarioRepo = productoUsuarioRepo;
     }
 
     public boolean estaDisponible(String email){
@@ -69,7 +72,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
             administradorObtenido.setNombre(a.getNombre());
             administradorObtenido.setPassword(a.getPassword());
             administradorObtenido.setProductos(a.getProductos());
-            administradorObtenido.setProductosUsuarios(a.getProductosUsuarios());
+            administradorObtenido.setProductosAprobadosUsuarios(a.getProductosAprobadosUsuarios());
 
             administradorRepo.save(administradorObtenido);
         }
@@ -80,7 +83,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         Administrador administradorEncontrado = obtenerAdministradorEmail(email);
 
         if (administradorEncontrado  != null){
-           administradorRepo.delete(administradorEncontrado );
+           administradorRepo.delete(administradorEncontrado);
         } else {
             throw new Exception("El administrador no ha sido encontrado");
         }
@@ -125,5 +128,35 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         }
 
         return administrador;
+    }
+
+    public void aprobarProductoUsuario(int idProducto, String cedulaAdministrador) throws Exception {
+
+        Administrador adminEncontrado = obtenerAdministrador(cedulaAdministrador);
+        Optional<ProductoUsuario> productoEncontrado = productoUsuarioRepo.findById(idProducto);
+
+        if(adminEncontrado!=null && productoEncontrado!=null){
+
+            productoEncontrado.get().setEstado(true);
+            productoEncontrado.get().setAdministrador(adminEncontrado);
+            adminEncontrado.getProductosAprobadosUsuarios().add(productoEncontrado.get());
+            administradorRepo.save(adminEncontrado);
+            productoUsuarioRepo.save(productoEncontrado.get());
+        }
+
+    }
+
+    public void RechazarProductoUsuario(int idProducto, String cedulaAdministrador) throws Exception {
+
+        Administrador adminEncontrado = obtenerAdministrador(cedulaAdministrador);
+        Optional<ProductoUsuario> productoEncontrado = productoUsuarioRepo.findById(idProducto);
+
+        if(adminEncontrado!=null && productoEncontrado!=null){
+
+            productoEncontrado.get().setEstado(false);
+            productoEncontrado.get().setAdministrador(adminEncontrado);
+            productoUsuarioRepo.save(productoEncontrado.get());
+        }
+
     }
 }

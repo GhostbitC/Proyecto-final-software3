@@ -15,14 +15,18 @@ public interface UsuarioServicio {
 //    void registrarTarjetaUsuario(String idUsuario,String numero,String codigo,String fecha)throws Exception;
 //
     Usuario obtenerUsuario(String id) throws Exception;
-//
+
     Usuario obtenerUsuarioEmailPassword(String email, String password) throws Exception;
-//
-//    Mascota obtenerMascotaUsuario(String nombreMascota,String idUsuario) throws Exception;
-//
-//    List<Mascota> obtenerMascotasPorUsuario(String idUsuario) throws Exception;
-//
-//    Compra obtenerCompra(int id) throws Exception;
+
+    void crearCompra(String cedulaUsuario, int idProducto) throws Exception;
+
+    void agregarProductoCompra(String cedulaUsuario, int idCompra, int idProducto) throws Exception;
+
+    void eliminarCompra(String cedulaUsuario, int idCompra) throws Exception;
+
+    void eliminarProductosCompra(String cedulaUsuario, int idCompra, int idProducto) throws Exception;
+
+    Compra obtenerCompra(int id) throws Exception;
 //
 //    List<Compra> obtenerHistorialServicios(String cedulaU);
 //

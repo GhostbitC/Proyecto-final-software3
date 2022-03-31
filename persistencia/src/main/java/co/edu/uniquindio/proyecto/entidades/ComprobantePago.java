@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Imagen implements Serializable {
+public class ComprobantePago implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
@@ -25,17 +25,7 @@ public class Imagen implements Serializable {
     @NotBlank
     private String url;
 
-    //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
-    @ManyToOne
-    private Producto producto;
-
-    //================================= RELACIÓN CON LA ENTIDAD PRODUCTOUSUARIO =================================//
-    @ManyToOne
-    private ProductoUsuario productoUsuario;
-
-    //================================= CONSTRUCTOR  =================================//
-    public Imagen(String url) {
-        this.url = url;
-    }
-
+    //================================= RELACIÓN CON LA ENTIDAD COMPRA =================================//
+    @OneToOne
+    private Compra compra;
 }

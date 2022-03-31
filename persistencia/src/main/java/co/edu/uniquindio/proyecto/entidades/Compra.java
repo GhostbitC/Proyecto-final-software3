@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,11 +43,15 @@ public class Compra implements Serializable {
     //================================= RELACION CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "compra")
     @ToString.Exclude
-    private List<Producto> productos;
+    private List<Producto> productos = new ArrayList<>();
 
     //================================= RELACION CON LA ENTIDAD ENVIO =================================//
     @ManyToOne
     @ToString.Exclude
     private Envio envio;
+
+    //================================= RELACION CON LA ENTIDAD COMPROBANTE DE PAGO =================================//
+    @OneToOne
+    private ComprobantePago comprobantePago;
 
 }

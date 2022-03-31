@@ -16,11 +16,11 @@ public class ProductoUsuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(name = "id", nullable = false)
     @EqualsAndHashCode.Include
-    private int codigoProductoUsuario;
+    private int id;
 
-    @Column(name = "nombre",length = 100,nullable = false)
+    @Column(name = "nombre",length = 100, nullable = false)
     private String nombre;
 
     @Column(name = "descripcion",length = 500)
@@ -32,7 +32,7 @@ public class ProductoUsuario implements Serializable {
     @Column(name = "cantidad", nullable = false)
     private  int cantidad;
 
-    @Column(name = "estado", nullable =false)
+    @Column(name = "estado", nullable = false)
     private Boolean estado;
 
     //================================= RELACIÓN CON LA ENTIDAD ADMINISTRADOR =================================//

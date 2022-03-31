@@ -22,7 +22,7 @@ public class Usuario extends Persona implements Serializable {
     //================================= RELACION CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
-    private List<Compra> compras;
+    private List<Compra> compras = new ArrayList<>();
 
     //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "usuario")
@@ -33,6 +33,11 @@ public class Usuario extends Persona implements Serializable {
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
     private List<Comentario> comentarios;
+
+    //================================= RELACION CON LA ENTIDAD PRODUCTO USUARIO =================================//
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private List<ProductoUsuario> productosUsuarios;
 
     //================================= RELACION CON LA ENTIDAD DIRECCION =================================//
     @OneToOne
