@@ -17,7 +17,6 @@
     <h:outputStylesheet library="css" name="style.css"/>
     <script src="https://kit.fontawesome.com/0f7ba84938.js" crossorigin="anonymous"></script>
 
-
     <ui:insert name="head"></ui:insert>
 
     <title><ui:insert name="title">CarePet</ui:insert></title>
@@ -26,136 +25,39 @@
 
 <h:body>
     <div id="header">
-        <ui:insert name="header">
-            <nav class="navbar navbar-expand-lg py-3 navbar-dark " style="background: #2F8DF1 ">
-                <div class="container">
-                    <a class="navbar-brand"  href="/"><i class="fas fa-paw"></i> <font face="tahoma">CarePet</font></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarColor02"
-                            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarColor02">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                   data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="pi pi-users"/>
-                                    <font face="tahoma">Usuarios</font>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="/registrarUsuario.xhtml"><i
-                                            class="pi pi-user-plus" style="margin-right: 10px"/>Registrarse</a></li>
-                                </ul>
-                            </li>
-
-                        </ul>
-                        <div class="d-flex">
-
-                            <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Registrar"
-                                             style="background: #34495E"/>
-                            <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Login"
-                                             onclick="PF('dlg1').show()" icon="pi pi-sign-in" iconPos="left"
-                                             rendered="#{!seguridadBean.autenticado}" style="background: #34495E"/>
-                            <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Logout"
-                                             action="#{seguridadBean.cerrarSesion}"
-                                             rendered="#{seguridadBean.autenticado}" icon="pi pi-sign-out"
-                                             iconPos="left" style="background: #34495E"/>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-
-            <h:form>
-                <p:dialog id="dialogo" header="Login" widgetVar="dlg1" Height="400px" width="40%" showEffect="fade"
-                          closeOnEscape="true" rendered="#{!seguridadBean.autenticado}">
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h5><font face="tahoma">Correo electronico</font></h5>
-                            <p:inputText id="username1" value="#{seguridadBean.email}" styleClass="p-d-block"
-                                         style="width: 100%"
-                                         required="true" requiredMessage="¡Ups! olvidaste el email"/>
-                            <br></br>
-                            <br></br>
-                            <h5><font face="tahoma">Contraseña</font></h5>
-                            <p:password id="nonFeedback" value="#{seguridadBean.password}" style="width: 100%"
-                                        required="true" requiredMessage="¡Ups! olvidaste la contraseña"/>
-                        </div>
-
-                        <div class="col-2">
-                            <div class="fotox">
-                                <img src="resources/img/user.png" alt="" style="margin-top: 50%"/>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <f:facet name="footer">
-                        <p:commandButton style="min-width: 30%" value="Iniciar" action="#{seguridadBean.iniciarSesion}"
-                                         styleClass="ui-button-raised ui-button-success ui-button-flat"
-                                         update="@form" href="/index.xhtml" icon="pi pi-sign-in" iconPos="left"/>
-                        <p:commandButton style="min-width: 30%" value="Recuperar contraseña"
-                                         styleClass="ui-button-raised ui-button-secondary ui-button-flat" update="@form"
-                                         onclick="PF('dlg2').show()"/>
-                        <p:growl showDetail="true" for="login-bean"/>
-                    </f:facet>
-                </p:dialog>
-            </h:form>
-
-
-            <h:form>
-                <p:dialog header="Recupera tu cuenta" widgetVar="dlg2" Height="400px" width="40%" showEffect="fade"
-                          closeOnEscape="true">
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h5>Correo electronico</h5>
-                            <p:inputText id="correo" value="#{seguridadBean.emailR}" styleClass="p-d-block"
-                                         style="width: 100%"
-                                         required="true" requiredMessage="¡Ups! olvidaste el email"/>
-                        </div>
-
-                        <div class="col-2">
-                            <div class="fotox">
-                                <img src="resources/img/contrasena.png" alt=""/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <f:facet name="footer">
-                        <p:commandButton style="min-width: 30%" value="Recuperar contraseña"
-                                         action="#{seguridadBean.buscarPorEmail}"
-                                         styleClass="ui-button-raised ui-button-success ui-button-flat"
-                                         update="@form" icon="pi pi-sign-in" iconPos="left"/>
-                        <p:growl showDetail="true" for="login-bean"/>
-                    </f:facet>
-                </p:dialog>
-            </h:form>
-        </ui:insert>
+        <div class="container-md-4" id="head" style="text-align: center; display: block">
+            <h1> Amazing Store</h1>
+        </div>
     </div>
 
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <div class="container">
+            <a class="navbar-brand" href="/"><font face="tahoma">Home</font></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarColor02"
+                    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-    <div id="content">
-        <ui:insert name="content">
+                </ul>
+                <div class="d-flex text-center">
+                    <div class="btn-group text-center">
+                        <a style="font-size: 14px" id="btn-registro" type="button" href="registrarUsuario.xhtml"
+                           class="btn btn-secondary">Registrar</a>
+                        <a id="btn-login" type="button" href="registrarUsuario.xhtml"
+                           class="btn btn-secondary">Login</a>
 
-        </ui:insert>
-    </div>
-
-    <br></br>
-
-    <div id="footer" class="footer">
-        <ui:insert name="footer">
-            <div class="py-4 bg-light" align="center">
-                <div class="justify-content-center">
-                    <div class="col-10">
-                        <span>Universidad del Quindío - Software 3 - 2022</span>
+                        <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Logout"
+                                         action="#{seguridadBean.cerrarSesion}"
+                                         rendered="#{seguridadBean.autenticado}" icon="pi pi-sign-out"
+                                         iconPos="left" style="background: #34495E"/>
                     </div>
                 </div>
             </div>
-        </ui:insert>
-    </div>
+        </div>
+    </nav>
+
 </h:body>
 </html>

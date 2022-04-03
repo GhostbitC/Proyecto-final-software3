@@ -7,86 +7,78 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xml:lang="en" lang="en">
 
-<ui:composition template="/WEB-INF/plantilla.xhtml">
+<h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&amp;display=swap" rel="stylesheet"/>
+    <title> Amazing Store </title>
+</h:head>
 
-    <ui:define name="title">Usuario | Registrar</ui:define>
-    <ui:define name="content">
+<body>
+<ui:define name="title">Usuario | Registrar</ui:define>
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col">
-                <img src="${pageContext.request.contextPath}/resources/img/CUsuario.jpg" alt="" style="margin-left: 20%;height: 70%;width: 70%; margin-top: 15%"/>
-            </div>
-
-        <div class="col">
-        <p:card styleClass="card"
-                style="border-radius: 15px;margin-left: 8%; margin-right: 20%; margin-top: 10%; margin-bottom: 2%; width: 80%;">
-            <f:facet name="title">
-                <font color="#000000"
-                      face="tahoma">¡Regístrese!</font>
-            </f:facet>
-
-            <p><font color="#000000" >¡Hola! en el siguiente formulario puedes indicarnos tus datos para poder registrarte y poder disfrutar de todo lo que te ofrecemos.</font></p>
-
-            <h:form>
-                <h:panelGrid columns="2" cellpadding="5" width="100%">
-                    <p:outputLabel for="cedula_usuario" value="Cedula:"/>
-                    <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.id}" style="width: 100%"
-                                 required="true"
-                                 requiredMessage="Ups! olvidaste el id"/>
-
-                    <p:outputLabel for="nombre_usuario" value="Nombre:"/>
-                    <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" style="width: 100%"
-                                 required="true" requiredMessage="Ups! olvidaste el nombre de usuario"/>
-
-
-                    <p:outputLabel for="nickName_usuario" value="Nickname:"/>
-                    <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 100%"
-                                 required="true" requiredMessage="Ups! olvidaste el nickname"/>
-
-                    <p:outputLabel for="email_usuario" value="Email:"/>
-                    <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%"
-                                 required="true"
-                                 requiredMessage="Ups! olvidaste el email"/>
-
-
-                    <p:outputLabel for="ciudad_usuario" value="Ciudad:"/>
-                    <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudad}"
-                                     converter="#{ciudadConverter}"
-                                     redisplay="true" style="width: 100%" required="true"
-                                     requiredMessage="Ups! olvidaste seleccionar la ciudad">
-                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
-                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.ciudades}"/>
-                    </p:selectOneMenu>
-
-
-                    <p:outputLabel for="contrasenia_usuario" value="Contraseña:"/>
-                    <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" feedback="true"
-                                promptLabel="Ingresa tu contraseña" weakLabel="Débil"
-                                goodLabel="Buena" strongLabel="Fuerte" redisplay="true" style="width: 100%"
-                                required="true"
-                                requiredMessage="Ups! olvidaste la contraseña"/>
-
-                </h:panelGrid>
-                <br></br>
-
-                <div class="form-group row justify-content-center" style="margin: 5%">
-                    <div class="col">
-                        <p:commandButton action="#{usuarioBean.registrarUsuario}" value="Crear"
-                                         update="@form"
-                                         style="background: #2F8DF1;width: 150px;margin-left: 20%"/>
-                    </div>
-                    <div class="col">
-                        <p:button href="/index.xhtml" value="Volver"  style="background: #2F8DF1;width: 150px;margin-left: 8%"/>
-                    </div>
+        <div class="col md-4" style="height: 100%;background-size: 50% 100%">
+            <div class="card" style="height: 100%;background-size: 100% 100%">
+                <div class="card-body" style="background: #6d4b7e;height: 100%">
+                    ssssss
                 </div>
-                <p:growl showDetail="true"/>
-            </h:form>
-        </p:card>
+            </div>
         </div>
+
+        <div class="col md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="5" width="100%">
+                            <p:outputLabel for="cedula_usuario" value="Cedula:"/>
+                            <p:inputText id="cedula_usuario" value="#{usuarioBean.usuario.cedula}" style="width: 100%"
+                                         required="true"
+                                         requiredMessage="Ups! olvidaste el id"/>
+
+                            <p:outputLabel for="nombre_usuario" value="Nombre:"/>
+                            <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" style="width: 100%"
+                                         required="true" requiredMessage="Ups! olvidaste el nombre de usuario"/>
+
+
+                            <p:outputLabel for="nickName_usuario" value="Nickname:"/>
+                            <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 100%"
+                                         required="true" requiredMessage="Ups! olvidaste el nickname"/>
+
+                            <p:outputLabel for="email_usuario" value="Email:"/>
+                            <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%"
+                                         required="true"
+                                         requiredMessage="Ups! olvidaste el email"/>
+
+                            <p:outputLabel for="contrasenia_usuario" value="Contraseña:"/>
+                            <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" feedback="true"
+                                        promptLabel="Ingresa tu contraseña" weakLabel="Débil"
+                                        goodLabel="Buena" strongLabel="Fuerte" redisplay="true" style="width: 100%"
+                                        required="true"
+                                        requiredMessage="Ups! olvidaste la contraseña"/>
+
+                        </h:panelGrid>
+                        <br></br>
+
+                        <div class="form-group row justify-content-center" style="margin: 5%">
+                            <div class="col">
+                                <p:commandButton  value="Crear"
+                                                  update="@form"
+                                                  style="background: #2F8DF1;width: 150px;margin-left: 20%"/>
+                            </div>
+                            <div class="col">
+                                <p:button href="/index.xhtml" value="Volver"  style="background: #2F8DF1;width: 150px;margin-left: 8%"/>
+                            </div>
+                        </div>
+                        <p:growl showDetail="true"/>
+                    </h:form>
+                </div>
+            </div>
         </div>
-    </ui:define>
-</ui:composition>
+    </div>
+</body>
 </html>

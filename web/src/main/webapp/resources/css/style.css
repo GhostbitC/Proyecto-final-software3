@@ -1,16 +1,17 @@
 /* Index */
 #fondo {
-    background: url(https://media.giphy.com/media/YnexM9LwlwGu4Z1QnS/giphy-downsized-large.gif) no-repeat;
+    background: url(https://media.giphy.com/media/7VzgMsB6FLCilwS30v/giphy-downsized-large.gif) no-repeat;
     -webkit-background-clip: text;
     text-align: center;
-    background-size: 1368px 650px;
+    background-size: 100vw 100vh;
 }
 
 #fondo #index {
     text-align: center;
     color: #fff3cd;
+    display: inline-block; !important;
+    align-items: center;
     margin-top: 20%;
-    height: 20%;
     background: rgba(0,0,0,0.40);
     background-size: 1368px;
 }
@@ -18,12 +19,19 @@
 #fondo #index .container{
     height: 200px;
     background-size: 1368px;
+    display: inline-block; !important;
+    align-items: center;
 }
 
 #fondo #index .container h1{
     font-size: 4rem;
     margin: 0;
     padding: 0;
+    font-family: 'Calibri Light',Tahoma;
+}
+
+#fondo #index .container h3{
+    font-family: 'Calibri Light',Tahoma;
 }
 
 .btn-continue {
@@ -35,6 +43,48 @@
 .btn-continue.ui-state-hover {
     color: black;
     background: white;
+}
+
+#head {
+    text-align: center;
+    font-family: 'Calibri Light',Tahoma;
+    background-size: 100vw 100vh;
+    color: #fff3cd;!important;
+}
+
+.navbar {
+    background: #55365d;
+    background-size: 100vw;
+}
+
+#btn-registro {
+    height: 33px;
+    width: 100px;
+    text-align: center;
+    display: block;
+}
+
+#btn-login {
+    height: 33px;
+    width: 100px;
+    text-align: center;
+    display: block;
+}
+
+body #header {
+    background: #6d4b7e;
+    height: 70px;
+}
+
+body #header #head {
+    background: #6d4b7e;!important
+    width: 100%;
+    height: 100%;
+}
+
+body #header #head h1 {
+    color: white;
+    text-align: center;
 }
 
 @media (min-width: 992px){
