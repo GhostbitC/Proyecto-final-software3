@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PersonaRepo extends JpaRepository<Persona,String> {
+public interface PersonaRepo extends JpaRepository<Persona,Integer> {
 
     //================================= REPOSITORIO DE PERSONA =================================//
 

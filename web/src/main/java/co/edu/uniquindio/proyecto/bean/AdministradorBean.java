@@ -30,6 +30,15 @@ public class AdministradorBean implements Serializable {
     @Autowired
     private AdministradorServicio administradorServicio;
 
+    @Autowired
+    private ImagenServicio imagenServicio;
+
+    @Autowired
+    private CategoriaProductoServicio categoriaServicio;
+
+    @Autowired
+    private ProductoServicio productoServicio;
+
     @Getter @Setter
     private Administrador administrador;
 
@@ -61,6 +70,7 @@ public class AdministradorBean implements Serializable {
         this.productoN= new Producto();
         this.imagenes = new ArrayList<>();
         this.administrador = obtenerAdministrador();
+        this.categorias = categoriaServicio.listarCategorias();
 
     }
 
@@ -76,7 +86,7 @@ public class AdministradorBean implements Serializable {
 
             try{
 
-                administradorEncontrado = administradorServicio.obtenerAdministrador(personaLogin.getCedula());
+                //administradorEncontrado = administradorServicio.obtenerAdministrador(personaLogin.getCedula());
                 personaLogin.toString();
 
             }catch (Exception e){
@@ -121,6 +131,35 @@ public class AdministradorBean implements Serializable {
         return null;
     }
 
+    public String registrarProducto() {
+
+        try {
+            if (personaLogin != null) {
+                if (!imagenes.isEmpty()){
+
+                    producto.setAdministrador((Administrador) personaLogin);
+
+                    Producto productoCreado = productoServicio.registrarProducto(this.producto);
+
+                    for (Imagen i : imagenes) {
+                        i.setProducto(productoCreado);
+                        imagenServicio.registrarImagen(i);
+                    }
+
+                    productoCreado.setImagenes(imagenes);
+
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se creo correctamente");
+                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+
+        return null;
+    }
 
 
 }

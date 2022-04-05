@@ -1,9 +1,7 @@
 package co.edu.uniquindio.proyecto.bean;
 
-import co.edu.uniquindio.proyecto.entidades.Administrador;
-import co.edu.uniquindio.proyecto.entidades.Persona;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
-import co.edu.uniquindio.proyecto.servicios.PersonaServicio;
+import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +51,7 @@ public class SeguridadBean implements Serializable {
                 }
 
                 autenticado=true;
-               return "/index?faces-redirect=true";
+               return "/general?faces-redirect=true";
             } catch (Exception e) {
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
@@ -62,11 +60,10 @@ public class SeguridadBean implements Serializable {
         return null;
     }
 
-
     public String cerrarSesion(){
 
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/index?faces-redirect=true";
+        return "/general?faces-redirect=true";
     }
 
 

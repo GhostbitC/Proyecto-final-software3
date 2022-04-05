@@ -27,10 +27,6 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     @Override
     public Administrador registrarAdministrador(Administrador a) throws Exception {
 
-        if (a.getCedula().length()>10){
-            throw new Exception("La cedula solo puede tener 10 caracteres");
-        }
-
         if (a.getNickname().length()>100){
             throw new Exception("El nickname solo puede tener 100 caracteres ");
         }
@@ -66,7 +62,6 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         Administrador administradorObtenido = obtenerEmailPassword(email,password);
 
         if(administradorObtenido!= null){
-            administradorObtenido.setCedula(a.getCedula());
             administradorObtenido.setEmail(a.getEmail());
             administradorObtenido.setNickname(a.getNickname());
             administradorObtenido.setNombre(a.getNombre());
@@ -90,7 +85,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     }
 
     @Override
-    public Administrador obtenerAdministrador(String id) throws Exception {
+    public Administrador obtenerAdministrador(int id) throws Exception {
         Optional<Administrador> administrador = administradorRepo.findById(id);
 
         if(administrador.isEmpty()){
@@ -130,7 +125,8 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         return administrador;
     }
 
-    public void aprobarProductoUsuario(int idProducto, String cedulaAdministrador) throws Exception {
+    @Override
+    public void aprobarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception {
 
         Administrador adminEncontrado = obtenerAdministrador(cedulaAdministrador);
         Optional<ProductoUsuario> productoEncontrado = productoUsuarioRepo.findById(idProducto);
@@ -146,7 +142,8 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
     }
 
-    public void RechazarProductoUsuario(int idProducto, String cedulaAdministrador) throws Exception {
+    @Override
+    public void RechazarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception {
 
         Administrador adminEncontrado = obtenerAdministrador(cedulaAdministrador);
         Optional<ProductoUsuario> productoEncontrado = productoUsuarioRepo.findById(idProducto);

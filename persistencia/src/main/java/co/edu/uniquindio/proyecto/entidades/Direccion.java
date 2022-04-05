@@ -30,7 +30,7 @@ public class Direccion implements Serializable {
     private String numero;
 
     //================================= RELACION CON LA ENTIDAD USUARIO =================================//
-    @OneToOne(mappedBy = "direccion")
+    @OneToOne(mappedBy = "direccion",orphanRemoval = true,cascade = CascadeType.ALL)
     private Usuario usuario;
 
     //================================= RELACION CON LA ENTIDAD CIUDAD =================================//

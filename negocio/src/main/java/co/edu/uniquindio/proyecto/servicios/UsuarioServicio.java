@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UsuarioServicio {
 
-    Usuario registrarUsuario(Usuario u, Direccion direccionUsuario) throws Exception;
+    Usuario registrarUsuario(Usuario u) throws Exception;
 
     void actualizarUsuario(String email, String password, Usuario u) throws Exception;
 
@@ -14,17 +14,17 @@ public interface UsuarioServicio {
 //
 //    void registrarTarjetaUsuario(String idUsuario,String numero,String codigo,String fecha)throws Exception;
 //
-    Usuario obtenerUsuario(String id) throws Exception;
+    Usuario obtenerUsuario(int id) throws Exception;
 
     Usuario obtenerUsuarioEmailPassword(String email, String password) throws Exception;
 
-    void crearCompra(String cedulaUsuario, int idProducto) throws Exception;
+    void crearCompra(int cedulaUsuario, int idProducto) throws Exception;
 
-    void agregarProductoCompra(String cedulaUsuario, int idCompra, int idProducto) throws Exception;
+    void agregarProductoCompra(int cedulaUsuario, int idCompra, int idProducto) throws Exception;
 
-    void eliminarCompra(String cedulaUsuario, int idCompra) throws Exception;
+    void eliminarCompra(int cedulaUsuario, int idCompra) throws Exception;
 
-    void eliminarProductosCompra(String cedulaUsuario, int idCompra, int idProducto) throws Exception;
+    void eliminarProductosCompra(int cedulaUsuario, int idCompra, int idProducto) throws Exception;
 
     Compra obtenerCompra(int id) throws Exception;
 //

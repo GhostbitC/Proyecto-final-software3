@@ -12,11 +12,15 @@ public interface AdministradorServicio {
 
     void eliminarAdministrador(String email) throws Exception;
 
-    Administrador obtenerAdministrador(String id) throws Exception;
+    Administrador obtenerAdministrador(int id) throws Exception;
 
     Administrador obtenerAdministradorEmail(String email) throws Exception;
 
     List<Administrador> listarAdministradores();
 
     Administrador obtenerEmailPassword(String email,String password) throws Exception;
+
+    void aprobarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception;
+
+    void RechazarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception;
 }

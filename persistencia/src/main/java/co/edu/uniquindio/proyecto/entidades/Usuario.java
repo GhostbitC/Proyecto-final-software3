@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,9 @@ public class Usuario extends Persona implements Serializable {
 
     @Column(name = "saldo", length = 10)
     private double saldo;
+
+    @Column(name = "fecha_nacimiento", nullable = false)
+    private String fechaNacimiento;
 
     //================================= RELACION CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "usuario")
@@ -44,8 +48,9 @@ public class Usuario extends Persona implements Serializable {
     private Direccion direccion;
 
     //================================= CONSTRUCTOR  =================================//
-    public Usuario(String id, String nombre, String nickname, String password, String email) {
-        super(id, nombre, nickname, password, email);
+    public Usuario(String nombre,String apellido,String nickname, String password, String email) {
+        super(nombre,apellido, nickname, password, email);
+        this.fechaNacimiento = getFechaNacimiento();
         this.compras= new ArrayList<>();
         this.favoritos= new ArrayList<>();
         this.comentarios = new ArrayList<>();

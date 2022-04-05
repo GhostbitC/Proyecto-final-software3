@@ -6,7 +6,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xml:lang="en" lang="en">
 <h:head>
@@ -19,14 +18,14 @@
 
     <ui:insert name="head"></ui:insert>
 
-    <title><ui:insert name="title">CarePet</ui:insert></title>
+    <title><ui:insert name="title">Amazing Store</ui:insert></title>
 
 </h:head>
 
-<h:body>
+<h:body id="body-pag" style="padding: 0;margin: 0">
     <div id="header">
-        <div class="container-md-4" id="head" style="text-align: center; display: block">
-            <h1> Amazing Store</h1>
+        <div class="container-md-4" id="head" style="text-align: center; display: block;">
+            <h1 style="font-family: 'Calibri',sans-serif"> Amazing Store</h1>
         </div>
     </div>
 
@@ -40,24 +39,44 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                        <a href="/usuario/eliminarUsuario.xhtml"
+                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-minus"
+                                                                                  style="margin-right: 15px"/>Eliminar</a>
+                    </li>
+                    <li jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                        <a href="/usuario/actualizarUsuario.xhtml"
+                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-edit"
+                                                                                  style="margin-right: 15px"/>Actualizar</a>
+                    </li>
 
                 </ul>
-                <div class="d-flex text-center">
-                    <div class="btn-group text-center">
-                        <a style="font-size: 14px" id="btn-registro" type="button" href="registrarUsuario.xhtml"
-                           class="btn btn-secondary">Registrar</a>
-                        <a id="btn-login" type="button" href="registrarUsuario.xhtml"
-                           class="btn btn-secondary">Login</a>
+                <h:form>
+                    <div class="d-flex text-center">
+                        <div class="btn-group text-center" jsf:rendered="#{!seguridadBean.autenticado}">
+                            <a style="font-size: 14px" id="btn-registro" type="button" href="registrarUsuario.xhtml"
+                               class="btn btn-secondary">Registrar</a>
+                            <a style="font-size: 14px" id="btn-login" type="button" href="loginUsuario.xhtml"
+                               class="btn btn-secondary">Ingresar</a>
+                        </div>
 
-                        <p:commandButton styleClass="ui-button-raised ui-button-secondary" value="Logout"
-                                         action="#{seguridadBean.cerrarSesion}"
-                                         rendered="#{seguridadBean.autenticado}" icon="pi pi-sign-out"
-                                         iconPos="left" style="background: #34495E"/>
+                        <p:commandButton style="font-size: 14px;height: 33px" action="#{seguridadBean.cerrarSesion}"
+                                         value="Cerrar sesión"
+                                         update="@form"
+                                         rendered="#{seguridadBean.autenticado}"/>
                     </div>
-                </div>
+                </h:form>
+
             </div>
         </div>
     </nav>
+
+
+    <div id="content">
+        <ui:insert name="content">
+
+        </ui:insert>
+    </div>
 
 </h:body>
 </html>

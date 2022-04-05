@@ -4,11 +4,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 
 //================================= RELACION DE HERENCIA =================================//
 
@@ -22,9 +21,13 @@ public class Persona implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id
-    @Column(name = "cedula", length = 10)
-    @Size(max = 10,message = "El valor ingresado excede los 10 caracteres")
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id",nullable = false)
     @EqualsAndHashCode.Include
+    private int id;
+
+    @Column(name = "cedula",length = 100)
+    @Size(max = 100,message = "El valor ingresado excede los 100 caracteres")
     private String cedula;
 
     @Column(name = "nombre",length = 100,nullable = false)
@@ -45,9 +48,9 @@ public class Persona implements Serializable {
     private String email;
 
     //================================= CONSTRUCTOR  =================================//
-    public Persona(String cedula, String nombre, String nickname, String password, String email) {
-        this.cedula = cedula;
+    public Persona(String nombre, String apellido,String nickname, String password, String email) {
         this.nombre = nombre;
+        this.apellido = apellido;
         this.nickname = nickname;
         this.password = password;
         this.email = email;

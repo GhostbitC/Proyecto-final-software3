@@ -30,6 +30,15 @@
                     <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}" style="width: 100%"
                                  required="true" requiredMessage="Ups! olvidaste el nombre de usuario"/>
 
+                    <p:outputLabel for="apellido_usuario" value="Apellido:" style="color:black"/>
+                    <p:inputText id="apellido_usuario" value="#{usuarioBean.usuario.apellido}" style="width: 100%"
+                                 required="true" requiredMessage="El apellido es obligatorio"/>
+
+                    <p:outputLabel for="fecha_nacimiento" value="Fecha de nacimiento:" style="color:black"/>
+                    <p:inputText type="date" id="fecha_nacimiento" value="#{usuarioBean.usuario.fechaNacimiento}"
+                                 style="width: 100%;"
+                                 required="true"
+                                 requiredMessage="La fecha de nacimiento es obligatoria"/>
 
                     <p:outputLabel for="nickName_usuario" value="Nickname:"/>
                     <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 100%"
@@ -39,17 +48,6 @@
                     <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%"
                                  required="true"
                                  requiredMessage="Ups! olvidaste el email"/>
-
-
-                    <p:outputLabel for="ciudad_usuario" value="Ciudad:"/>
-                    <p:selectOneMenu id="ciudad_usuario" value="#{usuarioBean.usuario.ciudad}"
-                                     converter="#{ciudadConverter}"
-                                     redisplay="true" style="width: 100%" required="true"
-                                     requiredMessage="Ups! olvidaste seleccionar la ciudad">
-                        <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
-                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{usuarioBean.ciudades}"/>
-                    </p:selectOneMenu>
-
 
                     <p:outputLabel for="contrasenia_usuario" value="Contraseña:"/>
                     <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}"

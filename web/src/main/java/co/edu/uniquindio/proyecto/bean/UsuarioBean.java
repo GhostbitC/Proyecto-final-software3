@@ -73,7 +73,7 @@ public class UsuarioBean implements Serializable {
 
     public void registrarUsuario() {
         try {
-            usuarioServicio.registrarUsuario(usuario, direccionUsuario);
+            usuarioServicio.registrarUsuario(usuario);
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! te registramos correctamente");
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
@@ -126,117 +126,5 @@ public class UsuarioBean implements Serializable {
         }
         return null;
     }
-
-//    public List<Compra> obtenerHistorialServicios(){
-//
-//        List<Compra> registrados=null;
-//
-//        if (personaLogin!=null){
-//
-//            try{
-//                registrados= usuarioServicio.obtenerHistorialServicios(personaLogin.getId());
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//        return registrados;
-//    }
-//
-//    public List<Compra> obtenerServiciosActivos(){
-//
-//        List<Compra> registrados=null;
-//
-//        if (personaLogin!=null){
-//
-//            try{
-//                registrados= usuarioServicio.obtenerServiciosActivos(personaLogin.getId());
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//        return registrados;
-//    }
-//
-//    public String metodos(int idCompra, int idServicio){
-//
-//        cancelarServicio(idServicio,idCompra);
-//
-//        return "/usuario/perfilUsuario?faces-redirect=true";
-//
-//    }
-//
-//    public List<CompraProducto> obtenerProductos(){
-//
-//        List<CompraProducto> registrados=null;
-//
-//        if (personaLogin!=null){
-//
-//            try{
-//                registrados= usuarioServicio.obtenerProductosUsuario(personaLogin.getId());
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//        return registrados;
-//    }
-//
-//
-//    public List<Mascota> obtenerMascotasUsuario(){
-//
-//        List<Mascota> mascotasU = null;
-//
-//        if (personaLogin!=null){
-//            try{
-//                mascotasU= usuarioServicio.obtenerMascotasPorUsuario(personaLogin.getId());
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        return mascotasU;
-//
-//    }
-//
-//    public Usuario obtenerUsuario(){
-//
-//        Usuario usuarioEncontrado = new Usuario();
-//
-//        if (personaLogin!=null){
-//
-//            try {
-//                usuarioEncontrado = usuarioServicio.obtenerUsuario(personaLogin.getId());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        return usuarioEncontrado;
-//    }
-//
-//    public void cancelarServicio(int idServicio,int idCompra) {
-//
-//        Servicio servicioAux;
-//        Compra compraAux;
-//
-//        if(personaLogin!= null){
-//
-//            try {
-//                servicioAux = servicioServicio.obtenerServicio(idServicio);
-//
-//                compraAux= usuarioServicio.obtenerCompra(idCompra);
-//
-//                usuario = usuarioServicio.obtenerUsuario(personaLogin.getId());
-//
-//                usuarioServicio.cancelarServicio(compraAux.getId(),servicioAux.getId(),usuario.getId());
-//                this.serviciosActivos = obtenerServiciosActivos();
-//                this.historialServicios= obtenerHistorialServicios();
-//
-//            } catch (Exception e) {
-//                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-//                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-//            }
-//        }
-//    }
-
 
 }

@@ -1,9 +1,11 @@
 /* Index */
 #fondo {
-    background: url(https://media.giphy.com/media/7VzgMsB6FLCilwS30v/giphy-downsized-large.gif) no-repeat;
+    background: url(../resources/img/fondo.gif) no-repeat;
     -webkit-background-clip: text;
     text-align: center;
     background-size: 100vw 100vh;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #fondo #index {
@@ -12,7 +14,7 @@
     display: inline-block; !important;
     align-items: center;
     margin-top: 20%;
-    background: rgba(0,0,0,0.40);
+    background: rgba(0,0,0,0.60);
     background-size: 1368px;
 }
 
@@ -27,11 +29,11 @@
     font-size: 4rem;
     margin: 0;
     padding: 0;
-    font-family: 'Calibri Light',Tahoma;
+    font-family: Poppins-Bold,sans-serif;
 }
 
 #fondo #index .container h3{
-    font-family: 'Calibri Light',Tahoma;
+    font-family: Poppins-Bold,sans-serif;
 }
 
 .btn-continue {
@@ -47,13 +49,13 @@
 
 #head {
     text-align: center;
-    font-family: 'Calibri Light',Tahoma;
+    font-family: 'Calibri',sans-serif;
     background-size: 100vw 100vh;
     color: #fff3cd;!important;
 }
 
 .navbar {
-    background: #55365d;
+    background: #542551;
     background-size: 100vw;
 }
 
@@ -72,14 +74,16 @@
 }
 
 body #header {
-    background: #6d4b7e;
-    height: 70px;
+    background: #63215f;
+    height: 53px;
+    text-align: center;
 }
 
 body #header #head {
-    background: #6d4b7e;!important
+    background: #63215f;!important
     width: 100%;
     height: 100%;
+    text-align: center;
 }
 
 body #header #head h1 {
@@ -87,6 +91,161 @@ body #header #head h1 {
     text-align: center;
 }
 
-@media (min-width: 992px){
+#registro{
+    margin: 0;
+    padding: 0;
+    font-family: "Calibri Light",sans-serif !important;
+    font-size: 2em;
+    font-weight: bold;
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#footer {
+    position: absolute;
+    background: #542551;
+    width: 100%;
+    height: 7%;
+    bottom: 0;
+    padding: 0.5em;
+    color: white;
+    text-align: center;
+}
+
+#aside,#main {
+    width: 50%;
+    align-items: center;
+}
+
+#aside {
+    background: #542551;
+    min-height: 100vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#aside #img-registro {
+    width: 20%;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 180px !important;
+}
+
+#aside #text-registro {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+#aside #text-registro h1{
+    margin: 0;
+    width: 90%;
+    text-align: center;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+#aside #text-registro h5{
+    margin: 0;
+    width: 90%;
+    text-align: center;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+#main {
+    background: white;
+    min-height: 100vh;
+    background-size: 50vw 100vh;
+}
+
+#main #card-registro {
+    min-height: 100vh;
+    text-align: left;
+    background-size: 100vw 100vh;
+    width: 100%;
+}
+
+#main #card-login {
+    min-height: 100vh;
+    text-align: left;
+    background-size: 100vw 100vh;
+    width: 100%;
+}
+
+#img-products{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.slider {
+    margin-left: 10px;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transform-style: preserve-3d;
+    animation: rotate 40s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: perspective(1000px) rotateY(0deg);
+    }
+
+    100% {
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+
+.slider span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--i)*45deg)) translateZ(300px);
+}
+
+.slider span img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 2s;
+    border-radius: 5px;
+}
+
+.slider span:hover img {
+    transform: translateY(-50px) scale(1.2);
+}
+
+@media screen and(min-width: 900px){
+    #registro{
+        flex-direction: column;
+    }
+
+    #main,#aside {
+        width: 100%;
+        height: 50vh;
+        justify-content: center;
+    }
 
 }

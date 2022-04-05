@@ -45,11 +45,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario registrarUsuario(Usuario u, Direccion direccionUsuario) throws Exception {
-
-        if (u.getCedula().length()>10){
-            throw new Exception("La cedula solo puede tener 10 caracteres");
-        }
+    public Usuario registrarUsuario(Usuario u) throws Exception {
 
         if (u.getNickname().length()>100){
             throw new Exception("El nickname solo puede tener 100 caracteres");
@@ -81,7 +77,6 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new Exception("El usuario ya existe");
         }
 
-        u.setDireccion(direccionUsuario);
         u.setSaldo(0);
 
         return usuarioRepo.save(u);
@@ -120,7 +115,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario obtenerUsuario(String id) throws Exception {
+    public Usuario obtenerUsuario(int id) throws Exception {
 
         Optional<Usuario> usuario = usuarioRepo.findById(id);
 
@@ -132,7 +127,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public void crearCompra(String cedulaUsuario, int idProducto) throws Exception {
+    public void crearCompra(int cedulaUsuario, int idProducto) throws Exception {
 
         Compra compraNueva = new Compra();
         Usuario usuario = obtenerUsuario(cedulaUsuario);
@@ -154,7 +149,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public void agregarProductoCompra(String cedulaUsuario, int idCompra, int idProducto) throws Exception {
+    public void agregarProductoCompra(int cedulaUsuario, int idCompra, int idProducto) throws Exception {
 
         Compra compra = compraRepo.obtenerCompraUsuario(idCompra, cedulaUsuario);
         Usuario usuario = obtenerUsuario(cedulaUsuario);
@@ -171,7 +166,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public void eliminarCompra(String cedulaUsuario, int idCompra) throws Exception {
+    public void eliminarCompra(int cedulaUsuario, int idCompra) throws Exception {
 
         Compra compra = compraRepo.obtenerCompraUsuario(idCompra, cedulaUsuario);
         Usuario usuario = obtenerUsuario(cedulaUsuario);
@@ -186,7 +181,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public void eliminarProductosCompra(String cedulaUsuario, int idCompra, int idProducto) throws Exception {
+    public void eliminarProductosCompra(int cedulaUsuario, int idCompra, int idProducto) throws Exception {
 
         Compra compra = compraRepo.obtenerCompraUsuario(idCompra, cedulaUsuario);
         Usuario usuario = obtenerUsuario(cedulaUsuario);

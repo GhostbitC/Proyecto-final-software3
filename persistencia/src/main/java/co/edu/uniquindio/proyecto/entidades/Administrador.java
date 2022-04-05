@@ -23,8 +23,8 @@ public class Administrador extends Persona implements Serializable {
     private List<ProductoUsuario> productosAprobadosUsuarios;
 
     //================================= CONSTRUCTOR  =================================//
-    public Administrador(String id, String nombre, String nickname, String password, String email) {
-        super(id, nombre, nickname, password, email);
+    public Administrador(String nombre,String apellido, String nickname, String password, String email) {
+        super(nombre,apellido, nickname, password, email);
         productos= new ArrayList<>();
         productosAprobadosUsuarios = new ArrayList<>();
     }
