@@ -17,9 +17,9 @@ public class Envio implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
-    private int codigoEnvio;
+    private int id;
 
     @Column(name = "tiempo_aproximado", length = 100)
     private String tiempoAproximado;
@@ -28,7 +28,7 @@ public class Envio implements Serializable {
     @Column(name = "fecha_envio", nullable = false)
     private Date fechaEnvio;
 
-    @Column(name = "valor")
+    @Column
     private float valor;
 
     //================================= RELACION CON LA ENTIDAD COMPRA =================================//

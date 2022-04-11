@@ -26,25 +26,25 @@ public class Persona implements Serializable {
     @EqualsAndHashCode.Include
     private int id;
 
-    @Column(name = "cedula",length = 100)
-    @Size(max = 100,message = "El valor ingresado excede los 100 caracteres")
+    @Column(length = 10)
+    @Size(max = 10,message = "El valor ingresado excede los 10 caracteres")
     private String cedula;
 
-    @Column(name = "nombre",length = 100,nullable = false)
+    @Column(length = 100,nullable = false)
     @Size(max = 100,message = "El valor ingresado excede los 100 caracteres")
     private String nombre;
 
-    @Column(name = "apellido",length = 100,nullable = false)
+    @Column(length = 100,nullable = false)
     @Size(max = 100,message = "El valor ingresado excede los 100 caracteres")
     private String apellido;
 
-    @Column(name = "nickname",length = 100,nullable = false,unique = true)
+    @Column(length = 100,nullable = false,unique = true)
     private String nickname;
 
-    @Column(name = "password",length = 100,nullable = false)
+    @Column(length = 100,nullable = false)
     private String password;
 
-    @Column(name = "email",length = 100,nullable = false,unique = true)
+    @Column(length = 100,nullable = false,unique = true)
     private String email;
 
     //================================= CONSTRUCTOR  =================================//

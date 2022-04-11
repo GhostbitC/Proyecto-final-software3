@@ -66,6 +66,6 @@ public class CategoriaProductoServicioImpl implements CategoriaProductoServicio 
 
     @Override
     public List<Categoria> listarCategorias() {
-        return categoriaRepo.findAll();
+        return categoriaRepo.obtenerCategoriasConverter("Destacados");
     }
 }

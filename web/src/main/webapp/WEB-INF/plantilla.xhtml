@@ -14,24 +14,26 @@
     <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
     <h:outputStylesheet library="css" name="style.css"/>
-    <script src="https://kit.fontawesome.com/0f7ba84938.js" crossorigin="anonymous"></script>
-
-    <ui:insert name="head"></ui:insert>
+    <script src="https://kit.fontawesome.com/64e66804a5.js" crossorigin="anonymous"></script>
 
     <title><ui:insert name="title">Amazing Store</ui:insert></title>
 
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no,initial-scale=1.0, maximun-scale=1.0,minimun-scale=1.0"/>
 </h:head>
 
-<h:body id="body-pag" style="padding: 0;margin: 0">
+<h:body id="body-pag" style="padding: 0;margin: 0;background: #FBFCFC;">
     <div id="header">
         <div class="container-md-4" id="head" style="text-align: center; display: block;">
             <h1 style="font-family: 'Calibri',sans-serif"> Amazing Store</h1>
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="/"><font face="tahoma">Home</font></a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/general.xhtml"><img
+                    src="${pageContext.request.contextPath}/resources/img/logo.png" alt=""
+                    style="margin-left: -20px;width: 40px;height: 40px"/></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarColor02"
                     aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,30 +41,50 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
-                        <a href="/usuario/eliminarUsuario.xhtml"
-                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-minus"
-                                                                                  style="margin-right: 15px"/>Eliminar</a>
-                    </li>
-                    <li jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
-                        <a href="/usuario/actualizarUsuario.xhtml"
-                           jsf:rendered="#{seguridadBean.autenticado}"><i class="pi pi-user-edit"
-                                                                                  style="margin-right: 15px"/>Actualizar</a>
+                    <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
+                        <a class="nav-link active" aria-current="page" href="/administrador/registrarProducto.xhtml">
+                            Registrar productos
+                        </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">
+                            Teclados
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">
+                            Mouses
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">
+                            Monitores
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">
+                            Portátiles
+                        </a>
+                    </li>
                 </ul>
+
                 <h:form>
                     <div class="d-flex text-center">
                         <div class="btn-group text-center" jsf:rendered="#{!seguridadBean.autenticado}">
-                            <a style="font-size: 14px" id="btn-registro" type="button" href="registrarUsuario.xhtml"
+                            <a id="btn-registro" type="button" href="registrarUsuario.xhtml"
                                class="btn btn-secondary">Registrar</a>
-                            <a style="font-size: 14px" id="btn-login" type="button" href="loginUsuario.xhtml"
+                            <a id="btn-login" type="button" href="loginUsuario.xhtml"
                                class="btn btn-secondary">Ingresar</a>
                         </div>
 
-                        <p:commandButton style="font-size: 14px;height: 33px" action="#{seguridadBean.cerrarSesion}"
+                        <p:commandButton id="cerrar" action="#{seguridadBean.cerrarSesion}"
                                          value="Cerrar sesión"
                                          update="@form"
+                                         style="font-size: 14px;height: 33px;background: none;border-color: white;border-radius: 10px"
                                          rendered="#{seguridadBean.autenticado}"/>
                     </div>
                 </h:form>
@@ -77,6 +99,35 @@
 
         </ui:insert>
     </div>
+
+    <footer class="text-white py-2" style="background: #542551">
+        <div class="container" style="width: 100%">
+            <nav class="row" style="width: 100%">
+                <ul class="col list-unstyled">
+                    <li> FAQ</li>
+                    <li> Políticas de envíos</li>
+                    <li> Políticas de privacidad</li>
+                    <li> Sobre nosotros</li>
+                </ul>
+
+                <ul class="col list-unstyled"
+                    style="align-content: center;position: relative;align-items: center;justify-content: center">
+                    <li style="justify-content: center;align-items: center;text-align: center; margin-top: 13%;margin-left: 20%"> Copyright © 2020 amazingstore</li>
+                </ul>
+
+                <ul class="col list-unstyled" style="text-align: right">
+                    <li class="font-weight-bold" style="justify-content: center;align-items: center;"> Redes sociales
+                    </li>
+                    <li class="d-flex">
+                        <a href="#" class="text-reset" style="margin-left: 80%;"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="text-reset" style="margin-left: 10px"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="text-reset" style="margin-left: 10px"><i
+                                class="fa-brands fa-twitter"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
 
 </h:body>
 </html>

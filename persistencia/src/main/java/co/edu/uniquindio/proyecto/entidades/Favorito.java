@@ -15,7 +15,7 @@ public class Favorito implements Serializable {
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
     private int id;
 

@@ -14,14 +14,14 @@ import java.io.Serializable;
 @ToString
 public class ComprobantePago implements Serializable {
 
-    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
     private int id;
 
-    @Column(name = "url",length = 100,nullable = false)
+    @Column(length = 100,nullable = false)
     @NotBlank
     private String url;
 

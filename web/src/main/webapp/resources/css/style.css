@@ -1,4 +1,4 @@
-/* Index */
+/*---------- Body index ----------*/
 #fondo {
     background: url(../resources/img/fondo.gif) no-repeat;
     -webkit-background-clip: text;
@@ -14,6 +14,7 @@
     display: inline-block; !important;
     align-items: center;
     margin-top: 20%;
+    padding: 0;
     background: rgba(0,0,0,0.60);
     background-size: 1368px;
 }
@@ -36,6 +37,7 @@
     font-family: Poppins-Bold,sans-serif;
 }
 
+/*---------- Botón index ----------*/
 .btn-continue {
     color: #f8f9fa;
     border-color: #f8f9fa;
@@ -54,16 +56,23 @@
     color: #fff3cd;!important;
 }
 
+/*---------- Navbar ----------*/
 .navbar {
     background: #542551;
     background-size: 100vw;
 }
 
+/*---------- Botones navbar ----------*/
 #btn-registro {
     height: 33px;
     width: 100px;
     text-align: center;
     display: block;
+    font-size: 14px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background: none;
+    border-color: white
 }
 
 #btn-login {
@@ -71,8 +80,47 @@
     width: 100px;
     text-align: center;
     display: block;
+    font-size: 14px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background: none;
+    border-color: white;
 }
 
+#btn-registro:hover {
+    background: white;
+    color: #542551;
+}
+
+#btn-login:hover {
+    background: white;
+    color: #542551;
+}
+
+.ui-carousel-next .ui-link .ui-state-disabled {
+    visibility: hidden !important;
+    border: none !important;
+    background: none !important;
+}
+.ui-carousel-prev-icon {
+    visibility: hidden !important;
+    border: none !important;
+    background: none !important;
+}
+
+.ui-carousel-next-icon {
+    visibility: hidden !important;
+    border: none !important;
+    background: none !important;
+}
+
+.ui-link {
+    visibility: hidden !important;
+    border: none !important;
+    background: none !important;
+}
+
+/*---------- Body ----------*/
 body #header {
     background: #63215f;
     height: 53px;
@@ -91,6 +139,7 @@ body #header #head h1 {
     text-align: center;
 }
 
+/*---------- Body registro y login ----------*/
 #registro{
     margin: 0;
     padding: 0;
@@ -101,19 +150,10 @@ body #header #head h1 {
     min-height: 100vh;
     justify-content: center;
     align-items: center;
+    background: #FBFCFC !important;
 }
 
-#footer {
-    position: absolute;
-    background: #542551;
-    width: 100%;
-    height: 7%;
-    bottom: 0;
-    padding: 0.5em;
-    color: white;
-    text-align: center;
-}
-
+/*---------- División de registro y login ----------*/
 #aside,#main {
     width: 50%;
     align-items: center;
@@ -162,7 +202,7 @@ body #header #head h1 {
 }
 
 #main {
-    background: white;
+    background: #FBFCFC!important;
     min-height: 100vh;
     background-size: 50vw 100vh;
 }
@@ -192,6 +232,7 @@ body #header #head h1 {
     overflow: hidden;
 }
 
+/*---------- Slider 3d registro de productos ----------*/
 .slider {
     margin-left: 10px;
     position: relative;
@@ -237,6 +278,278 @@ body #header #head h1 {
     transform: translateY(-50px) scale(1.2);
 }
 
+/*---------- Container de publicidad general ----------*/
+#publicidad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    width: 1000px;
+    height: 250px;
+}
+
+#publicidad img {
+    max-width: 100%;
+    width: 1000px;
+    height: 250px;
+}
+
+#publicidad .container-all {
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+#publicidad .container-all .slide {
+    display: flex;
+    transform: translate3d(0,0,0);
+    transition: all 400ms;
+    animation-name: autoplay;
+    animation-duration: 60s;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: step-start;
+}
+
+#publicidad .container-all .slide .item-slide {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-width: 100%;
+}
+
+@keyframes autoplay {
+
+    20%{
+        transform: translate3d(calc(-100%*0),0,0);
+    }
+
+    40%{
+        transform: translate3d(calc(-100%*1),0,0);
+    }
+
+    60%{
+        transform: translate3d(calc(-100%*2),0,0);
+    }
+
+    80%{
+        transform: translate3d(calc(-100%*3),0,0);
+    }
+
+    100%{
+        transform: translate3d(calc(-100%*4),0,0);
+    }
+}
+
+/*---------- Carousel general ----------*/
+#card-carousel-products {
+    width: 200px;
+    height: 350px;
+    border: none;
+    overflow: hidden;
+    cursor: default;
+    transition: all 400ms ease;
+}
+
+#card-carousel-products:hover {
+    background: #D5D8DC;
+}
+
+#cerrar:hover {
+    background: white;
+}
+
+.et-l .et-l--footer {
+    background: #6f42c1;
+}
+
+.product {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product .caption {
+    margin-top: 15px;
+}
+
+.product .caption h6 {
+    color: #455a64;
+}
+
+.product .caption .price + .price {
+    margin-left: 15px;
+}
+
+.product.tumbnail {
+    box-shadow: 0 5px 25px 0 transparent;
+    transition: 0.3s linear;
+    padding-top: 0;
+}
+
+.product.tumbnail img:hover {
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.2);
+}
+
+.single-product span {
+    display: inline-block;
+}
+
+.single-product .rating .fa-star, .single-product .rating .fa-star-o {
+    font-size: 16px;
+    color: #f7d4a0;
+    margin-left: 2px;
+}
+
+.single-product .rating + * {
+    margin-left: 15px;
+}
+
+.single-product h1.h1-variant-2 {
+    margin-bottom: 20px;
+}
+
+.single-product .caption:before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.single-product .caption span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.single-product .caption .price {
+    font-weight: 400;
+}
+
+.single-product .caption .price.sale {
+    color: #e75854;
+    font-size: 33px;
+}
+
+.single-product .caption * + .price {
+    margin-left: 10.8%;
+}
+
+@media (max-width: 1199px) {
+    .single-product .caption * + .price {
+        margin-left: 7.8%;
+    }
+}
+
+.single-product .caption * + .quantity {
+    margin-left: 26px;
+}
+
+.single-product .caption .info-list {
+    border-bottom: 1px solid #f3f3ed;
+    border-top: 1px solid #f3f3ed;
+    font-family: Montserrat, sans-serif;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    text-align: left;
+}
+
+.single-product .caption .info-list dt, .single-product .caption .info-list dd {
+    display: inline-block;
+    line-height: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.single-product .caption .info-list dt {
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    color: #a7b0b4;
+    width: 35%;
+    text-transform: uppercase;
+}
+
+.single-product .caption .info-list dd {
+    font-size: 15px;
+    color: #565452;
+    width: 62.5%;
+}
+
+.single-product .caption .share span.small {
+    margin-top: 9px;
+}
+
+@media (max-width: 991px) {
+    .single-product .caption .share span.small {
+        display: block;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .single-product .table-mobile tr {
+        padding-top: 0;
+    }
+    .single-product .table-mobile tr:before {
+        display: none;
+    }
+}
+
+.price {
+    display: inline-block;
+    font-size: 15px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #2b2f3e;
+}
+
+.price.sale {
+    color: #e75854;
+}
+
+.price del {
+    color: #b0bec5;
+}
+
+.quantity {
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    font-size: 12px;
+    background: #eceff1;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 82px;
+    height: auto;
+    display: inline-block;
+}
+
+.quantity span {
+    display: inline-block;
+}
+
+.quantity .num {
+    width: 26px;
+}
+
+.quantity [class*='fa-'] {
+    padding-top: 4px;
+    width: 22px;
+    padding-bottom: 4px;
+    color: #b0bec5;
+    cursor: pointer;
+}
+
+.quantity [class*='fa-']:hover {
+    color: #455a64;
+}
+
+/*---------- Media Screen ----------*/
 @media screen and(min-width: 900px){
     #registro{
         flex-direction: column;
@@ -247,5 +560,4 @@ body #header #head h1 {
         height: 50vh;
         justify-content: center;
     }
-
 }

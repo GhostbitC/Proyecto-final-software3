@@ -18,19 +18,19 @@
         <div class="row" style="background-size: 100vw 100vh;height: 100%;width: 100%;padding: 0!important;margin: 0!important;">
             <div class="col" id="img-products" style="min-height: 100vh;width: 100%;padding: 0!important;margin: 0!important;">
                 <div class="slider" style="margin-left: 60px">
-                    <span style="--i:1;"><img src="resources/img/products/img-1.jpg" alt=""/></span>
-                    <span style="--i:2;"><img src="resources/img/products/img-2.jpg" alt=""/></span>
-                    <span style="--i:3;"><img src="resources/img/products/img-3.jpg" alt=""/></span>
-                    <span style="--i:4;"><img src="resources/img/products/img-4.jpg" alt=""/></span>
-                    <span style="--i:5;"><img src="resources/img/products/img-5.jpg" alt=""/></span>
-                    <span style="--i:6;"><img src="resources/img/products/img-6.jpg" alt=""/></span>
-                    <span style="--i:7;"><img src="resources/img/products/img-7.jpg" alt=""/></span>
-                    <span style="--i:8;"><img src="resources/img/products/img-8.jpg" alt=""/></span>
+                    <span style="--i:1;"><img src="../resources/img/products/img-1.png" alt=""/></span>
+                    <span style="--i:2;"><img src="../resources/img/products/img-2.png" alt=""/></span>
+                    <span style="--i:3;"><img src="../resources/img/products/img-3.png" alt=""/></span>
+                    <span style="--i:4;"><img src="../resources/img/products/img-4.png" alt=""/></span>
+                    <span style="--i:5;"><img src="../resources/img/products/img-5.png" alt=""/></span>
+                    <span style="--i:6;"><img src="../resources/img/products/img-6.png" alt=""/></span>
+                    <span style="--i:7;"><img src="../resources/img/products/img-7.png" alt=""/></span>
+                    <span style="--i:8;"><img src="../resources/img/products/img-8.png" alt=""/></span>
                 </div>
             </div>
 
-            <div class="col" style="min-height: 100vh;width: 100%;padding: 0!important;margin: 0!important;">
-                <p:card styleClass="card p-3 md-3" id="card-producto" style="width: 100%;border-color: transparent;background: transparent;border: 0px">
+            <div class="col" style="min-height: 100vh;width: 100%;padding: 0!important;margin: 0!important;border: none !important;">
+                <p:card styleClass="card p-3 md-3" id="card-producto" style="margin-left: 20px;width: 97%;border: none!important;">
                     <div class="card-title" style="font-family:'Calibri',sans-serif;font-size: 30px;margin-top: 10px">
                         <font color="#542551">Registro de productos</font>
                     </div>
@@ -41,30 +41,29 @@
                         <h:panelGrid columns="2" cellpadding="5" width="100%">
 
                             <p:outputLabel for="categoria_producto" value="Categoria:"
-                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                                           style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
                             <p:selectOneMenu id="categoria_producto" value="#{administradorBean.producto.categoria}"
                                              style="width: 100%"
                                              converter="#{categoriaConverter}"
                                              required="true"
-                                             requiredMessage="La categoria es obligatorio">
+                                             requiredMessage="La categoría a la que pertenece el producto es obligatorio">
                                 <f:selectItem itemLabel="Seleccione una categoria" noSelectionOption="true"/>
                                 <f:selectItems var="categoria" itemLabel="#{categoria.nombre}"
                                                value="#{administradorBean.categorias}"/>
                             </p:selectOneMenu>
 
                             <p:outputLabel for="nombre_producto" value="Nombre:"
-                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                                           style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
                             <p:inputText id="nombre_producto" value="#{administradorBean.producto.nombre}"
                                          style="width: 100%"
                                          required="true"
-                                         requiredMessage="El nombre de la mascota es obligatorio"/>
+                                         requiredMessage="El nombre del producto es obligatorio"/>
 
                             <p:outputLabel for="descripcion_producto" value="Descripción:"
                                            style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
                             <p:inputTextarea id="descripcion_producto" value="#{administradorBean.producto.descripcion}"
-                                             style="width: 100%"
-                                             required="true" autoResize="none"
-                                             requiredMessage="La descripcion es obligatorio"/>
+                                             style="width: 100%;"
+                                             autoResize="none"/>
 
                             <p:outputLabel for="precio_producto" value="Precio:"
                                            style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
@@ -78,24 +77,25 @@
 
                             <p:outputLabel for="imagenes_producto" value="Imagenes:"
                                            style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
-                            <p:fileUpload id="imagenes_producto" listener="#{administradorBean.subirImagenes}"
-                                          mode="advanced"
-                                          multiple="true" sizeLimit="1000000" fileLimit="5"
-                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true" skinSimple="true"/>
+                            <p:fileUpload id="imagenes_producto" listener="#{administradorBean.subirImagenes}" mode="advanced"
+                                          auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                          required="true" skinSimple="true"/>
 
                         </h:panelGrid>
                         <br></br>
-                        <h:panelGrid columns="2" cellpadding="5" width="100%">
+                        <div class="form-group row justify-content-center" style="padding: 5%; text-align: center">
 
-                            <p:commandButton action="#{administradorBean.registrarProducto}" value="Registrar"
-                                             update="@form"
-                                             style="background: #2F8DF1;width: 120px; margin-left: 40%;margin-top: 5%"/>
+                            <div class="col">
+                                <p:button href="/general.xhtml" value="Volver"
+                                          style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                            </div>
 
-                            <p:button href="/index.xhtml" value="Volver"
-                                      style="background: #2F8DF1;width: 120px; margin-left: 15%;margin-top: 5%"/>
-
-                        </h:panelGrid>
-
+                            <div class="col">
+                                <p:commandButton action="#{administradorBean.registrarProducto}" value="Registrar"
+                                                 update="@form"
+                                                 style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                            </div>
+                        </div>
                         <p:growl showDetail="true"/>
 
                     </h:form>

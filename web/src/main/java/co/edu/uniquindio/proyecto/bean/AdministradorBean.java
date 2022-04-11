@@ -62,7 +62,6 @@ public class AdministradorBean implements Serializable {
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
-
     @PostConstruct
     public void inicializar() {
         this.categoria= new Categoria();
@@ -109,7 +108,6 @@ public class AdministradorBean implements Serializable {
             imagenes.add(foto);
         }
     }
-
 
     public String subirImagen(UploadedFile file) {
 
@@ -160,6 +158,5 @@ public class AdministradorBean implements Serializable {
 
         return null;
     }
-
 
 }

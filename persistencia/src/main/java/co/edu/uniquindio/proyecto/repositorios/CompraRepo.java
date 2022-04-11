@@ -11,14 +11,10 @@ import java.util.List;
 public interface CompraRepo extends JpaRepository<Compra,Integer> {
 
     //================================= REPOSITORIO DE COMPRA =================================//
-
-    @Query("select c from Compra c where c.id =:idCompra and c.usuario.cedula =:cedulaUsuario")
-    Compra obtenerCompraUsuario(int idCompra,int cedulaUsuario);
-
     @Query("select com from Compra c join c.comprobantePago com where c.id = :idCompra")
     ComprobantePago obtenerComprobante(int idCompra);
 
-    @Query("select c from Compra c where c.usuario.cedula =:cedulaU")
-    List<Compra> obtenerhistorialServiciosUsuario(int cedulaU);
+    @Query("select c from Compra c where c.usuario.id = :codigo")
+    List <Compra> listarComprasUsuario (String codigo);
 
 }

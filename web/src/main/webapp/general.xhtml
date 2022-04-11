@@ -15,13 +15,113 @@
         <h:outputStylesheet library="css" name="mapbox-gl.css"/>
         <h:outputScript library="js" name="mapbox-gl.js"/>
         <h:outputScript library="js" name="script-home.js"/>
+
+        <script src="https://kit.fontawesome.com/64e66804a5.js" crossorigin="anonymous"></script>
+
     </ui:define>
 
-    <ui:define name="title">Unilocal</ui:define>
+    <ui:define name="title">Amazing Store</ui:define>
     <ui:define name="content">
 
-        zzzzzzzzzzzz
+        <div class="container" id="publicidad" style="margin-top: 3%">
+            <div class="container-all">
+                <input type="hidden" id="1" name="image-slide"/>
+                <input type="hidden" id="2" name="image-slide"/>
+                <input type="hidden" id="3" name="image-slide"/>
+                <input type="hidden" id="4" name="image-slide"/>
+                <input type="hidden" id="5" name="image-slide"/>
 
+                <div class="slide">
+
+                    <div class="item-slide">
+                        <img src="resources/img/Banners/banner.jpg" alt=""/>
+                    </div>
+
+                    <div class="item-slide">
+                        <img src="resources/img/Banners/banner2.jpg" alt=""/>
+                    </div>
+
+                    <div class="item-slide">
+                        <img src="resources/img/Banners/banner3.png" alt=""/>
+                    </div>
+
+                    <div class="item-slide">
+                        <img src="resources/img/Banners/banner4.png" alt=""/>
+                    </div>
+
+                    <div class="item-slide">
+                        <img src="resources/img/Banners/banner5.jpg" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 5%;width: 95%;justify-content: center;align-items: center;text-align: center">
+            <div class="card" style="width: 100%;height: 300px">
+                <div class="card-body">
+                    <div class="title"
+                         style="font-size: 25px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center">
+                        <b><p style="color: #542551">¿Qué estás buscando?</p></b>
+                    </div>
+
+                    <div class="container" style="display: flex;width: 90%" >
+                        <p:inputText style="width: 100%;" placeholder="   Buscar"/>
+
+                        <p:commandButton style="margin-left: 20px;color: black" type="button" icon="pi pi-search"
+                                         iconPos="center"
+                                         styleClass="rounded-button
+                                         ui-button-secondary ui-button-flat" />
+                    </div>
+
+                    <div class="row" style="width: 100%;margin-top: 5%;font-size: 20px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center">
+                        <div class="col" style="width: 100%;font-size: 20px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center">
+                            <b><p style="color: #542551">Mostrar productos de menor a mayor precio</p></b>
+
+                            <p:commandButton type="button" value="Ver" styleClass="ui-button-secondary" style="margin-top: 3%;background: #542551; color: white;border-color: #542551;width: 100px"/>
+                        </div>
+
+                        <div class="col" style="width: 100%;font-size: 20px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center">
+                            <b><p style="color: #542551;margin-left: 40px">Mostrar productos de mayor a menor precio</p></b>
+
+                            <p:commandButton type="button" value="Ver" styleClass="ui-button-secondary" style="margin-left: 40px;margin-top: 3%;background: #542551; color: white;border-color: #542551;width: 100px" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container" style="margin-top: 5%;width: 95%;">
+            <h:form>
+                <div class="card" style="border: none;">
+                    <div class="title"
+                         style="font-size: 25px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center">
+                        <b><p style="color: #542551">Productos destacados</p></b>
+                    </div>
+                    <p:carousel value="#{inicioBean.productosDestacados}" var="producto" numVisible="5"
+                                style="width: 100%;margin-top: 2%;position: center;">
+                        <div class="card" id="card-carousel-products">
+                            <div class="card-body">
+                                <div style="font-size: 20px;justify-content: center;text-align: center;color: #542551;">
+                                    <b><p>#{producto.nombre}</p></b>
+                                </div>
+                                <br/>
+                                <div class="container" style="justify-content: center;display: flex;text-align: center">
+                                    <h:commandButton
+                                            style="position: fixed;width: 150px;height: 150px;border: none;background: transparent"
+                                            action="#{inicioBean.irADetalle(producto.id)}"><img
+                                            src="uploads/#{producto.imagenPrincipal}" alt=""
+                                            style="width: 180px;height: 150px"/></h:commandButton>
+                                </div>
+                                <div style="margin-left: 45px;position: absolute;bottom: 5px">
+                                    <b><p>$ #{producto.precio}</p></b>
+                                </div>
+                            </div>
+                        </div>
+                    </p:carousel>
+                </div>
+            </h:form>
+        </div>
 
     </ui:define>
 </ui:composition>

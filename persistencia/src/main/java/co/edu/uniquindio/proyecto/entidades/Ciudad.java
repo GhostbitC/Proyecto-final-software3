@@ -19,15 +19,15 @@ public class Ciudad implements Serializable {
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
     private int id;
 
-    @Column(name = "nombre",length = 100,nullable = false)
+    @Column(length = 100,nullable = false)
     @NotBlank
     private String nombre;
 
-    //================================= RELACION CON LA ENTIDAD DIRECCIÓN =================================//
+    //================================= RELACIÓN CON LA ENTIDAD DIRECCIÓN =================================//
     @OneToMany(mappedBy = "ciudad")
     @ToString.Exclude
     private List<Direccion> direcciones;

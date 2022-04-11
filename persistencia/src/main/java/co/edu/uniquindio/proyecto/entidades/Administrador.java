@@ -12,12 +12,12 @@ import java.util.*;
 @ToString
 public class Administrador extends Persona implements Serializable {
 
-    //================================= RELACION CON LA ENTIDAD PRODUCTO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "administrador")
     @ToString.Exclude
     private List<Producto> productos;
 
-    //================================= RELACION CON LA ENTIDAD PRODUCTO USUARIO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD PRODUCTO USUARIO =================================//
     @OneToMany(mappedBy = "administrador")
     @ToString.Exclude
     private List<ProductoUsuario> productosAprobadosUsuarios;

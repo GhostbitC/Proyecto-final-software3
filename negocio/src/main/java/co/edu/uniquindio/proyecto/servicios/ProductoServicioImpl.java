@@ -112,4 +112,9 @@ public class ProductoServicioImpl implements ProductoServicio {
     public List<Producto> listarProductos() {
         return productoRepo.findAll();
     }
+
+    @Override
+    public List<Producto> listarProductosDestacados() {
+        return productoRepo.listarProductosDestacados("Destacados");
+    }
 }

@@ -16,23 +16,23 @@ public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
-    private int codigoProducto;
+    private int id;
 
-    @Column(name = "nombre",length = 100,nullable = false)
+    @Column(length = 100,nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion",length = 500)
+    @Column(length = 500)
     private String descripcion;
 
-    @Column(name = "precio", nullable = false)
+    @Column(nullable = false)
     private double precio;
 
-    @Column(name = "cantidad", nullable = false)
-    private  int cantidad;
+    @Column(nullable = false)
+    private  int unidades;
 
-    @Column(name = "estado", nullable =false)
+    @Column(nullable =false)
     private Boolean estado;
 
     //================================= RELACION CON LA ENTIDAD ADMINISTRADOR =================================//

@@ -17,7 +17,7 @@ import java.util.List;
 @ToString
 public class Usuario extends Persona implements Serializable {
 
-    @Column(name = "saldo", length = 10)
+    @Column(length = 10)
     private double saldo;
 
     @Column(name = "fecha_nacimiento", nullable = false)

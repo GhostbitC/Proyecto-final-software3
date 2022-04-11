@@ -1,11 +1,10 @@
 package co.edu.uniquindio.proyecto.entidades;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Getter
@@ -18,40 +17,42 @@ public class Compra implements Serializable {
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
     private int id;
-
-    @Column(name = "valor")
-    private float valor;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_venta", length = 100)
     private Date fechaVenta;
 
-    @Column(name = "cantidad_productos")
-    private int cantidadProductos;
-
-    @Column(name = "estado")
+    @Column
     private Boolean estado;
 
-    //================================= RELACION CON LA ENTIDAD USUARIO =================================//
+    @Column(name = "medio_pago", nullable = false)
+    private String medioPago;
+
+    //================================= RELACIÓN CON LA ENTIDAD USUARIO =================================//
     @ManyToOne
     @ToString.Exclude
     private Usuario usuario;
 
-    //================================= RELACION CON LA ENTIDAD PRODUCTO =================================//
-    @OneToMany(mappedBy = "compra")
+    //================================= RELACIÓN CON LA ENTIDAD DETALLE COMPRA =================================//
+    @OneToMany (mappedBy = "compra")
     @ToString.Exclude
-    private List<Producto> productos = new ArrayList<>();
+    @JsonIgnore
+    private List<DetalleCompra> listaDetallesCompra;
 
-    //================================= RELACION CON LA ENTIDAD ENVIO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD ENVÍO =================================//
     @ManyToOne
     @ToString.Exclude
     private Envio envio;
 
-    //================================= RELACION CON LA ENTIDAD COMPROBANTE DE PAGO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD COMPROBANTE DE PAGO =================================//
     @OneToOne
     private ComprobantePago comprobantePago;
 
+    public Compra(Date fechaVenta, Usuario usuario) {
+        this.fechaVenta = fechaVenta;
+        this.usuario = usuario;
+    }
 }

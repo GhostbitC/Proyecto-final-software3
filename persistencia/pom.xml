@@ -11,7 +11,7 @@
 
     <artifactId>persistencia</artifactId>
     <name>Proyecto de persistencia</name>
-    <description>Este modulo representa los objetos del dominio de negocio del aplicativo</description>
+    <description>Este módulo representa los objetos del dominio de negocio del aplicativo</description>
 
     <dependencies>
         <dependency>

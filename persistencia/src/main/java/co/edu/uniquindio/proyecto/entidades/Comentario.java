@@ -16,18 +16,18 @@ public class Comentario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
     int id;
 
-    @Column(name = "comentario", nullable = false,length = 200)
+    @Column(nullable = false,length = 200)
     @Size(max = 200, message = "El comentario no puede superar los 200 caracteres")
     private String comentario;
 
-    @Column(name = "calificacion", nullable = false)
+    @Column(nullable = false)
     private int calificacion;
 
-    @Column(name = "respuesta", nullable = true,length = 200)
+    @Column(nullable = true,length = 200)
     @Size(max = 200, message = "La respuesta no puede superar los 200 caracteres")
     private String respuesta;
 

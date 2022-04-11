@@ -4,8 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -17,26 +16,26 @@ public class Categoria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
+    @Column(nullable = false)
     @EqualsAndHashCode.Include
     private int id;
 
-    @Column(name = "nombre",length = 100,nullable = false)
+    @Column(length = 100,nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion",length = 200)
+    @Column(length = 200)
     private String descripcion;
 
-    //================================= RELACION CON LA ENTIDAD PRODUCTO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "categoria")
     @ToString.Exclude
     private List<Producto> productos;
 
-    //================================= RELACION CON LA ENTIDAD PRODUCTO USUARIO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD PRODUCTO USUARIO =================================//
     @OneToMany(mappedBy = "categoria")
     private List<ProductoUsuario> productosUsuario;
 
-    //================================= RELACION CON LA ENTIDAD ADMINISTRADOR =================================//
+    //================================= RELACIÓN CON LA ENTIDAD ADMINISTRADOR =================================//
     @ManyToOne
     private Administrador administrador;
 
