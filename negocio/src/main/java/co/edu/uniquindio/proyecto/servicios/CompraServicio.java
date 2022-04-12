@@ -18,8 +18,6 @@ public interface CompraServicio {
 
     Compra agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception;
 
-    Compra agregarCompraUsuario(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception;
-
     List<Compra> listarComprasUsuario (String idUsuario);
 
 }

@@ -16,14 +16,12 @@ public class CompraServicioImpl implements CompraServicio {
     private final UsuarioRepo usuarioRepo;
     private final DetalleCompraRepo detalleCompraRepo;
     private final ProductoRepo productoRepo;
-    private final ProductoUsuarioRepo productoUsuarioRepo;
 
-    public CompraServicioImpl(CompraRepo compraRepo, UsuarioRepo usuarioRepo, DetalleCompraRepo detalleCompraRepo, ProductoRepo productoRepo, ProductoUsuarioRepo productoUsuarioRepo) {
+    public CompraServicioImpl(CompraRepo compraRepo, UsuarioRepo usuarioRepo, DetalleCompraRepo detalleCompraRepo, ProductoRepo productoRepo) {
         this.compraRepo = compraRepo;
         this.usuarioRepo = usuarioRepo;
         this.detalleCompraRepo = detalleCompraRepo;
         this.productoRepo = productoRepo;
-        this.productoUsuarioRepo = productoUsuarioRepo;
     }
 
     @Override
@@ -64,47 +62,13 @@ public class CompraServicioImpl implements CompraServicio {
             List<DetalleCompra> lista = new ArrayList<>();
             for (ProductoCarrito p : productoCarrito) {
                 detalle = new DetalleCompra();
-                if(detalleCompraRepo.verificarUnidades(p.getCodigo()) > p.getUnidades()){
+                if(detalleCompraRepo.verificarUnidadesProducto(p.getId()) > p.getUnidades()){
                     detalle.setCompra(compra);
                     detalle.setPrecioProducto(p.getPrecio());
                     detalle.setUnidades(p.getUnidades());
-                    detalle.setProducto(productoRepo.findById(p.getCodigo()).get());
+                    detalle.setProducto(productoRepo.findById(p.getId()).get());
                     //Verificar las unidades
-                    quitarUnidades(p.getCodigo(), p.getUnidades());
-                    detalleCompraRepo.save(detalle);
-                    lista.add(detalle);
-                    compra.setListaDetallesCompra(lista);
-                }
-            }
-            return compra;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-
-    }
-
-    @Override
-    public Compra agregarCompraUsuario(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception {
-
-        try {
-            Compra compra = new Compra();
-            compra.setFechaVenta(new Date());
-            compra.setUsuario(usuario);
-            compra.setMedioPago(medioPago);
-
-            compraRepo.save(compra);
-
-            DetalleCompra detalle;
-            List<DetalleCompra> lista = new ArrayList<>();
-            for (ProductoCarrito p : productoCarrito) {
-                detalle = new DetalleCompra();
-                if(detalleCompraRepo.verificarUnidades(p.getCodigo()) > p.getUnidades()){
-                    detalle.setCompra(compra);
-                    detalle.setPrecioProducto(p.getPrecio());
-                    detalle.setUnidades(p.getUnidades());
-                    detalle.setProductoUsuario(productoUsuarioRepo.findById(p.getCodigo()).get());
-                    //Verificar las unidades
-                    quitarUnidadesUsuario(p.getCodigo(), p.getUnidades());
+                    quitarUnidades(p.getId(), p.getUnidades());
                     detalleCompraRepo.save(detalle);
                     lista.add(detalle);
                     compra.setListaDetallesCompra(lista);
@@ -121,12 +85,6 @@ public class CompraServicioImpl implements CompraServicio {
        Optional<Producto> producto = productoRepo.findById(codigoProducto);
        Producto productoActual =producto.get();
        productoActual.setUnidades(productoActual.getUnidades() - unidadesComprada );
-    }
-
-    public void quitarUnidadesUsuario (Integer codigoProducto, Integer unidadesComprada){
-        Optional<ProductoUsuario> productoUsuario = productoUsuarioRepo.findById(codigoProducto);
-        ProductoUsuario productoActual =productoUsuario.get();
-        productoActual.setUnidades(productoActual.getUnidades() - unidadesComprada );
     }
 
     @Override

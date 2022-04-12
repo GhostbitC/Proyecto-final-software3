@@ -22,5 +22,19 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("select p from Producto p join p.categoria c where c.nombre =:cadena")
     List<Producto> listarProductosDestacados(String cadena);
 
+    @Query("select e from Producto p join p.especificaciones e where p.id = :idProducto")
+    List<Especificacion> obtenerEspecificaciones(int idProducto);
+
+    @Query("select avg(c.calificacion) from Comentario c where c.producto.id = :idProducto")
+    Integer obtenerCalificacion(Integer idProducto);
+
+    @Query("select count(*) from Comentario c where c.producto.id = :idProducto and c.calificacion = :calificacion")
+    Integer obtenerCantidadCalificacion(Integer idProducto,Integer calificacion);
+
+    @Query("select count(*) from Comentario c where c.producto.id = :idProducto")
+    Integer obtenerCantidad(Integer idProducto);
+
+    @Query("select c from Producto p join p.comentarios c where p.id = :idProducto")
+    List<Comentario>obtenerComentariosProducto(int idProducto);
 
 }

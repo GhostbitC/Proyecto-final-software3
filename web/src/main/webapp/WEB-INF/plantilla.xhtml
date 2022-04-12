@@ -47,6 +47,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                        <a class="nav-link active" aria-current="page" href="/usuario/registrarProducto.xhtml">
+                            Registrar productos
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">
                             Teclados
@@ -83,6 +89,7 @@
 
                         <p:commandButton id="cerrar" action="#{seguridadBean.cerrarSesion}"
                                          value="Cerrar sesión"
+                                         styleClass="ui-button-success"
                                          update="@form"
                                          style="font-size: 14px;height: 33px;background: none;border-color: white;border-radius: 10px"
                                          rendered="#{seguridadBean.autenticado}"/>
@@ -100,7 +107,7 @@
         </ui:insert>
     </div>
 
-    <footer class="text-white py-2" style="background: #542551">
+    <footer class="text-white py-2" style="background: #542551;width: 100%;position: absolute;margin-top: 20px">
         <div class="container" style="width: 100%">
             <nav class="row" style="width: 100%">
                 <ul class="col list-unstyled">

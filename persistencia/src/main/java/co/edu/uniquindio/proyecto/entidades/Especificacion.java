@@ -1,37 +1,33 @@
 package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
 @ToString
-public class Imagen implements Serializable {
+public class Especificacion implements Serializable {
 
-    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     @EqualsAndHashCode.Include
     private int id;
 
-    @Column(length = 100,nullable = false)
-    @NotBlank
-    private String url;
+    @Column(nullable = false,length = 500)
+    @Size(max = 500, message = "La especificación no puede superar los 500 caracteres")
+    private String especificacion;
 
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @ManyToOne
     private Producto producto;
 
-    //================================= CONSTRUCTOR  =================================//
-    public Imagen(String url) {
-        this.url = url;
+    public Especificacion(String especificacion) {
+        this.especificacion = especificacion;
     }
-
 }

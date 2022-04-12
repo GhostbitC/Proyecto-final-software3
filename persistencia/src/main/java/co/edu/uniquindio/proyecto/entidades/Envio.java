@@ -36,8 +36,4 @@ public class Envio implements Serializable {
     @ToString.Exclude
     private List<Compra> compras;
 
-    //================================= RELACION CON LA ENTIDAD VENTA PRODUCTO USUARIO =================================//
-    @OneToMany(mappedBy = "envio")
-    @ToString.Exclude
-    private List<VentaProductoUsuario> ventaProductosUsuarios;
 }

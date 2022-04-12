@@ -9,16 +9,9 @@ import java.util.*;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
-    private final VentaProductoUsuarioRepo compraProductoRepo;
-    private final CompraRepo compraRepo;
-    private final ProductoRepo productoRepo;
 
-
-    public UsuarioServicioImpl(UsuarioRepo usuarioRepo, VentaProductoUsuarioRepo compraProductoRepo, CompraRepo compraRepo, ProductoRepo productoRepo) {
+    public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
         this.usuarioRepo = usuarioRepo;
-        this.compraProductoRepo = compraProductoRepo;
-        this.compraRepo = compraRepo;
-        this.productoRepo = productoRepo;
     }
 
 

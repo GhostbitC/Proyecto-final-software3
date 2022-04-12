@@ -31,10 +31,6 @@ public class Categoria implements Serializable {
     @ToString.Exclude
     private List<Producto> productos;
 
-    //================================= RELACIÓN CON LA ENTIDAD PRODUCTO USUARIO =================================//
-    @OneToMany(mappedBy = "categoria")
-    private List<ProductoUsuario> productosUsuario;
-
     //================================= RELACIÓN CON LA ENTIDAD ADMINISTRADOR =================================//
     @ManyToOne
     private Administrador administrador;
@@ -43,7 +39,6 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.productos = new ArrayList<>();
-        this.productosUsuario = new ArrayList<>();
         this.administrador = administrador;
     }
 }

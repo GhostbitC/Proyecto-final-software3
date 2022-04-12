@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DetalleCompraRepo extends JpaRepository<DetalleCompra, Integer> {
 
-    @Query("select p.unidades from Producto p where p.id =:codigo" )
-    Integer verificarUnidades(Integer codigo);
+    @Query("select p.unidades from Producto p where p.id =:id" )
+    Integer verificarUnidadesProducto(Integer id);
+
 }

@@ -20,7 +20,7 @@ public interface AdministradorServicio {
 
     Administrador obtenerEmailPassword(String email,String password) throws Exception;
 
-    void aprobarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception;
+   // void aprobarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception;
 
-    void RechazarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception;
+    //void RechazarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception;
 }

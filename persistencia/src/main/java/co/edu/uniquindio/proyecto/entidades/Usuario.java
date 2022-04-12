@@ -28,6 +28,11 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Compra> compras = new ArrayList<>();
 
+    //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
+    @OneToMany(mappedBy = "usuario")
+    @ToString.Exclude
+    private List<Producto> productos;
+
     //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
@@ -38,19 +43,14 @@ public class Usuario extends Persona implements Serializable {
     @ToString.Exclude
     private List<Comentario> comentarios;
 
-    //================================= RELACION CON LA ENTIDAD PRODUCTO USUARIO =================================//
-    @OneToMany(mappedBy = "usuario")
-    @ToString.Exclude
-    private List<ProductoUsuario> productosUsuarios;
-
     //================================= RELACION CON LA ENTIDAD DIRECCION =================================//
     @OneToOne
     private Direccion direccion;
 
     //================================= CONSTRUCTOR  =================================//
-    public Usuario(String nombre,String apellido,String nickname, String password, String email) {
+    public Usuario(String nombre,String apellido,String nickname, String password, String email,String fechaNacimiento) {
         super(nombre,apellido, nickname, password, email);
-        this.fechaNacimiento = getFechaNacimiento();
+        this.fechaNacimiento = fechaNacimiento;
         this.compras= new ArrayList<>();
         this.favoritos= new ArrayList<>();
         this.comentarios = new ArrayList<>();

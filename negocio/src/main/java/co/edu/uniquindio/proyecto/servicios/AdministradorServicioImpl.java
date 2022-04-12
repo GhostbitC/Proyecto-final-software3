@@ -2,7 +2,6 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.AdministradorRepo;
-import co.edu.uniquindio.proyecto.repositorios.ProductoUsuarioRepo;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -11,11 +10,9 @@ import java.util.Optional;
 public class AdministradorServicioImpl implements AdministradorServicio{
 
     private final AdministradorRepo administradorRepo;
-    private final ProductoUsuarioRepo productoUsuarioRepo;
 
-    public AdministradorServicioImpl(AdministradorRepo administradorRepo, ProductoUsuarioRepo productoUsuarioRepo) {
+    public AdministradorServicioImpl(AdministradorRepo administradorRepo) {
         this.administradorRepo = administradorRepo;
-        this.productoUsuarioRepo = productoUsuarioRepo;
     }
 
     public boolean estaDisponible(String email){
@@ -67,7 +64,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
             administradorObtenido.setNombre(a.getNombre());
             administradorObtenido.setPassword(a.getPassword());
             administradorObtenido.setProductos(a.getProductos());
-            administradorObtenido.setProductosAprobadosUsuarios(a.getProductosAprobadosUsuarios());
+            administradorObtenido.setProductosAprobados(a.getProductosAprobados());
 
             administradorRepo.save(administradorObtenido);
         }
@@ -125,11 +122,12 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         return administrador;
     }
 
+    /*
     @Override
     public void aprobarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception {
 
         Administrador adminEncontrado = obtenerAdministrador(cedulaAdministrador);
-        Optional<ProductoUsuario> productoEncontrado = productoUsuarioRepo.findById(idProducto);
+        Optional<Producto> productoEncontrado = productoUsuarioRepo.findById(idProducto);
 
         if(adminEncontrado!=null && productoEncontrado!=null){
 
@@ -156,4 +154,6 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         }
 
     }
+
+     */
 }

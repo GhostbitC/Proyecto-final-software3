@@ -10,6 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Comentario implements Serializable {
@@ -38,10 +39,6 @@ public class Comentario implements Serializable {
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @ManyToOne
     private Producto producto;
-
-    //================================= RELACIÓN CON LA ENTIDAD PRODUCTO USUARIO =================================//
-    @ManyToOne
-    private ProductoUsuario productoUsuario;
 
     //================================= RELACIÓN CON LA ENTIDAD USUARIO =================================//
     @ManyToOne

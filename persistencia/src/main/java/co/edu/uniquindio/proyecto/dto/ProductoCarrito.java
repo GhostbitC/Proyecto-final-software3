@@ -9,29 +9,16 @@ import lombok.*;
 public class ProductoCarrito {
 
     @EqualsAndHashCode.Include
-    private Integer codigo;
+    private Integer id;
     private Integer unidades;
     private String nombre, imagen;
-    private Float precio,descuento,precioFinal;
+    private Float precio;
 
-    public Float getPrecioFinal(){
-        System.out.println("i:"+precio);
-        if (descuento>0){
-            Float resta= (descuento/100)* precio;
-            System.out.println(precio+ "-" + resta);
-            return precio-resta;
-        }
-        System.out.println("ab" + precio);
-        return precio;
-    }
-
-    public ProductoCarrito(Integer codigo, String nombre, String imagen, Integer unidades, Float precio, Float descuento) {
-        this.codigo = codigo;
+    public ProductoCarrito(Integer id, String nombre, String imagen, Integer unidades, Float precio) {
+        this.id = id;
         this.nombre = nombre;
         this.imagen = imagen;
         this.unidades = unidades;
         this.precio = precio;
-        this.descuento = descuento;
-        precioFinal = getPrecioFinal();
     }
 }
