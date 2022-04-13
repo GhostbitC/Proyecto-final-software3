@@ -11,6 +11,8 @@ import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -23,14 +25,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@ViewScoped
+@RequestScope
 public class AdministradorBean implements Serializable {
 
     @Autowired
     private AdministradorServicio administradorServicio;
 
+    @Autowired
+    private CompraServicio compraServicio;
+
+    @Autowired
+    private ProductoServicio productoServicio;
+
     @Getter @Setter
     private Administrador administrador;
+
+    @Getter
+    @Setter
+    private List<Producto>productosSinAprobarUsuarios;
+
+    @Getter
+    @Setter
+    private List<Compra>comprasUsuariosSinAprobar;
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
@@ -38,6 +54,8 @@ public class AdministradorBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         this.administrador = obtenerAdministrador();
+        this.comprasUsuariosSinAprobar = compraServicio.listarComprasSinAprobarUsuarios();
+        this.productosSinAprobarUsuarios = productoServicio.listarProductosSinAprobarUsuarios();
     }
 
     /***
@@ -52,8 +70,8 @@ public class AdministradorBean implements Serializable {
 
             try{
 
-                //administradorEncontrado = administradorServicio.obtenerAdministrador(personaLogin.getCedula());
-                personaLogin.toString();
+                administradorEncontrado = administradorServicio.obtenerAdministrador(personaLogin.getId());
+                //personaLogin.toString();
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -61,6 +79,16 @@ public class AdministradorBean implements Serializable {
 
         }
         return administradorEncontrado;
+    }
+
+    public void aprobarProductoUsuario(int idProducto) throws Exception {
+
+        administradorServicio.aprobarProductoUsuario(idProducto, personaLogin.getId());
+    }
+
+    public void rechazarProductoUsuario(int idProducto) throws Exception {
+
+        administradorServicio.rechazarProductoUsuario(idProducto, personaLogin.getId());
     }
 
 }

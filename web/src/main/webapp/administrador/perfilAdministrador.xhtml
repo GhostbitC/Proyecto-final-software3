@@ -25,29 +25,68 @@
         </div>
 
         <div class="card" style="margin: 2% 5%">
+            <h2 style="margin: 2% 5%"><font color="#2F8DF1"
+                                            face="tahoma">Productos pendientes por aprobar</font></h2>
+            <p:outputPanel id="ProductosPorAprobar" style="margin: 1% 5%">
+                <p:dataTable value="#{administradorBean.productosSinAprobarUsuarios}" var="productos" id="productosPendientesTable" style="margin-bottom: 20px">
 
-            <h2 style="margin-left: 1%">Reportes:</h2>
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{productos.nombre}"/>
+                    </p:column>
 
-            <div class="row" style="margin: 1%">
-                <div class="col">
-                    <h5>Diagrama de barra</h5>
-                        <h:panelGrid id="barLugaresCiudad">
-                            <p:barChart model="#{administradorBean.barLugaresCiudad}" style="width: 800px; height: 400px;" rendered="#{administradorBean.barLugaresCiudad != null}"/>
-                        </h:panelGrid>
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{productos.descripcion}"/>
+                    </p:column>
 
-                    <h:panelGrid id="barLugaresCalificacion">
-                        <p:barChart model="#{administradorBean.barLugaresCalificacion}" style="width: 800px; height: 400px;" rendered="#{administradorBean.barLugaresCalificacion != null}"/>
-                    </h:panelGrid>
-                </div>
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{productos.precio}"/>
+                    </p:column>
 
-                <div class="col">
-                    <h5>Diagrama de dona</h5>
-                        <h:panelGrid id="pieLugaresTipo">
-                            <p:chart type="pie" model="#{administradorBean.pieLugaresTipo}" style="width: 400px; height: 400px;" rendered="#{administradorBean.pieLugaresTipo != null}"/>
-                        </h:panelGrid>
-                </div>
-            </div>
+                    <p:column headerText="Unidades">
+                        <h:outputText value="#{productos.unidades}"/>
+                    </p:column>
 
+                    <p:column headerText="Aprobar producto">
+                        <p:commandButton action="#{administradorBean.aprobarProductoUsuario(productos.id)}"
+                                         update="productosPendientesTable"
+                                         value="Aprobar"
+                                         icon="pi pi-times"/>
+                    </p:column>
+
+                    <p:column headerText="Rechazar producto">
+                        <p:commandButton action="#{administradorBean.rechazarProductoUsuario(productos.id)}"
+                                         update="productosPendientesTable"
+                                         value="Rechazar"
+                                         icon="pi pi-times"/>
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel>
+        </div>
+
+        <div class="card" style="margin: 2% 5%">
+            <h2 style="margin: 2% 5%"><font color="#2F8DF1"
+                                            face="tahoma">Compras pendientes por aprobar</font></h2>
+            <p:outputPanel id="activas" style="margin: 1% 5%">
+                <p:dataTable value="#{administradorBean.comprasUsuariosSinAprobar}" var="compras" id="comprasPendientesTable" style="margin-bottom: 20px">
+
+                    <p:column headerText="Id de la compra">
+                        <h:outputText value="#{compras.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Fecha de la venta">
+                        <f:facet name="header">
+                            <h:outputText value="Fecha de inicio"/>
+                        </f:facet>
+                        <h:outputText value="#{compras.fechaVenta}"/>
+                    </p:column>
+
+                    <p:column headerText="Medio de pago">
+                        <h:outputText value="#{compras.medioPago}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel>
         </div>
 
     </ui:define>

@@ -21,6 +21,6 @@ public interface CompraRepo extends JpaRepository<Compra,Integer> {
     List <Compra> listarComprasUsuarioSinComprobante(int id);
 
     @Query("select c from Compra c where c.estado = false and c.comprobantePago is not null")
-    List <Compra> listarComprasSinAprobar();
+    List<Compra> listarComprasSinAprobar();
 
 }

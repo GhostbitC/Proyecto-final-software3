@@ -37,4 +37,10 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("select c from Producto p join p.comentarios c where p.id = :idProducto")
     List<Comentario>obtenerComentariosProducto(int idProducto);
 
+    @Query("select p from Producto p where p.estado = true and p.usuario.id = :idUsuario")
+    List<Producto>listarProductosPublicadosUsuario(int idUsuario);
+
+    @Query("select p from Producto p where p.estado = false and p.usuario is not null")
+    List<Producto>listarProductosSinAprobarUsuarios();
+
 }

@@ -41,9 +41,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
+                        <a class="nav-link active" aria-current="page" href="/administrador/perfilAdministrador.xhtml">
+                            Mi perfil
+                        </a>
+                    </li>
+
                     <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='admin'}">
                         <a class="nav-link active" aria-current="page" href="/administrador/registrarProducto.xhtml">
                             Registrar productos
+                        </a>
+                    </li>
+
+                    <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                        <a class="nav-link active" aria-current="page" href="/usuario/perfilUsuario.xhtml">
+                            Mi perfil
                         </a>
                     </li>
 
@@ -55,7 +68,7 @@
 
                     <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
                         <a class="nav-link active" aria-current="page" href="/usuario/carrito.xhtml">
-                            carrito
+                            Carrito
                         </a>
                     </li>
 

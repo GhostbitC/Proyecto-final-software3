@@ -4,6 +4,10 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -13,6 +17,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +30,12 @@ public class UsuarioBean implements Serializable {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+
+    @Autowired
+    private CompraServicio compraServicio;
+
+    @Autowired
+    private ProductoServicio productoServicio;
 
     @Autowired
     @Getter @Setter
@@ -54,15 +67,28 @@ public class UsuarioBean implements Serializable {
     @Setter
     private List<Compra> serviciosActivos;
 
-//    @Getter
-//    @Setter
-//    private List<CompraProducto> productos;
+    @Getter
+    @Setter
+    private List<Producto>productosPublicados;
+
+    @Getter
+    @Setter
+    private List<Compra> comprasSinComprobante;
+
+    @Value("${comprobantes.url}")
+    private String urlComprobantes;
+
+    @Getter
+    @Setter
+    private ComprobantePago comprobantePago;
 
 
     @PostConstruct
     public void inicializar() {
         this.usuario  = new Usuario();
         this.direccionUsuario = new Direccion();
+        this.productosPublicados = productoServicio.listarProductosUsuario(personaLogin.getId());
+        this.comprasSinComprobante = compraServicio.listarComprasUsuarioSinComprobante(personaLogin.getId());
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
@@ -120,6 +146,44 @@ public class UsuarioBean implements Serializable {
 
         }
         return null;
+    }
+
+    public void subirComprobante(FileUploadEvent event) {
+
+        UploadedFile imagen = event.getFile();
+        String nombreComprobante = subirImagen(imagen);
+
+        if (nombreComprobante != null) {
+
+            comprobantePago = new ComprobantePago();
+            comprobantePago.setUrl(nombreComprobante);
+
+        }
+    }
+
+    public String subirImagen(UploadedFile file) {
+
+        try {
+            InputStream input = file.getInputStream();
+            String fileName = FilenameUtils.getName(file.getFileName());
+            String baseName = FilenameUtils.getBaseName(fileName) + "_";
+            String extension = "." + FilenameUtils.getExtension(fileName);
+            File fileDest = File.createTempFile(baseName, extension, new File(urlComprobantes));
+            FileOutputStream output = new FileOutputStream(fileDest);
+            IOUtils.copy(input, output);
+
+            return fileDest.getName();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void unirComprobanteCompra(int idCompra){
+
+        compraServicio.añadirComprobanteCompra(idCompra, comprobantePago);
     }
 
 }

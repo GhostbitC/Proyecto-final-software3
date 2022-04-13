@@ -204,4 +204,16 @@ public class ProductoServicioImpl implements ProductoServicio {
     public List<Producto> listarProductosDestacados() {
         return productoRepo.listarProductosDestacados("Destacados");
     }
+
+    @Override
+    public List<Producto> listarProductosUsuario(int idUsuario){
+
+        return productoRepo.listarProductosPublicadosUsuario(idUsuario);
+    }
+
+    @Override
+    public List<Producto> listarProductosSinAprobarUsuarios(){
+
+        return productoRepo.listarProductosSinAprobarUsuarios();
+    }
 }

@@ -17,11 +17,14 @@ public class CompraServicioImpl implements CompraServicio {
     private final DetalleCompraRepo detalleCompraRepo;
     private final ProductoRepo productoRepo;
 
-    public CompraServicioImpl(CompraRepo compraRepo, UsuarioRepo usuarioRepo, DetalleCompraRepo detalleCompraRepo, ProductoRepo productoRepo) {
+    private final ComprobantePagoRepo comprobantePagoRepo;
+
+    public CompraServicioImpl(CompraRepo compraRepo, UsuarioRepo usuarioRepo, DetalleCompraRepo detalleCompraRepo, ProductoRepo productoRepo, ComprobantePagoRepo comprobantePagoRepo) {
         this.compraRepo = compraRepo;
         this.usuarioRepo = usuarioRepo;
         this.detalleCompraRepo = detalleCompraRepo;
         this.productoRepo = productoRepo;
+        this.comprobantePagoRepo = comprobantePagoRepo;
     }
 
     @Override
@@ -85,6 +88,32 @@ public class CompraServicioImpl implements CompraServicio {
        Optional<Producto> producto = productoRepo.findById(codigoProducto);
        Producto productoActual =producto.get();
        productoActual.setUnidades(productoActual.getUnidades() - unidadesComprada );
+    }
+    @Override
+    public void añadirComprobanteCompra(int idCompra, ComprobantePago comprobantePago){
+
+        Optional<Compra> compraEncontrada = compraRepo.findById(idCompra);
+
+        if(compraEncontrada!=null){
+
+            compraEncontrada.get().setComprobantePago(comprobantePago);
+            comprobantePago.setCompra(compraEncontrada.get());
+            comprobantePagoRepo.save(comprobantePago);
+            compraRepo.save(compraEncontrada.get());
+        }
+
+    }
+
+    @Override
+    public List<Compra> listarComprasUsuarioSinComprobante(int idUsuario){
+
+        return compraRepo.listarComprasUsuarioSinComprobante(idUsuario);
+    }
+
+    @Override
+    public List<Compra> listarComprasSinAprobarUsuarios(){
+
+        return compraRepo.listarComprasSinAprobar();
     }
 
     @Override

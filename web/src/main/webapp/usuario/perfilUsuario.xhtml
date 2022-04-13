@@ -24,7 +24,7 @@
         <div style="margin: 2% 5%">
             <div >
                 <h2><font color="#2F8DF1"
-                          face="tahoma">Estas son las mascotas que tienes registradas</font></h2>
+                          face="tahoma">Tu perfil</font></h2>
             </div>
             <br></br>
             <h:form id="formM">
@@ -35,18 +35,82 @@
         <div style="margin: 2% 5%">
             <p:card style=" background:#2F8DF1 ">
                 <h5 style="text-align: justify;"><font color="#f0f8ff"
-                          face="tahoma">Para nosotros es importante que tengas presente los servicios que has adquirido en nuestra veterinaria, a su vez somos concientes de que no vas a tener a tu querido amigo la totalidad del tiempo con nosotros, por ende a continuación
-                            puedes encontrar los servicios que tienes actios hasta el momento, los cuales podras cancelar cuando gustes. Ademas podras encontrar un historial
-                            de todos los servicios y productos que has adquirido con nosotos</font></h5>
+                          face="tahoma">En este apartado hay varios datos sobre ti y tus compras</font></h5>
             </p:card>
         </div>
 
+        <div class="card" style="margin: 2% 5%">
+            <h2 style="margin: 2% 5%"><font color="#2F8DF1" face="tahoma">Actualizar y eliminar usuario</font></h2>
+
+            <p:button href="/usuario/actualizarUsuario.xhtml" value="Actualizar" style="width: 20%;background: #542551; color: white;border-color: #542551"/>
+            <br/>
+            <p:button href="/usuario/eliminarUsuario.xhtml" value="Eliminar" style="width: 20%;background: #542551; color: white;border-color: #542551"/>
+
+        </div>
 
         <div class="card" style="margin: 2% 5%">
             <h2 style="margin: 2% 5%"><font color="#2F8DF1"
-                                            face="tahoma">Servicios activos</font></h2>
-            <p:outputPanel id="activas" style="margin: 1% 5%">
+                                            face="tahoma">Mis productos publicados</font></h2>
+            <p:outputPanel id="productosPublicados" style="margin: 1% 5%">
+                <p:dataTable value="#{usuarioBean.productosPublicados}" var="productos" id="productosPublicadosTable" style="margin-bottom: 20px">
 
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{productos.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{productos.descripcion}"/>
+                    </p:column>
+
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{productos.precio}"/>
+                    </p:column>
+
+                    <p:column headerText="Unidades">
+                        <h:outputText value="#{productos.unidades}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </p:outputPanel>
+        </div>
+
+        <div class="card" style="margin: 2% 5%">
+            <h2 style="margin: 2% 5%"><font color="#2F8DF1"
+                                            face="tahoma">Compras pendientes</font></h2>
+            <p:outputPanel id="activas" style="margin: 1% 5%">
+                <p:dataTable value="#{usuarioBean.comprasSinComprobante}" var="compras" id="comprasPendientesTable" style="margin-bottom: 20px">
+
+                    <p:column headerText="Id de la compra">
+                        <h:outputText value="#{compras.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Fecha de la venta">
+                        <f:facet name="header">
+                            <h:outputText value="Fecha de inicio"/>
+                        </f:facet>
+                        <h:outputText value="#{compras.fechaVenta}"/>
+                    </p:column>
+
+                    <p:column headerText="Medio de pago">
+                        <h:outputText value="#{compras.medioPago}"/>
+                    </p:column>
+
+                    <p:column headerText="Subir imagen">
+                        <p:outputLabel for="imagen_comprobante" value="Imagenes:"
+                                       style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                        <p:fileUpload id="imagen_comprobante" listener="#{usuarioBean.subirComprobante}" mode="advanced"
+                                      auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                      required="true" skinSimple="true"/>
+                    </p:column>
+
+                    <p:column headerText="Subir comprobante">
+                        <p:commandButton action="#{usuarioBean.unirComprobanteCompra(compras.id)}"
+                                         update="comprasPendientesTable"
+                                         value="Subir"
+                                         icon="pi pi-times"/>
+                    </p:column>
+
+                </p:dataTable>
             </p:outputPanel>
         </div>
 
@@ -56,17 +120,6 @@
             <p:outputPanel id="reservasH" style="margin: 1% 5%">
 
             </p:outputPanel>
-        </div>
-
-        <div style="margin: 2% 5%">
-            <div >
-                <h2><font color="#2F8DF1"
-                          face="tahoma">Productos que has adquirido adquiridos</font></h2>
-            </div>
-            <br></br>
-            <h:form id="form">
-
-            </h:form>
         </div>
 
     </ui:define>

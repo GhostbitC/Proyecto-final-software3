@@ -2,6 +2,9 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.AdministradorRepo;
+import co.edu.uniquindio.proyecto.repositorios.EspecificacionRepo;
+import co.edu.uniquindio.proyecto.repositorios.ImagenRepo;
+import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -11,8 +14,17 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
     private final AdministradorRepo administradorRepo;
 
-    public AdministradorServicioImpl(AdministradorRepo administradorRepo) {
+    private final ProductoRepo productoRepo;
+
+    private final ImagenRepo imagenRepo;
+
+    private final EspecificacionRepo especificacionRepo;
+
+    public AdministradorServicioImpl(AdministradorRepo administradorRepo, ProductoRepo productoRepo, ImagenRepo imagenRepo, EspecificacionRepo especificacionRepo) {
         this.administradorRepo = administradorRepo;
+        this.productoRepo = productoRepo;
+        this.imagenRepo = imagenRepo;
+        this.especificacionRepo = especificacionRepo;
     }
 
     public boolean estaDisponible(String email){
@@ -122,38 +134,43 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         return administrador;
     }
 
-    /*
-    @Override
-    public void aprobarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception {
 
-        Administrador adminEncontrado = obtenerAdministrador(cedulaAdministrador);
-        Optional<Producto> productoEncontrado = productoUsuarioRepo.findById(idProducto);
+    @Override
+    public void aprobarProductoUsuario(int idProducto, int idAdministrador) throws Exception {
+
+        Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
+        Optional<Producto> productoEncontrado = productoRepo.findById(idProducto);
 
         if(adminEncontrado!=null && productoEncontrado!=null){
 
             productoEncontrado.get().setEstado(true);
-            productoEncontrado.get().setAdministrador(adminEncontrado);
-            adminEncontrado.getProductosAprobadosUsuarios().add(productoEncontrado.get());
-            administradorRepo.save(adminEncontrado);
-            productoUsuarioRepo.save(productoEncontrado.get());
+            productoEncontrado.get().setAdministrador(adminEncontrado.get());
+            adminEncontrado.get().getProductosAprobados().add(productoEncontrado.get());
+            administradorRepo.save(adminEncontrado.get());
+            productoRepo.save(productoEncontrado.get());
         }
 
     }
 
     @Override
-    public void RechazarProductoUsuario(int idProducto, int cedulaAdministrador) throws Exception {
+    public void rechazarProductoUsuario(int idProducto, int idAdministrador) throws Exception {
 
-        Administrador adminEncontrado = obtenerAdministrador(cedulaAdministrador);
-        Optional<ProductoUsuario> productoEncontrado = productoUsuarioRepo.findById(idProducto);
+        Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
+        Optional<Producto> productoEncontrado = productoRepo.findById(idProducto);
 
         if(adminEncontrado!=null && productoEncontrado!=null){
 
-            productoEncontrado.get().setEstado(false);
-            productoEncontrado.get().setAdministrador(adminEncontrado);
-            productoUsuarioRepo.save(productoEncontrado.get());
+            for (Imagen i:productoEncontrado.get().getImagenes()) {
+                imagenRepo.delete(i);
+            }
+
+            for(Especificacion e:productoEncontrado.get().getEspecificaciones()){
+                especificacionRepo.delete(e);
+            }
+
+            productoRepo.delete(productoEncontrado.get());
         }
 
     }
 
-     */
 }

@@ -33,4 +33,8 @@ public interface ProductoServicio {
 
     List<Producto> listarProductos();
 
+    List<Producto> listarProductosUsuario(int idUsuario);
+
+    List<Producto> listarProductosSinAprobarUsuarios();
+
 }
