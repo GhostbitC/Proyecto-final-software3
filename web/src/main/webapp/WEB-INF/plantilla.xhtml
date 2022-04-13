@@ -53,6 +53,12 @@
                         </a>
                     </li>
 
+                    <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                        <a class="nav-link active" aria-current="page" href="/usuario/carrito.xhtml">
+                            carrito
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">
                             Teclados

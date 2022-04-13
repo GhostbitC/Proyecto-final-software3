@@ -17,7 +17,7 @@
 
         <div style="margin: 2% 5%">
             <h1><font
-                      face="tahoma">¡Hola #{usuarioBean.usuarioAux.nombre}!</font></h1>
+                      face="tahoma">¡Hola !</font></h1>
             <p:divider></p:divider>
         </div>
 
@@ -28,24 +28,7 @@
             </div>
             <br></br>
             <h:form id="formM">
-                <p:carousel value="#{usuarioBean.mascotasUsuario}" var="mascota" responsive="true"
-                            itemStyle="text-align:center" >
-                    <p:card >
-                        <div style="text-align: center;">
-                            <img src="/uploads/#{mascota.imagenPrincipal}" alt=""
-                                 style="height: 250px;width: 280px"/>
-                        </div>
-                        <br></br>
-                        <div style="text-align: center;">
-                            <h3><font color="#2F8DF1"
-                                      face="tahoma">#{mascota.nombre}</font></h3>
-                            <h6><font
-                                    face="tahoma">Tipo: #{mascota.tipo.nombre}</font></h6>
-                            <h6><font
-                                    face="tahoma">Raza: #{mascota.raza}</font></h6>
-                        </div>
-                    </p:card>
-                </p:carousel>
+
             </h:form>
         </div>
 
@@ -63,34 +46,7 @@
             <h2 style="margin: 2% 5%"><font color="#2F8DF1"
                                             face="tahoma">Servicios activos</font></h2>
             <p:outputPanel id="activas" style="margin: 1% 5%">
-                <p:dataTable value="#{usuarioBean.serviciosActivos}" var="compra" id="activosTable" style="margin-bottom: 20px">
 
-                    <p:column headerText="Servicio">
-                        <h:outputText value="#{compra.servicio.nombre}"/>
-                    </p:column>
-
-                    <p:column headerText="Fecha de inicio">
-                        <f:facet name="header">
-                            <h:outputText value="Fecha de inicio"/>
-                        </f:facet>
-                        <h:outputText value="#{compra.horaInicio}"/>
-                    </p:column>
-
-                    <p:column headerText="Veterinario a cargo">
-                        <h:outputText value="#{compra.servicio.trabajador.nombre}"/>
-                    </p:column>
-
-                    <p:column headerText="Correo veterinario">
-                        <h:outputText value="#{compra.servicio.trabajador.email}"/>
-                    </p:column>
-
-                    <p:column headerText="Terminar servicio">
-                        <p:commandButton action="#{usuarioBean.metodos(compra.id,compra.servicio.id)}"
-                                         update="activosTable,reservasHTable"
-                                         value="Devolver"
-                                         icon="pi pi-times"/>
-                    </p:column>
-                </p:dataTable>
             </p:outputPanel>
         </div>
 
@@ -98,32 +54,7 @@
             <h2 style="margin: 2% 5%"><font color="#2F8DF1"
                                             face="tahoma">Historial de servicios adquiridos</font></h2>
             <p:outputPanel id="reservasH" style="margin: 1% 5%">
-                <p:dataTable value="#{usuarioBean.historialServicios}" var="compra" id="reservasHTable" style="margin-bottom: 20px">
 
-                    <p:column headerText="Servicio">
-                        <h:outputText value="#{compra.servicio.nombre}"/>
-                    </p:column>
-
-                    <p:column headerText="Fecha de inicio">
-                        <f:facet name="header">
-                            <h:outputText value="Fecha de inicio"/>
-                        </f:facet>
-                        <h:outputText value="#{compra.horaInicio}"/>
-                    </p:column>
-
-                    <p:column headerText="Fecha de finalización">
-                        <f:facet name="header">
-                            <h:outputText value="Fecha de finalización"/>
-                        </f:facet>
-                        <h:outputText value="#{compra.horaFin}"/>
-                    </p:column>
-
-                    <p:column headerText="Veterinario">
-                        <h:outputText value="#{compra.servicio.trabajador.nombre}"/>
-                    </p:column>
-
-
-                </p:dataTable>
             </p:outputPanel>
         </div>
 
@@ -134,24 +65,7 @@
             </div>
             <br></br>
             <h:form id="form">
-                <p:carousel value="#{usuarioBean.productos}" var="compraP" responsive="true"
-                            itemStyle="text-align:center">
-                    <p:card style="height: 500px">
-                        <div style="text-align: center;">
-                            <img src="/uploads/#{compraP.producto.imagenPrincipal}" alt=""
-                                 style="height: 250px;width: 280px"/>
-                        </div>
-                        <br></br>
-                        <div style="text-align: center;">
-                            <h3><font color="#2F8DF1"
-                                      face="tahoma">#{compraP.producto.nombre}</font></h3>
-                            <h6><font
-                                    face="tahoma">Precio: #{compraP.producto.precio}</font></h6>
-                            <h6><font
-                                    face="tahoma">Categoria: #{compraP.producto.categoria.nombre}</font></h6>
-                        </div>
-                    </p:card>
-                </p:carousel>
+
             </h:form>
         </div>
 

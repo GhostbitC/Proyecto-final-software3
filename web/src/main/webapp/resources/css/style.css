@@ -423,6 +423,44 @@ body .ui-progressbar .ui-progressbar-value{
     background: #542551 !important;
 }
 
+body .ui-button {
+    background: #542551 !important;
+    border: 1px solid #542551 !important;
+}
+body .ui-button {
+    background: #2196F3;
+    color: #ffffff;
+    border: 1px solid #2196F3;
+    margin: 0;
+    outline: 0 none;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+body .ui-widget {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.ui-spinner-button {
+    width: 25px !important;
+}
+
+body .ui-spinner .ui-spinner-input{
+    height: 33px !important;
+}
+
+body .ui-button.ui-button-danger, body .ui-splitbutton.ui-button-danger > .ui-button {
+    background: #D32F2F !important;
+    color: #ffffff;
+    border: 1px solid #D32F2F !important;
+}
+
+body .ui-button.ui-button-text-icon-left .ui-icon{
+    margin-left: 30px !important;
+}
+
+
 /*---------- Media Screen ----------*/
 @media screen and(min-width: 900px){
     #registro{

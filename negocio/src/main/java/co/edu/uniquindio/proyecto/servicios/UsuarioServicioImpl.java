@@ -120,6 +120,18 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
+    public Usuario obtenerUsuarioNombre(String nombre) throws Exception {
+
+       Usuario usuario = usuarioRepo.findByNombre(nombre);
+
+        if(usuario ==null){
+            throw new Exception("No existe un usuario con el id dado");
+        }
+
+        return usuario;
+    }
+
+    @Override
     public List<Usuario> listarUsuarios() {
         return usuarioRepo.findAll();
     }

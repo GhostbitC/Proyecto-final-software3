@@ -88,7 +88,7 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
     @Override
-    public List<Compra> listarComprasUsuario(String idUsuario) {
+    public List<Compra> listarComprasUsuario(int idUsuario) {
         return compraRepo.listarComprasUsuario(idUsuario);
     }
 

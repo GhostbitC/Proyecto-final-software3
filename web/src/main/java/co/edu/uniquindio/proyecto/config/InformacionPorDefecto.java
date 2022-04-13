@@ -22,6 +22,9 @@ public class InformacionPorDefecto implements CommandLineRunner {
     private ImagenServicio imagenServicio;
 
     @Autowired
+    private CiudadServicio ciudadServicio;
+
+    @Autowired
     private ProductoServicio productoServicio;
 
     @Autowired
@@ -40,6 +43,39 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
             Usuario u = new Usuario("usuario", "usuario", "usuario", "usuario", "usuario@mail.com","04-01-2001");
             usuarioServicio.registrarUsuario(u);
+
+            //--------------------------- CIUDADES ----------------------------//
+
+            Ciudad ciudad1 = new Ciudad("Calarcá");
+            ciudadServicio.registrarCiudad(ciudad1);
+
+            Ciudad ciudad3 = new Ciudad("Medellin");
+            ciudadServicio.registrarCiudad(ciudad3);
+            Ciudad ciudad4 = new Ciudad("Pereira");
+            ciudadServicio.registrarCiudad(ciudad4);
+
+            Ciudad ciudad5 = new Ciudad("Armenia");
+            ciudadServicio.registrarCiudad(ciudad5);
+
+            Ciudad ciudad6 = new Ciudad("Bogota");
+            ciudadServicio.registrarCiudad(ciudad6);
+
+            Ciudad ciudad7 = new Ciudad("Cúcuta");
+            ciudadServicio.registrarCiudad(ciudad7);
+
+            Ciudad ciudad8 = new Ciudad("Villavicencio");
+            ciudadServicio.registrarCiudad(ciudad8);
+
+            Ciudad ciudad9 = new Ciudad("Cali");
+            ciudadServicio.registrarCiudad(ciudad9);
+
+            Ciudad ciudad10 = new Ciudad("Tulua");
+            ciudadServicio.registrarCiudad(ciudad10);
+
+            Ciudad ciudad11 = new Ciudad("Ibague");
+            ciudadServicio.registrarCiudad(ciudad11);
+
+            //--------------------------- CATEGORÍAS ----------------------------//
 
             Categoria categoria1 = new Categoria("Mouses","Perifericos",admin1);
             categoriaServicio.registrarCategoria(categoria1);

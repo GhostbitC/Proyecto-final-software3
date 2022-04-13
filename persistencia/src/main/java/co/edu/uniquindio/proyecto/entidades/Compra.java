@@ -33,8 +33,11 @@ public class Compra implements Serializable {
 
     //================================= RELACIÓN CON LA ENTIDAD USUARIO =================================//
     @ManyToOne
-    @ToString.Exclude
     private Usuario usuario;
+
+    //================================= RELACIÓN CON LA ENTIDAD USUARIO =================================//
+    @ManyToOne
+    private Administrador administrador;
 
     //================================= RELACIÓN CON LA ENTIDAD DETALLE COMPRA =================================//
     @OneToMany (mappedBy = "compra")

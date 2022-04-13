@@ -34,14 +34,27 @@ public class SeguridadBean implements Serializable {
     private Persona personaAux;
 
     @Getter @Setter
+    private Usuario usuario;
+
+    @Getter @Setter
     private  boolean autenticado;
 
     @Autowired
     private PersonaServicio personaServicio;
 
+    @Autowired
+    private CiudadServicio ciudadServicio;
+
+    @Autowired
+    private DireccionServicio direccionServicio;
+
+    @Getter @Setter
+    private Direccion direccion;
+
     @Getter @Setter
     @NotBlank
     private String email,emailR,password;
+
 
     @Getter @Setter
     private String rol;
@@ -56,7 +69,7 @@ public class SeguridadBean implements Serializable {
 
     @Getter
     @Setter
-    private Float subtotal;
+    private double subtotal;
 
     @Autowired
     private CompraServicio compraServicio;
@@ -69,17 +82,24 @@ public class SeguridadBean implements Serializable {
     @Setter
     private ArrayList<String> mediosPago;
 
+    @Getter
+    @Setter
+    private List<Ciudad> ciudades;
+
+
     @PostConstruct
     public void inicializar() {
         autenticado = false;
-        subtotal = 0F;
         this.productosCarrito = new ArrayList<>();
         this.mediosPago = new ArrayList<>();
         mediosPago.add("Tarjeta de crédito");
-        mediosPago.add("Tarjeta débito");
-        mediosPago.add("Pago contraentrega");
-        mediosPago.add("PSE");
+        mediosPago.add("Consignación");
+        mediosPago.add("Saldo de cuenta");
+        this.subtotal = 0.0;
+        this.usuario = new Usuario();
+        this.direccion = new Direccion();
         listaMisCompras = new ArrayList<Compra>();
+        this.ciudades = ciudadServicio.listarCiudades();
     }
 
     public String iniciarSesion(){
@@ -115,7 +135,7 @@ public class SeguridadBean implements Serializable {
     public List<Compra> listarComprasUsuario() {
         System.out.println(persona.getId());
         if (persona != null) {
-            listaMisCompras = compraServicio.listarComprasUsuario(String.valueOf(persona.getId()));
+            listaMisCompras = compraServicio.listarComprasUsuario(persona.getId());
             return listaMisCompras;
         }
         return null;
@@ -123,7 +143,7 @@ public class SeguridadBean implements Serializable {
 
     public Double calcularSubTotal(int indice) {
 
-        listaMisCompras = compraServicio.listarComprasUsuario(String.valueOf(persona.getId()));
+        listaMisCompras = compraServicio.listarComprasUsuario(persona.getId());
         Double total = 0.0;
 
         for (int i = 0; i < listaMisCompras.get(indice).getListaDetallesCompra().size(); i++) {
@@ -135,36 +155,41 @@ public class SeguridadBean implements Serializable {
     public void agregarAlCarrito(Integer codigo, Float precio, String nombre, String imagen) {
         ProductoCarrito pc = new ProductoCarrito(codigo, nombre, imagen, 1, precio);
         if (!productosCarrito.contains(pc)) {
-            System.out.print("Hola2");
-            System.out.println(pc.toString());
             productosCarrito.add(pc);
+            this.subtotal= subtotal + (pc.getPrecio() * pc.getUnidades());
+            this.subtotal = Math.round(subtotal*1000.0)/1000.0;
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "El producto se ha agregado a carrito");
             FacesContext.getCurrentInstance().addMessage("add-cart", fm);
         }
     }
 
     public void eliminarDelCarrito(int indice) {
-        subtotal -= productosCarrito.get(indice).getPrecio();
+        this.subtotal -= productosCarrito.get(indice).getPrecio();
+        this.subtotal = Math.round(subtotal*1000.0)/1000.0;
         productosCarrito.remove(indice);
-    }
 
-    public void actualizarSubtotal() {
-        subtotal = 0F;
-        for (ProductoCarrito p : productosCarrito) {
-            subtotal += p.getPrecio() * p.getUnidades();
+        if (productosCarrito.isEmpty()){
+            this.subtotal = 0.0;
         }
     }
 
-    public String comprar() {
+    public void actualizarSubtotal() {
+        this.subtotal = 0.0;
+        for (ProductoCarrito p : productosCarrito) {
+            this.subtotal += p.getPrecio() * p.getUnidades();
+            this.subtotal = Math.round(subtotal*1000.0)/1000.0;
+        }
+    }
+
+    public void comprar() {
         if (persona!= null && !productosCarrito.isEmpty()) {
             try {
                 if (mediosPago.contains(medioPago)) {
-                    Compra compraRealizada = compraServicio.agregarCompra(productosCarrito, (Usuario) persona, medioPago);
+                    compraServicio.agregarCompra(productosCarrito, (Usuario) persona, medioPago);
                     productosCarrito.clear();
-                    subtotal = 0F;
-                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "La compra se ha efectuado correctamente, revisa tu correo para visualizar tu compra");
-                    FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
-                    return "/usuario/carrito?faces-redirect=true";
+                    this.subtotal = 0.0;
+                    this.subtotal = Math.round(subtotal*1000.0)/1000.0;
+
                 } else {
                     FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Debe seleccionar un medio de pago para efectuar la compra");
                     FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
@@ -172,10 +197,34 @@ public class SeguridadBean implements Serializable {
             } catch (Exception e) {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "La compra no se ha podido efectuar correctamente: " + e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
-                return null;
+
             }
         }
-        return null;
+    }
+
+    public void registrarDireccion(){
+
+        try {
+            Usuario usuarioEncontrado = usuarioServicio.obtenerUsuarioNombre(usuario.getNombre());
+            usuarioEncontrado.setCedula(usuario.getCedula());
+            usuarioEncontrado.setDireccion(direccion);
+            direccionServicio.registrarDireccion(direccion);
+            usuarioServicio.registrarUsuario(usuarioEncontrado);
+
+        } catch (Exception e) {
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
+    }
+
+    public String efectuarCompra(){
+
+        registrarDireccion();
+        comprar();
+
+        FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "La compra se ha registrado, te avisaremos cuando sea aprobada");
+        FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
+        return "/usuario/carrito?faces-redirect=true";
     }
 
 

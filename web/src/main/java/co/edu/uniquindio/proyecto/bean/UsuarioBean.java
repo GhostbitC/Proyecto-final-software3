@@ -63,12 +63,7 @@ public class UsuarioBean implements Serializable {
     public void inicializar() {
         this.usuario  = new Usuario();
         this.direccionUsuario = new Direccion();
-//        this.usuarioAux = obtenerUsuario();
         this.ciudades = ciudadServicio.listarCiudades();
-//        this.mascotasUsuario = obtenerMascotasUsuario();
-//        this.historialServicios = obtenerHistorialServicios();
-//        this.serviciosActivos = obtenerServiciosActivos();
-//        this.productos = obtenerProductos();
     }
 
     public void registrarUsuario() {

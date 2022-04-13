@@ -18,6 +18,6 @@ public interface CompraServicio {
 
     Compra agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception;
 
-    List<Compra> listarComprasUsuario (String idUsuario);
+    List<Compra> listarComprasUsuario (int idUsuario);
 
 }
