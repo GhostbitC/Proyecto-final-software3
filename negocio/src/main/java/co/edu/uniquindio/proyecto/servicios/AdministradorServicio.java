@@ -23,4 +23,8 @@ public interface AdministradorServicio {
    void aprobarProductoUsuario(int idProducto, int idAdministrador) throws Exception;
 
    void rechazarProductoUsuario(int idProducto, int idAdministrador) throws Exception;
+
+   void aprobarCompra(int idCompra, int idAdministrador);
+
+   void rechazarCompra(int idCompra, int idAdministrador);
 }

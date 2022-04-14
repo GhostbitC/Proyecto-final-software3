@@ -1,10 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
-import co.edu.uniquindio.proyecto.repositorios.AdministradorRepo;
-import co.edu.uniquindio.proyecto.repositorios.EspecificacionRepo;
-import co.edu.uniquindio.proyecto.repositorios.ImagenRepo;
-import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
+import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -16,14 +13,20 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
     private final ProductoRepo productoRepo;
 
+    private final CompraRepo compraRepo;
+
     private final ImagenRepo imagenRepo;
+
+    private final ComprobantePagoRepo comprobantePagoRepo;
 
     private final EspecificacionRepo especificacionRepo;
 
-    public AdministradorServicioImpl(AdministradorRepo administradorRepo, ProductoRepo productoRepo, ImagenRepo imagenRepo, EspecificacionRepo especificacionRepo) {
+    public AdministradorServicioImpl(AdministradorRepo administradorRepo, ProductoRepo productoRepo, ImagenRepo imagenRepo, EspecificacionRepo especificacionRepo, CompraRepo compraRepo, ComprobantePagoRepo comprobantePagoRepo) {
         this.administradorRepo = administradorRepo;
         this.productoRepo = productoRepo;
+        this.compraRepo = compraRepo;
         this.imagenRepo = imagenRepo;
+        this.comprobantePagoRepo = comprobantePagoRepo;
         this.especificacionRepo = especificacionRepo;
     }
 
@@ -169,6 +172,34 @@ public class AdministradorServicioImpl implements AdministradorServicio{
             }
 
             productoRepo.delete(productoEncontrado.get());
+        }
+
+    }
+    @Override
+    public void aprobarCompra(int idCompra, int idAdministrador){
+
+        Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
+        Optional<Compra> compraEncontrada = compraRepo.findById(idCompra);
+
+        if(adminEncontrado!=null && compraEncontrada!=null){
+
+            compraEncontrada.get().setEstado(true);
+            compraEncontrada.get().setAdministrador(adminEncontrado.get());
+           // adminEncontrado.get().getCompras().add(compraEncontrada.get()); //Suponiendo que esa sea una lista de compras aprobadas
+            //Falta mirar lo del envio y el detalle
+        }
+
+    }
+    @Override
+    public void rechazarCompra(int idCompra, int idAdministrador){
+
+        Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
+        Optional<Compra> compraEncontrada = compraRepo.findById(idCompra);
+
+        if(adminEncontrado!=null && compraEncontrada!=null){
+
+            comprobantePagoRepo.delete(compraEncontrada.get().getComprobantePago());
+            compraRepo.delete(compraEncontrada.get());
         }
 
     }

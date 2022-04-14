@@ -85,6 +85,20 @@
                         <h:outputText value="#{compras.medioPago}"/>
                     </p:column>
 
+                    <p:column headerText="Aprobar compra">
+                        <p:commandButton action="#{administradorBean.aprobarCompra(compras.id)}"
+                                         update="comprasPendientesTable"
+                                         value="Aprobar"
+                                         icon="pi pi-times"/>
+                    </p:column>
+
+                    <p:column headerText="Rechazar compra">
+                        <p:commandButton action="#{administradorBean.rechazarCompra(compras.id)}"
+                                         update="comprasPendientesTable"
+                                         value="Rechazar"
+                                         icon="pi pi-times"/>
+                    </p:column>
+
                 </p:dataTable>
             </p:outputPanel>
         </div>

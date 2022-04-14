@@ -91,4 +91,14 @@ public class AdministradorBean implements Serializable {
         administradorServicio.rechazarProductoUsuario(idProducto, personaLogin.getId());
     }
 
+    public void aprobarCompra(int idCompra){
+
+        administradorServicio.aprobarCompra(idCompra, personaLogin.getId());
+    }
+
+    public void rechazarCompra(int idCompra){
+
+        administradorServicio.rechazarCompra(idCompra, personaLogin.getId());
+    }
+
 }
