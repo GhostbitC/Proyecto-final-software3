@@ -74,45 +74,49 @@
             </p:outputPanel>
         </div>
 
-        <div class="card" style="margin: 2% 5%">
-            <h2 style="margin: 2% 5%"><font color="#2F8DF1"
-                                            face="tahoma">Compras pendientes</font></h2>
-            <p:outputPanel id="activas" style="margin: 1% 5%">
-                <p:dataTable value="#{usuarioBean.comprasSinComprobante}" var="compras" id="comprasPendientesTable" style="margin-bottom: 20px">
+        <h:form>
 
-                    <p:column headerText="Id de la compra">
-                        <h:outputText value="#{compras.id}"/>
-                    </p:column>
+            <div class="card" style="margin: 2% 5%">
+                <h2 style="margin: 2% 5%"><font color="#2F8DF1"
+                                                face="tahoma">Compras pendientes</font></h2>
+                <p:outputPanel id="activas" style="margin: 1% 5%">
+                    <p:dataTable value="#{usuarioBean.comprasSinComprobante}" var="compras" id="comprasPendientesTable" style="margin-bottom: 20px">
 
-                    <p:column headerText="Fecha de la venta">
-                        <f:facet name="header">
-                            <h:outputText value="Fecha de inicio"/>
-                        </f:facet>
-                        <h:outputText value="#{compras.fechaVenta}"/>
-                    </p:column>
+                        <p:column headerText="Id de la compra">
+                            <h:outputText value="#{compras.id}"/>
+                        </p:column>
 
-                    <p:column headerText="Medio de pago">
-                        <h:outputText value="#{compras.medioPago}"/>
-                    </p:column>
+                        <p:column headerText="Fecha de la venta">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de inicio"/>
+                            </f:facet>
+                            <h:outputText value="#{compras.fechaVenta}"/>
+                        </p:column>
 
-                    <p:column headerText="Subir imagen">
-                        <p:outputLabel for="imagen_comprobante" value="Imagenes:"
-                                       style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
-                        <p:fileUpload id="imagen_comprobante" listener="#{usuarioBean.subirComprobante}" mode="advanced"
-                                      auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                                      required="true" skinSimple="true"/>
-                    </p:column>
+                        <p:column headerText="Medio de pago">
+                            <h:outputText value="#{compras.medioPago}"/>
+                        </p:column>
 
-                    <p:column headerText="Subir comprobante">
-                        <p:commandButton action="#{usuarioBean.unirComprobanteCompra(compras.id)}"
-                                         update="comprasPendientesTable"
-                                         value="Subir"
-                                         icon="pi pi-times"/>
-                    </p:column>
+                        <p:column headerText="Subir imagen">
+                            <p:outputLabel for="imagen_comprobante" value="Imagenes:"
+                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                            <p:fileUpload id="imagen_comprobante" listener="#{usuarioBean.subirComprobante}" mode="advanced"
+                                          auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                          required="true" skinSimple="true"/>
+                        </p:column>
 
-                </p:dataTable>
-            </p:outputPanel>
-        </div>
+                        <p:column headerText="Subir comprobante">
+                            <p:commandButton action="#{usuarioBean.unirComprobanteCompra(compras.id)}"
+                                             update="comprasPendientesTable"
+                                             value="Subir"
+                                             icon="pi pi-times"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:outputPanel>
+            </div>
+
+        </h:form>
 
         <div class="card" style="margin: 2% 5%">
             <h2 style="margin: 2% 5%"><font color="#2F8DF1"
