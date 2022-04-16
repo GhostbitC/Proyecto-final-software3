@@ -12,7 +12,7 @@
 
 <ui:composition template="/WEB-INF/plantilla.xhtml">
 
-    <ui:define name="title">Producto | Registrar</ui:define>
+    <ui:define name="title">Producto | Actualizar</ui:define>
     <ui:define name="content">
 
         <div class="row" style="background-size: 100vw 100vh;height: 100%;width: 100%;padding: 0!important;margin: 0!important;">
@@ -32,13 +32,20 @@
             <div class="col" style="min-height: 100vh;width: 100%;padding: 0!important;margin: 0!important;border: none !important;">
                 <p:card styleClass="card p-3 md-3" id="card-producto" style="margin-left: 20px;width: 97%;border: none!important;">
                     <div class="card-title" style="font-family:'Calibri',sans-serif;font-size: 30px;margin-top: 10px">
-                        <font color="#542551">Registro de productos</font>
+                        <font color="#542551">Actualización de productos</font>
                     </div>
 
-                    <p style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px">¡Hola! en el siguiente formulario puedes ingresar los datos del producto a registrar.</p>
+                    <p style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px">¡Hola! en el siguiente formulario actualizar tus productos, recuerda especificar en el primer campo el nombre del producto que deseas modificar.</p>
 
                     <h:form>
                         <h:panelGrid columns="2" cellpadding="5" width="100%">
+
+                            <p:outputLabel value="Nombre del producto a modificar:"
+                                           style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                            <p:inputText value="#{productoBean.productoN.nombre}"
+                                         style="width: 100%"
+                                         required="true"
+                                         requiredMessage="El nombre del producto es obligatorio"/>
 
                             <p:outputLabel for="categoria_producto" value="Categoria:"
                                            style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
@@ -78,7 +85,7 @@
                             <p:outputLabel for="imagenes_producto" value="Imagenes:"
                                            style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
                             <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced"
-                                          auto="true" sizeLimit="202400" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                          auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                           required="true" skinSimple="true"/>
 
                             <p:commandButton value="Especificación" action="#{productoBean.nuevaEspecificacion}"
@@ -111,15 +118,16 @@
                         <br/>
                         <br/>
 
+
                         <div class="container p-0">
                             <div class="row">
                                 <div class="col">
-                                    <p:button href="/general.xhtml" value="Volver"
+                                    <p:button href="/administrador/perfilAdministrador.xhtml" value="Volver"
                                               style="width: 90%;background: #542551; color: white;border-color: #542551"/>
                                 </div>
 
                                 <div class="col">
-                                    <p:commandButton action="#{productoBean.registrarProducto}" value="Registrar"
+                                    <p:commandButton action="#{productoBean.actualizarProducto}" value="Actualizar"
                                                      update="@form"
                                                      style="width: 90%;background: #542551; color: white;border-color: #542551"/>
 
@@ -129,7 +137,6 @@
                         </div>
 
                     </h:form>
-
                 </p:card>
             </div>
         </div>

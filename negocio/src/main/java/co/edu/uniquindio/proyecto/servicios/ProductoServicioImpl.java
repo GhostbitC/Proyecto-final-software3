@@ -45,6 +45,12 @@ public class ProductoServicioImpl implements ProductoServicio {
             productoEncontrado.setNombre(p.getNombre());
             productoEncontrado.setDescripcion(p.getDescripcion());
             productoEncontrado.setPrecio(p.getPrecio());
+            productoEncontrado.setCategoria(p.getCategoria());
+            productoEncontrado.setUnidades(p.getUnidades());
+            productoEncontrado.setImagenes(p.getImagenes());
+            productoEncontrado.setEspecificaciones(p.getEspecificaciones());
+
+            productoRepo.save(productoEncontrado);
         }else {
             throw new Exception("El producto a actualizar no existe");
         }

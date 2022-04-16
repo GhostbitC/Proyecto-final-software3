@@ -12,96 +12,254 @@
 
 <ui:composition template="/WEB-INF/plantilla.xhtml">
 
-    <ui:define name="title">Usuario | Perfil</ui:define>
+    <ui:define name="title">Administrador | Perfil</ui:define>
     <ui:define name="content">
 
-        <div style="margin: 2% 5%">
-            <h1>¡Hola!</h1>
-            <h2>#{administradorBean.administrador.nombre}</h2>
-            <p:divider></p:divider>
-            <h4>Email:  #{administradorBean.administrador.email} </h4>
-            <br></br>
-            <h4>Nickname:  #{administradorBean.administrador.nickname} </h4>
-        </div>
+        <h:form>
+            <div class="container" id="detal-product">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body" style="height: 100%">
+                                <div style="text-align: center;margin-top: 5%">
+                                    <p:graphicImage value="/resources/img/user.png" width="150"/>
+                                </div>
 
-        <div class="card" style="margin: 2% 5%">
-            <h2 style="margin: 2% 5%"><font color="#2F8DF1"
-                                            face="tahoma">Productos pendientes por aprobar</font></h2>
-            <p:outputPanel id="ProductosPorAprobar" style="margin: 1% 5%">
-                <p:dataTable value="#{administradorBean.productosSinAprobarUsuarios}" var="productos" id="productosPendientesTable" style="margin-bottom: 20px">
+                                <div class="mt-3" style="text-align: center;">
+                                    <h4 style="color: #542551">#{administradorBean.administrador.nickname}</h4>
 
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{productos.nombre}"/>
-                    </p:column>
+                                    <h6 style="margin-top: 5%">Calificación promedio</h6>
+                                    <p:rating readonly="true" style="margin-bottom: 5%"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <p:column headerText="Descripcion">
-                        <h:outputText value="#{productos.descripcion}"/>
-                    </p:column>
+                    <div class="col">
+                        <div class="card" style="height: 100%">
+                            <div class="card-body" style="margin-left: 5%">
+                                <div class="card-title">
+                                    <h4 style="color: #542551">Información personal</h4>
+                                </div>
 
-                    <p:column headerText="Precio">
-                        <h:outputText value="#{productos.precio}"/>
-                    </p:column>
+                                <div style="margin-top: 3%">
+                                    <p:repeat value="#{administradorBean.administrador}" var="persona">
+                                        <div class="container p-0">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <h5 style="font-size: 17px;color: #542551">Nombre completo: </h5>
+                                                </div>
 
-                    <p:column headerText="Unidades">
-                        <h:outputText value="#{productos.unidades}"/>
-                    </p:column>
+                                                <div class="col">
+                                                    <h5 style="font-size: 17px">#{persona.nombre} #{persona.apellido}</h5>
+                                                </div>
+                                            </div>
 
-                    <p:column headerText="Aprobar producto">
-                        <p:commandButton action="#{administradorBean.aprobarProductoUsuario(productos.id)}"
-                                         update="productosPendientesTable"
-                                         value="Aprobar"
-                                         icon="pi pi-times"/>
-                    </p:column>
+                                            <div class="row" style="margin-top: 1%">
+                                                <div class="col-4">
+                                                    <h5 style="font-size: 17px;color: #542551">Correo electrónico: </h5>
+                                                </div>
 
-                    <p:column headerText="Rechazar producto">
-                        <p:commandButton action="#{administradorBean.rechazarProductoUsuario(productos.id)}"
-                                         update="productosPendientesTable"
-                                         value="Rechazar"
-                                         icon="pi pi-times"/>
-                    </p:column>
+                                                <div class="col">
+                                                    <h5 style="font-size: 17px">#{persona.email}</h5>
+                                                </div>
+                                            </div>
 
-                </p:dataTable>
-            </p:outputPanel>
-        </div>
+                                            <div class="d-flex" style="margin-top: 20%">
 
-        <div class="card" style="margin: 2% 5%">
-            <h2 style="margin: 2% 5%"><font color="#2F8DF1"
-                                            face="tahoma">Compras pendientes por aprobar</font></h2>
-            <p:outputPanel id="activas" style="margin: 1% 5%">
-                <p:dataTable value="#{administradorBean.comprasUsuariosSinAprobar}" var="compras" id="comprasPendientesTable" style="margin-bottom: 20px">
+                                                <div>
+                                                    <p:button type="button" style="background: #542551;color: white;"
+                                                              class="btn" value="Editar productos"
+                                                              href="/administrador/updateProducto.xhtml"/>
+                                                </div>
 
-                    <p:column headerText="Id de la compra">
-                        <h:outputText value="#{compras.id}"/>
-                    </p:column>
+                                            </div>
 
-                    <p:column headerText="Fecha de la venta">
-                        <f:facet name="header">
-                            <h:outputText value="Fecha de inicio"/>
-                        </f:facet>
-                        <h:outputText value="#{compras.fechaVenta}"/>
-                    </p:column>
+                                        </div>
+                                    </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    <p:column headerText="Medio de pago">
-                        <h:outputText value="#{compras.medioPago}"/>
-                    </p:column>
+            <div class="container" style="width: 100%;margin-top: 3%;">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4 style="color: #542551">Productos por aprobar</h4>
+                        </div>
 
-                    <p:column headerText="Aprobar compra">
-                        <p:commandButton action="#{administradorBean.aprobarCompra(compras.id)}"
-                                         update="comprasPendientesTable"
-                                         value="Aprobar"
-                                         icon="pi pi-times"/>
-                    </p:column>
+                        <div style="margin-top: 3%">
 
-                    <p:column headerText="Rechazar compra">
-                        <p:commandButton action="#{administradorBean.rechazarCompra(compras.id)}"
-                                         update="comprasPendientesTable"
-                                         value="Rechazar"
-                                         icon="pi pi-times"/>
-                    </p:column>
+                            <p:dataTable value="#{administradorBean.productosSinAprobarUsuarios}" var="producto"
+                                         id="productosPendientesTable" style="margin-bottom: 20px">
 
-                </p:dataTable>
-            </p:outputPanel>
-        </div>
+                                <p:column headerText="Nombre del producto" style="text-align: center">
+                                    <h6>#{producto.nombre}</h6>
+                                </p:column>
+
+                                <p:column headerText="Ver a detalle" style="text-align: center">
+                                    <div class="container p-0 text-center">
+
+                                        <p:commandButton action="#{inicioBean.irADetalle(producto.id)}"
+                                                         update="productosPendientesTable"
+                                                         value="Ir a detalle" style="height: 40px"/>
+                                    </div>
+                                </p:column>
+
+                                <p:column headerText="Aprobar producto" style="text-align: center">
+                                    <p:commandButton action="#{administradorBean.aprobarProductoUsuario(producto.id)}"
+                                                     update="productosPendientesTable"
+                                                     value="Aprobar"/>
+                                </p:column>
+
+                                <p:column headerText="Rechazar producto" style="text-align: center">
+                                    <p:commandButton action="#{administradorBean.rechazarProductoUsuario(producto.id)}"
+                                                     update="productosPendientesTable"
+                                                     value="Rechazar"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container" style="width: 100%;margin-top: 3%;">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4 style="color: #542551">Compras por validar</h4>
+                        </div>
+
+                        <div style="margin-top: 3%">
+                            <p:repeat id="comprasPendientesTable" value="#{administradorBean.comprasUsuariosSinAprobar}"
+                                      var="compra">
+                                <div class="container p-0" style="margin-left:5%">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <div class="title">
+                                                <h6 style="color: #542551">Comprobante</h6>
+                                            </div>
+
+                                            <div class="container p-0" style="margin-top: 3%">
+                                                <p:galleria value="#{compra.comprobantePago.url}" var="image"
+                                                            numVisible="5" style="max-width: 640px">
+                                                    <p:graphicImage url="/comprobantes/#{image}" alt="#{image}"
+                                                                    style="width: 80px;height: 80px;margin-left: -20%"/>
+                                                    <p:commandButton onclick="PF('galleria1').show()"
+                                                                     style="position: fixed;color: transparent;width:600px;height:200px;border: none;background: transparent"/>
+
+                                                </p:galleria>
+                                                <p:galleria widgetVar="galleria1" value="#{compra.comprobantePago.url}"
+                                                            var="image"
+                                                            numVisible="9"
+                                                            circular="true" fullScreen="true" showItemNavigators="true"
+                                                            style="max-width: 50%">
+                                                    <p:graphicImage url="/comprobantes/#{image}" alt="#{image}"
+                                                                    style="width: 100%; display: block"/>
+                                                </p:galleria>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-2 text-center">
+                                            <div class="title">
+                                                <h6 style="color: #542551">Fecha de la compra</h6>
+                                            </div>
+
+                                            <h6 style="margin-top: 20%;margin-left: 8%">#{compra.fechaVenta}</h6>
+                                        </div>
+
+                                        <div class="col-3 text-center">
+                                            <div class="title">
+                                                <h6 style="color: #542551">Medio de pago</h6>
+                                            </div>
+
+                                            <h6 style="margin-top: 12%;">#{compra.medioPago}</h6>
+                                        </div>
+
+                                        <div class="col-2 text-center">
+                                            <div class="title">
+                                                <h6 style="color: #542551">Aprobar</h6>
+                                            </div>
+                                            <p:commandButton action="#{administradorBean.aprobarCompra(compra.id)}"
+                                                             update="comprasPendientesTable"
+                                                             value="Validar"
+                                                             style="margin-top: 10%;height: 40px;"/>
+
+                                        </div>
+
+                                        <div class="col-2 text-center">
+                                            <div class="title">
+                                                <h6 style="color: #542551">Rechazar</h6>
+                                            </div>
+
+                                            <p:commandButton action="#{administradorBean.rechazarCompra(compra.id)}"
+                                                             update="comprasPendientesTable"
+                                                             value="Rechazar"
+                                                             style="margin-top: 10%;height: 40px;background: #E52B1B!important; border: #E52B1B!important;"/>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                <br/>
+                            </p:repeat>
+                        </div>
+
+                        <div>
+                            <p:dataTable id="table" value="#{administradorBean.comprasUsuariosSinAprobar}"
+                                         var="compra" style="margin-bottom: 20px">
+
+                                <p:column headerText="Comprobante" style="text-align: center">
+                                    <p:galleria value="#{compra.comprobantePago.url}" var="image"
+                                                numVisible="5" style="max-width: 640px">
+                                        <p:graphicImage url="/comprobantes/#{image}" alt="#{image}"
+                                                        style="width: 80px;height: 80px;margin-left: -20%"/>
+                                        <p:commandButton onclick="PF('galleria1').show()"
+                                                         style="position: fixed;color: transparent;width:600px;height:200px;border: none;background: transparent"/>
+
+                                    </p:galleria>
+                                    <p:galleria widgetVar="galleria1" value="#{compra.comprobantePago.url}"
+                                                var="image"
+                                                numVisible="9"
+                                                circular="true" fullScreen="true" showItemNavigators="true"
+                                                style="max-width: 50%">
+                                        <p:graphicImage url="/comprobantes/#{image}" alt="#{image}"
+                                                        style="width: 100%; display: block"/>
+                                    </p:galleria>
+                                </p:column>
+
+
+                                <p:column headerText="Validar compra" style="text-align: center">
+                                    <p:commandButton action="#{administradorBean.aprobarCompra(compra.id)}"
+                                                     update="table"
+                                                     value="Validar"
+                                                     style="margin-top: 10%;height: 40px;"/>
+
+                                    <p:growl showDetail="true"/>
+
+                                </p:column>
+
+                                <p:column headerText="Rechazar compra" style="text-align: center">
+                                    <p:commandButton action="#{administradorBean.rechazarCompra(compra.id)}"
+
+                                                     value="Rechazar"
+                                                     style="margin-top: 10%;height: 40px;background: #E52B1B!important; border: #E52B1B!important;"/>
+
+                                    <p:growl showDetail="true"/>
+                                </p:column>
+
+                            </p:dataTable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
 
     </ui:define>
 </ui:composition>

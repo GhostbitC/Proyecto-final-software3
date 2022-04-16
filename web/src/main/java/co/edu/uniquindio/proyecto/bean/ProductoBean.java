@@ -182,6 +182,26 @@ public class ProductoBean implements Serializable {
     }
 
 
+    public void actualizarProducto() {
+
+        if (personaLogin != null) {
+
+            try {
+
+                productoServicio.actualizarProducto(producto, productoN.getNombre());
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El producto se actualizo correctamente");
+                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+            } catch (Exception e) {
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No pudimos actualizar el producto");
+                FacesContext.getCurrentInstance().addMessage(null, msg);
+            }
+
+        }
+
+    }
+
+
     public void nuevaEspecificacion() {
         this.especificacion = new Especificacion();
     }

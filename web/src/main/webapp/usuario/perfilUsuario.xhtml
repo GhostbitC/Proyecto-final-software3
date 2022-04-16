@@ -103,8 +103,13 @@
                                                 </div>
 
                                                 <div style="margin-left: 5%">
+                                                    <p:button  type="button" style="background: #1BA2E5!important;color: white;" class="btn" value="Editar productos"
+                                                               href="/usuario/updateProducto.xhtml"/>
+                                                </div>
 
-                                                        <p:commandButton  style="background: #E52B1B!important; border: #E52B1B!important;color: white;height: 100%" class="btn"
+                                                <div style="margin-left: 5%">
+
+                                                        <p:commandButton  style="background: #E52B1B!important;color: white;height: 100%" class="btn"
                                                                          value="Eliminar cuenta" action="#{usuarioBean.eliminarUsuario}"
                                                                           update="@form"/>
                                                         <p:growl showDetail="true"/>
@@ -169,11 +174,16 @@
                                                         </h5>
                                                     </div>
 
-                                                    <h5 style="font-size: 16px">
-                                                        Precio de venta: #{producto.precio}
-                                                    </h5>
+                                                    <div class="text-center">
+                                                        <p:commandButton  style="background: #E52B1B!important;color: white;height: 30px;font-size: 14px" class="btn"
+                                                                          value="Eliminar"
+                                                                          update="@form"/>
+                                                        <p:growl showDetail="true"/>
+                                                    </div>
+
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </p:dataScroller>
