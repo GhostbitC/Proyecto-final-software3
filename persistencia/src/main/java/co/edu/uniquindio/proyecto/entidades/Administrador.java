@@ -9,7 +9,6 @@ import java.util.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Administrador extends Persona implements Serializable {
 
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//

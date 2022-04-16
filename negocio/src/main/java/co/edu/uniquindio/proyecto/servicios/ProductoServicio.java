@@ -23,6 +23,8 @@ public interface ProductoServicio {
 
     Producto obtenerProductoNombre(String nombre) throws Exception;
 
+    Producto obtenerProductoEstrella(int idUsuario);
+
     int obtenerCalificacionPromedio(int idProducto) throws Exception;
 
     void ingresarComentario(Comentario c, Producto producto, Persona persona) throws Exception;

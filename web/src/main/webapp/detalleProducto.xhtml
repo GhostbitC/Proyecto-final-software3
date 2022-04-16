@@ -95,7 +95,7 @@
             </p:repeat>
         </div>
 
-        <h:form>
+        <h:form id="comentarios">
         <div class="container" id="detal-producto">
             <div class="row" >
                 <div class="col">
@@ -141,14 +141,14 @@
                             </div>
                             <br/>
                             <h6>Calificaciones globales</h6>
-                            <div style="margin-top: 20px;">
+                            <div class="container p-0" style="margin-top: 20px;">
                                 <div class="row">
                                     <div class="col-3 p-0" style="margin-left:15px">
                                         <h6>5 estrellas</h6>
                                     </div>
 
                                     <div class="col">
-                                        <p:progressBar value="#{detalleProductoBean.porcentaje5}" displayOnly="true" style="height: 20px"/>
+                                        <p:progressBar id="p1" value="#{detalleProductoBean.porcentaje5}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
                                     <div class="col-2">
@@ -162,7 +162,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <p:progressBar value="#{detalleProductoBean.porcentaje4}" displayOnly="true" style="height: 20px"/>
+                                        <p:progressBar id="p2" value="#{detalleProductoBean.porcentaje4}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
                                     <div class="col-2">
@@ -176,7 +176,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <p:progressBar value="#{detalleProductoBean.porcentaje3}" displayOnly="true" style="height: 20px"/>
+                                        <p:progressBar id="p3" value="#{detalleProductoBean.porcentaje3}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
                                     <div class="col-2">
@@ -190,7 +190,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <p:progressBar value="#{detalleProductoBean.porcentaje2}" displayOnly="true" style="height: 20px"/>
+                                        <p:progressBar id="p4" value="#{detalleProductoBean.porcentaje2}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
                                     <div class="col-2">
@@ -204,7 +204,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <p:progressBar value="#{detalleProductoBean.porcentaje1}" displayOnly="true" style="height: 20px"/>
+                                        <p:progressBar id="p5" value="#{detalleProductoBean.porcentaje1}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
                                     <div class="col-2">
@@ -245,7 +245,7 @@
 
                     <p:commandButton icon="pi pi-check" value="Registrar comentario"
                                      action="#{detalleProductoBean.ingresarComentario}"
-                                     update="comentarios_table, promedioProducto" style="margin-top: 2%"/>
+                                     update="comentarios,comentarios_table, promedioProducto,p1,p2,p3,p4,p5" style="margin-top: 2%"/>
                 </div>
             </div>
         </div>

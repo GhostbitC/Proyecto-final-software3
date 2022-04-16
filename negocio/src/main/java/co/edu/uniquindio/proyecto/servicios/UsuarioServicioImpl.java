@@ -84,9 +84,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         if(usuarioEncontrado!=null){
 
             usuarioEncontrado.setNombre(u.getNombre());
+            usuarioEncontrado.setApellido(u.getApellido());
+            usuarioEncontrado.setFechaNacimiento(u.getFechaNacimiento());
             usuarioEncontrado.setNickname(u.getNickname());
             usuarioEncontrado.setPassword(u.getPassword());
-            usuarioEncontrado.setDireccion(u.getDireccion());
             usuarioEncontrado.setEmail(u.getEmail());
 
             usuarioRepo.save(usuarioEncontrado);

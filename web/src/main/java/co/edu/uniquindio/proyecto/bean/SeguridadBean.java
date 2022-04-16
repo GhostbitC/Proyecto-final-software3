@@ -59,6 +59,9 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private String rol;
 
+    @Getter @Setter
+    private String nombreCompleto;
+
     @Getter
     @Setter
     private ArrayList<ProductoCarrito> productosCarrito;

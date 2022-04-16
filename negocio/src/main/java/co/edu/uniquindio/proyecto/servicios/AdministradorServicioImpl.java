@@ -15,15 +15,18 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
     private final CompraRepo compraRepo;
 
+    private final DetalleCompraRepo detalleCompraRepo;
+
     private final ImagenRepo imagenRepo;
 
     private final ComprobantePagoRepo comprobantePagoRepo;
 
     private final EspecificacionRepo especificacionRepo;
 
-    public AdministradorServicioImpl(AdministradorRepo administradorRepo, ProductoRepo productoRepo, ImagenRepo imagenRepo, EspecificacionRepo especificacionRepo, CompraRepo compraRepo, ComprobantePagoRepo comprobantePagoRepo) {
+    public AdministradorServicioImpl(AdministradorRepo administradorRepo, ProductoRepo productoRepo, DetalleCompraRepo detalleCompraRepo, ImagenRepo imagenRepo, EspecificacionRepo especificacionRepo, CompraRepo compraRepo, ComprobantePagoRepo comprobantePagoRepo) {
         this.administradorRepo = administradorRepo;
         this.productoRepo = productoRepo;
+        this.detalleCompraRepo = detalleCompraRepo;
         this.compraRepo = compraRepo;
         this.imagenRepo = imagenRepo;
         this.comprobantePagoRepo = comprobantePagoRepo;
@@ -190,16 +193,44 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         }
 
     }
+
+    public Compra obtenerCompra(int idCompra){
+
+        Optional<Compra> compraEncontrada ;
+
+        compraEncontrada= compraRepo.findById(idCompra);
+
+        return compraEncontrada.get();
+    }
     @Override
     public void rechazarCompra(int idCompra, int idAdministrador){
 
         Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
-        Optional<Compra> compraEncontrada = compraRepo.findById(idCompra);
+        Compra compraEncontrada = obtenerCompra(idCompra);
 
         if(adminEncontrado!=null && compraEncontrada!=null){
 
-            comprobantePagoRepo.delete(compraEncontrada.get().getComprobantePago());
-            compraRepo.delete(compraEncontrada.get());
+            ComprobantePago comprobanteCompra = compraEncontrada.getComprobantePago();
+
+            if(compraEncontrada.getListaDetallesCompra().size()!=0){
+
+                int tam = compraEncontrada.getListaDetallesCompra().size();
+
+                for(int i=0;i<tam;i++){
+
+                    DetalleCompra det = compraEncontrada.getListaDetallesCompra().get(i);
+                    detalleCompraRepo.delete(det);
+                    compraEncontrada.getListaDetallesCompra().remove(det);
+                }
+
+            }
+
+            comprobanteCompra.setCompra(null);
+            comprobantePagoRepo.save(comprobanteCompra);
+            compraEncontrada.setComprobantePago(null);
+            compraRepo.save(compraEncontrada);
+            comprobantePagoRepo.delete(comprobanteCompra);
+            compraRepo.delete(compraEncontrada);
         }
 
     }

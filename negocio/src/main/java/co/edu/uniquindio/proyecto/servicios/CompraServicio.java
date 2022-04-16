@@ -19,7 +19,7 @@ public interface CompraServicio {
 
     Compra agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception;
 
-    void añadirComprobanteCompra(int idCompra, ComprobantePago comprobantePago);
+    void añadirComprobanteCompra(int idCompra, ComprobantePago comprobantePago) throws Exception ;
 
     List<Compra> listarComprasUsuarioSinComprobante(int idUsuario);
 

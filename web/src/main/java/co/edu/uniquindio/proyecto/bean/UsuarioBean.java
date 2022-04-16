@@ -47,14 +47,17 @@ public class UsuarioBean implements Serializable {
     @Getter @Setter
     private Direccion direccionUsuario;
 
-    @Getter @Setter
-    private Usuario usuarioAux;
-
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
     @Getter @Setter
     private Ciudad ciudad;
+
+    @Getter @Setter
+    private Producto productoEstrella;
+
+    @Getter @Setter
+    private Usuario usuarioLogin;
 
     @Getter @Setter
     private List<Ciudad> ciudades;
@@ -86,9 +89,14 @@ public class UsuarioBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         this.usuario  = new Usuario();
+        this.usuarioLogin = obtenerUsuario();
         this.direccionUsuario = new Direccion();
-        this.productosPublicados = productoServicio.listarProductosUsuario(personaLogin.getId());
-        this.comprasSinComprobante = compraServicio.listarComprasUsuarioSinComprobante(personaLogin.getId());
+
+        if(personaLogin!=null){
+            this.productosPublicados = productoServicio.listarProductosUsuario(personaLogin.getId());
+        }
+        this.comprasSinComprobante = obtenerComprasSinComprobante();
+        this.productoEstrella = obtenerProductoEstrella();
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
@@ -106,10 +114,11 @@ public class UsuarioBean implements Serializable {
 
     public String eliminarUsuario(){
 
+        System.out.println("Entro");
         try {
-            if (personaLogin!=null) {
+            if (usuarioLogin!=null) {
 
-                usuarioServicio.eliminarUsuario(usuario.getEmail(),usuario.getPassword());
+                usuarioServicio.eliminarUsuario(usuarioLogin.getEmail(),usuarioLogin.getPassword());
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario ha sido eliminado con exito");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
@@ -133,11 +142,11 @@ public class UsuarioBean implements Serializable {
             if(personaLogin!=null){
 
                 usuarioServicio.actualizarUsuario(personaLogin.getEmail(),personaLogin.getPassword(), usuario);
+                this.usuarioLogin= obtenerUsuario();
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario se actualizo con exito");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
-                FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-                return "/index?faces-redirect=true";
+                return "/usuario/perfilUsuario?faces-redirect=true";
             }
 
         }catch(Exception e){
@@ -183,7 +192,55 @@ public class UsuarioBean implements Serializable {
 
     public void unirComprobanteCompra(int idCompra){
 
-        compraServicio.añadirComprobanteCompra(idCompra, comprobantePago);
+        try {
+            compraServicio.añadirComprobanteCompra(idCompra, comprobantePago);
+            this.comprasSinComprobante = obtenerComprasSinComprobante();
+        } catch (Exception e) {
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+        }
     }
+
+    public Producto obtenerProductoEstrella(){
+
+        Producto productoAux = new Producto();
+
+        if(personaLogin!=null){
+            productoAux=productoServicio.obtenerProductoEstrella(personaLogin.getId());
+        }
+
+        return productoAux;
+    }
+
+    public Usuario obtenerUsuario(){
+
+        Usuario usuarioEncontrado = new Usuario();
+
+        if(personaLogin!=null){
+
+            try{
+                usuarioEncontrado = usuarioServicio.obtenerUsuario(personaLogin.getId());
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+
+        return usuarioEncontrado;
+
+    }
+
+    public List<Compra> obtenerComprasSinComprobante(){
+
+        List<Compra> compras= new ArrayList<>();
+
+        if (personaLogin!=null){
+            compras = compraServicio.listarComprasUsuarioSinComprobante(personaLogin.getId());
+        }
+
+        return compras;
+    }
+
 
 }

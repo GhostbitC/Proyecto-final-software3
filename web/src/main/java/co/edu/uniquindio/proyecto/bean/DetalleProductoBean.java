@@ -174,6 +174,12 @@ public class DetalleProductoBean implements Serializable {
                 this.comentariosDetal.add(comentarioNuevo);
                 this.comentarioNuevo = new Comentario();
                 this.calificacionPromedio = productoServicio.obtenerCalificacionPromedio(id);
+                this.promedios= productoServicio.obtenerPorcentaje(id);
+                this.porcentaje1 = promedios[0];
+                this.porcentaje2 = promedios[1];
+                this.porcentaje3 = promedios[2];
+                this.porcentaje4 = promedios[3];
+                this.porcentaje5 = promedios[4];
 
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Tu opinión se registros exitosamente");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);

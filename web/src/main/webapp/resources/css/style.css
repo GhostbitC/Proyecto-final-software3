@@ -360,10 +360,6 @@ body #header #head h1 {
     background: #D5D8DC;
 }
 
-.d-flex #cerrar:hover {
-    background: white;
-}
-
 .et-l .et-l--footer {
     background: #6f42c1;
 }
@@ -460,6 +456,36 @@ body .ui-button.ui-button-text-icon-left .ui-icon{
     margin-left: 30px !important;
 }
 
+body .ui-fileupload .ui-fileupload-buttonbar .ui-button.ui-fileupload-choose .ui-icon{
+    visibility: hidden !important;
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar .ui-button{
+    height: 35px !important;
+    margin: 2.5%!important;
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar{
+    padding: 0!important;
+}
+
+body .ui-fileupload .ui-fileupload-content{
+    padding: 0.5rem !important;
+}
+
+body .ui-datatable thead th{
+    background: none!important;
+    border: none!important;
+    color: #542551 !important;
+}
+
+.dropdown-toggle{
+    color: transparent!important;
+}
+
+.dropdown-toggle a:hover{
+    color: transparent !important;
+}
 
 /*---------- Media Screen ----------*/
 @media screen and(min-width: 900px){

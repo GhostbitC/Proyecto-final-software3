@@ -37,7 +37,7 @@
 
                     <p style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px">¡Hola! en el siguiente formulario puedes ingresar los datos del producto a registrar.</p>
 
-                    <h:form>
+                    <h:form id="registro">
                         <h:panelGrid columns="2" cellpadding="5" width="100%">
 
                             <p:outputLabel for="categoria_producto" value="Categoria:"
@@ -118,7 +118,7 @@
 
                             <div class="col">
                                 <p:commandButton action="#{productoBean.registrarProducto}" value="Registrar"
-                                                 update="@form"
+                                                 update="registro"
                                                  style="width: 90%;background: #542551; color: white;border-color: #542551"/>
                             </div>
                         </div>

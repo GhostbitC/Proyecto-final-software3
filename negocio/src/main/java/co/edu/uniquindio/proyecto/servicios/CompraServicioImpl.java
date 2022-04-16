@@ -89,17 +89,31 @@ public class CompraServicioImpl implements CompraServicio {
        Producto productoActual =producto.get();
        productoActual.setUnidades(productoActual.getUnidades() - unidadesComprada );
     }
-    @Override
-    public void añadirComprobanteCompra(int idCompra, ComprobantePago comprobantePago){
+
+    public Compra obtenerCompra(int idCompra) throws Exception{
 
         Optional<Compra> compraEncontrada = compraRepo.findById(idCompra);
 
+        if (compraEncontrada==null){
+            throw new Exception("La compra no existe");
+        }
+
+        return compraEncontrada.get();
+    }
+
+    @Override
+    public void añadirComprobanteCompra(int idCompra, ComprobantePago comprobantePago) throws Exception {
+
+        Compra compraEncontrada = obtenerCompra(idCompra);
+
         if(compraEncontrada!=null){
 
-            compraEncontrada.get().setComprobantePago(comprobantePago);
-            comprobantePago.setCompra(compraEncontrada.get());
+            compraEncontrada.setComprobantePago(comprobantePago);
+            comprobantePago.setCompra(compraEncontrada);
             comprobantePagoRepo.save(comprobantePago);
-            compraRepo.save(compraEncontrada.get());
+            compraRepo.save(compraEncontrada);
+        }else{
+            throw new Exception("La compra no existe");
         }
 
     }

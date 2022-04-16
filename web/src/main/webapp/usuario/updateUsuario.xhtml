@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+
+<h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <title> Registrar </title>
+</h:head>
+
+<body id="registro" style="background: #E5E7E9">
+  <div id="aside">
+      <hr style="background: white;height: 4px"/>
+      <img src="${pageContext.request.contextPath}/resources/img/logo.png" class="text-center my-auto mx-auto" alt="" id="img-registro"/>
+
+      <div class="container text-center my-auto mx-auto" id="text-registro">
+          <h1 class="mb-1" style="margin-left: 30px">Amazing Store</h1>
+          <h5 class="mb-4" style="margin-left: 30px">
+              Unete al mundo tecnológico con nosotros
+          </h5>
+      </div>
+      <hr style="margin-top: 150px;background: white;height: 4px"/>
+  </div>
+
+  <div id="main">
+      <p:card styleClass="card p-4 md-4" id="card-registro">
+          <div class="card-title" style="font-family: 'Calibri',sans-serif;font-size: 25px;margin-top: 10px">
+              <font color="#542551">Actualización</font>
+          </div>
+
+          <h6 style="margin-top: 10px;color: #232121">¡Hola!, en el siguiente formulario puedes indicarnos los datos que desees modificar de tu cuenta.</h6>
+          <h:form>
+              <h:panelGrid columns="2" cellpadding="5" width="100%">
+                  <p:outputLabel for="nombre_usuario" value="Nombre:" style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                  <p:inputText id="nombre_usuario" value="#{usuarioBean.usuario.nombre}"
+                               style="width: 100%;"
+                               required="true" requiredMessage="El nombre es obligatorio"/>
+
+                  <p:outputLabel for="apellido_usuario" value="Apellido:" style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                  <p:inputText id="apellido_usuario" value="#{usuarioBean.usuario.apellido}" style="width: 100%"
+                               required="true" requiredMessage="El apellido es obligatorio"/>
+
+                  <p:outputLabel for="fecha_nacimiento" value="Fecha de nacimiento:" style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                  <p:inputText type="date" id="fecha_nacimiento" value="#{usuarioBean.usuario.fechaNacimiento}"
+                               style="width: 100%;"
+                               required="true"
+                               requiredMessage="La fecha de nacimiento es obligatoria"/>
+
+                  <p:outputLabel for="nickName_usuario" value="Nickname:" style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                  <p:inputText id="nickName_usuario" value="#{usuarioBean.usuario.nickname}" style="width: 100%"
+                               required="true" requiredMessage="El nickname es obligatorio"/>
+
+                  <p:outputLabel for="email_usuario" value="Correo:" style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                  <p:inputText id="email_usuario" value="#{usuarioBean.usuario.email}" style="width: 100%"
+                               required="true"
+                               requiredMessage="El correo electronico es obligatorio"/>
+
+                  <p:outputLabel for="contrasenia_usuario" value="Contraseña:" style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                  <p:password id="contrasenia_usuario" value="#{usuarioBean.usuario.password}" feedback="true"
+                              promptLabel="Ingresa tu contraseña" weakLabel="Débil"
+                              goodLabel="Buena" strongLabel="Fuerte" redisplay="true" style="width: 100%"
+                              required="true"
+                              requiredMessage="La contraseña es obligatoria"/>
+
+              </h:panelGrid>
+
+              <div class="form-group row justify-content-center" style="padding: 5%; text-align: center">
+
+                  <div class="col">
+                      <p:button href="/usuario/perfilUsuario.xhtml" value="Volver"
+                                style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                  </div>
+
+                  <div class="col">
+                      <p:commandButton action="#{usuarioBean.actualizarUsuario}" value="Actualizar"
+                                       update="@form"
+                                       style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                  </div>
+              </div>
+              <p:growl showDetail="true"/>
+          </h:form>
+      </p:card>
+  </div>
+</body>
+</html>

@@ -8,6 +8,7 @@ import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -91,6 +92,42 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         return productoEncontrado;
     }
+
+    @Override
+    public Producto obtenerProductoEstrella(int idUsuario) {
+
+        List<Producto>productos = listarProductosUsuario(idUsuario);
+        Producto productoEstrella = new Producto();
+
+        if (!productos.isEmpty()){
+
+            int calificacion = 0;
+
+            for(Producto p:productos){
+
+                if(p.getComentarios()!=null){
+
+                    Integer calificacionAux = productoRepo.obtenerCalificacion(p.getId());
+
+                    if(calificacionAux!=null){
+
+                        if(calificacionAux>calificacion){
+                            calificacion = calificacionAux;
+                            productoEstrella = p;
+                        }
+                    }
+
+                }
+
+            }
+
+            return productoEstrella;
+
+        }
+
+        return productoEstrella;
+    }
+
 
     @Override
     public void ingresarComentario(Comentario r, Producto producto) throws Exception {
@@ -208,7 +245,15 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public List<Producto> listarProductosUsuario(int idUsuario){
 
-        return productoRepo.listarProductosPublicadosUsuario(idUsuario);
+        List<Producto> productosUsuario = productoRepo.listarProductosPublicadosUsuario(idUsuario);
+
+        if(productosUsuario.isEmpty()){
+
+           return productosUsuario = new ArrayList<>();
+        }
+
+
+        return productosUsuario;
     }
 
     @Override

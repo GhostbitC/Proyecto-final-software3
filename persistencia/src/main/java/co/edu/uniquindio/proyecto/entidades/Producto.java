@@ -86,6 +86,7 @@ public class Producto implements Serializable {
         this.administrador = administrador;
         this.categoria = categoria;
         this.imagenes = new ArrayList<>();
+        this.comentarios=new ArrayList<>();
         this.especificaciones = new ArrayList<>();
     }
 

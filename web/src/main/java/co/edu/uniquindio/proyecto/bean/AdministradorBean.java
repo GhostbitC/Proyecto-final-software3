@@ -4,28 +4,17 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
-
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@RequestScope
+@ViewScoped
 public class AdministradorBean implements Serializable {
 
     @Autowired
@@ -54,8 +43,8 @@ public class AdministradorBean implements Serializable {
     @PostConstruct
     public void inicializar() {
         this.administrador = obtenerAdministrador();
-        this.comprasUsuariosSinAprobar = compraServicio.listarComprasSinAprobarUsuarios();
-        this.productosSinAprobarUsuarios = productoServicio.listarProductosSinAprobarUsuarios();
+        this.comprasUsuariosSinAprobar = obtenerComprasSinValidar();
+        this.productosSinAprobarUsuarios = obtenerProductosSinAprobar();
     }
 
     /***
@@ -84,21 +73,48 @@ public class AdministradorBean implements Serializable {
     public void aprobarProductoUsuario(int idProducto) throws Exception {
 
         administradorServicio.aprobarProductoUsuario(idProducto, personaLogin.getId());
+        this.productosSinAprobarUsuarios = obtenerProductosSinAprobar();
     }
 
     public void rechazarProductoUsuario(int idProducto) throws Exception {
 
         administradorServicio.rechazarProductoUsuario(idProducto, personaLogin.getId());
+        this.productosSinAprobarUsuarios = obtenerProductosSinAprobar();
     }
 
     public void aprobarCompra(int idCompra){
 
         administradorServicio.aprobarCompra(idCompra, personaLogin.getId());
+        this.comprasUsuariosSinAprobar = obtenerComprasSinValidar();
     }
 
     public void rechazarCompra(int idCompra){
 
         administradorServicio.rechazarCompra(idCompra, personaLogin.getId());
+        this.comprasUsuariosSinAprobar = obtenerComprasSinValidar();
+    }
+
+
+    public List<Producto> obtenerProductosSinAprobar(){
+
+        List<Producto> productos= new ArrayList<>();
+
+        if (personaLogin!=null){
+            productos=productoServicio.listarProductosSinAprobarUsuarios();
+        }
+
+        return productos;
+    }
+
+    public List<Compra> obtenerComprasSinValidar(){
+
+        List<Compra> compras = new ArrayList<>();
+
+        if (personaLogin!=null){
+            compras = compraServicio.listarComprasSinAprobarUsuarios();
+        }
+
+        return compras;
     }
 
 }
