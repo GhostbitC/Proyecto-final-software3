@@ -40,7 +40,7 @@ public class Compra implements Serializable {
     private Administrador administrador;
 
     //================================= RELACIÓN CON LA ENTIDAD DETALLE COMPRA =================================//
-    @OneToMany (mappedBy = "compra")
+    @OneToMany (mappedBy = "compra", cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
     private List<DetalleCompra> listaDetallesCompra;
@@ -51,7 +51,7 @@ public class Compra implements Serializable {
     private Envio envio;
 
     //================================= RELACIÓN CON LA ENTIDAD COMPROBANTE DE PAGO =================================//
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ComprobantePago comprobantePago;
 
     public Compra(Date fechaVenta, Usuario usuario) {

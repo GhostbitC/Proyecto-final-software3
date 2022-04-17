@@ -10,7 +10,7 @@ public interface UsuarioServicio {
 
     void actualizarUsuario(String email, String password, Usuario u) throws Exception;
 
-    void eliminarUsuario(String email, String password) throws Exception;
+    void eliminarUsuario(String email,String password) throws Exception;
 
     Usuario obtenerUsuario(int id) throws Exception;
 

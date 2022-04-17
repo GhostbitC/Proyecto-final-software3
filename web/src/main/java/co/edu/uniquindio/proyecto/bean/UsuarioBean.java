@@ -113,14 +113,16 @@ public class UsuarioBean implements Serializable {
 
         System.out.println("Entro");
         try {
-            if (usuarioLogin!=null) {
+            if (personaLogin!=null) {
 
-                usuarioServicio.eliminarUsuario(usuarioLogin.getEmail(),usuarioLogin.getPassword());
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario ha sido eliminado con exito");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+                    usuarioServicio.eliminarUsuario(personaLogin.getEmail(),personaLogin.getPassword());
 
-                FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-                return "/index?faces-redirect=true";
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el usuario ha sido eliminado con exito");
+                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+
+                    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+                    return "/index?faces-redirect=true";
+
             }
 
         }catch (Exception e) {

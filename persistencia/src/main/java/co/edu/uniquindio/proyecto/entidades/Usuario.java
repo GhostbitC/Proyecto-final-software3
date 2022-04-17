@@ -22,7 +22,7 @@ public class Usuario extends Persona implements Serializable {
     private String fechaNacimiento;
 
     //================================= RELACION CON LA ENTIDAD COMPRA =================================//
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Compra> compras;
 
@@ -37,7 +37,7 @@ public class Usuario extends Persona implements Serializable {
     private List<Favorito> favoritos;
 
     //================================= RELACION CON LA ENTIDAD COMENTARIO =================================//
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Comentario> comentarios;
 

@@ -9,9 +9,17 @@ import java.util.*;
 public class UsuarioServicioImpl implements UsuarioServicio {
 
     private final UsuarioRepo usuarioRepo;
+    private final FavoritoRepo favoritoRepo;
 
-    public UsuarioServicioImpl(UsuarioRepo usuarioRepo) {
+    private  final DireccionRepo direccionRepo;
+
+    private final ProductoServicio productoServicio;
+
+    public UsuarioServicioImpl(UsuarioRepo usuarioRepo, FavoritoRepo favoritoRepo, DireccionRepo direccionRepo, ProductoServicio productoServicio) {
         this.usuarioRepo = usuarioRepo;
+        this.favoritoRepo = favoritoRepo;
+        this.direccionRepo = direccionRepo;
+        this.productoServicio = productoServicio;
     }
 
 
@@ -102,7 +110,59 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Usuario usuarioEncontrado = obtenerUsuarioEmailPassword(email, password);
 
         if (usuarioEncontrado != null){
-            usuarioRepo.delete(usuarioEncontrado);
+
+            List<Producto>productosUsuario = usuarioEncontrado.getProductos();
+            List<Favorito>favoritos = usuarioEncontrado.getFavoritos();
+
+            if(productosUsuario!=null){
+
+                if(productosUsuario.size()!=0){
+
+                    int tamProductos = productosUsuario.size();
+
+                    for(int i=0;i<tamProductos;i++){
+
+                        Producto productoEncontrado = usuarioEncontrado.getProductos().get(i);
+
+                        productoServicio.eliminarProducto(productoEncontrado.getId());
+                        usuarioEncontrado.getProductos().remove(productoEncontrado);
+                    }
+
+                    usuarioRepo.save(usuarioEncontrado);
+                }
+            }
+
+            if(favoritos!=null){
+
+                if(favoritos.size()!=0){
+
+                    int tamFavoritos = favoritos.size();
+
+                    for(int i=0;i<tamFavoritos;i++){
+
+                        Favorito favoritoEncontrado = usuarioEncontrado.getFavoritos().get(i);
+                        favoritoRepo.delete(favoritoEncontrado);
+                        usuarioEncontrado.getFavoritos().remove(favoritoEncontrado);
+                    }
+
+                    usuarioRepo.save(usuarioEncontrado);
+                }
+            }
+
+            if(usuarioEncontrado.getDireccion()!=null){
+
+                Direccion direccionUsuario = usuarioEncontrado.getDireccion();
+                usuarioEncontrado.setDireccion(null);
+                usuarioRepo.save(usuarioEncontrado);
+                direccionRepo.delete(direccionUsuario);
+                usuarioRepo.delete(usuarioEncontrado);
+            }else{
+
+                usuarioRepo.save(usuarioEncontrado);
+                usuarioRepo.delete(usuarioEncontrado);
+            }
+
+
         }else{
             throw new Exception("Usuario no encontrado ");
         }
