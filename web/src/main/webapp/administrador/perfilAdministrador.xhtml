@@ -6,7 +6,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xml:lang="en" lang="en">
 
 
@@ -15,7 +14,6 @@
     <ui:define name="title">Administrador | Perfil</ui:define>
     <ui:define name="content">
 
-        <h:form>
             <div class="container" id="detal-product">
                 <div class="row">
                     <div class="col-4">
@@ -68,7 +66,7 @@
                                             <div class="d-flex" style="margin-top: 20%">
 
                                                 <div>
-                                                    <p:button type="button" style="background: #542551;color: white;"
+                                                    <p:button type="button" style="background: #1BA2E5!important;color: white;"
                                                               class="btn" value="Editar productos"
                                                               href="/administrador/updateProducto.xhtml"/>
                                                 </div>
@@ -84,6 +82,7 @@
                 </div>
             </div>
 
+        <h:form>
             <div class="container" style="width: 100%;margin-top: 3%;">
                 <div class="card">
                     <div class="card-body">
@@ -186,11 +185,10 @@
                                             <div class="title">
                                                 <h6 style="color: #542551">Aprobar</h6>
                                             </div>
+
                                             <p:commandButton action="#{administradorBean.aprobarCompra(compra.id)}"
-                                                             update="comprasPendientesTable"
                                                              value="Validar"
                                                              style="margin-top: 10%;height: 40px;"/>
-
                                         </div>
 
                                         <div class="col-2 text-center">
@@ -206,6 +204,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <p:growl showDetail="true"/>
                                 <br/>
                                 <br/>
                             </p:repeat>

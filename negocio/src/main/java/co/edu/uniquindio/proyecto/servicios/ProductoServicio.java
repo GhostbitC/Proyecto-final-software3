@@ -11,7 +11,7 @@ public interface ProductoServicio {
 
     void actualizarProducto(Producto p) throws Exception;
 
-    void eliminarProducto(String nombre) throws Exception;
+    void eliminarProducto(int idProducto) throws Exception;
 
     Producto obtenerProducto(int id) throws Exception;
 

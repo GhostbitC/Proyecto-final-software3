@@ -91,10 +91,7 @@ public class UsuarioBean implements Serializable {
         this.usuario  = new Usuario();
         this.usuarioLogin = obtenerUsuario();
         this.direccionUsuario = new Direccion();
-
-        if(personaLogin!=null){
-            this.productosPublicados = productoServicio.listarProductosUsuario(personaLogin.getId());
-        }
+        this.productosPublicados = obtenerProductosPublicados();
         this.comprasSinComprobante = obtenerComprasSinComprobante();
         this.productoEstrella = obtenerProductoEstrella();
         this.ciudades = ciudadServicio.listarCiudades();
@@ -241,6 +238,26 @@ public class UsuarioBean implements Serializable {
 
         return compras;
     }
+
+    public List<Producto> obtenerProductosPublicados(){
+
+        List<Producto> productos = new ArrayList<>();
+
+        if (personaLogin!=null){
+            productos =productoServicio.listarProductosUsuario(personaLogin.getId());
+        }
+
+        return productos;
+    }
+
+    public void eliminarProducto(int idProducto) throws Exception {
+
+        if (personaLogin!=null){
+            productoServicio.eliminarProducto(idProducto);
+            this.productosPublicados = obtenerProductosPublicados();
+        }
+    }
+
 
 
 }

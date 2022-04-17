@@ -188,6 +188,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
             compraEncontrada.get().setEstado(true);
             compraEncontrada.get().setAdministrador(adminEncontrado.get());
+            compraRepo.save(compraEncontrada.get());
            // adminEncontrado.get().getCompras().add(compraEncontrada.get()); //Suponiendo que esa sea una lista de compras aprobadas
             //Falta mirar lo del envio y el detalle
         }

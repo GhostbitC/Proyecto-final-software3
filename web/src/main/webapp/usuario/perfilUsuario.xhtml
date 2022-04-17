@@ -15,7 +15,6 @@
     <ui:define name="title">Usuario | Perfil</ui:define>
     <ui:define name="content">
 
-        <h:form>
             <div class="container" id="detal-product">
                 <div class="row">
                     <div class="col-4">
@@ -111,7 +110,7 @@
 
                                                         <p:commandButton  style="background: #E52B1B!important;color: white;height: 100%" class="btn"
                                                                          value="Eliminar cuenta" action="#{usuarioBean.eliminarUsuario}"
-                                                                          update="@form"/>
+                                                                          />
                                                         <p:growl showDetail="true"/>
 
                                                 </div>
@@ -127,8 +126,8 @@
                 </div>
             </div>
 
+        <h:form>
         <div class="container" id="detal-producto">
-
             <div class="row">
                 <div class="col">
                     <div class="card" style="height: 100%">
@@ -139,7 +138,7 @@
 
                             <div style="margin-top: 3%">
 
-                                <p:dataScroller value="#{usuarioBean.productosPublicados}" var="producto" chunkSize="10"
+                                <p:dataScroller id="publicaciones" value="#{usuarioBean.productosPublicados}" var="producto" chunkSize="10"
                                                 mode="inline"
                                                 scrollHeight="380">
 
@@ -175,9 +174,9 @@
                                                     </div>
 
                                                     <div class="text-center">
-                                                        <p:commandButton  style="background: #E52B1B!important;color: white;height: 30px;font-size: 14px" class="btn"
+                                                        <p:commandButton  action="#{usuarioBean.eliminarProducto(producto.id)}" style="background: #E52B1B!important;color: white;height: 30px;font-size: 14px" class="btn"
                                                                           value="Eliminar"
-                                                                          update="@form"/>
+                                                                          update="@form,publicaciones"/>
                                                         <p:growl showDetail="true"/>
                                                     </div>
 

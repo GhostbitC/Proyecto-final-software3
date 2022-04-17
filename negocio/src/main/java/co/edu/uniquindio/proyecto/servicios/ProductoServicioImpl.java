@@ -1,9 +1,8 @@
 package co.edu.uniquindio.proyecto.servicios;
 
-import co.edu.uniquindio.proyecto.entidades.Comentario;
-import co.edu.uniquindio.proyecto.entidades.Persona;
-import co.edu.uniquindio.proyecto.entidades.Producto;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
+import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.repositorios.EspecificacionRepo;
+import co.edu.uniquindio.proyecto.repositorios.ImagenRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.springframework.stereotype.Service;
@@ -19,10 +18,16 @@ public class ProductoServicioImpl implements ProductoServicio {
     private final ProductoRepo productoRepo;
     private final ComentarioRepo comentarioRepo;
 
+    private final ImagenRepo imagenRepo;
 
-    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo comentarioRepo) {
+    private final EspecificacionRepo especificacionRepo;
+
+
+    public ProductoServicioImpl(ProductoRepo productoRepo, ComentarioRepo comentarioRepo, ImagenRepo imagenRepo, EspecificacionRepo especificacionRepo) {
         this.productoRepo = productoRepo;
         this.comentarioRepo = comentarioRepo;
+        this.imagenRepo = imagenRepo;
+        this.especificacionRepo = especificacionRepo;
     }
 
     @Override
@@ -64,11 +69,49 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public void eliminarProducto(String nombre) throws Exception {
+    public void eliminarProducto(int idProducto) throws Exception {
 
-        Producto productoEncontrado = obtenerProductoNombre(nombre);
+        Producto productoEncontrado = obtenerProducto(idProducto);
 
         if (productoEncontrado!=null){
+
+            int tamImagenes = productoEncontrado.getImagenes().size();
+            int tamEspecificaciones = productoEncontrado.getEspecificaciones().size();
+
+
+            for(int i=0;i<tamImagenes;i++){
+
+                Imagen imagen = productoEncontrado.getImagenes().get(i);
+                imagenRepo.delete(imagen);
+                productoEncontrado.getImagenes().remove(imagen);
+            }
+
+            if(productoEncontrado.getComentarios()!=null){
+
+                int tamComentarios = productoEncontrado.getComentarios().size();
+
+                for(int i=0;i<tamComentarios;i++){
+
+                    Comentario comentario = productoEncontrado.getComentarios().get(i);
+                    comentarioRepo.delete(comentario);
+                    productoEncontrado.getComentarios().remove(comentario);
+                }
+            }
+
+            for(int i=0;i<tamEspecificaciones;i++){
+
+                Especificacion especificacion = productoEncontrado.getEspecificaciones().get(i);
+                especificacionRepo.delete(especificacion);
+                productoEncontrado.getEspecificaciones().remove(especificacion);
+            }
+
+            productoEncontrado.setAdministrador(null);
+
+            if(productoEncontrado.getUsuario() !=null){
+                productoEncontrado.setUsuario(null);
+            }
+
+            productoRepo.save(productoEncontrado);
             productoRepo.delete(productoEncontrado);
         }else{
             throw new Exception("El producto a eliminar no existe");
