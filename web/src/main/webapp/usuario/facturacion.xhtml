@@ -213,8 +213,8 @@
                         <h6 style="margin-top: 1%"> Recuerda subir el comprobante de pago al efectuar este mismo, su compra no sera enviada hasta no recibirlo.</h6>
                     </div>
 
-                    <p:commandButton value="Aceptar" update="@form" styleClass="rounded-button ui-button-info"
-                                     style="font-size: 15px;" icon="pi pi-check" action="#{seguridadBean.efectuarCompra}"/>
+                    <p:commandButton value="Efectuar compra" update="@form" styleClass="ui-button-info"
+                                     style="font-size: 15px;" action="#{seguridadBean.efectuarCompra}"/>
 
                         <p:growl showDetail="true" for="msj-compra"/>
 

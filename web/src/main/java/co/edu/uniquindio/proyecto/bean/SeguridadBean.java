@@ -24,9 +24,6 @@ public class SeguridadBean implements Serializable {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @Autowired
-    private AdministradorServicio administradorServicio;
-
     @Getter @Setter
     private Persona persona;
 
@@ -136,7 +133,6 @@ public class SeguridadBean implements Serializable {
     }
 
     public List<Compra> listarComprasUsuario() {
-        System.out.println(persona.getId());
         if (persona != null) {
             listaMisCompras = compraServicio.listarComprasUsuario(persona.getId());
             return listaMisCompras;
@@ -229,8 +225,5 @@ public class SeguridadBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
         return "/usuario/carrito?faces-redirect=true";
     }
-
-
-
 
 }

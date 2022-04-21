@@ -22,10 +22,10 @@
           content="width=device-width, user-scalable=no,initial-scale=1.0, maximun-scale=1.0,minimun-scale=1.0"/>
 </h:head>
 
-<h:body id="body-pag" style="padding: 0;margin: 0;background: #FBFCFC;">
+<h:body id="body-pag" style="padding: 0;margin: 0;background: #FBFCFC">
     <div id="header">
         <div class="container-md-4" id="head" style="text-align: center; display: block;">
-            <h1 style="font-family: 'Calibri',sans-serif"> Amazing Store</h1>
+            <h1 style="font-family: 'Calibri',sans-serif"> Amazing Store</h1>}
         </div>
     </div>
 
@@ -51,12 +51,6 @@
                     <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
                         <a class="nav-link active" aria-current="page" href="/usuario/registrarProducto.xhtml">
                             Registrar productos
-                        </a>
-                    </li>
-
-                    <li class="nav-item" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
-                        <a class="nav-link active" aria-current="page" href="/usuario/carrito.xhtml">
-                            Carrito
                         </a>
                     </li>
 
@@ -94,24 +88,44 @@
                                class="btn btn-secondary">Ingresar</a>
                         </div>
 
-                        <p:avatar rendered="#{seguridadBean.autenticado}" styleClass="p-mr-2" style="width: 40px;height: 40px" shape="circle">
-                            <p:graphicImage url="/resources/img/avatar.png" height="30" width="30"/>
-                            <a class="dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"
-                            style="background: none !important;border: none"/>
-                            <ul class="dropdown-menu dropdown-menu-lg-end">
-
-                                <div jsf:rendered="#{seguridadBean.rol=='usuario'}">
-                                    <li ><a class="dropdown-item" type="button" href="/usuario/perfilUsuario.xhtml">Mi perfil</a></li>
+                        <div class="row">
+                            <div class="col">
+                                <div jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol=='usuario'}">
+                                    <a href="/usuario/carrito.xhtml" style="display: flex"> <img
+                                            src="../resources/img/carrito.png" alt="" height="40" width="40"
+                                            style="margin-top: 3%"/></a>
                                 </div>
+                            </div>
 
-                                <div jsf:rendered="#{seguridadBean.rol=='admin'}">
-                                    <li ><a class="dropdown-item" type="button" href="/administrador/perfilAdministrador.xhtml">Mi perfil</a></li>
-                                </div>
+                            <div class="col">
+                                <p:avatar rendered="#{seguridadBean.autenticado}" styleClass="p-mr-2"
+                                          style="width: 40px;height: 40px;background: transparent!important;"
+                                          shape="circle">
+                                    <p:graphicImage url="/resources/img/user.png" height="30" width="30"/>
+                                    <a class="dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static"
+                                       aria-expanded="false"
+                                       style="background: none !important;border: none;width:100%;height: 100%"/>
+                                    <ul class="dropdown-menu dropdown-menu-lg-end">
 
-                                <li> <p:commandButton action="#{seguridadBean.cerrarSesion}"
-                                                      value="Cerrar sesión" style="background: transparent!important;color: black;border: transparent!important;"/></li>
-                            </ul>
-                        </p:avatar>
+                                        <div jsf:rendered="#{seguridadBean.rol=='usuario'}">
+                                            <li><a class="dropdown-item" type="button"
+                                                   href="/usuario/perfilUsuario.xhtml">Mi perfil</a></li>
+                                        </div>
+
+                                        <div jsf:rendered="#{seguridadBean.rol=='admin'}">
+                                            <li><a class="dropdown-item" type="button"
+                                                   href="/administrador/perfilAdministrador.xhtml">Mi perfil</a></li>
+                                        </div>
+
+                                        <li><p:commandButton action="#{seguridadBean.cerrarSesion}"
+                                                             value="Cerrar sesión"
+                                                             style="background: transparent!important;color: black;border: transparent!important;"/>
+                                        </li>
+                                    </ul>
+                                </p:avatar>
+                            </div>
+                        </div>
+
 
                     </div>
                 </h:form>
@@ -148,8 +162,7 @@
                     <li class="d-flex">
                         <a href="#" class="text-reset" style="margin-left: 80%;"><i class="fa-brands fa-facebook-f"></i></a>
                         <a href="#" class="text-reset" style="margin-left: 10px"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#" class="text-reset" style="margin-left: 10px"><i
-                                class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-reset" style="margin-left: 10px"><i class="fa-brands fa-twitter"></i></a>
                     </li>
                 </ul>
             </nav>

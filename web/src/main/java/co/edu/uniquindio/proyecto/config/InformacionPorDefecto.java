@@ -314,9 +314,65 @@ public class InformacionPorDefecto implements CommandLineRunner {
             comentario3.setProducto(producto1);
             comentario3.setUsuario(u);
 
+            Comentario comentario4= new Comentario();
+            comentario4.setComentario("If this mouse works, it's pretty fantastic. I like the layout, it's quick as heck, fairly lightweight for a wireless mouse, and the software, though not what I prefer, works fine for me.");
+            comentario4.setCalificacion(5);
+            comentario4.setProducto(producto2);
+            comentario4.setUsuario(u);
+
+            Comentario comentario5= new Comentario();
+            comentario5.setComentario("Super customizable y funcional. Llevo poco mas de un mes usandolo exclusivamente para gaming y programacion");
+            comentario5.setCalificacion(4);
+            comentario5.setProducto(producto2);
+            comentario5.setUsuario(u);
+
+            Comentario comentario6= new Comentario();
+            comentario6.setComentario("Bought this product about 2 months back and I've already started facing problems. Its \"w\" key stops working in the middle of the games.");
+            comentario6.setCalificacion(2);
+            comentario6.setProducto(producto3);
+            comentario6.setUsuario(u);
+
+            Comentario comentario7= new Comentario();
+            comentario7.setComentario("Ya realice la compra");
+            comentario7.setCalificacion(4);
+            comentario7.setProducto(producto3);
+            comentario7.setUsuario(u);
+
+            Comentario comentario8= new Comentario();
+            comentario8.setComentario(" Its so good, i loved it, but for those who doesn't like clicky sound then don't buy cuz its bit loud.");
+            comentario8.setCalificacion(4);
+            comentario8.setProducto(producto4);
+            comentario8.setUsuario(u);
+
+            Comentario comentario9= new Comentario();
+            comentario9.setComentario("Cumple todo lo que promete, los switches funcionan muy bien y trae algunos de repuesto, recomendado.");
+            comentario9.setCalificacion(5);
+            comentario9.setProducto(producto4);
+            comentario9.setUsuario(u);
+
+            Comentario comentario10= new Comentario();
+            comentario10.setComentario("Excelente teclado muy bueno, suena duro pero no es un problema.");
+            comentario10.setCalificacion(5);
+            comentario10.setProducto(producto5);
+            comentario10.setUsuario(u);
+
+            Comentario comentario11= new Comentario();
+            comentario11.setComentario("Encantado con tan maravilloso teclado, soy desarrollador y utilizar este keyboard es trabajar como los dioses, excelente. Me encanta porque es bastante ergonomico, las teclas se sienten demasiado bien al utilizarlo.");
+            comentario11.setCalificacion(5);
+            comentario11.setProducto(producto5);
+            comentario11.setUsuario(u);
+
             productoServicio.registrarComentario(comentario1);
             productoServicio.registrarComentario(comentario2);
             productoServicio.registrarComentario(comentario3);
+            productoServicio.registrarComentario(comentario4);
+            productoServicio.registrarComentario(comentario5);
+            productoServicio.registrarComentario(comentario6);
+            productoServicio.registrarComentario(comentario7);
+            productoServicio.registrarComentario(comentario8);
+            productoServicio.registrarComentario(comentario9);
+            productoServicio.registrarComentario(comentario10);
+            productoServicio.registrarComentario(comentario11);
 
 
         }

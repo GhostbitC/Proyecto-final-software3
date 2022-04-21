@@ -21,8 +21,8 @@ public class Comentario implements Serializable {
     @EqualsAndHashCode.Include
     int id;
 
-    @Column(nullable = false,length = 200)
-    @Size(max = 200, message = "El comentario no puede superar los 200 caracteres")
+    @Column(nullable = false)
+    @Size(max = 500, message = "El comentario no puede superar los 200 caracteres")
     private String comentario;
 
     @Column(nullable = false)
