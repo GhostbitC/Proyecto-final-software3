@@ -64,7 +64,7 @@ public class UsuarioBean implements Serializable {
 
     @Getter
     @Setter
-    private List<Compra> historialServicios;
+    private List<Compra> historial;
 
     @Getter
     @Setter
@@ -93,6 +93,7 @@ public class UsuarioBean implements Serializable {
         this.direccionUsuario = new Direccion();
         this.productosPublicados = obtenerProductosPublicados();
         this.comprasSinComprobante = obtenerComprasSinComprobante();
+        this.historial = obtenerHistorialTransacciones();
         this.productoEstrella = obtenerProductoEstrella();
         this.ciudades = ciudadServicio.listarCiudades();
     }
@@ -236,6 +237,17 @@ public class UsuarioBean implements Serializable {
 
         if (personaLogin!=null){
             compras = compraServicio.listarComprasUsuarioSinComprobante(personaLogin.getId());
+        }
+
+        return compras;
+    }
+
+    public List<Compra> obtenerHistorialTransacciones(){
+
+        List<Compra> compras= new ArrayList<>();
+
+        if (personaLogin!=null){
+            compras = compraServicio.listarComprasUsuario(personaLogin.getId());
         }
 
         return compras;

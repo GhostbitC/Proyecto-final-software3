@@ -14,7 +14,6 @@ import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -42,8 +41,7 @@ public class ProductoBean implements Serializable {
     @Autowired
     private EspecificacionServicio especificacionServicio;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private Categoria categoria;
 
     @Getter @Setter
@@ -56,21 +54,26 @@ public class ProductoBean implements Serializable {
     @Getter @Setter
     private Producto productoN;
 
-    @Getter
-    @Setter
-    private List<Especificacion> especificaciones;
+    @Getter @Setter
+    private List<Producto> teclados;
 
     @Getter @Setter
-    private Especificacion especificacion;
+    private List<Producto> mouses;
 
+    @Getter @Setter
+    private List<Producto> audifonos;
+
+    @Getter @Setter
+    private List<Producto> portatiles;
+    @Getter @Setter
+    private List<Especificacion> especificaciones;
+    @Getter @Setter
+    private Especificacion especificacion;
     @Value("${upload.url}")
     private String urlImagenes;
     private ArrayList<Imagen> imagenes;
-
-    @Getter
-    @Setter
+    @Getter @Setter
     private List<Categoria> categorias;
-
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
@@ -84,7 +87,10 @@ public class ProductoBean implements Serializable {
         this.categorias = categoriaServicio.listarCategorias();
         this.especificaciones = new ArrayList<>();
         this.especificacion = new Especificacion();
-
+        this.teclados = obtenerTeclados();
+        this.mouses = obtenerMouses();
+        this.audifonos = obtenerAudifonos();
+        this.portatiles = obtenerPortatiles();
     }
 
     public void subirImagenes(FileUploadEvent event) {
@@ -127,7 +133,7 @@ public class ProductoBean implements Serializable {
                 if (!imagenes.isEmpty() && !especificaciones.isEmpty()) {
 
                     producto.setAdministrador((Administrador) personaLogin);
-
+                    producto.setEstado(true);
                     Producto productoCreado = productoServicio.registrarProducto(this.producto);
 
                     for (Imagen i : imagenes) {
@@ -142,6 +148,11 @@ public class ProductoBean implements Serializable {
 
                     productoCreado.setEspecificaciones(especificaciones);
                     productoCreado.setImagenes(imagenes);
+
+                    this.teclados = obtenerTeclados();
+                    this.mouses = obtenerMouses();
+                    this.audifonos = obtenerAudifonos();
+                    this.portatiles = obtenerPortatiles();
 
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se creo correctamente");
                     FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
@@ -167,6 +178,11 @@ public class ProductoBean implements Serializable {
                         productoCreado.setEspecificaciones(especificaciones);
                         productoCreado.setImagenes(imagenes);
 
+                        this.teclados = obtenerTeclados();
+                        this.mouses = obtenerMouses();
+                        this.audifonos = obtenerAudifonos();
+                        this.portatiles = obtenerPortatiles();
+
                         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se creo correctamente");
                         FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
                     }
@@ -189,6 +205,12 @@ public class ProductoBean implements Serializable {
             try {
 
                 productoServicio.actualizarProducto(producto, productoN.getNombre());
+
+                this.teclados = obtenerTeclados();
+                this.mouses = obtenerMouses();
+                this.audifonos = obtenerAudifonos();
+                this.portatiles = obtenerPortatiles();
+
                 FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El producto se actualizo correctamente");
                 FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
 
@@ -219,6 +241,44 @@ public class ProductoBean implements Serializable {
     public void eliminarEspecificacion() {
         this.especificaciones.remove(this.especificacion);
         nuevaEspecificacion();
+    }
+
+    public List<Producto> obtenerTeclados(){
+
+        List<Producto> teclados = new ArrayList<>();
+
+        teclados = productoServicio.listarTeclados();
+
+        System.out.println(teclados.size());
+
+        return teclados;
+    }
+
+    public List<Producto> obtenerMouses(){
+
+        List<Producto> mouses = new ArrayList<>();
+
+        mouses = productoServicio.listarMouses();
+
+        return mouses;
+    }
+
+    public List<Producto> obtenerAudifonos(){
+
+        List<Producto> audifonos = new ArrayList<>();
+
+        audifonos = productoServicio.listarAudifonos();
+
+        return audifonos;
+    }
+
+    public List<Producto> obtenerPortatiles(){
+
+        List<Producto> portatiles = new ArrayList<>();
+
+        portatiles = productoServicio.listarPortatiles();
+
+        return portatiles;
     }
 
 }

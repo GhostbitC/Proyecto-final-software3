@@ -35,6 +35,14 @@ public interface ProductoServicio {
 
     List<Producto> listarProductos();
 
+    List<Producto> listarTeclados();
+
+    List<Producto> listarMouses();
+
+    List<Producto> listarAudifonos();
+
+    List<Producto> listarPortatiles();
+
     List<Producto> listarProductosUsuario(int idUsuario);
 
     List<Producto> listarProductosSinAprobarUsuarios();

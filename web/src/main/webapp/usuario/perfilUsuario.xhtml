@@ -15,210 +15,221 @@
     <ui:define name="title">Usuario | Perfil</ui:define>
     <ui:define name="content">
 
-            <div class="container" id="detal-product">
-                <div class="row">
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-body" style="height: 100%">
-                                <div style="text-align: center;margin-top: 5%">
-                                    <p:graphicImage value="/resources/img/user.png" width="150"/>
-                                </div>
-
-                                <div class="mt-3" style="text-align: center;">
-                                    <h4 style="color: #542551">#{usuarioBean.usuarioLogin.nickname}</h4>
-
-                                    <h6 style="margin-top: 5%">Calificación promedio</h6>
-                                    <p:rating readonly="true" style="margin-bottom: 5%"/>
-                                </div>
+        <div class="container" id="detal-product">
+            <div class="row">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body" style="height: 100%">
+                            <div style="text-align: center;margin-top: 5%">
+                                <p:graphicImage value="/resources/img/user.png" width="150"/>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="col">
-                        <div class="card" style="height: 100%">
-                            <div class="card-body" style="margin-left: 5%">
-                                <div class="card-title">
-                                    <h4 style="color: #542551">Información personal</h4>
-                                </div>
+                            <div class="mt-3" style="text-align: center;">
+                                <h4 style="color: #542551">#{usuarioBean.usuarioLogin.nickname}</h4>
 
-                                <div style="margin-top: 3%">
-                                    <p:repeat value="#{usuarioBean.usuarioLogin}" var="persona">
-                                        <div class="container p-0">
-                                            <div class="row" >
-                                                <div class="col-4">
-                                                    <h5 style="font-size: 17px;color: #542551">Nombre completo: </h5>
-                                                </div>
-
-                                                <div class="col">
-                                                    <h5 style="font-size: 17px">#{persona.nombre} #{persona.apellido}</h5>
-                                                </div>
-                                            </div>
-
-                                            <div class="row" style="margin-top: 1%">
-                                                <div class="col-4">
-                                                    <h5 style="font-size: 17px;color: #542551">Correo electrónico: </h5>
-                                                </div>
-
-                                                <div class="col">
-                                                    <h5 style="font-size: 17px">#{persona.email}</h5>
-                                                </div>
-                                            </div>
-
-                                            <div class="row" style="margin-top: 1%">
-                                                <div class="col-4">
-                                                    <h5 style="font-size: 17px;color: #542551">Ciudad de residencia: </h5>
-                                                </div>
-
-                                                <div class="col">
-                                                    <h5 style="font-size: 17px">#{persona.direccion.ciudad.nombre}</h5>
-                                                </div>
-                                            </div>
-
-                                            <div class="row" style="margin-top: 1%">
-                                                <div class="col-4">
-                                                    <h5 style="font-size: 17px;color: #542551">Dirección: </h5>
-                                                </div>
-
-                                                <div class="col">
-                                                    <h5 style="font-size: 17px"> #{persona.direccion.calle} ##{persona.direccion.numero}</h5>
-                                                </div>
-                                            </div>
-
-                                            <div class="row" style="margin-top: 1%">
-                                                <div class="col-4">
-                                                    <h5 style="font-size: 17px;color: #542551">Fecha de nacimiento: </h5>
-                                                </div>
-
-                                                <div class="col">
-                                                    <h5 style="font-size: 17px">#{persona.fechaNacimiento}</h5>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex" style="margin-top: 5%">
-
-                                                <div>
-                                                    <p:button  type="button" style="background: #542551;color: white;" class="btn" value="Editar cuenta"
-                                                                href="/usuario/updateUsuario.xhtml"/>
-                                                </div>
-
-                                                <div style="margin-left: 5%">
-                                                    <p:button  type="button" style="background: #1BA2E5!important;color: white;" class="btn" value="Editar productos"
-                                                               href="/usuario/updateProducto.xhtml"/>
-                                                </div>
-
-                                                <div style="margin-left: 5%">
-
-                                                        <p:commandButton  style="background: #E52B1B!important;color: white;height: 100%" class="btn"
-                                                                         value="Eliminar cuenta" action="#{usuarioBean.eliminarUsuario}"
-                                                                          />
-                                                        <p:growl showDetail="true"/>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </p:repeat>
-                                </div>
+                                <h6 style="margin-top: 5%">Calificación promedio</h6>
+                                <p:rating readonly="true" style="margin-bottom: 5%"/>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        <h:form>
-        <div class="container" id="detal-producto">
-            <div class="row">
                 <div class="col">
                     <div class="card" style="height: 100%">
-                        <div class="card-body" style="height: 100%">
+                        <div class="card-body" style="margin-left: 5%">
                             <div class="card-title">
-                                <h4 style="color: #542551">Productos publicados</h4>
+                                <h4 style="color: #542551">Información personal</h4>
                             </div>
 
                             <div style="margin-top: 3%">
-
-                                <p:dataScroller id="publicaciones" value="#{usuarioBean.productosPublicados}" var="producto" chunkSize="10"
-                                                mode="inline"
-                                                scrollHeight="380">
-
+                                <p:repeat value="#{usuarioBean.usuarioLogin}" var="persona">
                                     <div class="container p-0">
                                         <div class="row">
-                                            <div class="col-3" style="text-align: left">
-                                                <div class="container p-0">
-                                                    <p:graphicImage value="/uploads/#{producto.imagenPrincipal}"
-                                                                    style="width: 120px; height: 120px;margin-left: 3%"/>
-                                                </div>
+                                            <div class="col-4">
+                                                <h5 style="font-size: 17px;color: #542551">Nombre completo: </h5>
                                             </div>
 
                                             <div class="col">
-                                                <div style="margin-top: 15%">
-                                                    <div class="title">
-                                                        <h5 style="font-size: 16px">
-                                                            Nombre del producto: #{producto.nombre}
-                                                        </h5>
-                                                    </div>
+                                                <h5 style="font-size: 17px">#{persona.nombre} #{persona.apellido}</h5>
+                                            </div>
+                                        </div>
 
-                                                    <h5 style="font-size: 16px">
-                                                        Categoría del producto: #{producto.categoria.nombre}
-                                                    </h5>
-                                                </div>
+                                        <div class="row" style="margin-top: 1%">
+                                            <div class="col-4">
+                                                <h5 style="font-size: 17px;color: #542551">Correo electrónico: </h5>
                                             </div>
 
+                                            <div class="col">
+                                                <h5 style="font-size: 17px">#{persona.email}</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top: 1%">
                                             <div class="col-4">
-                                                <div style="margin-top: 18%;margin-left: 5%">
-                                                    <div class="title">
-                                                        <h5 style="font-size: 16px">
-                                                            Unidades disponibles: <i class="text-info">#{producto.unidades}</i>
-                                                        </h5>
-                                                    </div>
+                                                <h5 style="font-size: 17px;color: #542551">Ciudad de residencia: </h5>
+                                            </div>
 
-                                                    <div class="text-center">
-                                                        <p:commandButton  action="#{usuarioBean.eliminarProducto(producto.id)}" style="background: #E52B1B!important;color: white;height: 30px;font-size: 14px" class="btn"
-                                                                          value="Eliminar"
-                                                                          update="@form,publicaciones"/>
-                                                        <p:growl showDetail="true"/>
-                                                    </div>
+                                            <div class="col">
+                                                <h5 style="font-size: 17px">#{persona.direccion.ciudad.nombre}</h5>
+                                            </div>
+                                        </div>
 
-                                                </div>
+                                        <div class="row" style="margin-top: 1%">
+                                            <div class="col-4">
+                                                <h5 style="font-size: 17px;color: #542551">Dirección: </h5>
+                                            </div>
+
+                                            <div class="col">
+                                                <h5 style="font-size: 17px"> #{persona.direccion.calle} ##{persona.direccion.numero}</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top: 1%">
+                                            <div class="col-4">
+                                                <h5 style="font-size: 17px;color: #542551">Fecha de nacimiento: </h5>
+                                            </div>
+
+                                            <div class="col">
+                                                <h5 style="font-size: 17px">#{persona.fechaNacimiento}</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex" style="margin-top: 5%">
+
+                                            <div>
+                                                <p:button type="button" style="background: #542551;color: white;"
+                                                          class="btn" value="Editar cuenta"
+                                                          href="/usuario/updateUsuario.xhtml"/>
+                                            </div>
+
+                                            <div style="margin-left: 5%">
+                                                <p:button type="button"
+                                                          style="background: #1BA2E5!important;color: white;"
+                                                          class="btn" value="Editar productos"
+                                                          href="/usuario/updateProducto.xhtml"/>
+                                            </div>
+
+                                            <div style="margin-left: 5%">
+
+                                                <p:commandButton
+                                                        style="background: #E52B1B!important;color: white;height: 100%"
+                                                        class="btn"
+                                                        value="Eliminar cuenta" action="#{usuarioBean.eliminarUsuario}"
+                                                />
+                                                <p:growl showDetail="true"/>
+
                                             </div>
 
                                         </div>
+
                                     </div>
-                                </p:dataScroller>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-4">
-                    <div class="card" style="height: 100%">
-                        <div class="card-body" style="height: 100%">
-                            <div class="card-title">
-                                <h4 style="color: #542551">Producto estrella</h4>
-                            </div>
-
-                            <div class="container p-0" style="text-align: center;margin-top: 10%">
-                                <p:graphicImage value="/uploads/#{usuarioBean.productoEstrella.imagenPrincipal}"
-                                                style="width: 180px; height: 180px;margin-left: 3%"/>
-                            </div>
-
-                            <div style="text-align: center;margin-top: 10%">
-                                <h5>Nombre: #{usuarioBean.productoEstrella.nombre}</h5>
-                            </div>
-
-                            <div style="text-align: center">
-                                <h5>Unidades disponibles: <i class="text-info">#{usuarioBean.productoEstrella.unidades}</i></h5>
-                            </div>
-
-                            <div style="text-align: justify; margin-top: 15%;">
-                                <h6>En amazing store calculamos tu producto estrella basándonos en las calificaciones que brinden los usuarios recurrentes.</h6>
+                                </p:repeat>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <h:form>
+            <div class="container" id="detal-producto">
+                <div class="row">
+                    <div class="col">
+                        <div class="card" style="height: 100%">
+                            <div class="card-body" style="height: 100%">
+                                <div class="card-title">
+                                    <h4 style="color: #542551">Productos publicados</h4>
+                                </div>
+
+                                <div style="margin-top: 3%">
+
+                                    <p:dataScroller id="publicaciones" value="#{usuarioBean.productosPublicados}"
+                                                    var="producto" chunkSize="10"
+                                                    mode="inline"
+                                                    scrollHeight="380">
+
+                                        <div class="container p-0">
+                                            <div class="row">
+                                                <div class="col-3" style="text-align: left">
+                                                    <div class="container p-0">
+                                                        <p:graphicImage value="/uploads/#{producto.imagenPrincipal}"
+                                                                        style="width: 120px; height: 120px;margin-left: 3%"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div style="margin-top: 15%">
+                                                        <div class="title">
+                                                            <h5 style="font-size: 16px">
+                                                                Nombre del producto: #{producto.nombre}
+                                                            </h5>
+                                                        </div>
+
+                                                        <h5 style="font-size: 16px">
+                                                            Categoría del producto: #{producto.categoria.nombre}
+                                                        </h5>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div style="margin-top: 18%;margin-left: 5%">
+                                                        <div class="title">
+                                                            <h5 style="font-size: 16px">
+                                                                Unidades disponibles: <i
+                                                                    class="text-info">#{producto.unidades}</i>
+                                                            </h5>
+                                                        </div>
+
+                                                        <div class="text-center">
+                                                            <p:commandButton
+                                                                    action="#{usuarioBean.eliminarProducto(producto.id)}"
+                                                                    style="background: #E52B1B!important;color: white;height: 30px;font-size: 14px"
+                                                                    class="btn"
+                                                                    value="Eliminar"
+                                                                    update="@form,publicaciones"/>
+                                                            <p:growl showDetail="true"/>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </p:dataScroller>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="card" style="height: 100%">
+                            <div class="card-body" style="height: 100%">
+                                <div class="card-title">
+                                    <h4 style="color: #542551">Producto estrella</h4>
+                                </div>
+
+                                <div class="container p-0" style="text-align: center;margin-top: 10%">
+                                    <p:graphicImage value="/uploads/#{usuarioBean.productoEstrella.imagenPrincipal}"
+                                                    style="width: 180px; height: 180px;margin-left: 3%"/>
+                                </div>
+
+                                <div style="text-align: center;margin-top: 10%">
+                                    <h5>Nombre: #{usuarioBean.productoEstrella.nombre}</h5>
+                                </div>
+
+                                <div style="text-align: center">
+                                    <h5>Unidades disponibles: <i
+                                            class="text-info">#{usuarioBean.productoEstrella.unidades}</i></h5>
+                                </div>
+
+                                <div style="text-align: justify; margin-top: 15%;">
+                                    <h6>En amazing store calculamos tu producto estrella basándonos en las calificaciones que brinden los usuarios recurrentes.</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
             <div class="container" style="width: 100%;margin-top: 3%;">
@@ -230,7 +241,8 @@
 
                         <div style="margin-top: 3%">
 
-                            <p:dataTable value="#{usuarioBean.comprasSinComprobante}" var="compra" id="comprasPendientesTable" style="margin-bottom: 20px">
+                            <p:dataTable value="#{usuarioBean.comprasSinComprobante}" var="compra"
+                                         id="comprasPendientesTable" style="margin-bottom: 20px">
 
                                 <p:column style="text-align: center" headerText="Compra">
                                     <f:facet name="header">
@@ -252,7 +264,8 @@
                                 <p:column style="text-align: center" headerText="Subir imagen">
                                     <p:outputLabel for="imagen" value="Imagen"
                                                    style="visibility: hidden;position: fixed;"/>
-                                    <p:fileUpload id="imagen" value="Comprobante" listener="#{usuarioBean.subirComprobante}" mode="advanced"
+                                    <p:fileUpload id="imagen" value="Comprobante"
+                                                  listener="#{usuarioBean.subirComprobante}" mode="advanced"
                                                   auto="true" sizeLimit="300000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                                   required="true" skinSimple="true"/>
                                 </p:column>
@@ -261,6 +274,46 @@
                                     <p:commandButton action="#{usuarioBean.unirComprobanteCompra(compra.id)}"
                                                      update="@form,comprasPendientesTable"
                                                      value="Validar" style="width: 50%"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container" style="width: 100%;margin-top: 3%;">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4 style="color: #542551">Historial de transacciones</h4>
+                        </div>
+
+                        <div style="margin-top: 3%">
+
+                            <p:dataTable value="#{usuarioBean.historial}" var="compra" style="margin-bottom: 20px">
+
+                                <p:column style="text-align: center" headerText="Compra">
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto(s) a comprados"/>
+                                    </f:facet>
+                                    <p:repeat value="#{compra.listaDetallesCompra}" var="detalle">
+                                        <div class="container p-0">
+                                            <div>
+                                                <h6>#{detalle.producto.nombre}</h6>
+                                            </div>
+                                        </div>
+                                    </p:repeat>
+                                </p:column>
+
+                                <p:column style="text-align: center" headerText="Medio de pago">
+                                    <h6>#{compra.medioPago}</h6>
+                                </p:column>
+
+                                <p:column style="text-align: center" headerText="Fecha de la compra">
+                                    <h6>#{compra.fechaVenta}</h6>
                                 </p:column>
 
                             </p:dataTable>

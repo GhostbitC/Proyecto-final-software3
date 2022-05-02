@@ -237,8 +237,8 @@ public class ProductoServicioImpl implements ProductoServicio {
                     promedios[i]= (especifico*100)/(general);
                 }
             }else {
-                for(int i=0;i<promedios.length;i++){
-                    promedios[i]= 0;
+                for(int j=0;j<promedios.length;j++){
+                    promedios[j]= 0;
                 }
             }
 
@@ -292,6 +292,26 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
+    public List<Producto> listarTeclados() {
+        return productoRepo.listarProductosPorCategoria("Teclados");
+    }
+
+    @Override
+    public List<Producto> listarMouses() {
+        return productoRepo.listarProductosPorCategoria("Mouses");
+    }
+
+    @Override
+    public List<Producto> listarAudifonos() {
+        return productoRepo.listarProductosPorCategoria("Audífonos");
+    }
+
+    @Override
+    public List<Producto> listarPortatiles() {
+        return productoRepo.listarProductosPorCategoria("Portátiles");
+    }
+
+    @Override
     public List<Producto> listarProductosUsuario(int idUsuario){
 
         List<Producto> productosUsuario = productoRepo.listarProductosPublicadosUsuario(idUsuario);
@@ -300,7 +320,6 @@ public class ProductoServicioImpl implements ProductoServicio {
 
            return productosUsuario = new ArrayList<>();
         }
-
 
         return productosUsuario;
     }

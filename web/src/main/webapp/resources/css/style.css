@@ -465,6 +465,14 @@ body .ui-fileupload .ui-fileupload-buttonbar .ui-button{
     margin: 2.5%!important;
 }
 
+body .ui-dataview .ui-dataview-header {
+    visibility: hidden !important;
+}
+
+body .ui-dataview .ui-dataview-content {
+    margin-top: -5%;
+}
+
 body .ui-fileupload .ui-fileupload-buttonbar{
     padding: 0!important;
 }
@@ -485,6 +493,10 @@ body .ui-datatable thead th{
 
 .dropdown-toggle a:hover{
     color: transparent !important;
+}
+
+#products-catalogo:hover {
+    background: #D5D8DC;
 }
 
 /*---------- Media Screen ----------*/

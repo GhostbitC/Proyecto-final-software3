@@ -77,16 +77,16 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
             //--------------------------- CATEGORÍAS ----------------------------//
 
-            Categoria categoria1 = new Categoria("Mouses","Perifericos",admin1);
+            Categoria categoria1 = new Categoria("Mouses","Periféricos",admin1);
             categoriaServicio.registrarCategoria(categoria1);
 
-            Categoria categoria2 = new Categoria("Teclados","Perifericos",admin1);
+            Categoria categoria2 = new Categoria("Teclados","Periféricos",admin1);
             categoriaServicio.registrarCategoria(categoria2);
 
-            Categoria categoria3 = new Categoria("Audifonos","Perifericos",admin1);
+            Categoria categoria3 = new Categoria("Audífonos","Periféricos",admin1);
             categoriaServicio.registrarCategoria(categoria3);
 
-            Categoria categoria4 = new Categoria("Portatiles","Perifericos",admin1);
+            Categoria categoria4 = new Categoria("Portátiles","Periféricos",admin1);
             categoriaServicio.registrarCategoria(categoria4);
 
             Categoria categoria5 = new Categoria("Destacados","Destacados",admin2);
