@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xml:lang="en" lang="en">
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+    <ui:define name="title">Producto | Actualizar</ui:define>
+    <ui:define name="content">
+
+        <div class="row" style="background-size: 100vw 100vh;height: 100%;width: 100%;padding: 0!important;margin: 0!important;">
+            <div class="col" id="img-products" style="min-height: 100vh;width: 100%;padding: 0!important;margin: 0!important;">
+                <div class="slider" style="margin-left: 60px">
+                    <span style="--i:1;"><img src="../resources/img/products/img-1.png" alt=""/></span>
+                    <span style="--i:2;"><img src="../resources/img/products/img-2.png" alt=""/></span>
+                    <span style="--i:3;"><img src="../resources/img/products/img-3.png" alt=""/></span>
+                    <span style="--i:4;"><img src="../resources/img/products/img-4.png" alt=""/></span>
+                    <span style="--i:5;"><img src="../resources/img/products/img-5.png" alt=""/></span>
+                    <span style="--i:6;"><img src="../resources/img/products/img-6.png" alt=""/></span>
+                    <span style="--i:7;"><img src="../resources/img/products/img-7.png" alt=""/></span>
+                    <span style="--i:8;"><img src="../resources/img/products/img-8.png" alt=""/></span>
+                </div>
+            </div>
+
+            <div class="col" style="min-height: 100vh;width: 100%;padding: 0!important;margin: 0!important;border: none !important;">
+                <p:card styleClass="card p-3 md-3" id="card-producto" style="margin-left: 20px;width: 97%;border: none!important;">
+                    <div class="card-title" style="font-family:'Calibri',sans-serif;font-size: 30px;margin-top: 10px">
+                        <font color="#542551">Actualización de productos</font>
+                    </div>
+
+                    <p style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px">¡Hola! en el siguiente formulario actualizar tus productos, recuerda especificar en el primer campo el nombre del producto que deseas modificar.</p>
+
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="5" width="100%">
+
+                            <p:outputLabel value="Nombre del producto a modificar:"
+                                           style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                            <p:inputText value="#{productoBean.productoN.nombre}"
+                                         style="width: 100%"
+                                         required="true"
+                                         requiredMessage="El nombre del producto es obligatorio"/>
+
+                            <p:outputLabel for="categoria_producto" value="Categoria:"
+                                           style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                            <p:selectOneMenu id="categoria_producto" value="#{productoBean.producto.categoria}"
+                                             style="width: 100%"
+                                             converter="#{categoriaConverter}"
+                                             required="true"
+                                             requiredMessage="La categoría a la que pertenece el producto es obligatorio">
+                                <f:selectItem itemLabel="Seleccione una categoria" noSelectionOption="true"/>
+                                <f:selectItems var="categoria" itemLabel="#{categoria.nombre}"
+                                               value="#{productoBean.categorias}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel for="nombre_producto" value="Nombre:"
+                                           style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                            <p:inputText id="nombre_producto" value="#{productoBean.producto.nombre}"
+                                         style="width: 100%"
+                                         required="true"
+                                         requiredMessage="El nombre del producto es obligatorio"/>
+
+                            <p:outputLabel for="descripcion_producto" value="Descripción:"
+                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                            <p:inputTextarea id="descripcion_producto" value="#{productoBean.producto.descripcion}"
+                                             style="width: 100%;"
+                                             autoResize="none"/>
+
+                            <p:outputLabel for="precio_producto" value="Precio:"
+                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                            <p:inputText id="precio_producto" value="#{productoBean.producto.precio}"
+                                         style="width: 100%"/>
+
+                            <p:outputLabel for="unidades_producto" value="Unidades:"
+                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                            <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}"
+                                         style="width: 100%"/>
+
+                            <p:outputLabel for="imagenes_producto" value="Imagenes:"
+                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                            <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced"
+                                          auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                          required="true" skinSimple="true"/>
+
+                            <p:commandButton value="Especificación" action="#{productoBean.nuevaEspecificacion}"
+                                             onclick="PF('Especificaciones').show()" style="background: #542551;border-color: #542551">
+                            </p:commandButton>
+
+                            <p:dataTable id="dt-products1" widgetVar="dtProducts" var="especificacion"
+                                         value="#{productoBean.especificaciones}"
+                                         reflow="true" styleClass="products-table"
+                                         selection="#{productoBean.especificacion}"
+                                         rows="10">
+                                <p:autoUpdate/>
+                                <f:facet name="header">
+                                    <div class="products-table-header">
+                                        <span style="font-weight: bold">Especificaciones</span>
+                                    </div>
+                                </f:facet>
+
+                                <p:column headerText="Especificacion" style="font-family: 'Calibri',sans-serif">
+                                    <h:outputText value="#{especificacion.especificacion}" style="font-family: 'Calibri',sans-serif"/>
+                                </p:column>
+                                <p:column headerText="Borrar" style="font-family: 'Calibri',sans-serif">
+                                    <p:commandButton icon="pi pi-trash"
+                                                     actionListener="#{productoBean.eliminarEspecificacion}"
+                                                     process="@this"/>
+                                </p:column>
+                            </p:dataTable>
+
+                        </h:panelGrid>
+                        <br/>
+                        <br/>
+
+
+                        <div class="container p-0">
+                            <div class="row">
+                                <div class="col">
+                                    <p:button href="/administrador/perfilAdministrador.xhtml" value="Volver"
+                                              style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                                </div>
+
+                                <div class="col">
+                                    <p:commandButton action="#{productoBean.actualizarProducto}" value="Actualizar"
+                                                     update="@form"
+                                                     style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+
+                                    <p:growl showDetail="true"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:form>
+                </p:card>
+            </div>
+        </div>
+
+        <p:dialog header="Especificaciones" showEffect="fade"
+                  widgetVar="Especificaciones" modal="true"
+                  styleClass="">
+            <h:form>
+                <p:outputPanel id="panel1">
+                    <p>
+                        <p:outputLabel for="especificacion" value="Especificación:"/>
+                        <p:inputText id="especificacion" value="#{productoBean.especificacion.especificacion}"
+                                     style="width: 100%"/>
+                    </p>
+
+                </p:outputPanel>
+                <p:commandButton
+                        style="background-color: #0c63e4; margin-left: 28%"
+                        value="Guardar"
+
+                        onclick="PF('Especificaciones').hide()"
+                        action="#{productoBean.crearEspecificacion}">
+                </p:commandButton>
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>
+</html>
