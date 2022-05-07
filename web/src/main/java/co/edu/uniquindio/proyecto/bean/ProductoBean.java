@@ -124,13 +124,13 @@ public class ProductoBean implements Serializable {
 
         try {
             InputStream input = file.getInputStream();
-            System.out.println("Entro 1");
+            System.out.println("Entro 1 " +file.getSize()+ " "+ urlImagenes);
             String fileName = FilenameUtils.getName(file.getFileName());
-            System.out.println("Entro 2");
+            System.out.println("Entro 2 " + fileName);
             String baseName = FilenameUtils.getBaseName(fileName) + "_";
-            System.out.println("Entro 3");
+            System.out.println("Entro 3 "+ baseName);
             String extension = "." + FilenameUtils.getExtension(fileName);
-            System.out.println("Entro 4");
+            System.out.println("Entro 4 "+extension);
             File fileDest = File.createTempFile(baseName, extension, new File(urlImagenes));
             System.out.println("Entro 5");
             FileOutputStream output = new FileOutputStream(fileDest);
