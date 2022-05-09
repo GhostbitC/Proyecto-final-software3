@@ -179,11 +179,13 @@
                                 <p:column headerText="Aprobar producto" style="text-align: center">
                                     <p:commandButton action="#{administradorBean.aprobarProductoUsuario(producto.id)}"
                                                      update="productosPendientesTable"
+                                                     style="border-color: black!important;"
                                                      value="Aprobar"/>
                                 </p:column>
 
                                 <p:column headerText="Rechazar producto" style="text-align: center">
                                     <p:commandButton action="#{administradorBean.rechazarProductoUsuario(producto.id)}"
+                                                     style="background: #E52B1B!important;border-color: black!important;"
                                                      update="productosPendientesTable"
                                                      value="Rechazar"/>
                                 </p:column>
@@ -231,7 +233,7 @@
                                     <p:commandButton action="#{administradorBean.aprobarCompra(compra.id)}"
                                                      update="table"
                                                      value="Validar"
-                                                     style="margin-top: 10%;height: 40px;"/>
+                                                     style="margin-top: 10%;height: 40px;border-color: black!important;"/>
 
                                     <p:growl showDetail="true"/>
 
@@ -239,13 +241,11 @@
 
                                 <p:column headerText="Rechazar compra" style="text-align: center">
                                     <p:commandButton action="#{administradorBean.rechazarCompra(compra.id)}"
-
+                                                     update="table"
                                                      value="Rechazar"
-                                                     style="margin-top: 10%;height: 40px;background: #E52B1B!important; border: #E52B1B!important;"/>
-
+                                                     style="margin-top: 10%;height: 40px;background: #E52B1B!important; border-color: black!important;"/>
                                     <p:growl showDetail="true"/>
                                 </p:column>
-
                             </p:dataTable>
                         </div>
                     </div>

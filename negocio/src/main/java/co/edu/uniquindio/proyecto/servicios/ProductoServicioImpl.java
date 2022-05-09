@@ -273,7 +273,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<Producto> listarProductos() {
-        return productoRepo.findAll();
+        return productoRepo.listarProductosGeneral();
     }
 
     @Override

@@ -12,6 +12,8 @@ public interface UsuarioServicio {
 
     void eliminarUsuario(String email,String password) throws Exception;
 
+    void cambiarPassword(String email,String password) throws Exception;
+
     Usuario obtenerUsuario(int id) throws Exception;
 
     Usuario obtenerUsuarioNombre(String nombre) throws Exception;

@@ -68,7 +68,7 @@
 
                                     <p:commandButton value="Añadir al carrito" style="width: 50%;font-size: 18px;background:#542551;border-color: black !important;" update="@form"
                                                      icon="pi pi-shopping-cart" iconPos="rigth"
-                                                     rendered="#{seguridadBean.autenticado and detalleProductoBean.producto.usuario!=seguridadBean.persona}"
+                                                     rendered="#{seguridadBean.autenticado}"
                                                      action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.id, detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre,detalleProductoBean.producto.imagenPrincipal)}"/>
                                     <p:growl for="add-cart" showDetail="true"/>
                                 </h:form>
@@ -151,7 +151,7 @@
                                         <p:progressBar id="p1" value="#{detalleProductoBean.porcentaje5}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-3" style="text-align:center">
                                         <h6>#{detalleProductoBean.porcentaje5}%</h6>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                         <p:progressBar id="p2" value="#{detalleProductoBean.porcentaje4}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-3" style="text-align:center">
                                         <h6>#{detalleProductoBean.porcentaje4}%</h6>
                                     </div>
                                 </div>
@@ -179,7 +179,7 @@
                                         <p:progressBar id="p3" value="#{detalleProductoBean.porcentaje3}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-3" style="text-align:center">
                                         <h6>#{detalleProductoBean.porcentaje3}%</h6>
                                     </div>
                                 </div>
@@ -193,7 +193,7 @@
                                         <p:progressBar id="p4" value="#{detalleProductoBean.porcentaje2}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-3" style="text-align:center">
                                         <h6>#{detalleProductoBean.porcentaje2}%</h6>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@
                                         <p:progressBar id="p5" value="#{detalleProductoBean.porcentaje1}" displayOnly="true" style="height: 20px"/>
                                     </div>
 
-                                    <div class="col-2">
+                                    <div class="col-3" style="text-align:center">
                                         <h6>#{detalleProductoBean.porcentaje1}%</h6>
                                     </div>
                                 </div>

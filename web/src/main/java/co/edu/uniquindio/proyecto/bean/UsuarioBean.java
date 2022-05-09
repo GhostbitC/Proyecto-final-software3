@@ -55,6 +55,9 @@ public class UsuarioBean implements Serializable {
     private String correo;
 
     @Getter @Setter
+    private String passwordN;
+
+    @Getter @Setter
     private Direccion direccionUsuario;
 
     @Value(value = "#{seguridadBean.persona}")
@@ -172,15 +175,18 @@ public class UsuarioBean implements Serializable {
 
     public void subirComprobante(FileUploadEvent event) {
 
-        UploadedFile imagen = event.getFile();
-        String nombreComprobante = subirImagen(imagen);
+        comprobantePago = new ComprobantePago();
+        comprobantePago.setUrl("default.jpg");
 
-        if (nombreComprobante != null) {
 
-            comprobantePago = new ComprobantePago();
-            comprobantePago.setUrl(nombreComprobante);
+        //UploadedFile imagen = event.getFile();
+        //String nombreComprobante = subirImagen(imagen);
 
-        }
+        //if (nombreComprobante != null) {
+
+            //comprobantePago = new ComprobantePago();
+          //  comprobantePago.setUrl(nombreComprobante);
+        //}
     }
 
     public String subirImagen(UploadedFile file) {
@@ -342,9 +348,12 @@ public class UsuarioBean implements Serializable {
             Usuario u = usuarioServicio.obtenerUsuarioEmail(correo);
 
             if (u!=null){
-                String asunto = "Cambio de contraseña";
+
+                String mensaje = "<span style=\"color:#542551;font-size: 25px\"><b>Recuperar contraseña</b></span>";
+                mensaje += "<br><br> Para cambiar tu contraseña por favor ingresa al siguiente enlace:";
+                mensaje += "<br><br><span style=\"color:#542551\"><b>https://amazing-store-uq.herokuapp.com/cambiarPassword.xhtml</b></span><br><br>";
                 String emailCliente = u.getEmail();
-                String mensaje = "https://amazing-store-uq.herokuapp.com/cambiarPassword.xhtml";
+                String asunto = "Cambio de contraseña";
                 emailService.enviarEmail(asunto,mensaje,emailCliente);
             }else{
                 throw new Exception("No hemos encontrado tu cuenta");
@@ -355,15 +364,52 @@ public class UsuarioBean implements Serializable {
     }
 
     public void showMessagePassword() {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", "Revisa tu correo electrónico, te hemos enviado un email.");
 
-        PrimeFaces.current().dialog().showMessageDynamic(message);
+        try {
+            Usuario u= usuarioServicio.obtenerUsuarioEmail(correo);
+
+            if (u!=null){
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", "Revisa tu correo electrónico, te hemos enviado un email.");
+
+                PrimeFaces.current().dialog().showMessageDynamic(message);
+            }else{
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", "No se encontró el usuario");
+
+                PrimeFaces.current().dialog().showMessageDynamic(message);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", e.getMessage());
+
+            PrimeFaces.current().dialog().showMessageDynamic(message);
+        }
     }
 
     public void metodsPassword(){
 
         enviarEmailPassword();
         showMessagePassword();
+    }
+
+    public String cambiarPassword(){
+
+        try {
+            Usuario u = usuarioServicio.obtenerUsuarioEmail(correo);
+
+            usuarioServicio.cambiarPassword(u.getEmail(),passwordN);
+            String mensaje = "<span style=\"color:#542551;font-size: 25px\"><b>Cambio de contraseña exitoso</b></span>";
+            mensaje += "<br><br>¡Tu contraseña fue actualizada!";
+            mensaje += "<br><br>Disfruta de nuestros servicios en <span style=\"color:#542551\"><b>https://amazing-store-uq.herokuapp.com/</b></span>";
+            mensaje += "<br><br>¡Te esperamos!";
+            emailService.enviarEmail("Confirmación cambio de contraseña",mensaje,u.getEmail());
+
+            return "/loginUsuario?faces-redirect=true";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

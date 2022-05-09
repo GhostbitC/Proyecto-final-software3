@@ -141,10 +141,21 @@ public class UsuarioServicioImpl implements UsuarioServicio {
                 usuarioRepo.save(usuarioEncontrado);
                 usuarioRepo.delete(usuarioEncontrado);
             }
-
-
         }else{
             throw new Exception("Usuario no encontrado ");
+        }
+    }
+
+    @Override
+    public void cambiarPassword(String email, String password) throws Exception {
+
+        Usuario u = usuarioRepo.findByEmail(email);
+
+        if (u!=null){
+            u.setPassword(password);
+            usuarioRepo.save(u);
+        }else{
+            throw new Exception("No existe una cuenta vinculada con este correo");
         }
     }
 

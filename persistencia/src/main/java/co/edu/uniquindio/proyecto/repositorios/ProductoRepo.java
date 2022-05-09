@@ -22,6 +22,9 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("select p from Producto p join p.categoria c where c.nombre =:cadena")
     List<Producto> listarProductosDestacados(String cadena);
 
+    @Query("select p from Producto p where p.estado is true")
+    List<Producto> listarProductosGeneral();
+
     @Query("select p from Producto p join p.categoria c where c.nombre =:cadena and p.estado = true")
     List<Producto> listarProductosPorCategoria(String cadena);
 

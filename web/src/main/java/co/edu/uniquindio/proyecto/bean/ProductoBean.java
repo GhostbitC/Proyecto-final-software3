@@ -152,7 +152,8 @@ public class ProductoBean implements Serializable {
 
                     productoCreado.setEspecificaciones(especificaciones);
                     productoCreado.setImagenes(imagenes);
-
+                    productoCreado.setEstado(true);
+                    productoServicio.registrarProducto(productoCreado);
                     this.teclados = obtenerTeclados();
                     this.mouses = obtenerMouses();
                     this.audifonos = obtenerAudifonos();

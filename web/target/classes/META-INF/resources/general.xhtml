@@ -89,7 +89,7 @@
             <h:form>
                 <div class="card" style="border: none;">
                     <div class="title"
-                         style="font-size: 25px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center">
+                         style="font-size: 35px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center">
                         <b><p style="color: #542551">Productos destacados</p></b>
                     </div>
                     <p:carousel value="#{inicioBean.productosDestacados}" var="producto" numVisible="5"
@@ -118,10 +118,45 @@
         </div>
 
         <div class="container" style="margin-top: 1%;width: 95%;">
+            <div class="card" style="border: none">
+                <div class="card-body">
+                    <div class="title"
+                         style="font-size: 35px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center;margin-bottom: -2%">
+                        <b><p style="color: #542551">Distribuidores</p></b>
+                    </div>
+
+                    <div class="container p-0 m-0" style="margin-top:5% !important">
+                        <div class="row">
+                            <div class="col" style="text-align:center">
+                                <img src="resources/img/redragon-logo.png" alt="" height="50%" width="100%"/>
+                            </div>
+
+                            <div class="col" style="text-align:center">
+                                <img src="resources/img/acer-logo.png" alt="" height="60%" width="100%"/>
+                            </div>
+
+                            <div class="col" style="text-align:center">
+                                <img src="resources/img/logitech-logo.png" alt="" height="60%" width="100%"/>
+                            </div>
+
+                            <div class="col" style="text-align:center">
+                                <img src="resources/img/asus-logo.png" alt="" height="80%" width="100%"/>
+                            </div>
+
+                            <div class="col" style="text-align:center">
+                                <img src="resources/img/VSG-logo.png" alt="" height="70%" width="100%"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 2%;width: 95%;">
             <h:form>
                 <div class="card" style="border: none;">
                     <div class="title"
-                         style="font-size: 25px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center;margin-bottom: -2%">
+                         style="font-size: 35px;font-family: 'Calibri',sans-serif;justify-content: center;text-align: center;margin-bottom: -2%">
                         <b><p style="color: #542551">Productos</p></b>
                     </div>
 
@@ -129,7 +164,7 @@
                         <p:dataView id="products" value="#{inicioBean.productos}" var="producto"
                                     layout="grid" >
                             <p:dataViewGridItem columns="5">
-                                <div id="products-catalogo" class="card" style="border: none;width: 200px;height: 315px;margin-left: 20%;margin-top: 15%">
+                                <div id="products-catalogo" class="card" style="border: none;width: 200px;height: 315px;margin-left: 20%;margin-top: 10%">
                                     <div class="card-body">
                                         <div style="font-size: 18px;justify-content: center;text-align: center;color: #542551;">
                                             <b><p>#{producto.nombre}</p></b>

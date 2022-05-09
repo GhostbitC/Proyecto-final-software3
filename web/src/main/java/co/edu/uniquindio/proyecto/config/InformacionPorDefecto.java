@@ -1056,6 +1056,36 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
             productoServicio.registrarComentario(c1);
             productoServicio.registrarComentario(c2);
+
+
+            //========================= PRUEBA PRODUCTOS ==================//
+            Producto product = new Producto("Redragon K551RGB-BA","Tecnología antighost\n" +
+                    "El teclado está compuesto por interruptores antighosting. Esta cualidad es indispensable si necesitas darle un uso máximo al periférico. Gracias a esto evitarás fallas al tocar varias teclas al mismo tiempo.",335.615,10,u,categoria2);
+            u.getProductos().add(product);
+            Imagen img = new Imagen("K551RGB-BA.png");
+            img.setProducto(product);
+            Especificacion esp = new Especificacion("Teclado mecánico con switch outemu blue.");
+            esp.setProducto(product);
+            product.getImagenes().add(img);
+            product.getEspecificaciones().add(esp);
+            productoServicio.registrarProducto(product);
+            usuarioServicio.actualizarUsuario(u.getEmail(),u.getPassword(),u);
+            imagenServicio.registrarImagen(img);
+            especificacionServicio.registrarEspecificacion(esp);
+
+            Producto product1 = new Producto("Xtrike Me GK-979","Este teclado Xtrike Me de alto rendimiento permite que puedas disfrutar de horas ilimitadas de juegos. Está diseñado especialmente para que puedas expresar tanto tus habilidades como tu estilo.",139.005,2,u,categoria2);
+            u.getProductos().add(product);
+            Imagen imge = new Imagen("Xtrike.png");
+            imge.setProducto(product1);
+            Especificacion esp1 = new Especificacion("Función antighosting incorporada");
+            esp1.setProducto(product);
+            product1.getImagenes().add(imge);
+            product1.getEspecificaciones().add(esp1);
+            productoServicio.registrarProducto(product1);
+            usuarioServicio.actualizarUsuario(u.getEmail(),u.getPassword(),u);
+            imagenServicio.registrarImagen(imge);
+            especificacionServicio.registrarEspecificacion(esp1);
+
         }
     }
 }

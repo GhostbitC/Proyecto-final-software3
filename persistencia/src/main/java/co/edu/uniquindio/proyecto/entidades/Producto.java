@@ -105,6 +105,18 @@ public class Producto implements Serializable {
         this.especificaciones = new ArrayList<>();
     }
 
+    public Producto(String nombre, String descripcion, double precio, int unidades, Usuario usuario, Categoria categoria) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.unidades = unidades;
+        this.usuario = usuario;
+        this.categoria = categoria;
+        this.imagenes = new ArrayList<>();
+        this.comentarios=new ArrayList<>();
+        this.especificaciones = new ArrayList<>();
+    }
+
     public String getImagenPrincipal(){
 
         if(imagenes!=null && !imagenes.isEmpty()){

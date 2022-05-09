@@ -197,7 +197,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
     public Compra obtenerCompra(int idCompra){
 
-        Optional<Compra> compraEncontrada ;
+        Optional<Compra> compraEncontrada;
 
         compraEncontrada= compraRepo.findById(idCompra);
 
@@ -209,20 +209,14 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
         Compra compraEncontrada = obtenerCompra(idCompra);
 
-        if(adminEncontrado!=null && compraEncontrada!=null){
+        if(adminEncontrado.isPresent() && compraEncontrada!=null){
 
             ComprobantePago comprobanteCompra = compraEncontrada.getComprobantePago();
 
-            if(compraEncontrada.getListaDetallesCompra().size()!=0){
+            if(compraEncontrada.getListaDetallesCompra()!=null && compraEncontrada.getListaDetallesCompra().size()>0){
 
-                int tam = compraEncontrada.getListaDetallesCompra().size();
-
-                for(int i=0;i<tam;i++){
-
-                    DetalleCompra det = compraEncontrada.getListaDetallesCompra().get(i);
-                    detalleCompraRepo.delete(det);
-                    compraEncontrada.getListaDetallesCompra().remove(det);
-                }
+                detalleCompraRepo.deleteAll(compraEncontrada.getListaDetallesCompra());
+                compraEncontrada.getListaDetallesCompra().clear();
 
             }
 
