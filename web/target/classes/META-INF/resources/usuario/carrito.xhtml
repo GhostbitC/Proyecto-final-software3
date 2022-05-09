@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+    <ui:define name="title"> Carrito de compras</ui:define>
+    <ui:define name="content">
+
+        <h:form id="form">
+        <div class="container" id="detal-product">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 100%; border: none">
+                        <div class="container" style="padding: 0">
+                            <div class="card-body" style="min-height: 100vh;">
+                                <div class="card-title">
+                                    <h2 style="color: #542551">Carrito de productos</h2>
+                                    <div style="display:flex;">
+                                        <h5 style="text-align: left"><i class="text-info font-weight-bold">#{seguridadBean.productosCarrito.size()}</i> productos en el carrito</h5>
+                                    </div>
+                                </div>
+
+                                    <p:repeat value="#{seguridadBean.productosCarrito}" var="producto" varStatus="p">
+                                        <div class="container p-0">
+                                            <div class="row">
+                                                <div class="col-md-4" style="text-align: center">
+                                                    <p:graphicImage value="/uploads/#{producto.imagen}"
+                                                                    style="width: 180px; height: 180px"/>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="title" style="margin-top: 20%">
+                                                        <h4 style="color: #542551">#{producto.nombre}</h4>
+                                                    </div>
+
+                                                    <h6 style="margin-top: 10%">$ #{producto.precio}</h6>
+                                                </div>
+
+                                                <div class="col">
+                                                    <div class="container">
+                                                        <div style="margin-top: 20%">
+                                                            <p:spinner class="form-control form-control-sm" value="#{producto.unidades}" min="1" max="10" >
+                                                                <p:ajax listener="#{seguridadBean.actualizarSubtotal}" update="@form"/>
+                                                            </p:spinner>
+                                                        </div>
+
+                                                        <div style="margin-top: 3%;text-align: right">
+                                                            <p:commandButton icon="pi pi-trash"
+                                                                             iconPos="left"
+                                                                             value="Remover"
+                                                                             styleClass="btn btn-danger"
+                                                                             action="#{seguridadBean.eliminarDelCarrito(p.index)}"
+                                                                             update="@form" style="width: 100%;background: #E52B1B!important; border: #E52B1B!important;"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                        </div>
+                                    </p:repeat>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="card" style="border: none">
+                        <div class="card-body">
+                            <div class="card-title" style="text-align: left">
+                                <h3 style="color: #542551">Total a pagar</h3>
+                                <h5>$ #{seguridadBean.subtotal}</h5>
+                            </div>
+
+                            <h6 style="margin-top: 10%">Esta compra no cuenta con envio gratis</h6>
+                            <div style="text-align: right">
+                                <p:button  rendered="#{seguridadBean.autenticado and seguridadBean.productosCarrito.size() !=0}" value="Finalizar compra" href="/usuario/facturacion.xhtml" styleClass="ui-button-warning" style="margin-top: 3%;color: white!important"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 8%; border: none">
+                        <div class="card-body">
+                          <div class="card-title">
+                              <h4 style="color: #542551">Productos destacados</h4>
+                          </div>
+
+                            <div>
+                                <p:repeat value="#{inicioBean.productosDestacados}" var="producto">
+                                    <div class="container p-0">
+
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div style="padding: 0">
+                                                    <p:graphicImage url="/uploads/#{producto.imagenPrincipal}"
+                                                                    style="width: 120px; height: 120px"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col">
+                                                <div class="title" style="margin-top: 10%">
+                                                    <h6 style="color: #542551;font-size: 15px">#{producto.nombre}</h6>
+                                                </div>
+
+                                                <div style="margin-top: 12%">
+                                                    <h6 style="font-size: 15px">$#{producto.precio}</h6>
+                                                    <h6 style="font-size: 15px">Disponibles: #{producto.unidades}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p:repeat>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>
+</html>

@@ -1,7 +1,7 @@
 
 /*---------- Body index ----------*/
 #fondo {
-    background: url(./META-INF/resources/resources/img/fondo.jpg) no-repeat;
+    background: url(../resources/img/fondo.jpg) no-repeat;
     -webkit-background-clip: text;
     text-align: center;
     background-size: 100vw 100vh;
@@ -10,7 +10,7 @@
 }
 
 #password {
-    background: url(./META-INF/resources/resources/img/password.jpg) no-repeat;
+    background: url(../resources/img/password.jpg) no-repeat;
     -webkit-background-clip: text;
     text-align: center;
     background-size: 100vw 100vh;
