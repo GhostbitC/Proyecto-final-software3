@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest(classes = NegocioApplication.class)
@@ -26,15 +28,25 @@ public class CompraServicioTest {
     private ProductoServicio productoServicio;
 
     @Autowired
+    private AdministradorServicio administradorServicio;
+
+    @Autowired
     private ComprobantePagoServicio comprobantePagoServicio;
 
     @Test
+    @Sql("classpath:dataset.sql")
     public void registrarCompraTest(){
 
         try {
-            Usuario u = usuarioServicio.obtenerUsuario(1);
 
-            Compra registrada = compraServicio.crearCompra(u);
+            Administrador a = administradorServicio.obtenerAdministrador(2);
+            Usuario u = usuarioServicio.obtenerUsuario(1);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            Date fechaCompra = sdf.parse("2022/05/05");
+
+            Compra nuevaCompra = new Compra(fechaCompra,true,"Consignación",u,a);
+
+            Compra registrada = compraServicio.crearCompra(nuevaCompra);
 
             Assertions.assertNotNull(registrada);
         } catch (Exception e) {
