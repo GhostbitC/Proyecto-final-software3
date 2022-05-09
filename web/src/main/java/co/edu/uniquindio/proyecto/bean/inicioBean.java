@@ -26,12 +26,28 @@ public class inicioBean implements Serializable {
     @Setter
     private List<Producto> productosDestacados;
 
+    @Getter
+    @Setter
+    private List<Producto> productos;
+
+    @Getter
+    @Setter
+    private List<Producto> productosMenorPrecio;
+
+    @Getter
+    @Setter
+    private List<Producto> productosMayorPrecio;
+
     @PostConstruct
     public void inicializar() {
         this.productosDestacados = productoServicio.listarProductosDestacados();
+        this.productos = productoServicio.listarProductos();
+        this.productosMenorPrecio = productoServicio.listarProductosPorMenorPrecio();
+        this.productosMayorPrecio = productoServicio.listarProductosPorMayorPrecio();
     }
 
     public String irADetalle(Integer id){
       return  "/detalleProducto?faces-redirect=true&amp;producto="+id;
     }
+
 }

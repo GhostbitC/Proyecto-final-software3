@@ -82,8 +82,23 @@ public class Producto implements Serializable {
     public Producto(String nombre, String descripcion, double precio, Administrador administrador, Categoria categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.setEstado(true);
         this.precio = precio;
         this.administrador = administrador;
+        this.categoria = categoria;
+        this.imagenes = new ArrayList<>();
+        this.comentarios=new ArrayList<>();
+        this.especificaciones = new ArrayList<>();
+    }
+
+    public Producto(String nombre, String descripcion, double precio, int unidades, Boolean estado, Administrador administrador, Usuario usuario, Categoria categoria) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.unidades = unidades;
+        this.estado = estado;
+        this.administrador = administrador;
+        this.usuario = usuario;
         this.categoria = categoria;
         this.imagenes = new ArrayList<>();
         this.comentarios=new ArrayList<>();

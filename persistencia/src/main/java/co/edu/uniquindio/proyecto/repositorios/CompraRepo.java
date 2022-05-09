@@ -23,4 +23,7 @@ public interface CompraRepo extends JpaRepository<Compra,Integer> {
     @Query("select c from Compra c where c.estado is null and c.comprobantePago is not null")
     List<Compra> listarComprasSinAprobar();
 
+    @Query("select c from Compra c where c.usuario.id =:idUsuario and c.id =:idCompra")
+    Compra obtenerCompraUsuario(int idUsuario,int idCompra);
+
 }

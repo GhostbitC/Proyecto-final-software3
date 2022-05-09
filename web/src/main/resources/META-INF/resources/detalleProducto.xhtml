@@ -61,12 +61,12 @@
                                 </div>
 
                                 <div jsf:rendered="#{detalleProductoBean.producto.precio!=0}" style="margin-top: 7%">
-                                    <h2>$ #{detalleProductoBean.producto.precio}</h2>
+                                    <h2>$ #{detalleProductoBean.producto.precio} COP</h2>
                                 </div>
 
                                 <h:form class="mt-4">
 
-                                    <p:commandButton value="Añadir al carrito" style="width: 50%;font-size: 18px;background:#542551;border-color: #542551" update="@form"
+                                    <p:commandButton value="Añadir al carrito" style="width: 50%;font-size: 18px;background:#542551;border-color: black !important;" update="@form"
                                                      icon="pi pi-shopping-cart" iconPos="rigth"
                                                      rendered="#{seguridadBean.autenticado and detalleProductoBean.producto.usuario!=seguridadBean.persona}"
                                                      action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.id, detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre,detalleProductoBean.producto.imagenPrincipal)}"/>
@@ -243,9 +243,9 @@
                         </div>
                     </div>
 
-                    <p:commandButton icon="pi pi-check" value="Registrar comentario"
+                    <p:commandButton value="Registrar comentario"
                                      action="#{detalleProductoBean.ingresarComentario}"
-                                     update="comentarios,comentarios_table, promedioProducto,p1,p2,p3,p4,p5" style="margin-top: 2%"/>
+                                     update="comentarios,comentarios_table, promedioProducto,p1,p2,p3,p4,p5" style="margin-top: 2%;border-color: black!important;"/>
                 </div>
             </div>
         </div>

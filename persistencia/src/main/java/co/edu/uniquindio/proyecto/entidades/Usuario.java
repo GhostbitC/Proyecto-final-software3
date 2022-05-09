@@ -52,6 +52,7 @@ public class Usuario extends Persona implements Serializable {
         this.compras= new ArrayList<>();
         this.favoritos= new ArrayList<>();
         this.comentarios = new ArrayList<>();
+        this.productos = new ArrayList<>();
     }
 
 }

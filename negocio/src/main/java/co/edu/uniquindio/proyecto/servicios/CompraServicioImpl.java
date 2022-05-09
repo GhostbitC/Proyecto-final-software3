@@ -28,27 +28,16 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
     @Override
-    public Compra crearCompra(Usuario usuario) throws Exception {
-        if (usuarioRepo.findById(usuario.getId()).isPresent()) {
-            return new Compra(new Date(), usuario);
+    public Compra crearCompra(Compra c) throws Exception {
 
-        } else {
-            throw new Exception("El usuario no existe");
-        }
+       return compraRepo.save(c);
+
     }
 
     @Override
     public Compra agregarDetalleCompra(Compra compra, DetalleCompra detalle) {
         compra.getListaDetallesCompra().add(detalle);
         return compra;
-    }
-
-    @Override
-    public Compra efectuarCompra(Compra compra) throws Exception {
-        for (DetalleCompra d : compra.getListaDetallesCompra()) {
-            detalleCompraRepo.save(d);
-        }
-        return compraRepo.save(compra);
     }
 
     @Override
@@ -94,7 +83,7 @@ public class CompraServicioImpl implements CompraServicio {
 
         Optional<Compra> compraEncontrada = compraRepo.findById(idCompra);
 
-        if (compraEncontrada==null){
+        if (compraEncontrada.isEmpty()){
             throw new Exception("La compra no existe");
         }
 
@@ -106,16 +95,14 @@ public class CompraServicioImpl implements CompraServicio {
 
         Compra compraEncontrada = obtenerCompra(idCompra);
 
-        if(compraEncontrada!=null){
-
-            compraEncontrada.setComprobantePago(comprobantePago);
-            comprobantePago.setCompra(compraEncontrada);
-            comprobantePagoRepo.save(comprobantePago);
-            compraRepo.save(compraEncontrada);
-        }else{
+        if(compraEncontrada==null){
             throw new Exception("La compra no existe");
         }
 
+        compraEncontrada.setComprobantePago(comprobantePago);
+        comprobantePago.setCompra(compraEncontrada);
+        comprobantePagoRepo.save(comprobantePago);
+        compraRepo.save(compraEncontrada);
     }
 
     @Override
@@ -133,6 +120,29 @@ public class CompraServicioImpl implements CompraServicio {
     @Override
     public List<Compra> listarComprasUsuario(int idUsuario) {
         return compraRepo.listarComprasUsuario(idUsuario);
+    }
+
+    @Override
+    public Compra obtenerCompraUsuario(int idUsuario, int idCompra) throws Exception {
+
+        Optional<Usuario> u = usuarioRepo.findById(idUsuario);
+        Optional<Compra> c = compraRepo.findById(idCompra);
+
+        if (u.isEmpty()){
+            throw new Exception("El usuario no existe");
+        }
+
+        if (c.isEmpty()){
+            throw new Exception("La compra no existe");
+        }
+
+        Compra compraU = compraRepo.obtenerCompraUsuario(u.get().getId(),c.get().getId());
+
+        if (compraU == null) {
+            throw new Exception("El usuario no cuenta con esta compra");
+        }
+
+        return compraU;
     }
 
 }

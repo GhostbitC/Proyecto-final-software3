@@ -1,6 +1,16 @@
+
 /*---------- Body index ----------*/
 #fondo {
-    background: url(../resources/img/fondo.gif) no-repeat;
+    background: url(../resources/img/fondo.jpg) no-repeat;
+    -webkit-background-clip: text;
+    text-align: center;
+    background-size: 100vw 100vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#password {
+    background: url(../resources/img/password.jpg) no-repeat;
     -webkit-background-clip: text;
     text-align: center;
     background-size: 100vw 100vh;
@@ -497,6 +507,10 @@ body .ui-datatable thead th{
 
 #products-catalogo:hover {
     background: #D5D8DC;
+}
+
+#products .ui-g {
+    margin-left: 8%;
 }
 
 /*---------- Media Screen ----------*/

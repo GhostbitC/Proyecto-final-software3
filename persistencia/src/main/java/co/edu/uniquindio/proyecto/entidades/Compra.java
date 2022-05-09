@@ -57,5 +57,15 @@ public class Compra implements Serializable {
     public Compra(Date fechaVenta, Usuario usuario) {
         this.fechaVenta = fechaVenta;
         this.usuario = usuario;
+        this.listaDetallesCompra = new ArrayList<>();
+    }
+
+    public Compra(Date fechaVenta, Boolean estado, String medioPago, Usuario usuario, Administrador administrador) {
+        this.fechaVenta = fechaVenta;
+        this.estado = estado;
+        this.medioPago = medioPago;
+        this.usuario = usuario;
+        this.administrador = administrador;
+        this.listaDetallesCompra = new ArrayList<>();
     }
 }

@@ -30,13 +30,13 @@ public class ImagenServicioImpl implements ImagenServicio{
     }
 
     @Override
-    public Imagen actualizarImagen(Imagen i) throws Exception {
+    public void actualizarImagen(Imagen i) throws Exception {
 
         if (i.getUrl().length() > 100){
             throw  new Exception("La URL no es valida");
         }
 
-        return imagenRepo.save(i);
+        imagenRepo.save(i);
     }
 
     @Override

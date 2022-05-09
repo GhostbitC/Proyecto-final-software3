@@ -47,4 +47,10 @@ public interface ProductoServicio {
 
     List<Producto> listarProductosSinAprobarUsuarios();
 
+    List<Producto> listarProductosPorMenorPrecio();
+
+    List<Producto> listarProductosPorMayorPrecio();
+
+    List<Producto> listarProductosAdmin(int idAdmin);
+
 }

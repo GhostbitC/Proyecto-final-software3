@@ -75,35 +75,25 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         if (productoEncontrado!=null){
 
-            int tamImagenes = productoEncontrado.getImagenes().size();
-            int tamEspecificaciones = productoEncontrado.getEspecificaciones().size();
+            if(productoEncontrado.getImagenes()!=null && productoEncontrado.getImagenes().size()>0){
 
+                imagenRepo.deleteAll(productoEncontrado.getImagenes());
 
-            for(int i=0;i<tamImagenes;i++){
+                productoEncontrado.getImagenes().clear();
 
-                Imagen imagen = productoEncontrado.getImagenes().get(i);
-                imagenRepo.delete(imagen);
-                productoEncontrado.getImagenes().remove(imagen);
             }
 
-            if(productoEncontrado.getComentarios()!=null){
+            if(productoEncontrado.getComentarios()!=null && productoEncontrado.getComentarios().size()>0){
 
-                int tamComentarios = productoEncontrado.getComentarios().size();
+                comentarioRepo.deleteAll(productoEncontrado.getComentarios());
 
-                for(int i=0;i<tamComentarios;i++){
+                productoEncontrado.getComentarios().clear();
 
-                    Comentario comentario = productoEncontrado.getComentarios().get(i);
-                    comentarioRepo.delete(comentario);
-                    productoEncontrado.getComentarios().remove(comentario);
-                }
             }
 
-            for(int i=0;i<tamEspecificaciones;i++){
+            especificacionRepo.deleteAll(productoEncontrado.getEspecificaciones());
 
-                Especificacion especificacion = productoEncontrado.getEspecificaciones().get(i);
-                especificacionRepo.delete(especificacion);
-                productoEncontrado.getEspecificaciones().remove(especificacion);
-            }
+            productoEncontrado.getEspecificaciones().clear();
 
             productoEncontrado.setAdministrador(null);
 
@@ -325,8 +315,31 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
+    public List<Producto> listarProductosAdmin(int idAdmin){
+
+        List<Producto> productosUsuario = productoRepo.listarProductosPublicadosAdmin(idAdmin);
+
+        if(productosUsuario.isEmpty()){
+
+            return productosUsuario = new ArrayList<>();
+        }
+
+        return productosUsuario;
+    }
+
+    @Override
     public List<Producto> listarProductosSinAprobarUsuarios(){
 
         return productoRepo.listarProductosSinAprobarUsuarios();
+    }
+
+    @Override
+    public List<Producto> listarProductosPorMenorPrecio() {
+        return productoRepo.listarProductosPorMenorPrecio();
+    }
+
+    @Override
+    public List<Producto> listarProductosPorMayorPrecio() {
+        return productoRepo.listarProductosPorMayorPrecio();
     }
 }

@@ -28,10 +28,6 @@ public class Comentario implements Serializable {
     @Column(nullable = false)
     private int calificacion;
 
-    @Column(nullable = true,length = 200)
-    @Size(max = 200, message = "La respuesta no puede superar los 200 caracteres")
-    private String respuesta;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_comentario", nullable = false)
     private Date fechaComentario;
@@ -44,5 +40,11 @@ public class Comentario implements Serializable {
     @ManyToOne
     private Usuario usuario;
 
-
+    public Comentario(String comentario, int calificacion, Date fechaComentario, Producto producto, Usuario usuario) {
+        this.comentario = comentario;
+        this.calificacion = calificacion;
+        this.fechaComentario = fechaComentario;
+        this.producto = producto;
+        this.usuario = usuario;
+    }
 }

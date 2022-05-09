@@ -73,25 +73,6 @@ public class ComentarioServicioImpl implements ComentarioServicio{
     }
 
     @Override
-    public void responderComentario(String respuesta, int idComentario) throws Exception{
-
-        Comentario comentarioEncontrado= obtenerComentario(idComentario);
-
-        try{
-
-            if (comentarioEncontrado!=null){
-
-                comentarioEncontrado.setRespuesta(respuesta);
-                comentarioRepo.save(comentarioEncontrado);
-            }else {
-                throw new Exception("Comentario no encontrado");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public Comentario obtenerComentario(int id) throws Exception {
 
         Optional<Comentario> comentario = comentarioRepo.findById(id);

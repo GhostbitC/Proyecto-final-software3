@@ -43,7 +43,16 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
     @Query("select p from Producto p where p.estado = true and p.usuario.id = :idUsuario")
     List<Producto>listarProductosPublicadosUsuario(int idUsuario);
 
+    @Query("select p from Producto p where p.estado = true and p.administrador.id =:idAdmin and p.usuario is null")
+    List<Producto>listarProductosPublicadosAdmin(int idAdmin);
+
     @Query("select p from Producto p where p.estado = false and p.usuario is not null")
     List<Producto>listarProductosSinAprobarUsuarios();
+
+    @Query("select p from Producto p order by p.precio asc")
+    List<Producto>listarProductosPorMenorPrecio();
+
+    @Query("select p from Producto p order by p.precio desc")
+    List<Producto>listarProductosPorMayorPrecio();
 
 }

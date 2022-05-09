@@ -60,14 +60,14 @@
                   <div class="form-group row justify-content-center" style="padding: 5%; text-align: center">
 
                       <div class="col">
-                          <p:button href="/general.xhtml" value="Volver"
-                                    style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                          <p:commandButton action="#{seguridadBean.iniciarSesion}" value="Ingresar"
+                                           update="@form"
+                                           style="width: 90%;background: #542551; color: white;border-color: black !important;"/>
                       </div>
 
                       <div class="col">
-                          <p:commandButton action="#{seguridadBean.iniciarSesion}" value="Ingresar"
-                                           update="@form"
-                                           style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                          <p:button href="/general.xhtml" value="Volver"
+                                    style="width: 90%;background: #566573 !important; color: white;border-color: black !important;"/>
                       </div>
                   </div>
                   <p:growl showDetail="true"/>

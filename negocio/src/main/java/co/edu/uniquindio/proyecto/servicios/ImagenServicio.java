@@ -8,7 +8,7 @@ public interface ImagenServicio {
 
     Imagen registrarImagen(Imagen i) throws Exception;
 
-    Imagen actualizarImagen(Imagen i) throws Exception;
+    void actualizarImagen(Imagen i) throws Exception;
 
     void eliminarImagen (int id) throws Exception;
 

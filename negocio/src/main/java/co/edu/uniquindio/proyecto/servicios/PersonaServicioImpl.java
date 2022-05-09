@@ -26,7 +26,7 @@ public class PersonaServicioImpl implements PersonaServicio{
 
         Optional<Persona> persona = personaRepo.findByEmailAndPassword(email,password);
 
-        if (persona ==null){
+        if (persona.isEmpty()){
             throw new Exception("Los datos de autenticación son incorrectos");
         }
 

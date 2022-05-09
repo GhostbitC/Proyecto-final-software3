@@ -16,6 +16,8 @@ public interface UsuarioServicio {
 
     Usuario obtenerUsuarioNombre(String nombre) throws Exception;
 
+    Usuario obtenerUsuarioEmail(String email) throws Exception;
+
     Usuario obtenerUsuarioEmailPassword(String email, String password) throws Exception;
 
     List<Usuario> listarUsuarios();

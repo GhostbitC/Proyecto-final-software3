@@ -72,14 +72,14 @@
               <div class="form-group row justify-content-center" style="padding: 5%; text-align: center">
 
                   <div class="col">
-                      <p:button href="/usuario/perfilUsuario.xhtml" value="Volver"
-                                style="width: 90%;background: #542551; color: white;border-color: #542551"/>
-                  </div>
-
-                  <div class="col">
                       <p:commandButton action="#{usuarioBean.actualizarUsuario}" value="Actualizar"
                                        update="@form"
                                        style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                  </div>
+
+                  <div class="col">
+                      <p:button href="/usuario/perfilUsuario.xhtml" value="Volver"
+                                style="width: 90%;background: #542551; color: white;border-color: #542551"/>
                   </div>
               </div>
               <p:growl showDetail="true"/>

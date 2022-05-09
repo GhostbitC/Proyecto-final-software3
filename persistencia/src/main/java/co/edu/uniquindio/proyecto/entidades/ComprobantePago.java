@@ -27,4 +27,9 @@ public class ComprobantePago implements Serializable {
     //================================= RELACIÓN CON LA ENTIDAD COMPRA =================================//
     @OneToOne
     private Compra compra;
+
+    public ComprobantePago(String url, Compra compra) {
+        this.url = url;
+        this.compra = compra;
+    }
 }

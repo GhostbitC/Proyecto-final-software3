@@ -7,7 +7,6 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:pe="http://primefaces.org/ui/extensions"
       xml:lang="en" lang="en">
 
 <ui:composition template="/WEB-INF/plantilla.xhtml">
@@ -31,24 +30,24 @@
 
             <div class="col" style="min-height: 100vh;width: 100%;padding: 0!important;margin: 0!important;border: none !important;">
                 <p:card styleClass="card p-3 md-3" id="card-producto" style="margin-left: 20px;width: 97%;border: none!important;">
-                    <div class="card-title" style="font-family:'Calibri',sans-serif;font-size: 30px;margin-top: 10px">
-                        <font color="#542551">Actualización de productos</font>
+                    <div class="card-title" style="margin-top: 1%">
+                        <h4 style="color: #542551">Actualización de productos</h4>
                     </div>
 
-                    <p style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px">¡Hola! en el siguiente formulario actualizar tus productos, recuerda especificar en el primer campo el nombre del producto que deseas modificar.</p>
+                    <h5 style="font-size: 16px;color: black;margin-top: 4%;text-align: justify">¡Hola! en el siguiente formulario actualizar tus productos, recuerda especificar en el primer campo el nombre del producto que deseas modificar.</h5>
 
                     <h:form>
                         <h:panelGrid columns="2" cellpadding="5" width="100%">
 
                             <p:outputLabel value="Nombre del producto a modificar:"
-                                           style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                                           style="font-family:'Calibri',sans-serif;color: black!important;font-size: 17px"/>
                             <p:inputText value="#{productoBean.productoN.nombre}"
                                          style="width: 100%"
                                          required="true"
                                          requiredMessage="El nombre del producto es obligatorio"/>
 
                             <p:outputLabel for="categoria_producto" value="Categoria:"
-                                           style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                                           style="font-family:'Calibri',sans-serif;color: black!important;font-size: 17px"/>
                             <p:selectOneMenu id="categoria_producto" value="#{productoBean.producto.categoria}"
                                              style="width: 100%"
                                              converter="#{categoriaConverter}"
@@ -60,36 +59,36 @@
                             </p:selectOneMenu>
 
                             <p:outputLabel for="nombre_producto" value="Nombre:"
-                                           style="font-family:'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                                           style="font-family:'Calibri',sans-serif;color: black!important;font-size: 17px"/>
                             <p:inputText id="nombre_producto" value="#{productoBean.producto.nombre}"
                                          style="width: 100%"
                                          required="true"
                                          requiredMessage="El nombre del producto es obligatorio"/>
 
                             <p:outputLabel for="descripcion_producto" value="Descripción:"
-                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                                           style="font-family: 'Calibri',sans-serif;color: black!important;font-size: 17px"/>
                             <p:inputTextarea id="descripcion_producto" value="#{productoBean.producto.descripcion}"
                                              style="width: 100%;"
                                              autoResize="none"/>
 
                             <p:outputLabel for="precio_producto" value="Precio:"
-                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                                           style="font-family: 'Calibri',sans-serif;color: black!important;font-size: 17px"/>
                             <p:inputText id="precio_producto" value="#{productoBean.producto.precio}"
                                          style="width: 100%"/>
 
                             <p:outputLabel for="unidades_producto" value="Unidades:"
-                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                                           style="font-family: 'Calibri',sans-serif;color: black!important;font-size: 17px"/>
                             <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}"
                                          style="width: 100%"/>
 
                             <p:outputLabel for="imagenes_producto" value="Imagenes:"
-                                           style="font-family: 'Calibri',sans-serif;color: #232121;font-size: 17px"/>
+                                           style="font-family: 'Calibri',sans-serif;color: black!important;font-size: 17px"/>
                             <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced"
                                           auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
                                           required="true" skinSimple="true"/>
 
                             <p:commandButton value="Especificación" action="#{productoBean.nuevaEspecificacion}"
-                                             onclick="PF('Especificaciones').show()" style="background: #542551;border-color: #542551">
+                                             onclick="PF('Especificaciones').show()" style="background: #542551;border-color: black!important;">
                             </p:commandButton>
 
                             <p:dataTable id="dt-products1" widgetVar="dtProducts" var="especificacion"
@@ -122,14 +121,14 @@
                         <div class="container p-0">
                             <div class="row">
                                 <div class="col">
-                                    <p:button href="/administrador/perfilAdministrador.xhtml" value="Volver"
-                                              style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                                    <p:commandButton action="#{productoBean.actualizarProducto}" value="Actualizar"
+                                                     update="@form"
+                                                     style="width: 90%;background: #542551; color: white;border-color: black!important;"/>
                                 </div>
 
                                 <div class="col">
-                                    <p:commandButton action="#{productoBean.actualizarProducto}" value="Actualizar"
-                                                     update="@form"
-                                                     style="width: 90%;background: #542551; color: white;border-color: #542551"/>
+                                    <p:button href="/usuario/perfilUsuario.xhtml" value="Volver"
+                                              style="width: 90%;background: #566573 !important; color: white;border-color: black !important;"/>
 
                                     <p:growl showDetail="true"/>
                                 </div>

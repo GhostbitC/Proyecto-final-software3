@@ -2,27 +2,34 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
+import com.lowagie.text.Document;
+import com.lowagie.text.pdf.PdfWriter;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.Serializable;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Component
 @ViewScoped
@@ -43,6 +50,9 @@ public class UsuarioBean implements Serializable {
 
     @Getter @Setter
     private Usuario usuario;
+
+    @Getter @Setter
+    private String correo;
 
     @Getter @Setter
     private Direccion direccionUsuario;
@@ -69,6 +79,9 @@ public class UsuarioBean implements Serializable {
     @Getter
     @Setter
     private List<Compra> serviciosActivos;
+
+    @Autowired
+    private EmailService emailService;
 
     @Getter
     @Setter
@@ -248,6 +261,7 @@ public class UsuarioBean implements Serializable {
 
         if (personaLogin!=null){
             compras = compraServicio.listarComprasUsuario(personaLogin.getId());
+
         }
 
         return compras;
@@ -272,6 +286,84 @@ public class UsuarioBean implements Serializable {
         }
     }
 
+    public void enviarFactura(int idCompra){
 
+        try {
+            Compra compra = compraServicio.obtenerCompraUsuario(personaLogin.getId(),idCompra);
+
+            String mensaje = "<span style=\"color:#542551;font-size: 25px\"><b>Factura Amazing Store</b></span>";
+            mensaje += "<br><br>Usted ha realizado una compra en Amazing Store";
+            mensaje += "<br><br><span style=\"color:#542551;font-size: 12px\"><b>Su factura contiene los siguientes datos: </b></span><br><br>";
+            String emailCliente = personaLogin.getEmail();
+            Double totalCompra = 0.0;
+
+            String asunto = "Factura";
+
+            mensaje += "<span style=\"color:#542551\"><b>Fecha de compra: </b></span>" + "<span style=\"color:black\">"+compra.getFechaVenta().toString()+ "</span><br><br>";
+
+            mensaje += "<span style=\"color:#542551;font-size: 18.5px\"><b>Productos comprados</b></span><br>";
+
+            for (int i = 0; i < compra.getListaDetallesCompra().size(); i++) {
+
+                mensaje += "<ul>";
+                mensaje += "<li>" + compra.getListaDetallesCompra().get(i).getProducto().getNombre() + "<span style=\"color:black\">&nbsp;&nbsp;&nbsp;<b>    Unidades:      </b></span>" + "<span style=\"color:blue\">" + compra.getListaDetallesCompra().get(i).getUnidades() + "</span>" + "</li>";
+                mensaje += "</ul>";
+
+                totalCompra += compra.getListaDetallesCompra().get(i).getProducto().getPrecio();
+            }
+
+            mensaje += "<br><span style=\"color:#542551\"><b>Total cancelado: </b></span>" + "<span style=\"color:black\">"+ totalCompra +" COP </span><br>";
+
+            mensaje += "<br><span style=\"color:#542551\"><b>Método de pago seleccionado: </b></span>" + "<span style=\"color:black\">"+compra.getMedioPago()+"</span>";
+
+            emailService.enviarEmail(asunto,mensaje,emailCliente);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showMessage() {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", "La factura se ha enviado al correo electrónico vinculado a esta cuenta");
+
+        PrimeFaces.current().dialog().showMessageDynamic(message);
+    }
+
+    public void metods(int idCompra){
+
+        enviarFactura(idCompra);
+        showMessage();
+    }
+
+    public void enviarEmailPassword(){
+
+        try {
+
+            Usuario u = usuarioServicio.obtenerUsuarioEmail(correo);
+
+            if (u!=null){
+                String asunto = "Cambio de contraseña";
+                String emailCliente = u.getEmail();
+                String mensaje = "https://amazing-store-uq.herokuapp.com/cambiarPassword.xhtml";
+                emailService.enviarEmail(asunto,mensaje,emailCliente);
+            }else{
+                throw new Exception("No hemos encontrado tu cuenta");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showMessagePassword() {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", "Revisa tu correo electrónico, te hemos enviado un email.");
+
+        PrimeFaces.current().dialog().showMessageDynamic(message);
+    }
+
+    public void metodsPassword(){
+
+        enviarEmailPassword();
+        showMessagePassword();
+    }
 
 }

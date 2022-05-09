@@ -114,39 +114,19 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             List<Producto>productosUsuario = usuarioEncontrado.getProductos();
             List<Favorito>favoritos = usuarioEncontrado.getFavoritos();
 
-            if(productosUsuario!=null){
+            if(productosUsuario!=null && productosUsuario.size()!=0){
 
-                if(productosUsuario.size()!=0){
+                for(Producto p:usuarioEncontrado.getProductos()){
 
-                    int tamProductos = productosUsuario.size();
-
-                    for(int i=0;i<tamProductos;i++){
-
-                        Producto productoEncontrado = usuarioEncontrado.getProductos().get(i);
-
-                        productoServicio.eliminarProducto(productoEncontrado.getId());
-                        usuarioEncontrado.getProductos().remove(productoEncontrado);
-                    }
-
-                    usuarioRepo.save(usuarioEncontrado);
+                    productoServicio.eliminarProducto(p.getId());
                 }
+
+                usuarioEncontrado.getProductos().clear();
             }
 
-            if(favoritos!=null){
+            if(favoritos!=null && favoritos.size()!=0){
 
-                if(favoritos.size()!=0){
-
-                    int tamFavoritos = favoritos.size();
-
-                    for(int i=0;i<tamFavoritos;i++){
-
-                        Favorito favoritoEncontrado = usuarioEncontrado.getFavoritos().get(i);
-                        favoritoRepo.delete(favoritoEncontrado);
-                        usuarioEncontrado.getFavoritos().remove(favoritoEncontrado);
-                    }
-
-                    usuarioRepo.save(usuarioEncontrado);
-                }
+                favoritoRepo.deleteAll(usuarioEncontrado.getFavoritos());
             }
 
             if(usuarioEncontrado.getDireccion()!=null){
@@ -190,6 +170,18 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         return usuario;
+    }
+
+    @Override
+    public Usuario obtenerUsuarioEmail(String email) throws Exception {
+
+        Usuario u = usuarioRepo.findByEmail(email);
+
+        if (u==null){
+            throw new Exception("El usuario no existe");
+        }
+
+        return u;
     }
 
     @Override

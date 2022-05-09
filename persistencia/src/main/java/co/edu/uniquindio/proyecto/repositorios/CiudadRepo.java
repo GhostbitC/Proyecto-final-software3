@@ -9,5 +9,4 @@ public interface CiudadRepo extends JpaRepository<Ciudad,Integer>{
 
     //================================= REPOSITORIO DE CIUDAD =================================//
 
-
 }

@@ -30,4 +30,9 @@ public class Especificacion implements Serializable {
     public Especificacion(String especificacion) {
         this.especificacion = especificacion;
     }
+
+    public Especificacion(String especificacion, Producto producto) {
+        this.especificacion = especificacion;
+        this.producto = producto;
+    }
 }

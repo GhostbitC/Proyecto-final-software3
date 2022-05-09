@@ -35,4 +35,11 @@ public class Direccion implements Serializable {
     //================================= RELACIÓN CON LA ENTIDAD CIUDAD =================================//
     @ManyToOne
     private Ciudad ciudad;
+
+    public Direccion(String calle, String numero, Usuario usuario, Ciudad ciudad) {
+        this.calle = calle;
+        this.numero = numero;
+        this.usuario = usuario;
+        this.ciudad = ciudad;
+    }
 }

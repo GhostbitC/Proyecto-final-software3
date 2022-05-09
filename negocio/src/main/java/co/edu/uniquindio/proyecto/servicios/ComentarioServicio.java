@@ -12,8 +12,6 @@ public interface ComentarioServicio {
 
     void eliminarComentario(int id) throws  Exception;
 
-    void responderComentario(String respuesta, int idComentario) throws Exception;
-
     Comentario obtenerComentario(int id) throws  Exception;
 
     List<Comentario> listarComentarios();

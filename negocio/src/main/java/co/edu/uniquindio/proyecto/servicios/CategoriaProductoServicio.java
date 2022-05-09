@@ -5,8 +5,6 @@ import co.edu.uniquindio.proyecto.entidades.Categoria;
 import java.util.List;
 
 public interface CategoriaProductoServicio {
-
-
     Categoria registrarCategoria(Categoria c) throws Exception;
 
     void actualizarCategoria(Categoria c,int id) throws Exception;

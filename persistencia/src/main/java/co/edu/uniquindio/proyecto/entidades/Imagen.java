@@ -34,4 +34,8 @@ public class Imagen implements Serializable {
         this.url = url;
     }
 
+    public Imagen(String url, Producto producto) {
+        this.url = url;
+        this.producto = producto;
+    }
 }

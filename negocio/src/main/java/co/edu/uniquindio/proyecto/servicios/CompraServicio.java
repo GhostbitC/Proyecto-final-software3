@@ -11,11 +11,9 @@ import java.util.List;
 
 public interface CompraServicio {
 
-    Compra crearCompra(Usuario usuario) throws Exception;
+    Compra crearCompra(Compra c) throws Exception;
 
     Compra agregarDetalleCompra(Compra compra, DetalleCompra detalle);
-
-    Compra efectuarCompra(Compra compra) throws Exception;
 
     Compra agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception;
 
@@ -26,5 +24,7 @@ public interface CompraServicio {
     List<Compra> listarComprasSinAprobarUsuarios();
 
     List<Compra> listarComprasUsuario (int idUsuario);
+
+    Compra obtenerCompraUsuario(int idUsuario,int idCompra) throws Exception;
 
 }

@@ -5,7 +5,6 @@ import co.edu.uniquindio.proyecto.servicios.CategoriaProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.EspecificacionServicio;
 import co.edu.uniquindio.proyecto.servicios.ImagenServicio;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
-import com.cloudinary.utils.ObjectUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FilenameUtils;
@@ -19,12 +18,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import com.cloudinary.*;
 
 @Component
 @ViewScoped
@@ -72,7 +71,6 @@ public class ProductoBean implements Serializable {
     private Especificacion especificacion;
     @Value("${upload.url}")
     private String urlImagenes;
-
     private ArrayList<Imagen> imagenes;
     @Getter @Setter
     private List<Categoria> categorias;
@@ -95,48 +93,33 @@ public class ProductoBean implements Serializable {
         this.portatiles = obtenerPortatiles();
     }
 
-    public void subirImagenes(FileUploadEvent event) throws IOException {
+    public void subirImagenes(FileUploadEvent event) {
 
-        UploadedFile imagen = event.getFile();
+        Imagen foto = new Imagen("default.jpg");
 
-//        System.out.println(imagen.getFileName());
+        imagenes.add(foto);
+
+//        UploadedFile imagen = event.getFile();
+//        String nombreImagen = subirImagen(imagen);
 //
-//        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-//                "cloud_name", "dtz8xwoku",
-//                "api_key", "226879525723834",
-//                "api_secret", "buFX4wXU7iUa3R_A2YRLnuxuQ_U"));
+//        if (nombreImagen != null) {
 //
-//        Map uploadResult = cloudinary.uploader().upload(new File("doc.mp4"), ObjectUtils.emptyMap());
+//            Imagen foto = new Imagen(nombreImagen);
 //
-//        System.out.println(uploadResult.get("url"));
-
-        String nombreImagen = subirImagen(imagen);
-
-        if (nombreImagen != null) {
-
-            Imagen foto = new Imagen(nombreImagen);
-
-            imagenes.add(foto);
-        }
+//            imagenes.add(foto);
+//        }
     }
 
     public String subirImagen(UploadedFile file) {
 
         try {
             InputStream input = file.getInputStream();
-            System.out.println("Entro 1 " +file.getSize()+ " "+ urlImagenes);
             String fileName = FilenameUtils.getName(file.getFileName());
-            System.out.println("Entro 2 " + fileName);
             String baseName = FilenameUtils.getBaseName(fileName) + "_";
-            System.out.println("Entro 3 "+ baseName);
             String extension = "." + FilenameUtils.getExtension(fileName);
-            System.out.println("Entro 4 "+extension);
             File fileDest = File.createTempFile(baseName, extension, new File(urlImagenes));
-            System.out.println("Entro 5");
             FileOutputStream output = new FileOutputStream(fileDest);
-            System.out.println("Entro 6");
             IOUtils.copy(input, output);
-            System.out.println("Entro 7");
 
             return fileDest.getName();
         } catch (Exception e) {

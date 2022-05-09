@@ -97,16 +97,9 @@
                                         <div class="d-flex" style="margin-top: 5%">
 
                                             <div>
-                                                <p:button type="button" style="background: #542551;color: white;"
+                                                <p:button type="button" style="background: #542551;color: white;border-color: black!important;"
                                                           class="btn" value="Editar cuenta"
                                                           href="/usuario/updateUsuario.xhtml"/>
-                                            </div>
-
-                                            <div style="margin-left: 5%">
-                                                <p:button type="button"
-                                                          style="background: #1BA2E5!important;color: white;"
-                                                          class="btn" value="Editar productos"
-                                                          href="/usuario/updateProducto.xhtml"/>
                                             </div>
 
                                             <div style="margin-left: 5%">
@@ -138,7 +131,20 @@
                         <div class="card" style="height: 100%">
                             <div class="card-body" style="height: 100%">
                                 <div class="card-title">
-                                    <h4 style="color: #542551">Productos publicados</h4>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h4 style="color: #542551">Productos publicados</h4>
+                                        </div>
+                                        <div class="col-1">
+                                            <p:button icon="pi pi-pencil" styleClass="rounded-button ui-button-help" style="border-color: transparent!important;background: transparent!important;color: black!important;" href="/usuario/updateProducto.xhtml"/>
+                                        </div>
+                                        <div class="col-1">
+                                            <p:button icon="pi pi-trash" styleClass="rounded-button ui-button-help" style="border-color: transparent!important;background: transparent!important;color: black!important;" href="/usuario/deleteProducto.xhtml" />
+                                        </div>
+                                        <div class="col-1">
+                                            <p:button icon="pi pi-plus" styleClass="rounded-button" style="border-color: transparent!important;background: transparent!important;color: black!important;" href="/usuario/registrarProducto.xhtml"/>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div style="margin-top: 3%">
@@ -172,24 +178,13 @@
                                                 </div>
 
                                                 <div class="col-4">
-                                                    <div style="margin-top: 18%;margin-left: 5%">
+                                                    <div style="margin-top: 30%;margin-left: 5%">
                                                         <div class="title">
                                                             <h5 style="font-size: 16px">
                                                                 Unidades disponibles: <i
                                                                     class="text-info">#{producto.unidades}</i>
                                                             </h5>
                                                         </div>
-
-                                                        <div class="text-center">
-                                                            <p:commandButton
-                                                                    action="#{usuarioBean.eliminarProducto(producto.id)}"
-                                                                    style="background: #E52B1B!important;color: white;height: 30px;font-size: 14px"
-                                                                    class="btn"
-                                                                    value="Eliminar"
-                                                                    update="@form,publicaciones"/>
-                                                            <p:growl showDetail="true"/>
-                                                        </div>
-
                                                     </div>
                                                 </div>
 
@@ -273,7 +268,7 @@
                                 <p:column style="text-align: center" headerText="Validar compra">
                                     <p:commandButton action="#{usuarioBean.unirComprobanteCompra(compra.id)}"
                                                      update="@form,comprasPendientesTable"
-                                                     value="Validar" style="width: 50%"/>
+                                                     value="Validar" style="width: 50%;border-color: black!important;"/>
                                 </p:column>
 
                             </p:dataTable>
@@ -287,7 +282,7 @@
             <div class="container" style="width: 100%;margin-top: 3%;">
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">
+                        <div class="card-title" >
                             <h4 style="color: #542551">Historial de transacciones</h4>
                         </div>
 
@@ -316,8 +311,11 @@
                                     <h6>#{compra.fechaVenta}</h6>
                                 </p:column>
 
+                                <p:column style="text-align: center" headerText="Factura">
+                                    <p:commandButton action="#{usuarioBean.metods(compra.id)}" value="Factura"/>
+                                </p:column>
                             </p:dataTable>
-
+                            <p:growl showDetail="true"/>
                         </div>
                     </div>
                 </div>

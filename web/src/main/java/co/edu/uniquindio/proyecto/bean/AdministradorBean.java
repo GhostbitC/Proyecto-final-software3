@@ -35,6 +35,10 @@ public class AdministradorBean implements Serializable {
 
     @Getter
     @Setter
+    private List<Producto>productosPublicados;
+
+    @Getter
+    @Setter
     private List<Compra>comprasUsuariosSinAprobar;
 
     @Value(value = "#{seguridadBean.persona}")
@@ -45,6 +49,7 @@ public class AdministradorBean implements Serializable {
         this.administrador = obtenerAdministrador();
         this.comprasUsuariosSinAprobar = obtenerComprasSinValidar();
         this.productosSinAprobarUsuarios = obtenerProductosSinAprobar();
+        this.productosPublicados = obtenerProductosPublicados();
     }
 
     /***
@@ -88,6 +93,14 @@ public class AdministradorBean implements Serializable {
         this.comprasUsuariosSinAprobar = obtenerComprasSinValidar();
     }
 
+    public void eliminarProducto(int idProducto) throws Exception {
+
+        if (personaLogin!=null){
+            productoServicio.eliminarProducto(idProducto);
+            this.productosPublicados = obtenerProductosPublicados();
+        }
+    }
+
     public void rechazarCompra(int idCompra){
 
         administradorServicio.rechazarCompra(idCompra, personaLogin.getId());
@@ -115,6 +128,17 @@ public class AdministradorBean implements Serializable {
         }
 
         return compras;
+    }
+
+    public List<Producto> obtenerProductosPublicados(){
+
+        List<Producto> productos = new ArrayList<>();
+
+        if (personaLogin!=null){
+            productos =productoServicio.listarProductosAdmin(personaLogin.getId());
+        }
+
+        return productos;
     }
 
 }
