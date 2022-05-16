@@ -1,7 +1,7 @@
 
 /*---------- Body index ----------*/
 #fondo {
-    background: url(../resources/img/fondo.jpg) no-repeat;
+    background: url(../resources/img/fondo.gif) no-repeat;
     -webkit-background-clip: text;
     text-align: center;
     background-size: 100vw 100vh;

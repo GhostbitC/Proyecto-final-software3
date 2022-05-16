@@ -33,6 +33,9 @@ public class CompraServicioTest {
     @Autowired
     private ComprobantePagoServicio comprobantePagoServicio;
 
+    @Autowired
+    private EmailService emailService;
+
     @Test
     @Sql("classpath:dataset.sql")
     public void registrarCompraTest(){
@@ -173,7 +176,12 @@ public class CompraServicioTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    @Test
+    public void enviarEmail() {
+
+        emailService.enviarEmail("Prueba","Prueba", "sebastianquinteroosorio2104@gmail.com");
     }
 
 }
