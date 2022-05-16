@@ -69,17 +69,19 @@ public class ProductoBean implements Serializable {
     private List<Especificacion> especificaciones;
     @Getter @Setter
     private Especificacion especificacion;
-    @Value("${upload.url}")
-    private String urlImagenes;
+
     private ArrayList<Imagen> imagenes;
     @Getter @Setter
     private List<Categoria> categorias;
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
 
+    @Getter @Setter
+    private String linkImagen;
 
     @PostConstruct
     public void inicializar() {
+        this.linkImagen="";
         this.categoria= new Categoria();
         this.producto = new Producto();
         this.productoN= new Producto();
@@ -93,41 +95,14 @@ public class ProductoBean implements Serializable {
         this.portatiles = obtenerPortatiles();
     }
 
-    public void subirImagenes(FileUploadEvent event) {
+    public void subirImagenes(){
 
-        Imagen foto = new Imagen("default.jpg");
+        if(linkImagen!=null && linkImagen.length()!=0){
 
-        imagenes.add(foto);
-
-//        UploadedFile imagen = event.getFile();
-//        String nombreImagen = subirImagen(imagen);
-//
-//        if (nombreImagen != null) {
-//
-//            Imagen foto = new Imagen(nombreImagen);
-//
-//            imagenes.add(foto);
-//        }
-    }
-
-    public String subirImagen(UploadedFile file) {
-
-        try {
-            InputStream input = file.getInputStream();
-            String fileName = FilenameUtils.getName(file.getFileName());
-            String baseName = FilenameUtils.getBaseName(fileName) + "_";
-            String extension = "." + FilenameUtils.getExtension(fileName);
-            File fileDest = File.createTempFile(baseName, extension, new File(urlImagenes));
-            FileOutputStream output = new FileOutputStream(fileDest);
-            IOUtils.copy(input, output);
-
-            return fileDest.getName();
-        } catch (Exception e) {
-
-            e.printStackTrace();
+            Imagen foto = new Imagen(linkImagen);
+            imagenes.add(foto);
         }
 
-        return null;
     }
 
     public String registrarProducto() {

@@ -16,9 +16,8 @@ fileUpload.addEventListener('change', function (event){
         },
         data: formData
     }).then(function (res){
-        //console.log(res.data.url.toString());
-        document.getElementById("crear-producto:link_imagen").value  = res.data.url.toString();
-        console.log(document.getElementById("crear-producto:link_imagen").value);
+        document.getElementById("crear-producto:link-imagen").value  = res.data.url.toString();
+        console.log(document.getElementById("crear-producto:link-imagen").value);
     }).catch(function (err){
         console.log(err);
     });

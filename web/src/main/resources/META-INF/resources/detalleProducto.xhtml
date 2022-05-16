@@ -26,7 +26,7 @@
                                     style="max-width: 640px;align-content: center;justify-content: center;text-align: center"
                                     showThumbnails="false" showIndicators="true" changeItemOnIndicatorHover="true"
                                     showIndicatorsOnItem="true">
-                            <p:graphicImage url="/uploads/#{image}" alt="#{image}"
+                            <p:graphicImage url="#{image}" alt="#{image}"
                                             style="width: 400px;height: 380px;display: block;justify-content: center;align-content: center"/>
                             <p:commandButton onclick="PF('galleria1').show()"
                                              style="position: fixed;color: transparent;width:600px;height:200px;border: none;background: transparent"/>
@@ -35,7 +35,7 @@
                         <p:galleria widgetVar="galleria1" value="#{detalleProductoBean.urlImagenes}" var="image"
                                     numVisible="9"
                                     circular="true" fullScreen="true" showItemNavigators="true" style="max-width: 50%">
-                            <p:graphicImage url="/uploads/#{image}" alt="#{image}" style="width: 100%; display: block"/>
+                            <p:graphicImage url="#{image}" alt="#{image}" style="width: 100%; display: block"/>
                         </p:galleria>
 
                     </div>

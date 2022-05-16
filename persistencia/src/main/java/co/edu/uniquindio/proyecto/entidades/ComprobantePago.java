@@ -20,7 +20,7 @@ public class ComprobantePago implements Serializable {
     @EqualsAndHashCode.Include
     private int id;
 
-    @Column(length = 100,nullable = false)
+    @Column(length = 300,nullable = false)
     @NotBlank
     private String url;
 

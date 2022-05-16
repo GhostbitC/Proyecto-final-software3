@@ -12,6 +12,11 @@
 
 <ui:composition template="/WEB-INF/plantilla.xhtml">
 
+    <ui:define name="head">
+        <h:outputScript library="js" name="axios.min.js"/>
+        <h:outputScript library="js" name="uploadToCloudinary.js"/>
+    </ui:define>
+
     <ui:define name="title">Producto | Registrar</ui:define>
     <ui:define name="content">
 
@@ -38,6 +43,7 @@
                     <h5 style="font-size: 16px;color: black;margin-top: 4%;text-align: justify">¡Hola! en el siguiente formulario puedes ingresar los datos del producto a registrar.</h5>
 
                     <h:form>
+
                         <h:panelGrid columns="2" cellpadding="5" width="100%">
 
                             <p:outputLabel for="categoria_producto" value="Categoria:"
@@ -74,12 +80,6 @@
                                            style="font-family: 'Calibri',sans-serif;color: black;font-size: 17px"/>
                             <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}"
                                          style="width: 100%"/>
-
-                            <p:outputLabel for="imagenes_producto" value="Imagenes:"
-                                           style="font-family: 'Calibri',sans-serif;color: black;font-size: 17px"/>
-                            <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced"
-                                          auto="true" sizeLimit="202400" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                                          required="true" skinSimple="true"/>
 
                             <p:commandButton value="Especificación" action="#{productoBean.nuevaEspecificacion}"
                                              onclick="PF('Especificaciones').show()" style="background: #542551;border-color: black!important;">
@@ -123,8 +123,16 @@
                             </div>
                         </div>
                         <p:growl showDetail="true"/>
-
                     </h:form>
+
+                    <h:form id="crear-producto">
+                        <h:inputText id="link-imagen" value="#{productoBean.linkImagen}"/>
+                        <input id="file-upload" type="file"/>
+
+                        <p:commandButton value="Subir" action="#{productoBean.subirImagenes}"
+                                         style="background: #542551;border-color: #542551"/>
+                    </h:form>
+
                 </p:card>
             </div>
         </div>
