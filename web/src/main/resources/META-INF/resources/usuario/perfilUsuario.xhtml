@@ -12,6 +12,11 @@
 
 <ui:composition template="/WEB-INF/plantilla.xhtml">
 
+    <ui:define name="head">
+        <h:outputScript library="js" name="axios.min.js"/>
+        <h:outputScript library="js" name="uploadToCloudinary.js"/>
+    </ui:define>
+
     <ui:define name="title">Usuario | Perfil</ui:define>
     <ui:define name="content">
 
@@ -158,7 +163,7 @@
                                             <div class="row">
                                                 <div class="col-3" style="text-align: left">
                                                     <div class="container p-0">
-                                                        <p:graphicImage value="/uploads/#{producto.imagenPrincipal}"
+                                                        <p:graphicImage value="#{producto.imagenPrincipal}"
                                                                         style="width: 120px; height: 120px;margin-left: 3%"/>
                                                     </div>
                                                 </div>
@@ -204,7 +209,7 @@
                                 </div>
 
                                 <div class="container p-0" style="text-align: center;margin-top: 10%">
-                                    <p:graphicImage value="/uploads/#{usuarioBean.productoEstrella.imagenPrincipal}"
+                                    <p:graphicImage value="#{usuarioBean.productoEstrella.imagenPrincipal}"
                                                     style="width: 180px; height: 180px;margin-left: 3%"/>
                                 </div>
 
@@ -257,12 +262,7 @@
                                 </p:column>
 
                                 <p:column style="text-align: center" headerText="Subir imagen">
-                                    <p:outputLabel for="imagen" value="Imagen"
-                                                   style="visibility: hidden;position: fixed;"/>
-                                    <p:fileUpload id="imagen" value="Comprobante"
-                                                  listener="#{usuarioBean.subirComprobante}" mode="advanced"
-                                                  auto="true" sizeLimit="300000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                                                  required="true" skinSimple="true"/>
+
                                 </p:column>
 
                                 <p:column style="text-align: center" headerText="Validar compra">
@@ -320,6 +320,14 @@
                     </div>
                 </div>
             </div>
+        </h:form>
+
+        <h:form id="crear-producto">
+            <h:inputText id="link-imagen" value="#{usuarioBean.linkImagen}"/>
+            <input id="file-upload" type="file"/>
+
+            <p:commandButton value="Subir" action="#{usuarioBean.subirComprobante}"
+                             style="background: #542551;border-color: #542551"/>
         </h:form>
 
     </ui:define>

@@ -94,8 +94,8 @@ public class UsuarioBean implements Serializable {
     @Setter
     private List<Compra> comprasSinComprobante;
 
-    @Value("${comprobantes.url}")
-    private String urlComprobantes;
+    @Getter @Setter
+    private String linkImagen;
 
     @Getter
     @Setter
@@ -104,6 +104,7 @@ public class UsuarioBean implements Serializable {
 
     @PostConstruct
     public void inicializar() {
+        this.linkImagen = "";
         this.usuario  = new Usuario();
         this.usuarioLogin = obtenerUsuario();
         this.direccionUsuario = new Direccion();
@@ -173,40 +174,12 @@ public class UsuarioBean implements Serializable {
         return null;
     }
 
-    public void subirComprobante(FileUploadEvent event) {
+    public void subirComprobante() {
 
-        comprobantePago = new ComprobantePago();
-        comprobantePago.setUrl("default.jpg");
-
-
-        //UploadedFile imagen = event.getFile();
-        //String nombreComprobante = subirImagen(imagen);
-
-        //if (nombreComprobante != null) {
-
-            //comprobantePago = new ComprobantePago();
-          //  comprobantePago.setUrl(nombreComprobante);
-        //}
-    }
-
-    public String subirImagen(UploadedFile file) {
-
-        try {
-            InputStream input = file.getInputStream();
-            String fileName = FilenameUtils.getName(file.getFileName());
-            String baseName = FilenameUtils.getBaseName(fileName) + "_";
-            String extension = "." + FilenameUtils.getExtension(fileName);
-            File fileDest = File.createTempFile(baseName, extension, new File(urlComprobantes));
-            FileOutputStream output = new FileOutputStream(fileDest);
-            IOUtils.copy(input, output);
-
-            return fileDest.getName();
-        } catch (Exception e) {
-
-            e.printStackTrace();
+        if(linkImagen!=null && linkImagen.length()!=0){
+            comprobantePago = new ComprobantePago();
+            comprobantePago.setUrl(linkImagen);
         }
-
-        return null;
     }
 
     public void unirComprobanteCompra(int idCompra){

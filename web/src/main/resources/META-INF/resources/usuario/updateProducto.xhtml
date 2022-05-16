@@ -11,6 +11,11 @@
 
 <ui:composition template="/WEB-INF/plantilla.xhtml">
 
+    <ui:define name="head">
+        <h:outputScript library="js" name="axios.min.js"/>
+        <h:outputScript library="js" name="uploadToCloudinary.js"/>
+    </ui:define>
+
     <ui:define name="title">Producto | Actualizar</ui:define>
     <ui:define name="content">
 
@@ -81,12 +86,6 @@
                             <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}"
                                          style="width: 100%"/>
 
-                            <p:outputLabel for="imagenes_producto" value="Imagenes:"
-                                           style="font-family: 'Calibri',sans-serif;color: black!important;font-size: 17px"/>
-                            <p:fileUpload id="imagenes_producto" listener="#{productoBean.subirImagenes}" mode="advanced"
-                                          auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-                                          required="true" skinSimple="true"/>
-
                             <p:commandButton value="Especificación" action="#{productoBean.nuevaEspecificacion}"
                                              onclick="PF('Especificaciones').show()" style="background: #542551;border-color: black!important;">
                             </p:commandButton>
@@ -136,6 +135,15 @@
                         </div>
 
                     </h:form>
+
+                    <h:form id="crear-producto">
+                        <h:inputText id="link-imagen" value="#{productoBean.linkImagen}"/>
+                        <input id="file-upload" type="file"/>
+
+                        <p:commandButton value="Subir" action="#{productoBean.subirImagenes}"
+                                         style="background: #542551;border-color: #542551"/>
+                    </h:form>
+
                 </p:card>
             </div>
         </div>
