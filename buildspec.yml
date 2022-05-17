@@ -10,5 +10,5 @@ phases:
         - echo Build completed successfully
 artifacts:
   files:
-    -web/target/amazing-store.jar
+    -/web/target/web-1.0-SNAPSHOT.jar
   discard-paths: yes
