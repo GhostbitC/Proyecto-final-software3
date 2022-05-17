@@ -28,7 +28,7 @@ jobs:
         with:
           java-version: ${{ env.JAVA_VERSION }}
       - name: Build with Maven
-        run: mvn clean install web/pom.xml
+        run: mvn clean install and mvn compiler:compiler and mvn org.apache.maven.plugins:maven-compiler-plugin:compile and mvn org.apache.maven.plugins:maven-compiler-plugin:2.0.2:compile &
       - name: 'Deploy to Azure WebApp'
         uses: azure/webapps-deploy@v2
         with:
