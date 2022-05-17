@@ -11,7 +11,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: amazing-store  # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }} # set this to the path to your web app project
+  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace.web.target }} # set this to the path to your web app project
   JAVA_VERSION: '11'                # set this to the Java version to use
   AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}     # set GH repo secret with the publish profile of the web app
 
