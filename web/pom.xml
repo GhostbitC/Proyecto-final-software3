@@ -27,6 +27,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>amazing-store</finalName>
     </build>
 
     <dependencyManagement>

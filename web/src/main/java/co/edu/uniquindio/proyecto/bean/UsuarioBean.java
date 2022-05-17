@@ -2,8 +2,6 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
-import com.lowagie.text.Document;
-import com.lowagie.text.pdf.PdfWriter;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FilenameUtils;
@@ -14,22 +12,13 @@ import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
-import org.springframework.web.servlet.view.document.AbstractPdfView;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Component
 @ViewScoped
