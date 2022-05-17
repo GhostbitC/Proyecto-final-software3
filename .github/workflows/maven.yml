@@ -20,5 +20,5 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Execute Jar File
+      run: sudo kill -9 'sudo lsof -t -i:80' & sudo java -jar /home/ubuntu/actions-runner/_work/Proyecto-final-software3/Proyecto-final-software3/web/target
