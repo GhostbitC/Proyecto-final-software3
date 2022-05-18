@@ -1,8 +1,7 @@
-
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - amazing-store-app
+name: Build and deploy JAR app to Azure Web App - app-amazing-store
 
 on:
   push:
@@ -10,30 +9,45 @@ on:
       - master
   workflow_dispatch:
 
-env:
-  AZURE_WEBAPP_NAME: amazing-store  # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace.web }}/web/target/*.jar # set this to the path to your web app project
-  JAVA_VERSION: '11'                # set this to the Java version to use
-  AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}     # set GH repo secret with the publish profile of the web app
-
-
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  build:
     runs-on: ubuntu-latest
-    environment: dev
+
     steps:
-      - uses: actions/checkout@master
-      - name: Set up JDK 11
+      - uses: actions/checkout@v2
+
+      - name: Set up Java version
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ env.JAVA_VERSION }}
+          java-version: '11'
+
       - name: Build with Maven
-        run: mvn clean install web/pom.xml
-      - name: 'Deploy to Azure WebApp'
+        run: mvn clean install
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: java-app
+          path: '${{ github.workspace }}/web/target/*.jar'
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: java-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'amazing-store-app'
+          app-name: 'app-amazing-store'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2DB5304BA931432E99DE0A3F9BD9A54F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2E1A69454B4A4AE6A61479533E9DF133 }}
           package: '*.jar'
