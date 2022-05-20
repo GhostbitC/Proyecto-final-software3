@@ -2,9 +2,7 @@ package co.edu.uniquindio.proyecto.filter;
 
 import co.edu.uniquindio.proyecto.bean.SeguridadBean;
 import org.springframework.stereotype.Component;
-
 import javax.servlet.*;
-import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -17,7 +15,7 @@ public class SeguridadFilter implements Filter {
     public static final String PAGINA_INICIO = "/index.xhtml";
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) {
 
         try {
             final HttpServletRequest request = (HttpServletRequest) servletRequest;

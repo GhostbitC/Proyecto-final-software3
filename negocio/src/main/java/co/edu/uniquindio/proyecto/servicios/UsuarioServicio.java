@@ -2,11 +2,9 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 
-import java.util.List;
-
 public interface UsuarioServicio {
 
-    Usuario registrarUsuario(Usuario u) throws Exception;
+    void registrarUsuario(Usuario u) throws Exception;
 
     void actualizarUsuario(String email, String password, Usuario u) throws Exception;
 
@@ -21,6 +19,4 @@ public interface UsuarioServicio {
     Usuario obtenerUsuarioEmail(String email) throws Exception;
 
     Usuario obtenerUsuarioEmailPassword(String email, String password) throws Exception;
-
-    List<Usuario> listarUsuarios();
 }

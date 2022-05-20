@@ -2,9 +2,7 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.Producto;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
@@ -24,8 +22,11 @@ public class BusquedaBean implements Serializable {
     @Getter @Setter
     private List<Producto> productos;
 
-    @Autowired
-    private ProductoServicio productoServicio;
+    private final ProductoServicio productoServicio;
+
+    public BusquedaBean(ProductoServicio productoServicio) {
+        this.productoServicio = productoServicio;
+    }
 
     @PostConstruct
     public void inicializar(){

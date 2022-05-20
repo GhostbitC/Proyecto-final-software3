@@ -2,9 +2,7 @@ package co.edu.uniquindio.proyecto.converter;
 
 import co.edu.uniquindio.proyecto.entidades.Ciudad;
 import co.edu.uniquindio.proyecto.servicios.CiudadServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -13,9 +11,11 @@ import java.io.Serializable;
 @Component
 public class CiudadConverter implements Converter<Ciudad>, Serializable {
 
-    @Autowired
-    private CiudadServicio ciudadServicio;
+    private final CiudadServicio ciudadServicio;
 
+    public CiudadConverter(CiudadServicio ciudadServicio) {
+        this.ciudadServicio = ciudadServicio;
+    }
 
     @Override
     public Ciudad getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {

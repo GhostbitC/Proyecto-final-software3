@@ -4,10 +4,7 @@ import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CompraServicioImpl implements CompraServicio {
@@ -28,20 +25,17 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
     @Override
-    public Compra crearCompra(Compra c) throws Exception {
+    public void crearCompra(Compra c) throws Exception {
 
-       return compraRepo.save(c);
-
+        if (c !=null){
+            compraRepo.save(c);
+        }else{
+            throw new Exception("No se puede registrar esta compra");
+        }
     }
 
     @Override
-    public Compra agregarDetalleCompra(Compra compra, DetalleCompra detalle) {
-        compra.getListaDetallesCompra().add(detalle);
-        return compra;
-    }
-
-    @Override
-    public Compra agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception {
+    public void agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception {
         try {
             Compra compra = new Compra();
             compra.setFechaVenta(new Date());
@@ -54,19 +48,17 @@ public class CompraServicioImpl implements CompraServicio {
             List<DetalleCompra> lista = new ArrayList<>();
             for (ProductoCarrito p : productoCarrito) {
                 detalle = new DetalleCompra();
-                if(detalleCompraRepo.verificarUnidadesProducto(p.getId()) > p.getUnidades()){
+                if( p!=null && detalleCompraRepo.verificarUnidadesProducto(p.getId()) > p.getUnidades()){
                     detalle.setCompra(compra);
                     detalle.setPrecioProducto(p.getPrecio());
                     detalle.setUnidades(p.getUnidades());
-                    detalle.setProducto(productoRepo.findById(p.getId()).get());
-                    //Verificar las unidades
+                    detalle.setProducto(productoRepo.findById(p.getId()).orElse(null));
                     quitarUnidades(p.getId(), p.getUnidades());
                     detalleCompraRepo.save(detalle);
                     lista.add(detalle);
                     compra.setListaDetallesCompra(lista);
                 }
             }
-            return compra;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -75,8 +67,11 @@ public class CompraServicioImpl implements CompraServicio {
 
     public void quitarUnidades (Integer codigoProducto, Integer unidadesComprada){
        Optional<Producto> producto = productoRepo.findById(codigoProducto);
-       Producto productoActual =producto.get();
-       productoActual.setUnidades(productoActual.getUnidades() - unidadesComprada );
+
+       if (producto.isPresent()){
+           Producto productoActual =producto.get();
+           productoActual.setUnidades(productoActual.getUnidades() - unidadesComprada );
+       }
     }
 
     public Compra obtenerCompra(int idCompra) throws Exception{
@@ -90,15 +85,13 @@ public class CompraServicioImpl implements CompraServicio {
         return compraEncontrada.get();
     }
 
-    @Override
-    public void añadirComprobanteCompra(int idCompra, ComprobantePago comprobantePago) throws Exception {
+    public void agregarComprobanteCompra(int idCompra, ComprobantePago comprobantePago) throws Exception {
 
         Compra compraEncontrada = obtenerCompra(idCompra);
 
         if(compraEncontrada==null){
             throw new Exception("La compra no existe");
         }
-
         compraEncontrada.setComprobantePago(comprobantePago);
         comprobantePago.setCompra(compraEncontrada);
         comprobantePagoRepo.save(comprobantePago);
@@ -107,13 +100,11 @@ public class CompraServicioImpl implements CompraServicio {
 
     @Override
     public List<Compra> listarComprasUsuarioSinComprobante(int idUsuario){
-
         return compraRepo.listarComprasUsuarioSinComprobante(idUsuario);
     }
 
     @Override
     public List<Compra> listarComprasSinAprobarUsuarios(){
-
         return compraRepo.listarComprasSinAprobar();
     }
 
@@ -124,7 +115,6 @@ public class CompraServicioImpl implements CompraServicio {
 
     @Override
     public Compra obtenerCompraUsuario(int idUsuario, int idCompra) throws Exception {
-
         Optional<Usuario> u = usuarioRepo.findById(idUsuario);
         Optional<Compra> c = compraRepo.findById(idCompra);
 
@@ -141,7 +131,6 @@ public class CompraServicioImpl implements CompraServicio {
         if (compraU == null) {
             throw new Exception("El usuario no cuenta con esta compra");
         }
-
         return compraU;
     }
 

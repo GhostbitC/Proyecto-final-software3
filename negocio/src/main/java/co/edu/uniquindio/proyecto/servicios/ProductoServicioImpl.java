@@ -7,10 +7,7 @@ import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProductoServicioImpl implements ProductoServicio {
@@ -65,7 +62,11 @@ public class ProductoServicioImpl implements ProductoServicio {
     @Override
     public void actualizarProducto(Producto p) throws Exception {
 
-        productoRepo.save(p);
+        if (p !=null){
+            productoRepo.save(p);
+        }else{
+            throw new Exception("No se encontraron registros");
+        }
     }
 
     @Override
@@ -167,43 +168,22 @@ public class ProductoServicioImpl implements ProductoServicio {
         return productoEstrella;
     }
 
-
-    @Override
-    public void ingresarComentario(Comentario r, Producto producto) throws Exception {
-
-        try {
-            if (producto != null) {
-
-                r.setProducto(producto);
-                comentarioRepo.save(r);
-
-            }
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
     @Override
     public int obtenerCalificacionPromedio(int idProducto) throws Exception {
 
-        Integer calificacion=0;
+        Integer calification;
         Producto productoEncontrado= obtenerProducto(idProducto);
 
         if (productoEncontrado!=null){
 
-            calificacion = productoRepo.obtenerCalificacion(productoEncontrado.getId());
+            calification = productoRepo.obtenerCalificacion(productoEncontrado.getId());
 
 
         }else{
             throw new Exception("El producto no fue encontrado");
         }
 
-        if(calificacion==null){
-            return 0;
-        }
-        else{
-            return calificacion;
-        }
+        return Objects.requireNonNullElse(calification, 0);
 
     }
 
@@ -225,10 +205,6 @@ public class ProductoServicioImpl implements ProductoServicio {
                     especifico = productoRepo.obtenerCantidadCalificacion(productoEncontrado.getId(),i+1);
 
                     promedios[i]= (especifico*100)/(general);
-                }
-            }else {
-                for(int j=0;j<promedios.length;j++){
-                    promedios[j]= 0;
                 }
             }
 
@@ -303,28 +279,12 @@ public class ProductoServicioImpl implements ProductoServicio {
 
     @Override
     public List<Producto> listarProductosUsuario(int idUsuario){
-
-        List<Producto> productosUsuario = productoRepo.listarProductosPublicadosUsuario(idUsuario);
-
-        if(productosUsuario.isEmpty()){
-
-           return productosUsuario = new ArrayList<>();
-        }
-
-        return productosUsuario;
+        return productoRepo.listarProductosPublicadosUsuario(idUsuario);
     }
 
     @Override
     public List<Producto> listarProductosAdmin(int idAdmin){
-
-        List<Producto> productosUsuario = productoRepo.listarProductosPublicadosAdmin(idAdmin);
-
-        if(productosUsuario.isEmpty()){
-
-            return productosUsuario = new ArrayList<>();
-        }
-
-        return productosUsuario;
+        return productoRepo.listarProductosPublicadosAdmin(idAdmin);
     }
 
     @Override

@@ -3,26 +3,27 @@ package co.edu.uniquindio.proyecto.bean;
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.*;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 @Scope("session")
 public class SeguridadBean implements Serializable {
 
-    @Autowired
-    private UsuarioServicio usuarioServicio;
+    private final UsuarioServicio usuarioServicio;
+
+    private final PersonaServicio personaServicio;
+
+    private final CiudadServicio ciudadServicio;
+
+    private final DireccionServicio direccionServicio;
 
     @Getter @Setter
     private Persona persona;
@@ -36,22 +37,12 @@ public class SeguridadBean implements Serializable {
     @Getter @Setter
     private  boolean autenticado;
 
-    @Autowired
-    private PersonaServicio personaServicio;
-
-    @Autowired
-    private CiudadServicio ciudadServicio;
-
-    @Autowired
-    private DireccionServicio direccionServicio;
-
     @Getter @Setter
     private Direccion direccion;
 
     @Getter @Setter
     @NotBlank
     private String email,emailR,password;
-
 
     @Getter @Setter
     private String rol;
@@ -71,8 +62,7 @@ public class SeguridadBean implements Serializable {
     @Setter
     private double subtotal;
 
-    @Autowired
-    private CompraServicio compraServicio;
+    private final CompraServicio compraServicio;
 
     @Getter
     @Setter
@@ -86,6 +76,14 @@ public class SeguridadBean implements Serializable {
     @Setter
     private List<Ciudad> ciudades;
 
+    public SeguridadBean(UsuarioServicio usuarioServicio, PersonaServicio personaServicio, CiudadServicio ciudadServicio, DireccionServicio direccionServicio, CompraServicio compraServicio) {
+        this.usuarioServicio = usuarioServicio;
+        this.personaServicio = personaServicio;
+        this.ciudadServicio = ciudadServicio;
+        this.direccionServicio = direccionServicio;
+        this.compraServicio = compraServicio;
+    }
+
 
     @PostConstruct
     public void inicializar() {
@@ -98,7 +96,7 @@ public class SeguridadBean implements Serializable {
         this.subtotal = 0.0;
         this.usuario = new Usuario();
         this.direccion = new Direccion();
-        listaMisCompras = new ArrayList<Compra>();
+        listaMisCompras = new ArrayList<>();
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
@@ -140,10 +138,10 @@ public class SeguridadBean implements Serializable {
         return null;
     }
 
-    public Double calcularSubTotal(int indice) {
+    public double calcularSubTotal(int indice) {
 
         listaMisCompras = compraServicio.listarComprasUsuario(persona.getId());
-        Double total = 0.0;
+        double total = 0.0;
 
         for (int i = 0; i < listaMisCompras.get(indice).getListaDetallesCompra().size(); i++) {
             total = listaMisCompras.get(indice).getListaDetallesCompra().get(i).getUnidades() * listaMisCompras.get(indice).getListaDetallesCompra().get(i).getProducto().getPrecio();
@@ -166,7 +164,6 @@ public class SeguridadBean implements Serializable {
         this.subtotal -= productosCarrito.get(indice).getPrecio();
         this.subtotal = Math.round(subtotal*1000.0)/1000.0;
         productosCarrito.remove(indice);
-
         if (productosCarrito.isEmpty()){
             this.subtotal = 0.0;
         }
@@ -188,7 +185,6 @@ public class SeguridadBean implements Serializable {
                     productosCarrito.clear();
                     this.subtotal = 0.0;
                     this.subtotal = Math.round(subtotal*1000.0)/1000.0;
-
                 } else {
                     FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Debe seleccionar un medio de pago para efectuar la compra");
                     FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
@@ -196,20 +192,17 @@ public class SeguridadBean implements Serializable {
             } catch (Exception e) {
                 FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "La compra no se ha podido efectuar correctamente: " + e.getMessage());
                 FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
-
             }
         }
     }
 
     public void registrarDireccion(){
-
         try {
             Usuario usuarioEncontrado = usuarioServicio.obtenerUsuarioNombre(usuario.getNombre());
             usuarioEncontrado.setCedula(usuario.getCedula());
             usuarioEncontrado.setDireccion(direccion);
             direccionServicio.registrarDireccion(direccion);
             usuarioServicio.registrarUsuario(usuarioEncontrado);
-
         } catch (Exception e) {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
@@ -217,10 +210,8 @@ public class SeguridadBean implements Serializable {
     }
 
     public String efectuarCompra(){
-
         registrarDireccion();
         comprar();
-
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "La compra se ha registrado, te avisaremos cuando sea aprobada");
         FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
         return "/usuario/carrito?faces-redirect=true";

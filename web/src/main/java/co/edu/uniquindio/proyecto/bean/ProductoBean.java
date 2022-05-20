@@ -5,41 +5,27 @@ import co.edu.uniquindio.proyecto.servicios.CategoriaProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.EspecificacionServicio;
 import co.edu.uniquindio.proyecto.servicios.ImagenServicio;
 import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
-import lombok.Getter;
-import lombok.Setter;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.file.UploadedFile;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 @ViewScoped
 public class ProductoBean implements Serializable {
 
-    @Autowired
-    private ImagenServicio imagenServicio;
+    private final ImagenServicio imagenServicio;
 
-    @Autowired
-    private CategoriaProductoServicio categoriaServicio;
+    private final CategoriaProductoServicio categoriaServicio;
 
-    @Autowired
-    private ProductoServicio productoServicio;
+    private final ProductoServicio productoServicio;
 
-    @Autowired
-    private EspecificacionServicio especificacionServicio;
+    private final EspecificacionServicio especificacionServicio;
 
     @Getter @Setter
     private Categoria categoria;
@@ -75,9 +61,15 @@ public class ProductoBean implements Serializable {
     private List<Categoria> categorias;
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
-
     @Getter @Setter
     private String linkImagen;
+
+    public ProductoBean(ImagenServicio imagenServicio, CategoriaProductoServicio categoriaServicio, ProductoServicio productoServicio, EspecificacionServicio especificacionServicio) {
+        this.imagenServicio = imagenServicio;
+        this.categoriaServicio = categoriaServicio;
+        this.productoServicio = productoServicio;
+        this.especificacionServicio = especificacionServicio;
+    }
 
     @PostConstruct
     public void inicializar() {
@@ -173,7 +165,6 @@ public class ProductoBean implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-
         return null;
     }
 
@@ -198,24 +189,18 @@ public class ProductoBean implements Serializable {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No pudimos actualizar el producto");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }
-
         }
-
     }
-
 
     public void nuevaEspecificacion() {
         this.especificacion = new Especificacion();
     }
 
     public void crearEspecificacion() {
-
         if (personaLogin != null) {
-
             this.especificaciones.add(especificacion);
             nuevaEspecificacion();
         }
-
     }
 
     public void eliminarEspecificacion() {
@@ -224,41 +209,26 @@ public class ProductoBean implements Serializable {
     }
 
     public List<Producto> obtenerTeclados(){
-
-        List<Producto> teclados = new ArrayList<>();
-
+        List<Producto> teclados;
         teclados = productoServicio.listarTeclados();
-
-        System.out.println(teclados.size());
-
         return teclados;
     }
 
     public List<Producto> obtenerMouses(){
-
-        List<Producto> mouses = new ArrayList<>();
-
+        List<Producto> mouses;
         mouses = productoServicio.listarMouses();
-
         return mouses;
     }
 
     public List<Producto> obtenerAudifonos(){
-
-        List<Producto> audifonos = new ArrayList<>();
-
+        List<Producto> audifonos;
         audifonos = productoServicio.listarAudifonos();
-
         return audifonos;
     }
 
     public List<Producto> obtenerPortatiles(){
-
-        List<Producto> portatiles = new ArrayList<>();
-
+        List<Producto> portatiles;
         portatiles = productoServicio.listarPortatiles();
-
         return portatiles;
     }
-
 }

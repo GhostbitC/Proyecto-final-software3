@@ -19,8 +19,6 @@ public interface ProductoServicio {
 
     List<Producto> listarProductosDestacados();
 
-    void ingresarComentario(Comentario r, Producto producto) throws Exception;
-
     Producto obtenerProductoNombre(String nombre) throws Exception;
 
     Producto obtenerProductoEstrella(int idUsuario);

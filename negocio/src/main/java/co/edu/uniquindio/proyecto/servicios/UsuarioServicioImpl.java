@@ -25,12 +25,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     public boolean estaDisponible(String email){
         Usuario usuarioEmail = usuarioRepo.findByEmail(email);
-
-        if (usuarioEmail!=null){
-            return  true;
-        }
-
-        return false;
+        return usuarioEmail != null;
     }
 
     @Override
@@ -41,12 +36,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         if(usuario==null){
             throw new Exception("No existe un usuario con el correo y contraseña ingresado");
         }
-
         return usuario;
     }
 
     @Override
-    public Usuario registrarUsuario(Usuario u) throws Exception {
+    public void registrarUsuario(Usuario u) throws Exception {
 
         if (u.getNickname().length()>100){
             throw new Exception("El nickname solo puede tener 100 caracteres");
@@ -80,7 +74,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         u.setSaldo(0);
 
-        return usuarioRepo.save(u);
+        usuarioRepo.save(u);
     }
 
 
@@ -194,10 +188,4 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         return u;
     }
-
-    @Override
-    public List<Usuario> listarUsuarios() {
-        return usuarioRepo.findAll();
-    }
-
 }

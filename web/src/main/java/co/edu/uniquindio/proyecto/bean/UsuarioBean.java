@@ -2,14 +2,8 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
+import lombok.*;
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.file.UploadedFile;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
@@ -17,25 +11,20 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 @ViewScoped
 public class UsuarioBean implements Serializable {
 
-    @Autowired
-    private UsuarioServicio usuarioServicio;
+    private final UsuarioServicio usuarioServicio;
 
-    @Autowired
-    private CompraServicio compraServicio;
+    private final CompraServicio compraServicio;
 
-    @Autowired
-    private ProductoServicio productoServicio;
+    private final ProductoServicio productoServicio;
 
-    @Autowired
-    @Getter @Setter
-    private CiudadServicio ciudadServicio;
+    @Getter
+    private final CiudadServicio ciudadServicio;
 
     @Getter @Setter
     private Usuario usuario;
@@ -72,8 +61,7 @@ public class UsuarioBean implements Serializable {
     @Setter
     private List<Compra> serviciosActivos;
 
-    @Autowired
-    private EmailService emailService;
+    private final EmailService emailService;
 
     @Getter
     @Setter
@@ -89,6 +77,14 @@ public class UsuarioBean implements Serializable {
     @Getter
     @Setter
     private ComprobantePago comprobantePago;
+
+    public UsuarioBean(UsuarioServicio usuarioServicio, CompraServicio compraServicio, ProductoServicio productoServicio, CiudadServicio ciudadServicio, EmailService emailService) {
+        this.usuarioServicio = usuarioServicio;
+        this.compraServicio = compraServicio;
+        this.productoServicio = productoServicio;
+        this.ciudadServicio = ciudadServicio;
+        this.emailService = emailService;
+    }
 
 
     @PostConstruct
@@ -174,7 +170,7 @@ public class UsuarioBean implements Serializable {
     public void unirComprobanteCompra(int idCompra){
 
         try {
-            compraServicio.añadirComprobanteCompra(idCompra, comprobantePago);
+            compraServicio.agregarComprobanteCompra(idCompra, comprobantePago);
             this.comprasSinComprobante = obtenerComprasSinComprobante();
         } catch (Exception e) {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
@@ -259,32 +255,32 @@ public class UsuarioBean implements Serializable {
         try {
             Compra compra = compraServicio.obtenerCompraUsuario(personaLogin.getId(),idCompra);
 
-            String mensaje = "<span style=\"color:#542551;font-size: 25px\"><b>Factura Amazing Store</b></span>";
-            mensaje += "<br><br>Usted ha realizado una compra en Amazing Store";
-            mensaje += "<br><br><span style=\"color:#542551;font-size: 12px\"><b>Su factura contiene los siguientes datos: </b></span><br><br>";
+            StringBuilder mensaje = new StringBuilder("<span style=\"color:#542551;font-size: 25px\"><b>Factura Amazing Store</b></span>");
+            mensaje.append("<br><br>Usted ha realizado una compra en Amazing Store");
+            mensaje.append("<br><br><span style=\"color:#542551;font-size: 12px\"><b>Su factura contiene los siguientes datos: </b></span><br><br>");
             String emailCliente = personaLogin.getEmail();
-            Double totalCompra = 0.0;
+            double totalCompra = 0.0;
 
             String asunto = "Factura";
 
-            mensaje += "<span style=\"color:#542551\"><b>Fecha de compra: </b></span>" + "<span style=\"color:black\">"+compra.getFechaVenta().toString()+ "</span><br><br>";
+            mensaje.append("<span style=\"color:#542551\"><b>Fecha de compra: </b></span>" + "<span style=\"color:black\">").append(compra.getFechaVenta().toString()).append("</span><br><br>");
 
-            mensaje += "<span style=\"color:#542551;font-size: 18.5px\"><b>Productos comprados</b></span><br>";
+            mensaje.append("<span style=\"color:#542551;font-size: 18.5px\"><b>Productos comprados</b></span><br>");
 
             for (int i = 0; i < compra.getListaDetallesCompra().size(); i++) {
 
-                mensaje += "<ul>";
-                mensaje += "<li>" + compra.getListaDetallesCompra().get(i).getProducto().getNombre() + "<span style=\"color:black\">&nbsp;&nbsp;&nbsp;<b>    Unidades:      </b></span>" + "<span style=\"color:blue\">" + compra.getListaDetallesCompra().get(i).getUnidades() + "</span>" + "</li>";
-                mensaje += "</ul>";
+                mensaje.append("<ul>");
+                mensaje.append("<li>").append(compra.getListaDetallesCompra().get(i).getProducto().getNombre()).append("<span style=\"color:black\">&nbsp;&nbsp;&nbsp;<b>    Unidades:      </b></span>").append("<span style=\"color:blue\">").append(compra.getListaDetallesCompra().get(i).getUnidades()).append("</span>").append("</li>");
+                mensaje.append("</ul>");
 
                 totalCompra += compra.getListaDetallesCompra().get(i).getProducto().getPrecio();
             }
 
-            mensaje += "<br><span style=\"color:#542551\"><b>Total cancelado: </b></span>" + "<span style=\"color:black\">"+ totalCompra +" COP </span><br>";
+            mensaje.append("<br><span style=\"color:#542551\"><b>Total cancelado: </b></span>" + "<span style=\"color:black\">").append(totalCompra).append(" COP </span><br>");
 
-            mensaje += "<br><span style=\"color:#542551\"><b>Método de pago seleccionado: </b></span>" + "<span style=\"color:black\">"+compra.getMedioPago()+"</span>";
+            mensaje.append("<br><span style=\"color:#542551\"><b>Método de pago seleccionado: </b></span>" + "<span style=\"color:black\">").append(compra.getMedioPago()).append("</span>");
 
-            emailService.enviarEmail(asunto,mensaje,emailCliente);
+            emailService.enviarEmail(asunto, mensaje.toString(),emailCliente);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -330,15 +326,15 @@ public class UsuarioBean implements Serializable {
         try {
             Usuario u= usuarioServicio.obtenerUsuarioEmail(correo);
 
+            FacesMessage message;
             if (u!=null){
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", "Revisa tu correo electrónico, te hemos enviado un email.");
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", "Revisa tu correo electrónico, te hemos enviado un email.");
 
-                PrimeFaces.current().dialog().showMessageDynamic(message);
             }else{
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", "No se encontró el usuario");
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Confirmación", "No se encontró el usuario");
 
-                PrimeFaces.current().dialog().showMessageDynamic(message);
             }
+            PrimeFaces.current().dialog().showMessageDynamic(message);
 
         } catch (Exception e) {
             e.printStackTrace();

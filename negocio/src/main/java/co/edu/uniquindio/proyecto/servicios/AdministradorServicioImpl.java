@@ -3,8 +3,7 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AdministradorServicioImpl implements AdministradorServicio{
@@ -40,7 +39,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     }
 
     @Override
-    public Administrador registrarAdministrador(Administrador a) throws Exception {
+    public void registrarAdministrador(Administrador a) throws Exception {
 
         if (a.getNickname().length()>100){
             throw new Exception("El nickname solo puede tener 100 caracteres ");
@@ -66,8 +65,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         if(estaDisponible(a.getEmail())){
             throw new Exception("El administrador ya existe");
         }
-
-        return administradorRepo.save(a);
+        administradorRepo.save(a);
     }
 
 
@@ -89,36 +87,12 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     }
 
     @Override
-    public void eliminarAdministrador(String email) throws Exception {
-        Administrador administradorEncontrado = obtenerAdministradorEmail(email);
-
-        if (administradorEncontrado  != null){
-           administradorRepo.delete(administradorEncontrado);
-        } else {
-            throw new Exception("El administrador no ha sido encontrado");
-        }
-    }
-
-    @Override
     public Administrador obtenerAdministrador(int id) throws Exception {
         Optional<Administrador> administrador = administradorRepo.findById(id);
 
         if(administrador.isEmpty()){
             throw new Exception("No existe un administrador con el id ingresado");
         }
-
-        return administrador.get();
-    }
-
-    @Override
-    public Administrador obtenerAdministradorEmail(String email) throws Exception {
-
-        Optional<Administrador> administrador = administradorRepo.findByEmail(email);
-
-        if(administrador.isEmpty()){
-            throw new Exception("No existe un administrador con el correo ingresado");
-        }
-
         return administrador.get();
     }
 
@@ -136,7 +110,6 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
             throw new Exception("¡Ups! No te hemos podido encontrar");
         }
-
         return administrador;
     }
 
@@ -147,15 +120,15 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
         Optional<Producto> productoEncontrado = productoRepo.findById(idProducto);
 
-        if(adminEncontrado!=null && productoEncontrado!=null){
-
+        if(adminEncontrado.isPresent() && productoEncontrado.isPresent()){
             productoEncontrado.get().setEstado(true);
             productoEncontrado.get().setAdministrador(adminEncontrado.get());
             adminEncontrado.get().getProductosAprobados().add(productoEncontrado.get());
             administradorRepo.save(adminEncontrado.get());
             productoRepo.save(productoEncontrado.get());
+        }else {
+            throw new Exception("No se encontraron datos relacionados");
         }
-
     }
 
     @Override
@@ -164,35 +137,26 @@ public class AdministradorServicioImpl implements AdministradorServicio{
         Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
         Optional<Producto> productoEncontrado = productoRepo.findById(idProducto);
 
-        if(adminEncontrado!=null && productoEncontrado!=null){
+        if(adminEncontrado.isPresent() && productoEncontrado.isPresent()){
 
-            for (Imagen i:productoEncontrado.get().getImagenes()) {
-                imagenRepo.delete(i);
-            }
-
-            for(Especificacion e:productoEncontrado.get().getEspecificaciones()){
-                especificacionRepo.delete(e);
-            }
-
+            imagenRepo.deleteAll(productoEncontrado.get().getImagenes());
+            especificacionRepo.deleteAll(productoEncontrado.get().getEspecificaciones());
             productoRepo.delete(productoEncontrado.get());
+        }else {
+            throw new Exception("No se encontraron registros relacionados");
         }
-
     }
+
     @Override
     public void aprobarCompra(int idCompra, int idAdministrador){
-
         Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
         Optional<Compra> compraEncontrada = compraRepo.findById(idCompra);
 
-        if(adminEncontrado!=null && compraEncontrada!=null){
-
+        if(adminEncontrado.isPresent() && compraEncontrada.isPresent()){
             compraEncontrada.get().setEstado(true);
             compraEncontrada.get().setAdministrador(adminEncontrado.get());
             compraRepo.save(compraEncontrada.get());
-           // adminEncontrado.get().getCompras().add(compraEncontrada.get()); //Suponiendo que esa sea una lista de compras aprobadas
-            //Falta mirar lo del envio y el detalle
         }
-
     }
 
     public Compra obtenerCompra(int idCompra){
@@ -201,8 +165,9 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
         compraEncontrada= compraRepo.findById(idCompra);
 
-        return compraEncontrada.get();
+        return compraEncontrada.orElse(null);
     }
+
     @Override
     public void rechazarCompra(int idCompra, int idAdministrador){
 
@@ -227,7 +192,6 @@ public class AdministradorServicioImpl implements AdministradorServicio{
             comprobantePagoRepo.delete(comprobanteCompra);
             compraRepo.delete(compraEncontrada);
         }
-
     }
 
 }

@@ -2,29 +2,23 @@ package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 @ViewScoped
 public class AdministradorBean implements Serializable {
 
-    @Autowired
-    private AdministradorServicio administradorServicio;
+    private final AdministradorServicio administradorServicio;
 
-    @Autowired
-    private CompraServicio compraServicio;
+    private final CompraServicio compraServicio;
 
-    @Autowired
-    private ProductoServicio productoServicio;
+    private final ProductoServicio productoServicio;
 
     @Getter @Setter
     private Administrador administrador;
@@ -43,6 +37,12 @@ public class AdministradorBean implements Serializable {
 
     @Value(value = "#{seguridadBean.persona}")
     private Persona personaLogin;
+
+    public AdministradorBean(AdministradorServicio administradorServicio, CompraServicio compraServicio, ProductoServicio productoServicio) {
+        this.administradorServicio = administradorServicio;
+        this.compraServicio = compraServicio;
+        this.productoServicio = productoServicio;
+    }
 
     @PostConstruct
     public void inicializar() {

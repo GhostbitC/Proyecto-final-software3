@@ -1,23 +1,16 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
-import co.edu.uniquindio.proyecto.entidades.Compra;
-import co.edu.uniquindio.proyecto.entidades.ComprobantePago;
-import co.edu.uniquindio.proyecto.entidades.DetalleCompra;
-import co.edu.uniquindio.proyecto.entidades.Usuario;
-
-import java.util.ArrayList;
-import java.util.List;
+import co.edu.uniquindio.proyecto.entidades.*;
+import java.util.*;
 
 public interface CompraServicio {
 
-    Compra crearCompra(Compra c) throws Exception;
+    void crearCompra(Compra c) throws Exception;
 
-    Compra agregarDetalleCompra(Compra compra, DetalleCompra detalle);
+    void agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception;
 
-    Compra agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception;
-
-    void añadirComprobanteCompra(int idCompra, ComprobantePago comprobantePago) throws Exception ;
+    void agregarComprobanteCompra(int idCompra, ComprobantePago comprobantePago) throws Exception ;
 
     List<Compra> listarComprasUsuarioSinComprobante(int idUsuario);
 

@@ -6,15 +6,11 @@ import java.util.List;
 
 public interface AdministradorServicio {
 
-    Administrador registrarAdministrador(Administrador a) throws Exception;
+    void registrarAdministrador(Administrador a) throws Exception;
 
     void actualizarAdministrador(Administrador a,String email,String password) throws Exception;
 
-    void eliminarAdministrador(String email) throws Exception;
-
     Administrador obtenerAdministrador(int id) throws Exception;
-
-    Administrador obtenerAdministradorEmail(String email) throws Exception;
 
     List<Administrador> listarAdministradores();
 

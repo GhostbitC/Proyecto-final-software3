@@ -17,39 +17,12 @@ public class CategoriaProductoServicioImpl implements CategoriaProductoServicio 
     }
 
     @Override
-    public Categoria registrarCategoria(Categoria c) throws Exception {
+    public void registrarCategoria(Categoria c) throws Exception {
 
         if (c.getNombre().length() >100){
             throw new Exception("No se puede exceder los 100 caracteres");
         }
-        return categoriaRepo.save(c);
-    }
-
-    @Override
-    public void actualizarCategoria(Categoria c, int id) throws Exception {
-
-        Categoria categoriaEncontrada = obtenerCategoria(id);
-
-        if (categoriaEncontrada!=null){
-            categoriaEncontrada.setNombre(c.getNombre());
-            categoriaEncontrada.setDescripcion(c.getDescripcion());
-        }else {
-            throw new Exception("La categoria a actualizar no existe");
-        }
-    }
-
-    @Override
-    public void eliminarCategoria(int id) throws Exception {
-
-        Categoria categoriaEncontrada = obtenerCategoria(id);
-
-        if (categoriaEncontrada != null){
-
-            categoriaRepo.delete(categoriaEncontrada);
-        }else {
-            throw new Exception("La categoria a eliminar no existe");
-        }
-
+        categoriaRepo.save(c);
     }
 
     @Override
@@ -58,9 +31,8 @@ public class CategoriaProductoServicioImpl implements CategoriaProductoServicio 
         Optional<Categoria> categoriaEncontrada = categoriaRepo.findById(id);
 
         if (categoriaEncontrada.isEmpty()){
-            throw new Exception("La categoria a encontrar no existe");
+            throw new Exception("La categoría a encontrar no existe");
         }
-
         return categoriaEncontrada.get();
     }
 

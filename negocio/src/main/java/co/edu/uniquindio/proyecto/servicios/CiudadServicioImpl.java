@@ -15,35 +15,12 @@ public class CiudadServicioImpl implements CiudadServicio{
     }
 
     @Override
-    public Ciudad registrarCiudad(Ciudad ciudad) throws Exception {
+    public void registrarCiudad(Ciudad ciudad) throws Exception {
 
         if (ciudad.getNombre().length()>100){
             throw new Exception("El nombre solo puede tener 100 caracteres compa");
         }
-
-        return ciudadRepo.save(ciudad);
-    }
-
-    @Override
-    public Ciudad actualizarCiudad(Ciudad ciudad) throws Exception {
-
-        if (ciudad.getNombre().length()>100){
-            throw new Exception("El nombre solo puede tener 100 caracteres compa");
-        }
-
-        return ciudadRepo.save(ciudad);
-    }
-
-    @Override
-    public void eliminarCiudad(int id) throws Exception {
-
-        Ciudad ciudadEncontrada=obtenerCiudad(id);
-
-        if (ciudadEncontrada != null){
-            ciudadRepo.delete(ciudadEncontrada);
-        }else{
-            throw new Exception("La ciudad que desea eliminar no existe");
-        }
+        ciudadRepo.save(ciudad);
     }
 
     @Override

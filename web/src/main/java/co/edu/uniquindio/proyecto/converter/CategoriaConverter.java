@@ -2,9 +2,7 @@ package co.edu.uniquindio.proyecto.converter;
 
 import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.servicios.CategoriaProductoServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -13,8 +11,11 @@ import java.io.Serializable;
 @Component
 public class CategoriaConverter implements Converter<Categoria>, Serializable {
 
-    @Autowired
-    private CategoriaProductoServicio categoriaServicio;
+    private final CategoriaProductoServicio categoriaServicio;
+
+    public CategoriaConverter(CategoriaProductoServicio categoriaServicio) {
+        this.categoriaServicio = categoriaServicio;
+    }
 
 
     @Override

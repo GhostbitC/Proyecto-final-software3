@@ -1,18 +1,10 @@
 package co.edu.uniquindio.proyecto.bean;
 
-import co.edu.uniquindio.proyecto.dto.MarkerDTO;
 import co.edu.uniquindio.proyecto.entidades.*;
-import co.edu.uniquindio.proyecto.servicios.ComentarioServicio;
-import co.edu.uniquindio.proyecto.servicios.ProductoServicio;
-import co.edu.uniquindio.proyecto.servicios.UsuarioServicio;
-import com.google.gson.Gson;
-import lombok.Getter;
-import lombok.Setter;
-import org.primefaces.PrimeFaces;
-import org.springframework.beans.factory.annotation.Autowired;
+import co.edu.uniquindio.proyecto.servicios.*;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -20,20 +12,14 @@ import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @ViewScoped
 public class DetalleProductoBean implements Serializable {
 
-    @Autowired
-    private UsuarioServicio usuarioServicio;
+    private final ProductoServicio productoServicio;
 
-    @Autowired
-    private ProductoServicio productoServicio;
-
-    @Autowired
-    private ComentarioServicio comentarioServicio;
+    private final ComentarioServicio comentarioServicio;
 
     @Value("#{param['producto']}")
     private String idProducto;
@@ -79,6 +65,11 @@ public class DetalleProductoBean implements Serializable {
     @Getter @Setter
     private Comentario comentarioNuevo;
 
+    public DetalleProductoBean(ProductoServicio productoServicio, ComentarioServicio comentarioServicio) {
+        this.productoServicio = productoServicio;
+        this.comentarioServicio = comentarioServicio;
+    }
+
     @PostConstruct
     public void inicializar() {
 
@@ -87,7 +78,6 @@ public class DetalleProductoBean implements Serializable {
         if (idProducto!=null && !"".equals(idProducto)){
             try {
                 int id = Integer.parseInt(idProducto);
-
                 this.producto = productoServicio.obtenerProducto(id);
                 this.urlImagenes = new ArrayList<>();
                 this.calificacionPromedio = productoServicio.obtenerCalificacionPromedio(id);
@@ -99,26 +89,16 @@ public class DetalleProductoBean implements Serializable {
                 this.porcentaje5 = promedios[4];
                 this.comentariosDetal = obtenerComentarios();
 
-                System.out.println(porcentaje1);
-                System.out.println(porcentaje5);
-
-
                 List<Imagen> imagenes = producto.getImagenes();
 
                 if(imagenes.size()>0){
-
                     for(Imagen i:imagenes){
-
                         urlImagenes.add(i.getUrl());
                     }
                 }else{
-
                     urlImagenes.add("default.png");
                 }
-
                 personaCreadora = obtenerPersonaCreadora(id);
-                List<Producto>productos=new ArrayList<>();
-                productos.add(producto);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -128,7 +108,7 @@ public class DetalleProductoBean implements Serializable {
 
     public Persona obtenerPersonaCreadora(int idProducto) {
 
-        Persona aux = new Persona();
+        Persona aux;
 
         if (producto.getUsuario() !=null){
 
@@ -136,7 +116,6 @@ public class DetalleProductoBean implements Serializable {
         }else{
             aux = producto.getAdministrador();
         }
-
         return aux;
     }
 
@@ -192,5 +171,4 @@ public class DetalleProductoBean implements Serializable {
         }
         return null;
     }
-
 }

@@ -1,12 +1,10 @@
 package co.edu.uniquindio.proyecto.config;
 
-import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.servicios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,9 +25,6 @@ public class InformacionPorDefecto implements CommandLineRunner {
     private ImagenServicio imagenServicio;
 
     @Autowired
-    private DireccionServicio direccionServicio;
-
-    @Autowired
     private CiudadServicio ciudadServicio;
 
     @Autowired
@@ -37,9 +32,6 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
     @Autowired
     private EspecificacionServicio especificacionServicio;
-
-    @Autowired
-    private ComprobantePagoServicio comprobantePagoServicio;
 
     @Autowired
     private CompraServicio compraServicio;
