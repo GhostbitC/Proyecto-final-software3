@@ -261,15 +261,6 @@
                                     <h6>#{compra.medioPago}</h6>
                                 </p:column>
 
-                                <p:column style="text-align: center" headerText="Subir imagen">
-                                        <h:inputText id="link-imagen" value="#{usuarioBean.linkImagen}"/>
-                                        <input id="file-upload" type="file"/>
-
-                                        <p:commandButton ajax="false" value="Subir" action="#{usuarioBean.subirComprobante}"
-                                                         style="background: #542551;border-color: #542551"/>
-
-                                </p:column>
-
                                 <p:column style="text-align: center" headerText="Validar compra">
                                     <p:commandButton action="#{usuarioBean.unirComprobanteCompra(compra.id)}"
                                                      update="@form,comprasPendientesTable"
@@ -325,6 +316,14 @@
                     </div>
                 </div>
             </div>
+        </h:form>
+
+        <h:form id="crear-producto">
+            <h:inputText id="link-imagen" value="#{usuarioBean.linkImagen}"/>
+            <input id="file-upload" type="file"/>
+
+            <p:commandButton value="Subir" action="#{usuarioBean.subirComprobante}"
+                             style="background: #542551;border-color: #542551"/>
         </h:form>
 
     </ui:define>
