@@ -102,9 +102,14 @@ public class ProductoServicioTest {
     public void obtenerCalificacionPromedioTest(){
 
         try {
+            boolean comprobado=false;
             int calificacionPromedio = productoServicio.obtenerCalificacionPromedio(2);
 
-            Assertions.assertNotNull(calificacionPromedio);
+            if(calificacionPromedio>=0){
+                comprobado=true;
+            }
+
+            Assertions.assertTrue(comprobado);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+    <ui:define name="title"> Factura | Compra</ui:define>
+    <ui:define name="content">
+
+        <h:form>
+        <div class="container" id="detal-product">
+            <div class="card">
+                <div class="card-body" style="min-height: 100vh">
+                    <div class="card-title">
+                        <h2 style="color: #542551">Detalles de facturación</h2>
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col">
+                                <h3><p:outputLabel for="nombre_user" value="Nombre:"
+                                                   style="color: #232121"/></h3>
+                                <p:inputText id="nombre_user" value="#{seguridadBean.usuario.nombre}"
+                                             style="width: 100%"
+                                             placeholder="Ingrese su nombre"
+                                             required="true"
+                                             requiredMessage="El nombre es obligatorio"/>
+                            </div>
+
+                            <div class="col">
+                                <h3><p:outputLabel for="apellido_user" value="Apellido:"
+                                                   style="color: #232121"/></h3>
+                                <p:inputText id="apellido_user"
+                                             style="width: 100%"
+                                             placeholder="Ingrese su apellido"
+                                             required="true"
+                                             requiredMessage="El apellido es obligatorio"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <h3><p:outputLabel for="email_user" value="Correo:"
+                                                   style="color: #232121"/></h3>
+                                <p:inputText id="email_user"
+                                             style="width: 100%"
+                                             placeholder="Ingrese su correo"
+                                             required="true"
+                                             requiredMessage="El correo es obligatorio"/>
+                            </div>
+
+                            <div class="col">
+                                <h3><p:outputLabel for="cedula_user" value="Documento de identidad:"
+                                                   style="color: #232121"/></h3>
+                                <p:inputText id="cedula_user" value="#{seguridadBean.usuario.cedula}"
+                                             style="width: 100%"
+                                             placeholder="Ingrese su documento de identidad"
+                                             required="true"
+                                             requiredMessage="El documento es obligatorio"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3%">
+                        <h5 style="color: #542551">Dirección</h5>
+
+                           <h3 style="margin-top: -5px"><p:outputLabel value="Pais/Región:"
+                                              style="color: #232121"/></h3>
+                           <h6>COLOMBIA</h6>
+
+                        <div class="row">
+                            <div class="col">
+                                <h3><p:outputLabel for="calle_user" value="Calle:"
+                                                   style="color: #232121"/></h3>
+                                <p:inputText id="calle_user" value="#{seguridadBean.direccion.calle}"
+                                             style="width: 100%"
+                                             placeholder="Ingrese la calle donde reside"
+                                             required="true"
+                                             requiredMessage="La calle es obligatoria"/>
+                            </div>
+                            <div class="col">
+                                <h3><p:outputLabel for="number_user" value="Número:"
+                                                   style="color: #232121"/></h3>
+                                <p:inputText id="number_user" value="#{seguridadBean.direccion.numero}"
+                                             style="width: 100%"
+                                             placeholder="Ingrese el numero de residencia"
+                                             required="true"
+                                             requiredMessage="La calle es obligatoria"/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <h3><p:outputLabel for="department_user" value="Departamento:"
+                                                   style="color: #232121"/></h3>
+                                <p:inputText id="department_user"
+                                             style="width: 100%"
+                                             placeholder="Ingrese el departamento de residencia (Opcional)"/>
+                            </div>
+                            <div class="col">
+                                <h3><p:outputLabel for="ciudad_user" value="Ciudad:"
+                                                   style="color: #232121"/></h3>
+                                <p:selectOneMenu id="ciudad_user" value="#{seguridadBean.direccion.ciudad}"
+                                                 converter="#{ciudadConverter}"
+                                                 redisplay="true" style="width: 100%" required="true"
+                                                 requiredMessage="La ciudad es obligatoria">
+                                    <f:selectItem itemLabel="Seleccione una ciudad" noSelectionOption="true"/>
+                                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}" value="#{seguridadBean.ciudades}"/>
+                                </p:selectOneMenu>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3%">
+                        <h5 style="color: #542551">Tu pedido</h5>
+
+                        <div class="row" style="margin-top: 1.5%">
+                            <div class="col">
+                                <div class="title">
+                                    <h6 style="color: #542551">Producto(s)</h6>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="title">
+                                    <h6 style="color: #542551">Subtotal</h6>
+                                </div>
+                            </div>
+                        </div>
+
+
+                            <p:repeat value="#{seguridadBean.productosCarrito}" var="producto">
+                                <div class="container p-0">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h6>#{producto.nombre}</h6>
+                                        </div>
+                                        <div class="col">
+                                            <h6>#{producto.precio}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p:repeat>
+
+
+                        <div class="row" style="margin-top: 1%">
+                            <div class="col">
+                                <h5 style="color: #542551">Total a pagar</h5>
+                            </div>
+                            <div class="col">
+                                <h5>#{seguridadBean.subtotal}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 1.5%">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h5 style="color: #542551">Método de pago</h5>
+                    </div>
+
+
+                    <h3><p:outputLabel for="pago_user" value="Medio de pago:"
+                                       style="color: #232121"/></h3>
+                    <p:selectOneMenu id="pago_user" value="#{seguridadBean.medioPago}" required="true" style="width: 100%">
+                        <f:selectItem itemLabel="Seleccione un medio de pago" noSelectionOption="true"/>
+                        <f:selectItems var="medio" value="#{seguridadBean.mediosPago}"/>
+                    </p:selectOneMenu>
+
+                    <div style="margin-top: 1%">
+                        <h6> Si el metodo de pago seleccionado fue consignación, una vez finalice la compra realice un deposito a nuestra cuenta de nequi o daviplata</h6>
+
+                        <div class="row">
+                          <div class="col-4 p-0" style="display: flex">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p:graphicImage value="/resources/img/Nequi.png" height="70" width="70"/>
+                                    </div>
+
+                                    <div class="col">
+                                        <h3><p:outputLabel value="Número de cuenta:"
+                                                           style="color: #542551"/></h3>
+                                       <h6 style="margin-top: -3%">3226346138</h6>
+                                    </div>
+                                </div>
+                          </div>
+
+                            <div class="col p-0">
+                                <div class="row" style="width:35%">
+                                    <div class="col-4" >
+                                        <div style="margin-left: 10%">
+                                            <p:graphicImage value="/resources/img/daviplata.png" height="45" width="45"
+                                                            style="margin-top: 33%"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <h3 style="margin-top: 5%"><p:outputLabel value="Número de cuenta:"
+                                                           style="color: #542551"/></h3>
+                                        <h6 style="margin-top: -3%">3226347698</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 style="margin-top: 1%"> Recuerda subir el comprobante de pago al efectuar este mismo, su compra no sera enviada hasta no recibirlo.</h6>
+                    </div>
+
+                    <p:commandButton value="Efectuar compra" update="@form" styleClass="ui-button-info"
+                                     style="font-size: 15px;border-color: black!important;" action="#{seguridadBean.efectuarCompra}"/>
+                </div>
+            </div>
+
+        </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
