@@ -24,22 +24,22 @@ public class Usuario extends Persona implements Serializable {
     //================================= RELACION CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private transient List<Compra> compras;
+    private List<Compra> compras;
 
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
-    private transient List<Producto> productos;
+    private List<Producto> productos;
 
     //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
-    private transient List<Favorito> favoritos;
+    private List<Favorito> favoritos;
 
     //================================= RELACION CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private transient List<Comentario> comentarios;
+    private List<Comentario> comentarios;
 
     //================================= RELACION CON LA ENTIDAD DIRECCION =================================//
     @OneToOne

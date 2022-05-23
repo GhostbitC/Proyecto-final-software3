@@ -30,7 +30,7 @@ public class Ciudad implements Serializable {
     //================================= RELACIÓN CON LA ENTIDAD DIRECCIÓN =================================//
     @OneToMany(mappedBy = "ciudad")
     @ToString.Exclude
-    private transient List<Direccion> direcciones;
+    private List<Direccion> direcciones;
 
     //================================= CONSTRUCTOR  =================================//
     public Ciudad( String nombre) {

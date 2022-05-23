@@ -29,7 +29,7 @@ public class Categoria implements Serializable {
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "categoria")
     @ToString.Exclude
-    private transient List<Producto> productos;
+    private List<Producto> productos;
 
     //================================= RELACIÓN CON LA ENTIDAD ADMINISTRADOR =================================//
     @ManyToOne

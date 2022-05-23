@@ -1,0 +1,13 @@
+co\edu\uniquindio\proyecto\bean\inicioBean.class
+co\edu\uniquindio\proyecto\bean\ProductoBean.class
+co\edu\uniquindio\proyecto\bean\SeguridadBean.class
+co\edu\uniquindio\proyecto\bean\AdministradorBean.class
+co\edu\uniquindio\proyecto\converter\CategoriaConverter.class
+co\edu\uniquindio\proyecto\WebApplication.class
+co\edu\uniquindio\proyecto\converter\CiudadConverter.class
+co\edu\uniquindio\proyecto\config\PaginaPrincipalConfig.class
+co\edu\uniquindio\proyecto\bean\DetalleProductoBean.class
+co\edu\uniquindio\proyecto\filter\SeguridadFilter.class
+co\edu\uniquindio\proyecto\bean\UsuarioBean.class
+co\edu\uniquindio\proyecto\bean\BusquedaBean.class
+co\edu\uniquindio\proyecto\config\InformacionPorDefecto.class

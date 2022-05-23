@@ -34,6 +34,6 @@ public class Envio implements Serializable {
     //================================= RELACION CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "envio")
     @ToString.Exclude
-    private transient List<Compra> compras;
+    private List<Compra> compras;
 
 }

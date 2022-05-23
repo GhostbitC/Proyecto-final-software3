@@ -55,28 +55,28 @@ public class Producto implements Serializable {
     //================================= RELACIÓN CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude
-    private transient List<Comentario> comentarios;
+    private List<Comentario> comentarios;
 
     //================================= RELACIÓN CON LA ENTIDAD IMAGEN =================================//
     @OneToMany(mappedBy = "producto",fetch=FetchType.LAZY)
     @ToString.Exclude
-    private transient List<Imagen> imagenes;
+    private List<Imagen> imagenes;
 
     //================================= RELACIÓN CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private transient List<Favorito> favoritos;
+    private List<Favorito> favoritos;
 
     //================================= RELACIÓN CON LA ENTIDAD ESPECIFICACIÓN =================================//
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude
-    private transient List<Especificacion> especificaciones;
+    private List<Especificacion> especificaciones;
 
     //================================= RELACIÓN CON LA ENTIDAD DETALLE COMPRA =================================//
     @OneToMany (mappedBy = "producto", cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
-    private transient List<DetalleCompra> listaDetalleCompra;
+    private List<DetalleCompra> listaDetalleCompra;
 
 
     public Producto(String nombre, String descripcion, double precio, Administrador administrador, Categoria categoria) {
