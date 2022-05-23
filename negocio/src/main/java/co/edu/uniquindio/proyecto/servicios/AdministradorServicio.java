@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AdministradorServicio {
 
-    void registrarAdministrador(Administrador a) throws Exception;
+    void registrarAdministrador(Administrador a) throws ObjetoNoEncontradoException;
 
     void actualizarAdministrador(Administrador a,String email,String password);
     Administrador obtenerAdministrador(int id) throws ObjetoNoEncontradoException;
