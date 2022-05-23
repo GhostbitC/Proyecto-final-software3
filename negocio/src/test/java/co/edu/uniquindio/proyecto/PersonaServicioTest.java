@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-public class PersonaServicioTest {
+class PersonaServicioTest {
 
     @Autowired
     private PersonaServicio personaServicio;
@@ -25,7 +25,7 @@ public class PersonaServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void loginTest(){
+    void loginTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);

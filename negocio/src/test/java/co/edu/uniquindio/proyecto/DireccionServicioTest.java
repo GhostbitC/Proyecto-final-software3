@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-public class DireccionServicioTest {
+class DireccionServicioTest {
 
     @Autowired
     private CiudadServicio ciudadServicio;
@@ -29,7 +29,7 @@ public class DireccionServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void registrarDireccionTest(){
+    void registrarDireccionTest(){
         try {
             Ciudad c = ciudadServicio.obtenerCiudad(1);
             Usuario u = usuarioServicio.obtenerUsuario(1);

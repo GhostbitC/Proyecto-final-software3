@@ -541,6 +541,10 @@ body .ui-datatable thead th{
     z-index:-1;
 }
 
+.input#file-upload-button{
+    background: red !important;
+}
+
 /*---------- Media Screen ----------*/
 @media screen and(min-width: 900px){
     #registro{

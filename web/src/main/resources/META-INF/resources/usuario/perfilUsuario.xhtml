@@ -261,6 +261,12 @@
                                     <h6>#{compra.medioPago}</h6>
                                 </p:column>
 
+                                <p:column style="text-align: center" headerText="Cargar comprobante">
+                                    <p:commandButton style="width: 50%;border-color: black!important;"
+                                                     onclick="PF('dlg1').show()"
+                                                     value="Cargar"/>
+                                </p:column>
+
                                 <p:column style="text-align: center" headerText="Validar compra">
                                     <p:commandButton action="#{usuarioBean.unirComprobanteCompra(compra.id)}"
                                                      update="@form,comprasPendientesTable"
@@ -319,11 +325,20 @@
         </h:form>
 
         <h:form id="crear-producto">
-            <h:inputText id="link-imagen" value="#{usuarioBean.linkImagen}"/>
-            <input id="file-upload" type="file"/>
+            <p:dialog header="Cargar comprobante" widgetVar="dlg1" minHeight="40" style="width: 40%;color: #542551" showEffect="fade">
 
-            <p:commandButton value="Subir" action="#{usuarioBean.subirComprobante}"
-                             style="background: #542551;border-color: #542551"/>
+                <div class="row">
+                    <div class="col">
+                        <h:inputText id="link-imagen" value="#{usuarioBean.linkImagen}" style="visibility: hidden;position: fixed;"/>
+                        <input id="file-upload" type="file"/>
+                    </div>
+
+                    <div class="col">
+                        <p:commandButton value="Subir" action="#{usuarioBean.subirComprobante}"
+                                         style="background: #542551;border-color: #542551" onclick="PF('dlg1').hide()"/>
+                    </div>
+                </div>
+            </p:dialog>
         </h:form>
 
     </ui:define>

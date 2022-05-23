@@ -16,7 +16,7 @@ import java.util.List;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-public class CompraServicioTest {
+class CompraServicioTest {
 
     @Autowired
     private CompraServicio compraServicio;
@@ -35,7 +35,7 @@ public class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void registrarCompraTest(){
+    void registrarCompraTest(){
 
         try {
 
@@ -58,7 +58,7 @@ public class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void agregarCompraTest(){
+    void agregarCompraTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -83,7 +83,7 @@ public class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void listarComprasSinAprobarUsuarioTest(){
+    void listarComprasSinAprobarUsuarioTest(){
 
         List<Compra> lista = compraServicio.listarComprasSinAprobarUsuarios();
         lista.forEach(System.out::println);
@@ -93,7 +93,7 @@ public class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void listarComprasSinComprobanteUsuarioTest(){
+    void listarComprasSinComprobanteUsuarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -109,7 +109,7 @@ public class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void listarComprasUsuarioTest(){
+    void listarComprasUsuarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -125,7 +125,7 @@ public class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void obtenerComprasUsuarioTest(){
+    void obtenerComprasUsuarioTest(){
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
 
@@ -138,7 +138,7 @@ public class CompraServicioTest {
     }
 
     @Test
-    public void enviarEmail() {
+    void enviarEmail() {
 
         emailService.enviarEmail("Prueba","Prueba", "sebastianquinteroosorio2104@gmail.com");
     }
