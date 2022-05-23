@@ -21,18 +21,18 @@ public class Especificacion implements Serializable {
 
     @Column(nullable = false,length = 500)
     @Size(max = 500, message = "La especificación no puede superar los 500 caracteres")
-    private String especificacion;
+    private String especification;
 
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @ManyToOne
     private Producto producto;
 
-    public Especificacion(String especificacion) {
-        this.especificacion = especificacion;
+    public Especificacion(String especification) {
+        this.especification = especification;
     }
 
-    public Especificacion(String especificacion, Producto producto) {
-        this.especificacion = especificacion;
+    public Especificacion(String especification, Producto producto) {
+        this.especification = especification;
         this.producto = producto;
     }
 }

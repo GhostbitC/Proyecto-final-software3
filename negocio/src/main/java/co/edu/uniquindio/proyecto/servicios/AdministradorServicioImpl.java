@@ -3,10 +3,12 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 import java.util.*;
 
 @Service
-public class AdministradorServicioImpl implements AdministradorServicio{
+public class AdministradorServicioImpl implements AdministradorServicio, Serializable {
 
     private final AdministradorRepo administradorRepo;
 
@@ -178,7 +180,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
             ComprobantePago comprobanteCompra = compraEncontrada.getComprobantePago();
 
-            if(compraEncontrada.getListaDetallesCompra()!=null && compraEncontrada.getListaDetallesCompra().size()>0){
+            if(compraEncontrada.getListaDetallesCompra()!=null && compraEncontrada.getListaDetallesCompra().isEmpty()){
 
                 detalleCompraRepo.deleteAll(compraEncontrada.getListaDetallesCompra());
                 compraEncontrada.getListaDetallesCompra().clear();

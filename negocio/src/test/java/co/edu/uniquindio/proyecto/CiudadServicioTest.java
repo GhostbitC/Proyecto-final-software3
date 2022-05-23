@@ -12,13 +12,13 @@ import java.util.List;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-public class CiudadServicioTest {
+class CiudadServicioTest {
 
     @Autowired
     private CiudadServicio ciudadServicio;
 
     @Test
-    public void registrarCiudadTest(){
+    void registrarCiudadTest(){
 
         try {
             Ciudad c = new Ciudad("Armenia");
@@ -35,7 +35,7 @@ public class CiudadServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void obtenerCiudadTest(){
+    void obtenerCiudadTest(){
 
         try {
             Ciudad c = ciudadServicio.obtenerCiudad(1);
@@ -48,7 +48,7 @@ public class CiudadServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void listarCiudadesTest(){
+    void listarCiudadesTest(){
 
         List<Ciudad> lista = ciudadServicio.listarCiudades();
         lista.forEach(System.out::println);

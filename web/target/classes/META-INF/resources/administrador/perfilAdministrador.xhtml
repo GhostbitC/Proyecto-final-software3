@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+
+
+<ui:composition template="/WEB-INF/plantilla.xhtml">
+
+    <ui:define name="title">Administrador | Perfil</ui:define>
+    <ui:define name="content">
+
+            <div class="container" id="detal-product">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body" style="height: 100%">
+                                <div style="text-align: center;margin-top: 5%">
+                                    <p:graphicImage value="/resources/img/user.png" width="150"/>
+                                </div>
+
+                                <div class="mt-3" style="text-align: center;">
+                                    <h4 style="color: #542551">#{administradorBean.administrador.nickname}</h4>
+
+                                    <h6 style="margin-top: 5%">Calificación promedio</h6>
+                                    <p:rating readonly="true" style="margin-bottom: 5%"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card" style="height: 100%">
+                            <div class="card-body" style="margin-left: 5%">
+                                <div class="card-title">
+                                    <h4 style="color: #542551">Información personal</h4>
+                                </div>
+
+                                <div style="margin-top: 3%">
+                                    <p:repeat value="#{administradorBean.administrador}" var="persona">
+                                        <div class="container p-0">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <h5 style="font-size: 17px;color: #542551">Nombre completo: </h5>
+                                                </div>
+
+                                                <div class="col">
+                                                    <h5 style="font-size: 17px">#{persona.nombre} #{persona.apellido}</h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="margin-top: 1%">
+                                                <div class="col-4">
+                                                    <h5 style="font-size: 17px;color: #542551">Correo electrónico: </h5>
+                                                </div>
+
+                                                <div class="col">
+                                                    <h5 style="font-size: 17px">#{persona.email}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </p:repeat>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="container" id="detal-producto">
+
+            <div class="card" style="height: 100%">
+                <div class="card-body" style="height: 100%">
+                    <div class="card-title">
+                        <div class="row">
+                            <div class="col-9">
+                                <h4 style="color: #542551">Productos publicados</h4>
+                            </div>
+                            <div class="col-1">
+                                <p:button icon="pi pi-pencil" styleClass="rounded-button ui-button-help"
+                                          style="border-color: transparent!important;background: transparent!important;color: black!important;"
+                                          href="/administrador/updateProducto.xhtml"/>
+                            </div>
+                            <div class="col-1">
+                                <p:button icon="pi pi-trash" styleClass="rounded-button ui-button-help"
+                                          style="border-color: transparent!important;background: transparent!important;color: black!important;"
+                                          href="/administrador/deleteProducto.xhtml"/>
+                            </div>
+                            <div class="col-1">
+                                <p:button icon="pi pi-plus" styleClass="rounded-button"
+                                          style="border-color: transparent!important;background: transparent!important;color: black!important;"
+                                          href="/administrador/registrarProducto.xhtml"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3%">
+
+                        <p:dataScroller id="publicaciones" value="#{administradorBean.productosPublicados}"
+                                        var="producto" chunkSize="10"
+                                        mode="inline"
+                                        scrollHeight="380">
+
+                            <div class="container p-0">
+                                <div class="row">
+                                    <div class="col-3" style="text-align: left">
+                                        <div class="container p-0">
+                                            <p:graphicImage value="#{producto.imagenPrincipal}"
+                                                            style="width: 120px; height: 120px;margin-left: 3%"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div style="margin-top: 15%">
+                                            <div class="title">
+                                                <h5 style="font-size: 16px">
+                                                    Nombre del producto: #{producto.nombre}
+                                                </h5>
+                                            </div>
+
+                                            <h5 style="font-size: 16px">
+                                                Categoría del producto: #{producto.categoria.nombre}
+                                            </h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div style="margin-top: 30%;margin-left: 5%">
+                                            <div class="title">
+                                                <h5 style="font-size: 16px">
+                                                    Unidades disponibles: <i
+                                                        class="text-info">#{producto.unidades}</i>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </p:dataScroller>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <h:form>
+            <div class="container" style="width: 100%;margin-top: 3%;">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4 style="color: #542551">Productos por aprobar</h4>
+                        </div>
+
+                        <div style="margin-top: 3%">
+
+                            <p:dataTable value="#{administradorBean.productosSinAprobarUsuarios}" var="producto"
+                                         id="productosPendientesTable" style="margin-bottom: 20px">
+
+                                <p:column headerText="Nombre del producto" style="text-align: center">
+                                    <h6>#{producto.nombre}</h6>
+                                </p:column>
+
+                                <p:column headerText="Ver a detalle" style="text-align: center">
+                                    <div class="container p-0 text-center">
+
+                                        <p:commandButton action="#{inicioBean.irADetalle(producto.id)}"
+                                                         update="productosPendientesTable"
+                                                         value="Ir a detalle" style="height: 40px"/>
+                                    </div>
+                                </p:column>
+
+                                <p:column headerText="Aprobar producto" style="text-align: center">
+                                    <p:commandButton action="#{administradorBean.aprobarProductoUsuario(producto.id)}"
+                                                     update="productosPendientesTable"
+                                                     style="border-color: black!important;"
+                                                     value="Aprobar"/>
+                                </p:column>
+
+                                <p:column headerText="Rechazar producto" style="text-align: center">
+                                    <p:commandButton action="#{administradorBean.rechazarProductoUsuario(producto.id)}"
+                                                     style="background: #E52B1B!important;border-color: black!important;"
+                                                     update="productosPendientesTable"
+                                                     value="Rechazar"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container" style="width: 100%;margin-top: 3%;">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4 style="color: #542551">Compras por validar</h4>
+                        </div>
+
+                        <div>
+                            <p:dataTable id="table" value="#{administradorBean.comprasUsuariosSinAprobar}"
+                                         var="compra" style="margin-bottom: 20px">
+
+                                <p:column headerText="Comprobante" style="text-align: center">
+                                    <p:galleria value="#{compra.comprobantePago.url}" var="image"
+                                                numVisible="5" style="max-width: 640px">
+                                        <p:graphicImage url="#{image}" alt="#{image}"
+                                                        style="width: 80px;height: 80px;margin-left: -20%"/>
+                                        <p:commandButton onclick="PF('galleria1').show()"
+                                                         style="position: fixed;color: transparent;width:600px;height:200px;border: none;background: transparent"/>
+
+                                    </p:galleria>
+                                    <p:galleria widgetVar="galleria1" value="#{compra.comprobantePago.url}"
+                                                var="image"
+                                                numVisible="9"
+                                                circular="true" fullScreen="true" showItemNavigators="true"
+                                                style="max-width: 50%">
+                                        <p:graphicImage url="#{image}" alt="#{image}"
+                                                        style="width: 100%; display: block"/>
+                                    </p:galleria>
+                                </p:column>
+
+
+                                <p:column headerText="Validar compra" style="text-align: center">
+                                    <p:commandButton action="#{administradorBean.aprobarCompra(compra.id)}"
+                                                     update="table"
+                                                     value="Validar"
+                                                     style="margin-top: 10%;height: 40px;border-color: black!important;"/>
+
+                                    <p:growl showDetail="true"/>
+
+                                </p:column>
+
+                                <p:column headerText="Rechazar compra" style="text-align: center">
+                                    <p:commandButton action="#{administradorBean.rechazarCompra(compra.id)}"
+                                                     update="table"
+                                                     value="Rechazar"
+                                                     style="margin-top: 10%;height: 40px;background: #E52B1B!important; border-color: black!important;"/>
+                                    <p:growl showDetail="true"/>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
