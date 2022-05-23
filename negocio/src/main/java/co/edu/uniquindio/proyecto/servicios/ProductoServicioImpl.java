@@ -7,6 +7,7 @@ import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Service
@@ -153,17 +154,11 @@ public class ProductoServicioImpl implements ProductoServicio {
 
                             calificacion = calificacionAux;
                             productoEstrella = p;
-                        
                     }
-
                 }
-
             }
-
             return productoEstrella;
-
         }
-
         return productoEstrella;
     }
 
