@@ -71,7 +71,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
 
     @Override
-    public void actualizarAdministrador(Administrador a,String email, String password) throws Exception {
+    public void actualizarAdministrador(Administrador a,String email, String password){
 
         Administrador administradorObtenido = obtenerEmailPassword(email,password);
 
@@ -113,7 +113,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
 
     @Override
-    public void aprobarProductoUsuario(int idProducto, int idAdministrador) throws Exception {
+    public void aprobarProductoUsuario(int idProducto, int idAdministrador) throws ObjetoNoEncontradoException {
 
         Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
         Optional<Producto> productoEncontrado = productoRepo.findById(idProducto);
@@ -125,12 +125,12 @@ public class AdministradorServicioImpl implements AdministradorServicio{
             administradorRepo.save(adminEncontrado.get());
             productoRepo.save(productoEncontrado.get());
         }else {
-            throw new Exception("No se encontraron datos relacionados");
+            throw new ObjetoNoEncontradoException("No se encontraron registros en la base de datos");
         }
     }
 
     @Override
-    public void rechazarProductoUsuario(int idProducto, int idAdministrador) throws Exception {
+    public void rechazarProductoUsuario(int idProducto, int idAdministrador) throws ObjetoNoEncontradoException {
 
         Optional<Administrador> adminEncontrado = administradorRepo.findById(idAdministrador);
         Optional<Producto> productoEncontrado = productoRepo.findById(idProducto);
@@ -141,7 +141,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
             especificacionRepo.deleteAll(productoEncontrado.get().getEspecificaciones());
             productoRepo.delete(productoEncontrado.get());
         }else {
-            throw new Exception("No se encontraron registros relacionados");
+            throw new ObjetoNoEncontradoException("No se encontraron registros en la base de datos");
         }
     }
 
