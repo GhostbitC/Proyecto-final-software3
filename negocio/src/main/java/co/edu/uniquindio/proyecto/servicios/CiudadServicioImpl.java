@@ -8,7 +8,11 @@ import java.io.Serializable;
 import java.util.*;
 
 @Service
+<<<<<<< HEAD
 public class CiudadServicioImpl implements CiudadServicio {
+=======
+public class CiudadServicioImpl implements CiudadServicio, Serializable {
+>>>>>>> 7ee5dbbe7e1512263ca45170be7940984eca9eeb
 
     private final CiudadRepo ciudadRepo;
 

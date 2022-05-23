@@ -8,7 +8,11 @@ import java.io.Serializable;
 import java.util.*;
 
 @Service
+<<<<<<< HEAD
 public class AdministradorServicioImpl implements AdministradorServicio {
+=======
+public class AdministradorServicioImpl implements AdministradorServicio, Serializable {
+>>>>>>> 7ee5dbbe7e1512263ca45170be7940984eca9eeb
 
     private final AdministradorRepo administradorRepo;
 

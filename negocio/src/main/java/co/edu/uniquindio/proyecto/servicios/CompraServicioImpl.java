@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Service
-public class CompraServicioImpl implements CompraServicio {
+public class CompraServicioImpl implements CompraServicio, Serializable {
 
     private final CompraRepo compraRepo;
     private final UsuarioRepo usuarioRepo;

@@ -11,7 +11,11 @@ import java.util.Optional;
 
 @Service
 @Transactional
+<<<<<<< HEAD
 public class PersonaServicioImpl implements PersonaServicio {
+=======
+public class PersonaServicioImpl implements PersonaServicio, Serializable {
+>>>>>>> 7ee5dbbe7e1512263ca45170be7940984eca9eeb
 
     @Autowired
     private PersonaRepo personaRepo;

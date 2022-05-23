@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoriaProductoServicioImpl implements CategoriaProductoServicio {
+public class CategoriaProductoServicioImpl implements CategoriaProductoServicio, Serializable {
 
     private final CategoriaProductoRepo categoriaRepo;
 
