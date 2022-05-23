@@ -178,7 +178,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
             ComprobantePago comprobanteCompra = compraEncontrada.getComprobantePago();
 
-            if(compraEncontrada.getListaDetallesCompra()!=null && compraEncontrada.getListaDetallesCompra().size()>0){
+            if(compraEncontrada.getListaDetallesCompra()!=null && compraEncontrada.getListaDetallesCompra().isEmpty()){
 
                 detalleCompraRepo.deleteAll(compraEncontrada.getListaDetallesCompra());
                 compraEncontrada.getListaDetallesCompra().clear();
