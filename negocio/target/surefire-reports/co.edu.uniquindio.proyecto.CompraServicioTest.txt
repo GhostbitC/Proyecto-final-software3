@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: co.edu.uniquindio.proyecto.CompraServicioTest
--------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.086 s - in co.edu.uniquindio.proyecto.CompraServicioTest
