@@ -11,13 +11,13 @@ import javax.transaction.Transactional;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-class UsuarioServicioTest {
+public class UsuarioServicioTest {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
 
     @Test
-    void registrarUsuarioTest(){
+    public void registrarUsuarioTest(){
 
         try {
             Usuario u = new Usuario("Sebastian","Quintero Osorio","Botsorio","21quintero04","sebastianquinteroosorio2104@gmail.com","04/01/2001");
@@ -34,7 +34,7 @@ class UsuarioServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void eliminarUsuarioTest(){
+    public void eliminarUsuarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -51,7 +51,7 @@ class UsuarioServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void actualizarUsuarioTest(){
+    public void actualizarUsuarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -70,7 +70,7 @@ class UsuarioServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerUsuarioTest(){
+    public void obtenerUsuarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -84,7 +84,7 @@ class UsuarioServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerUsuarioEmailPasswordTest(){
+    public void obtenerUsuarioEmailPasswordTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuarioEmailPassword("sebastianquinteroosorio2104@gmail.com","s123");
@@ -97,7 +97,7 @@ class UsuarioServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerUsuarioNombreTest(){
+    public void obtenerUsuarioNombreTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuarioNombre("Sebastian");

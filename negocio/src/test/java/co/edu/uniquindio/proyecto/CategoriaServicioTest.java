@@ -12,7 +12,7 @@ import java.util.List;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-class CategoriaServicioTest {
+public class CategoriaServicioTest {
 
     @Autowired
     private AdministradorServicio administradorServicio;
@@ -21,7 +21,7 @@ class CategoriaServicioTest {
     private CategoriaProductoServicio categoriaProductoServicio;
 
     @Test
-    void registrarCategoriaProductoTest(){
+    public void registrarCategoriaProductoTest(){
 
         try {
             Administrador a = administradorServicio.obtenerAdministrador(1);
@@ -40,7 +40,7 @@ class CategoriaServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerCategoriaProductoTest(){
+    public void obtenerCategoriaProductoTest(){
 
         try {
             Categoria c = categoriaProductoServicio.obtenerCategoria(1);
@@ -53,7 +53,7 @@ class CategoriaServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarCategoriasTest(){
+    public void listarCategoriasTest(){
 
         List<Categoria> lista = categoriaProductoServicio.listarCategorias();
         lista.forEach(System.out::println);

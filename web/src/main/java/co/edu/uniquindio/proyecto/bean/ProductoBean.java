@@ -100,7 +100,8 @@ public class ProductoBean implements Serializable {
     public String registrarProducto() {
 
         try {
-            if (personaLogin != null && seguridadBean.getRol().equals("admin") && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
+            if (personaLogin != null && seguridadBean.getRol().equals("admin")) {
+                if (!imagenes.isEmpty() && !especificaciones.isEmpty()) {
 
                     producto.setAdministrador((Administrador) personaLogin);
                     producto.setEstado(true);
@@ -127,8 +128,11 @@ public class ProductoBean implements Serializable {
 
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se creo correctamente");
                     FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+                }
             } else {
-                if (personaLogin != null && seguridadBean.getRol().equals("usuario") && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
+                if (personaLogin != null && seguridadBean.getRol().equals("usuario")) {
+                    if (!imagenes.isEmpty() && !especificaciones.isEmpty()) {
+
                         producto.setUsuario((Usuario) personaLogin);
 
                         Producto productoCreado = productoServicio.registrarProducto(this.producto);
@@ -154,6 +158,7 @@ public class ProductoBean implements Serializable {
                         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se creo correctamente");
                         FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
                     }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

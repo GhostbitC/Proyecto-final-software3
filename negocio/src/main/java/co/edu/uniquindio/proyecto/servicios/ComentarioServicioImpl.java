@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ComentarioServicioImpl implements ComentarioServicio {
+public class ComentarioServicioImpl implements ComentarioServicio{
 
     private final ProductoRepo productoRepo;
 

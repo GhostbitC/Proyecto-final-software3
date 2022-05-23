@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-class ImagenServicioTest {
+public class ImagenServicioTest {
 
     @Autowired
     private ImagenServicio imagenServicio;
@@ -24,7 +24,7 @@ class ImagenServicioTest {
     private ImagenRepo imagenRepo;
 
     @Test
-    void registrarImagenTest(){
+    public void registrarImagenTest(){
 
         try {
             Producto p = productoServicio.obtenerProducto(1);

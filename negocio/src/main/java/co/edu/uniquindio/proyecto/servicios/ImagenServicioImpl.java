@@ -5,7 +5,7 @@ import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ImagenServicioImpl implements ImagenServicio {
+public class ImagenServicioImpl implements ImagenServicio{
 
     private final ImagenRepo imagenRepo;
 

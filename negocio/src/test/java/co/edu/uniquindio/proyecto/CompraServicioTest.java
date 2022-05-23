@@ -16,7 +16,7 @@ import java.util.List;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-class CompraServicioTest {
+public class CompraServicioTest {
 
     @Autowired
     private CompraServicio compraServicio;
@@ -35,7 +35,7 @@ class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void registrarCompraTest(){
+    public void registrarCompraTest(){
 
         try {
 
@@ -58,7 +58,7 @@ class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void agregarCompraTest(){
+    public void agregarCompraTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -83,7 +83,7 @@ class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarComprasSinAprobarUsuarioTest(){
+    public void listarComprasSinAprobarUsuarioTest(){
 
         List<Compra> lista = compraServicio.listarComprasSinAprobarUsuarios();
         lista.forEach(System.out::println);
@@ -93,7 +93,7 @@ class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarComprasSinComprobanteUsuarioTest(){
+    public void listarComprasSinComprobanteUsuarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -109,7 +109,7 @@ class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarComprasUsuarioTest(){
+    public void listarComprasUsuarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -125,7 +125,7 @@ class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerComprasUsuarioTest(){
+    public void obtenerComprasUsuarioTest(){
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
 
@@ -138,7 +138,8 @@ class CompraServicioTest {
     }
 
     @Test
-    void enviarEmail() {
+    public void enviarEmail() {
+
         emailService.enviarEmail("Prueba","Prueba", "sebastianquinteroosorio2104@gmail.com");
     }
 

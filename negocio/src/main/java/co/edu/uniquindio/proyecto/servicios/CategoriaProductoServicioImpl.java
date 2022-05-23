@@ -4,12 +4,11 @@ import co.edu.uniquindio.proyecto.entidades.Categoria;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaProductoRepo;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoriaProductoServicioImpl implements CategoriaProductoServicio, Serializable {
+public class CategoriaProductoServicioImpl implements CategoriaProductoServicio {
 
     private final CategoriaProductoRepo categoriaRepo;
 

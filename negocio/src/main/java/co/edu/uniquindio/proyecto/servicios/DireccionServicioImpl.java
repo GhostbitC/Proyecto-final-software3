@@ -4,9 +4,8 @@ import co.edu.uniquindio.proyecto.entidades.Direccion;
 import co.edu.uniquindio.proyecto.repositorios.DireccionRepo;
 import org.springframework.stereotype.Service;
 
-
 @Service
-public class DireccionServicioImpl implements DireccionServicio {
+public class DireccionServicioImpl implements DireccionServicio{
 
     private final DireccionRepo direccionRepo;
 

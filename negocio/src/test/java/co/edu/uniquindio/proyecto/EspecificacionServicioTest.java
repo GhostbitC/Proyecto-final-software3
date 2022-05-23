@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-class EspecificacionServicioTest {
+public class EspecificacionServicioTest {
 
     @Autowired
     private EspecificacionServicio especificacionServicio;
@@ -26,7 +26,7 @@ class EspecificacionServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void registrarEspecificacionTest(){
+    public void registrarEspecificacionTest(){
         try {
             Producto p = productoServicio.obtenerProducto(2);
 

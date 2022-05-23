@@ -15,7 +15,7 @@ import java.util.List;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-class ProductoServicioTest {
+public class ProductoServicioTest {
 
     @Autowired
     private AdministradorServicio administradorServicio;
@@ -30,7 +30,7 @@ class ProductoServicioTest {
     private UsuarioServicio usuarioServicio;
 
     @Test
-    void registrarProductoTest(){
+    public void registrarProductoTest(){
 
         try {
             Administrador a = administradorServicio.obtenerAdministrador(1);
@@ -49,7 +49,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void eliminarProductoTest(){
+    public void eliminarProductoTest(){
 
         try {
 
@@ -67,7 +67,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void actualizarProductoTest(){
+    public void actualizarProductoTest(){
 
         try {
             Producto p = productoServicio.obtenerProducto(2);
@@ -86,7 +86,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerProductoTest(){
+    public void obtenerProductoTest(){
 
         try {
             Producto p = productoServicio.obtenerProducto(2);
@@ -99,7 +99,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerCalificacionPromedioTest(){
+    public void obtenerCalificacionPromedioTest(){
 
         try {
             boolean comprobado=false;
@@ -119,7 +119,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void ingresarComentarioTest(){
+    public void ingresarComentarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -143,7 +143,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void registrarComentarioTest(){
+    public void registrarComentarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -167,7 +167,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerPorcentajeTest(){
+    public void obtenerPorcentajeTest(){
 
         try {
             Producto p = productoServicio.obtenerProducto(2);
@@ -182,7 +182,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerProductoEstrellaTest(){
+    public void obtenerProductoEstrellaTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -197,7 +197,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerProductoNombreTest(){
+    public void obtenerProductoNombreTest(){
 
         try {
             Producto p = productoServicio.obtenerProductoNombre("Asus vivoBook");
@@ -210,7 +210,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarProductosTest(){
+    public void listarProductosTest(){
 
         List<Producto> lista = productoServicio.listarProductos();
         lista.forEach(System.out::println);
@@ -220,7 +220,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarTecladosTest(){
+    public void listarTecladosTest(){
 
         List<Producto> lista = productoServicio.listarTeclados();
         lista.forEach(System.out::println);
@@ -230,7 +230,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarMousesTest(){
+    public void listarMousesTest(){
 
         List<Producto> lista = productoServicio.listarMouses();
         lista.forEach(System.out::println);
@@ -240,7 +240,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarAudifonosTest(){
+    public void listarAudifonosTest(){
 
         List<Producto> lista = productoServicio.listarAudifonos();
         lista.forEach(System.out::println);
@@ -250,7 +250,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarPortatilesTest(){
+    public void listarPortatilesTest(){
 
         List<Producto> lista = productoServicio.listarPortatiles();
         lista.forEach(System.out::println);
@@ -260,7 +260,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarProductosUsuarioTest(){
+    public void listarProductosUsuarioTest(){
 
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
@@ -276,7 +276,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarProductosSinAprobarTest(){
+    public void listarProductosSinAprobarTest(){
 
         List<Producto> lista = productoServicio.listarProductosSinAprobarUsuarios();
         lista.forEach(System.out::println);
@@ -286,7 +286,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarProductosDestacadosTest(){
+    public void listarProductosDestacadosTest(){
 
         List<Producto> lista = productoServicio.listarProductosDestacados();
         lista.forEach(System.out::println);
@@ -297,7 +297,7 @@ class ProductoServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void buscarProductosTest(){
+    public void buscarProductosTest(){
 
         List<Producto> lista = productoServicio.buscarProductos("Asus");
         lista.forEach(System.out::println);

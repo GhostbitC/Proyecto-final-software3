@@ -17,4 +17,6 @@ public interface UsuarioRepo extends JpaRepository<Usuario,Integer> {
 
     Optional<Usuario> findByNickname(String nickname);
 
+    @Query("delete from Usuario u where u.id = :idUsuario")
+    void eliminarPorId(int idUsuario);
 }

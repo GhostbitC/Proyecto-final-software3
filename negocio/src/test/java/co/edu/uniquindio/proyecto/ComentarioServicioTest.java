@@ -12,7 +12,7 @@ import java.util.List;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-class ComentarioServicioTest {
+public class ComentarioServicioTest {
 
     @Autowired
     private ComentarioServicio comentarioServicio;
@@ -22,7 +22,7 @@ class ComentarioServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void listarComentariosPorProductoTest() {
+    public void listarComentariosPorProductoTest() {
 
         try {
             Producto p = productoServicio.obtenerProducto(2);

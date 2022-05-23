@@ -11,8 +11,7 @@ public class ProductoCarrito {
     @EqualsAndHashCode.Include
     private Integer id;
     private Integer unidades;
-    private String nombre;
-    private String imagen;
+    private String nombre, imagen;
     private Float precio;
 
     public ProductoCarrito(Integer id, String nombre, String imagen, Integer unidades, Float precio) {

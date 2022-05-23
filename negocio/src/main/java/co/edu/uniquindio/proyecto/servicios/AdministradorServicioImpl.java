@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class AdministradorServicioImpl implements AdministradorServicio {
+public class AdministradorServicioImpl implements AdministradorServicio{
 
     private final AdministradorRepo administradorRepo;
 
@@ -178,7 +178,7 @@ public class AdministradorServicioImpl implements AdministradorServicio {
 
             ComprobantePago comprobanteCompra = compraEncontrada.getComprobantePago();
 
-            if(compraEncontrada.getListaDetallesCompra()!=null && compraEncontrada.getListaDetallesCompra().isEmpty()){
+            if(compraEncontrada.getListaDetallesCompra()!=null && compraEncontrada.getListaDetallesCompra().size()>0){
 
                 detalleCompraRepo.deleteAll(compraEncontrada.getListaDetallesCompra());
                 compraEncontrada.getListaDetallesCompra().clear();

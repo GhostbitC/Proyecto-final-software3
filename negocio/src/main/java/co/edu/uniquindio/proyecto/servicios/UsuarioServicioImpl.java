@@ -108,7 +108,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             List<Producto>productosUsuario = usuarioEncontrado.getProductos();
             List<Favorito>favoritos = usuarioEncontrado.getFavoritos();
 
-            if(productosUsuario!=null && productosUsuario.isEmpty()){
+            if(productosUsuario!=null && productosUsuario.size()!=0){
 
                 for(Producto p:usuarioEncontrado.getProductos()){
 
@@ -118,7 +118,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
                 usuarioEncontrado.getProductos().clear();
             }
 
-            if(favoritos!=null && favoritos.isEmpty()){
+            if(favoritos!=null && favoritos.size()!=0){
 
                 favoritoRepo.deleteAll(usuarioEncontrado.getFavoritos());
             }
