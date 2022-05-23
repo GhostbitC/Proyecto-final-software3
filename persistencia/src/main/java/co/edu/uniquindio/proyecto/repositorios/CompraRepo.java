@@ -5,10 +5,12 @@ import co.edu.uniquindio.proyecto.entidades.ComprobantePago;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Repository
-public interface CompraRepo extends JpaRepository<Compra,Integer> {
+public interface CompraRepo extends JpaRepository<Compra,Integer>, Serializable {
 
     //================================= REPOSITORIO DE COMPRA =================================//
     @Query("select com from Compra c join c.comprobantePago com where c.id = :idCompra")

@@ -4,10 +4,12 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.io.Serializable;
 import java.util.List;
 
 @Repository
-public interface CategoriaProductoRepo extends JpaRepository<Categoria,Integer> {
+public interface CategoriaProductoRepo extends JpaRepository<Categoria,Integer>, Serializable {
 
     //================================= REPOSITORIO DE CATEGORÍA =================================//
 

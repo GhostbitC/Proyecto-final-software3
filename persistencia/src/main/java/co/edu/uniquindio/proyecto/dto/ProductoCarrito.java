@@ -1,12 +1,13 @@
 package co.edu.uniquindio.proyecto.dto;
 
 import lombok.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class ProductoCarrito {
+public class ProductoCarrito implements Serializable {
 
     @EqualsAndHashCode.Include
     private Integer id;

@@ -4,10 +4,11 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 @Repository
-public interface AdministradorRepo extends JpaRepository<Administrador,Integer> {
+public interface AdministradorRepo extends JpaRepository<Administrador, Integer>, Serializable {
 
     //================================= REPOSITORIO DE ADMINISTRADOR =================================//
 

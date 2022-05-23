@@ -5,10 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Repository
-public interface ProductoRepo extends JpaRepository<Producto,Integer> {
+public interface ProductoRepo extends JpaRepository<Producto,Integer>, Serializable {
 
     @Query("select i from Producto p join p.imagenes i where p.id = :idProducto")
     List<Imagen> obtenerImagenes(int idProducto);

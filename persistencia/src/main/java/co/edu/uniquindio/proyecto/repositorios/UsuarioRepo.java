@@ -4,10 +4,11 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Repository
-public interface UsuarioRepo extends JpaRepository<Usuario,Integer> {
+public interface UsuarioRepo extends JpaRepository<Usuario,Integer>, Serializable {
 
     Usuario findByEmailAndPassword(String email,String password);
 

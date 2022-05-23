@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
+import java.io.Serializable;
 import java.util.*;
 
 @Component
 @ViewScoped
-public class AdministradorBean {
+public class AdministradorBean implements Serializable {
 
     private final AdministradorServicio administradorServicio;
 
@@ -64,7 +65,6 @@ public class AdministradorBean {
             try{
 
                 administradorEncontrado = administradorServicio.obtenerAdministrador(personaLogin.getId());
-                //personaLogin.toString();
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -74,13 +74,13 @@ public class AdministradorBean {
         return administradorEncontrado;
     }
 
-    public void aprobarProductoUsuario(int idProducto) throws Exception {
+    public void aprobarProductoUsuario(int idProducto) {
 
         administradorServicio.aprobarProductoUsuario(idProducto, personaLogin.getId());
         this.productosSinAprobarUsuarios = obtenerProductosSinAprobar();
     }
 
-    public void rechazarProductoUsuario(int idProducto) throws Exception {
+    public void rechazarProductoUsuario(int idProducto) {
 
         administradorServicio.rechazarProductoUsuario(idProducto, personaLogin.getId());
         this.productosSinAprobarUsuarios = obtenerProductosSinAprobar();
@@ -92,7 +92,7 @@ public class AdministradorBean {
         this.comprasUsuariosSinAprobar = obtenerComprasSinValidar();
     }
 
-    public void eliminarProducto(int idProducto) throws Exception {
+    public void eliminarProducto(int idProducto){
 
         if (personaLogin!=null){
             productoServicio.eliminarProducto(idProducto);
