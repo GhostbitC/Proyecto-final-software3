@@ -12,7 +12,7 @@ import java.util.List;
 
 @SpringBootTest(classes = NegocioApplication.class)
 @Transactional
-public class AdministradorServicioTest {
+class AdministradorServicioTest {
 
     @Autowired
     private AdministradorServicio administradorServicio;
@@ -27,7 +27,7 @@ public class AdministradorServicioTest {
     private UsuarioServicio usuarioServicio;
 
     @Test
-    public void registrarAdministradorTest(){
+    void registrarAdministradorTest(){
 
         try {
             Administrador a = new Administrador("Sebastian","Quintero Osorio","Botsorio","21quintero04","sebastianquinteroosorio2104@gmail.com");
@@ -44,7 +44,7 @@ public class AdministradorServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void actualizarAdministradorTest(){
+    void actualizarAdministradorTest(){
 
         try {
             Administrador a = administradorServicio.obtenerAdministrador(1);
@@ -63,7 +63,7 @@ public class AdministradorServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void obtenerAdministradorTest(){
+    void obtenerAdministradorTest(){
 
         try {
             Administrador a = administradorServicio.obtenerAdministrador(1);
@@ -77,7 +77,7 @@ public class AdministradorServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void obtenerAdministradorEmailPasswordTest(){
+    void obtenerAdministradorEmailPasswordTest(){
 
         try {
             Administrador a = administradorServicio.obtenerEmailPassword("braianc.piedrahitar@uqvirtual.edu.co","b123");
@@ -90,7 +90,7 @@ public class AdministradorServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void aprobarProductoUsuarioTest(){
+    void aprobarProductoUsuarioTest(){
 
         try {
             Administrador a = administradorServicio.obtenerAdministrador(1);
@@ -110,7 +110,7 @@ public class AdministradorServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void rechazarProductoUsuarioTest() {
+    void rechazarProductoUsuarioTest() {
 
         try {
             Administrador a = administradorServicio.obtenerAdministrador(1);
@@ -130,7 +130,7 @@ public class AdministradorServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void aprobarCompraUsuarioTest(){
+    void aprobarCompraUsuarioTest(){
 
         try {
             Administrador a = administradorServicio.obtenerAdministrador(1);
@@ -151,7 +151,7 @@ public class AdministradorServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void rechazarCompraUsuarioTest(){
+    void rechazarCompraUsuarioTest(){
 
         try {
             Administrador a = administradorServicio.obtenerAdministrador(1);
@@ -172,7 +172,7 @@ public class AdministradorServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void listarAdministradoresTest(){
+    void listarAdministradoresTest(){
 
         List<Administrador> lista = administradorServicio.listarAdministradores();
         lista.forEach(System.out::println);
