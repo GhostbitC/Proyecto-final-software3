@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: co.edu.uniquindio.proyecto.ProductoServicioTest
+-------------------------------------------------------------------------------
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 67.223 s - in co.edu.uniquindio.proyecto.ProductoServicioTest

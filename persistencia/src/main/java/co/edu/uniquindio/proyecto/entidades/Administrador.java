@@ -2,7 +2,6 @@ package co.edu.uniquindio.proyecto.entidades;
 
 import lombok.*;
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
 @Entity
@@ -24,7 +23,7 @@ public class Administrador extends Persona {
     //================================= RELACIÓN CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "administrador")
     @ToString.Exclude
-    private List<Compra> compras;
+    private transient List<Compra> compras;
 
     //================================= CONSTRUCTOR  =================================//
     public Administrador(String nombre,String apellido, String nickname, String password, String email) {

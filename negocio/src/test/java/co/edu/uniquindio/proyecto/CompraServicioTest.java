@@ -30,9 +30,6 @@ class CompraServicioTest {
     @Autowired
     private AdministradorServicio administradorServicio;
 
-    @Autowired
-    private EmailService emailService;
-
     @Test
     @Sql("classpath:dataset.sql")
     void registrarCompraTest(){
@@ -125,28 +122,16 @@ class CompraServicioTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    void obtenerComprasUsuarioTest(){
+    void obtenerComprasUsuarioTest() {
         try {
             Usuario u = usuarioServicio.obtenerUsuario(1);
 
-            Compra c = compraServicio.obtenerCompraUsuario(u.getId(),2);
+            Compra c = compraServicio.obtenerCompraUsuario(u.getId(), 2);
 
             Assertions.assertNotNull(c);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @Test
-    void enviarEmail() {
-
-        Boolean aux = false;
-
-        emailService.enviarEmail("Prueba","Prueba", "sebastianquinteroosorio2104@gmail.com");
-        aux = true;
-
-        Assertions.assertNotNull(true);
-
     }
 
 }

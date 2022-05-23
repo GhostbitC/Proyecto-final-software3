@@ -17,7 +17,7 @@ public class EspecificacionServicioImpl implements EspecificacionServicio{
     @Override
     public void registrarEspecificacion(Especificacion e) throws ObjetoNoEncontradoException {
 
-        if(e.getEspecificacion().length() > 500){
+        if(e.getEspecification().length() > 500){
             throw new ObjetoNoEncontradoException("No puede superar los 500 caracteres");
         }
         especificacionRepo.save(e);

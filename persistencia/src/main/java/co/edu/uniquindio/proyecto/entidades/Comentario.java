@@ -23,7 +23,7 @@ public class Comentario implements Serializable {
 
     @Column(nullable = false)
     @Size(max = 500, message = "El comentario no puede superar los 200 caracteres")
-    private String comentario;
+    private String coment;
 
     @Column(nullable = false)
     private int calificacion;
@@ -40,8 +40,8 @@ public class Comentario implements Serializable {
     @ManyToOne
     private Usuario usuario;
 
-    public Comentario(String comentario, int calificacion, Date fechaComentario, Producto producto, Usuario usuario) {
-        this.comentario = comentario;
+    public Comentario(String coment, int calificacion, Date fechaComentario, Producto producto, Usuario usuario) {
+        this.coment = coment;
         this.calificacion = calificacion;
         this.fechaComentario = fechaComentario;
         this.producto = producto;
