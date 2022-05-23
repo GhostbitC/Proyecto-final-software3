@@ -12,7 +12,7 @@ import java.util.*;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Categoria implements Serializable {
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class Categoria implements Serializable {
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "categoria")
     @ToString.Exclude
-    private List<Producto> productos;
+    private transient List<Producto> productos;
 
     //================================= RELACIÓN CON LA ENTIDAD ADMINISTRADOR =================================//
     @ManyToOne

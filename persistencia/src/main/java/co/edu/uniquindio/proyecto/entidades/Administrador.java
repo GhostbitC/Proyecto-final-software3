@@ -13,12 +13,12 @@ public class Administrador extends Persona {
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "administrador")
     @ToString.Exclude
-    private List<Producto> productos;
+    private transient List<Producto> productos;
 
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO USUARIO =================================//
     @OneToMany(mappedBy = "administrador")
     @ToString.Exclude
-    private List<Producto> productosAprobados;
+    private transient List<Producto> productosAprobados;
 
     //================================= RELACIÓN CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "administrador")

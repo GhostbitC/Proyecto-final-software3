@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ComprobantePago {
+public class ComprobantePago implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id
@@ -26,7 +26,7 @@ public class ComprobantePago {
 
     //================================= RELACIÓN CON LA ENTIDAD COMPRA =================================//
     @OneToOne
-    private transient Compra compra;
+    private Compra compra;
 
     public ComprobantePago(String url, Compra compra) {
         this.url = url;
