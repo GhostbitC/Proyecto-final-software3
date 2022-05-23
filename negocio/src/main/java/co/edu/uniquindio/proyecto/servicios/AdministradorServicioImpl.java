@@ -40,31 +40,31 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     }
 
     @Override
-    public void registrarAdministrador(Administrador a) throws Exception {
+    public void registrarAdministrador(Administrador a) throws ObjetoNoEncontradoException{
 
         if (a.getNickname().length()>100){
-            throw new Exception("El nickname solo puede tener 100 caracteres ");
+            throw new ObjetoNoEncontradoException("El nickname solo puede tener 100 caracteres ");
         }
 
         if (a.getEmail().length()>100){
-            throw new Exception("El correo solo puede tener 100 caracteres ");
+            throw new ObjetoNoEncontradoException("El correo solo puede tener 100 caracteres ");
         }
 
         if (a.getNombre().length()>100){
-            throw new Exception("El nombre solo puede tener 100 caracteres ");
+            throw new ObjetoNoEncontradoException("El nombre solo puede tener 100 caracteres ");
         }
 
         if (a.getPassword().length()>100){
-            throw new Exception("La contraseña solo puede tener 100 caracteres ");
+            throw new ObjetoNoEncontradoException("La contraseña solo puede tener 100 caracteres ");
         }
 
         Optional<Administrador> admNick= administradorRepo.findByNickname(a.getNickname());
         if(admNick.isPresent()){
-            throw new Exception("El administrador ya existe");
+            throw new ObjetoNoEncontradoException("El administrador ya existe");
         }
 
         if(estaDisponible(a.getEmail())){
-            throw new Exception("El administrador ya existe");
+            throw new ObjetoNoEncontradoException("El administrador ya existe");
         }
         administradorRepo.save(a);
     }
@@ -91,7 +91,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     public Administrador obtenerAdministrador(int id) throws ObjetoNoEncontradoException {
         Optional<Administrador> administrador = administradorRepo.findById(id);
 
-        return administrador.orElseThrow(() ->new ObjetoNoEncontradoException("No se encontraron registros en la base de datos"));
+        return administrador.orElseThrow(() ->new ObjetoNoEncontradoException("No se encontraron administradores con los datos proporcionados"));
     }
 
     @Override
@@ -106,7 +106,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
 
         if(administrador == null){
 
-            throw new ObjetoNoEncontradoException("No se encontraron registros en la base de datos");
+            throw new ObjetoNoEncontradoException("No se encontraron registros");
         }
         return administrador;
     }
@@ -125,7 +125,7 @@ public class AdministradorServicioImpl implements AdministradorServicio{
             administradorRepo.save(adminEncontrado.get());
             productoRepo.save(productoEncontrado.get());
         }else {
-            throw new ObjetoNoEncontradoException("No se encontraron registros en la base de datos");
+            throw new ObjetoNoEncontradoException("No se encontraron administradores ni productos");
         }
     }
 
