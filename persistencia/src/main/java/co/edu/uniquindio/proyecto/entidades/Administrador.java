@@ -9,7 +9,7 @@ import java.util.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Administrador extends Persona implements Serializable {
+public class Administrador extends Persona{
 
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "administrador")

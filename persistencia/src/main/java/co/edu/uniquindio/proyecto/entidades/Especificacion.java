@@ -11,7 +11,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
-public class Especificacion implements Serializable {
+public class Especificacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

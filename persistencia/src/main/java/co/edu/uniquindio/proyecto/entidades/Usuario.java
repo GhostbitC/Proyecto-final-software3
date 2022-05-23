@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Usuario extends Persona implements Serializable {
+public class Usuario extends Persona {
     @Column(length = 10)
     private double saldo;
 

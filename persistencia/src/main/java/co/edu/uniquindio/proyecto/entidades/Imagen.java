@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Imagen implements Serializable {
+public class Imagen {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id

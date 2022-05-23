@@ -14,7 +14,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
-public class Ciudad implements Serializable {
+public class Ciudad {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id

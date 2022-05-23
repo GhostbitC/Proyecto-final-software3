@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Persona implements Serializable {
+public class Persona {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id
