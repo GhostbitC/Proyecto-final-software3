@@ -4,14 +4,10 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
 public interface ProductoRepo extends JpaRepository<Producto,Integer> {
-
-    @Query("select i from Producto p join p.imagenes i where p.id = :idProducto")
-    List<Imagen> obtenerImagenes(int idProducto);
 
     @Query("select p from Producto p where p.nombre =:nombreProducto")
     Producto obtenerProductoNombre(String nombreProducto);
@@ -27,9 +23,6 @@ public interface ProductoRepo extends JpaRepository<Producto,Integer> {
 
     @Query("select p from Producto p join p.categoria c where c.nombre =:cadena and p.estado = true")
     List<Producto> listarProductosPorCategoria(String cadena);
-
-    @Query("select e from Producto p join p.especificaciones e where p.id = :idProducto")
-    List<Especificacion> obtenerEspecificaciones(int idProducto);
 
     @Query("select avg(c.calificacion) from Comentario c where c.producto.id = :idProducto")
     Integer obtenerCalificacion(Integer idProducto);
