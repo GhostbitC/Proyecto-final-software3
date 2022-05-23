@@ -7,7 +7,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,7 +23,7 @@ public class Usuario extends Persona implements Serializable {
     //================================= RELACION CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Compra> compras;
+    private transient List<Compra> compras;
 
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "usuario")

@@ -37,7 +37,8 @@ class ProductoServicioTest {
 
             Categoria c = categoriaProductoServicio.obtenerCategoria(1);
 
-            Producto p = new Producto("Asus Gaming","Pc gamer",29.399,a,c);
+            Producto p = new Producto("Asus Gaming","Pc gamer",29.399,a);
+            p.setCategoria(c);
 
             Producto registrado = productoServicio.registrarProducto(p);
 

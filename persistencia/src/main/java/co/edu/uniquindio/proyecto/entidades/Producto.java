@@ -50,7 +50,7 @@ public class Producto implements Serializable {
 
     //================================= RELACIÓN CON LA ENTIDAD COMPRA =================================//
     @ManyToOne
-    private Compra compra;
+    private transient Compra compra;
 
     //================================= RELACIÓN CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "producto")
@@ -76,42 +76,23 @@ public class Producto implements Serializable {
     @OneToMany (mappedBy = "producto", cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
-    private List<DetalleCompra> listaDetalleCompra;
+    private transient List<DetalleCompra> listaDetalleCompra;
 
-
-    public Producto(String nombre, String descripcion, double precio, Administrador administrador, Categoria categoria) {
+    public Producto(String nombre, String descripcion, double precio, Administrador administrador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.setEstado(true);
         this.precio = precio;
         this.administrador = administrador;
-        this.categoria = categoria;
         this.imagenes = new ArrayList<>();
         this.comentarios=new ArrayList<>();
         this.especificaciones = new ArrayList<>();
     }
 
-    public Producto(String nombre, String descripcion, double precio, int unidades, Boolean estado, Administrador administrador, Usuario usuario, Categoria categoria) {
+    public Producto(String nombre, String descripcion, double precio, Usuario u) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.unidades = unidades;
-        this.estado = estado;
-        this.administrador = administrador;
-        this.usuario = usuario;
-        this.categoria = categoria;
-        this.imagenes = new ArrayList<>();
-        this.comentarios=new ArrayList<>();
-        this.especificaciones = new ArrayList<>();
-    }
-
-    public Producto(String nombre, String descripcion, double precio, int unidades, Usuario usuario, Categoria categoria) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.unidades = unidades;
-        this.usuario = usuario;
-        this.categoria = categoria;
+        this.usuario = u;
         this.imagenes = new ArrayList<>();
         this.comentarios=new ArrayList<>();
         this.especificaciones = new ArrayList<>();

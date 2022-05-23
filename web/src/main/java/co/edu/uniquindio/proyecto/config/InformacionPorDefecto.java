@@ -37,7 +37,7 @@ public class InformacionPorDefecto implements CommandLineRunner {
     private CompraServicio compraServicio;
 
     @Override
-    public void run(String... args) throws Exception{
+    public void run(String... args) {
 
         if (administradorServicio.listarAdministradores().isEmpty()){
 
@@ -107,7 +107,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
 
             //=========================== PRODUCTOS DESTACADOS ================================//
-            Producto producto1 = new Producto("Asus Tuf Gaming","ASUS TUF Gaming FX505 cambiará su forma de ver las computadoras portátiles para juegos. Supera las expectativas, con un hardware impresionante y un chasis compacto y de diseño agresivo que es excepcionalmente resistente.¡Con una pantalla NanoEdge de nivel IPS de vanguardia y una durabilidad certificada MIL-STD-810G.",4099.755,admin1,categoria5);
+            Producto producto1 = new Producto("Asus Tuf Gaming","ASUS TUF Gaming FX505 cambiará su forma de ver las computadoras portátiles para juegos. Supera las expectativas, con un hardware impresionante y un chasis compacto y de diseño agresivo que es excepcionalmente resistente.¡Con una pantalla NanoEdge de nivel IPS de vanguardia y una durabilidad certificada MIL-STD-810G.",4099.755,admin1);
+            producto1.setCategoria(categoria5);
             producto1.setUnidades(3);
             admin1.getProductos().add(producto1);
             Imagen img1 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652629850/uploads/Asus-Gamer-TUF_kkwdvk.png");
@@ -152,7 +153,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(e4);
             especificacionServicio.registrarEspecificacion(e5);
 
-            Producto producto2 = new Producto("G502 Lightspeed","G502 es el mejor mouse para juegos de Logitech G, completamente rediseñado desde adentro hacia afuera con velocidad de luz inalámbrica y compatibilidad de juego de energía para que puedas jugar más rápido y con más precisión.", 440.599,admin1,categoria5);
+            Producto producto2 = new Producto("G502 Lightspeed","G502 es el mejor mouse para juegos de Logitech G, completamente rediseñado desde adentro hacia afuera con velocidad de luz inalámbrica y compatibilidad de juego de energía para que puedas jugar más rápido y con más precisión.", 440.599,admin1);
+            producto2.setCategoria(categoria5);
             producto2.setUnidades(8);
             admin1.getProductos().add(producto2);
             Imagen img5 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652630062/uploads/g502-mouse_uupsmi.png");
@@ -197,7 +199,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(e9);
             especificacionServicio.registrarEspecificacion(e10);
 
-            Producto producto3 = new Producto("Redragon H260 RGB","Auriculares para juegos con micrófono, cableados, compatibles con Xbox One, Nintendo Switch, PS4, PS5, PC, portátiles y Nintendo Switch",82.411,admin1,categoria5);
+            Producto producto3 = new Producto("Redragon H260 RGB","Auriculares para juegos con micrófono, cableados, compatibles con Xbox One, Nintendo Switch, PS4, PS5, PC, portátiles y Nintendo Switch",82.411,admin1);
+            producto3.setCategoria(categoria5);
             producto3.setUnidades(7);
             admin1.getProductos().add(producto3);
             Imagen img9 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652630392/uploads/Hylas-h260_obeb05.png");
@@ -242,7 +245,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(e14);
             especificacionServicio.registrarEspecificacion(e15);
 
-            Producto producto4 = new Producto("Krom Kuma - NXKROMKUMA","Krom Kuma presenta un robusto diseño con interruptores híbridos que te brindan una respuesta táctil precisa y un nivel superior de confort y agilidad, ya que requiere un menor esfuerzo en la pulsación. El aliado perfecto para largas sesiones de juego.",126.799,admin2,categoria5);
+            Producto producto4 = new Producto("Krom Kuma - NXKROMKUMA","Krom Kuma presenta un robusto diseño con interruptores híbridos que te brindan una respuesta táctil precisa y un nivel superior de confort y agilidad, ya que requiere un menor esfuerzo en la pulsación. El aliado perfecto para largas sesiones de juego.",126.799,admin2);
+            producto4.setCategoria(categoria5);
             producto4.setUnidades(5);
             admin2.getProductos().add(producto4);
             Imagen img13 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652630577/uploads/krom_kuma_2_a6auas.png");
@@ -287,7 +291,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(e19);
             especificacionServicio.registrarEspecificacion(e20);
 
-            Producto producto5 = new Producto("kumara k552 rgb","Teclado mecánico TKL súper aclamado, compacto y ampliamente funcional. Es virtualmente irrompible y tiene una durabilidad extraordinaria gracias a que su estructura está reforzada con acero. Además, cuenta con bloqueo de tecla Windows y los excelentes interruptores Redragon Blue/Red, sonoros y táctiles, para 5 millones de clics",229.999,admin2,categoria5);
+            Producto producto5 = new Producto("kumara k552 rgb","Teclado mecánico TKL súper aclamado, compacto y ampliamente funcional. Es virtualmente irrompible y tiene una durabilidad extraordinaria gracias a que su estructura está reforzada con acero. Además, cuenta con bloqueo de tecla Windows y los excelentes interruptores Redragon Blue/Red, sonoros y táctiles, para 5 millones de clics",229.999,admin2);
+            producto5.setCategoria(categoria5);
             producto5.setUnidades(10);
             admin2.getProductos().add(producto5);
             Imagen img17 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652630796/uploads/KUMARA_l3wtgg.png");
@@ -416,7 +421,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             //=========================== PRODUCTOS GENERALES ================================//
 
                         //==================== AUDÍFONOS ====================//
-            Producto p1 = new Producto("HECATE by Edifier GX07","Auriculares inalámbricos para juegos, auriculares Bluetooth con cancelación activa de ruido, latencia ultra baja de 60 ms, micrófono con cancelación de ruido, modo de juego/música, control de aplicaciones, color gris.",448.239,admin1,categoria3);
+            Producto p1 = new Producto("HECATE by Edifier GX07","Auriculares inalámbricos para juegos, auriculares Bluetooth con cancelación activa de ruido, latencia ultra baja de 60 ms, micrófono con cancelación de ruido, modo de juego/música, control de aplicaciones, color gris.",448.239,admin1);
+            p1.setCategoria(categoria3);
             p1.setUnidades(3);
             admin1.getProductos().add(p1);
             Imagen i1 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652632788/uploads/Hecate-GX07_e0eba3.png");
@@ -449,7 +455,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es3);
             especificacionServicio.registrarEspecificacion(es4);
 
-            Producto p2 = new Producto("Logitech G Series G332","Auriculares para juegos con cable, audífonos giratorios de cuero sintético, conector de audio de 0.138 in, micrófono abatible a silencio, ligero para PC, Xbox One, Xbox Series X, S, PS5, PS4, Nintendo Switch, negro.",171.819,5,true,admin1,us,categoria3);
+            Producto p2 = new Producto("Logitech G Series G332","Auriculares para juegos con cable, audífonos giratorios de cuero sintético, conector de audio de 0.138 in, micrófono abatible a silencio, ligero para PC, Xbox One, Xbox Series X, S, PS5, PS4, Nintendo Switch, negro.",171.819,us);
+            p2.setUnidades(5);
+            p2.setCategoria(categoria3);
+            p2.setAdministrador(admin1);
+            p2.setEstado(true);
             admin1.getProductos().add(p2);
             us.getProductos().add(p2);
             Imagen i3 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652630937/uploads/G332_y5sadt.png");
@@ -487,7 +497,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es7);
             especificacionServicio.registrarEspecificacion(es8);
 
-            Producto p3 = new Producto("Redragon Ares","Los auriculares para juegos con cable Redragon H101 te permiten escuchar cada detalle en todas las direcciones, tal como el desarrollador del juego pretendía. ¡Fuego enemigo, las huellas de tu oponente y puedes enfocarte para ganar!.",46.909,10,true,admin1,us,categoria3);
+            Producto p3 = new Producto("Redragon Ares","Los auriculares para juegos con cable Redragon H101 te permiten escuchar cada detalle en todas las direcciones, tal como el desarrollador del juego pretendía. ¡Fuego enemigo, las huellas de tu oponente y puedes enfocarte para ganar!.",46.909,us);
+            p3.setUnidades(10);
+            p3.setCategoria(categoria3);
+            p3.setAdministrador(admin1);
+            p3.setEstado(true);
             admin1.getProductos().add(p3);
             us.getProductos().add(p3);
             Imagen i6 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652631084/uploads/Ares_pi6sko.png");
@@ -525,7 +539,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es11);
             especificacionServicio.registrarEspecificacion(es12);
 
-            Producto p4 = new Producto("Vsg Kuiper","",46.909,admin1,categoria3);
+            Producto p4 = new Producto("Vsg Kuiper","vsg product",46.909,admin1);
+            p4.setCategoria(categoria3);
             p4.setUnidades(10);
             admin1.getProductos().add(p4);
             Imagen i9 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652631198/uploads/vsg-Kui_vqqvo6.png");
@@ -555,7 +570,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
 
                         //==================== PORTÁTILES ====================//
-            Producto p5 = new Producto("Logitech Legion","Lenovo Legion 5 15 Gaming Laptop, 15.6\" FHD (1920 x 1080) Display, AMD Ryzen 7 5800H Processor, 16GB DDR4 RAM, 512GB NVMe SSD, NVIDIA GeForce RTX 3050Ti, Windows 11H, 82JW0012US, Phantom Blue.",5249.999,3,true,admin1,us,categoria4);
+            Producto p5 = new Producto("Logitech Legion","Lenovo Legion 5 15 Gaming Laptop, 15.6\" FHD (1920 x 1080) Display, AMD Ryzen 7 5800H Processor, 16GB DDR4 RAM, 512GB NVMe SSD, NVIDIA GeForce RTX 3050Ti, Windows 11H, 82JW0012US, Phantom Blue.",5249.999,us);
+            p5.setUnidades(3);
+            p5.setCategoria(categoria4);
+            p5.setAdministrador(admin1);
+            p5.setEstado(true);
             admin1.getProductos().add(p5);
             us.getProductos().add(p5);
             Imagen i11 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652631274/uploads/lenovo_rqxwtt.png");
@@ -593,7 +612,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es18);
             especificacionServicio.registrarEspecificacion(es19);
 
-            Producto p6 = new Producto("Acer Predator Helios 300","Acer Predator Helios 300 PH315-54-760S Gaming Laptop | Intel i7-11800H | NVIDIA GeForce RTX 3060 Laptop GPU | 15.6\" Full HD 144Hz 3ms IPS Display | 16GB DDR4 | 512GB SSD | Killer WiFi 6 | RGB Keyboard",6249.999,2,true,admin1,us,categoria4);
+            Producto p6 = new Producto("Acer Predator Helios 300","Acer Predator Helios 300 PH315-54-760S Gaming Laptop | Intel i7-11800H | NVIDIA GeForce RTX 3060 Laptop GPU | 15.6\" Full HD 144Hz 3ms IPS Display | 16GB DDR4 | 512GB SSD | Killer WiFi 6 | RGB Keyboard",6249.999,us);
+            p6.setUnidades(2);
+            p6.setCategoria(categoria4);
+            p6.setAdministrador(admin1);
+            p6.setEstado(true);
             admin1.getProductos().add(p6);
             us.getProductos().add(p6);
             Imagen i14 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652631381/uploads/Predator-helios-300_qgb7nr.png");
@@ -631,7 +654,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es22);
             especificacionServicio.registrarEspecificacion(es23);
 
-            Producto p7 = new Producto("HP Pavilion Gaming","Portátil Micro-EDGE de 15.6 pulgadas, procesador Intel Core i5-9300H, NVIDIA GeForce GTX 1650 (4 GB), 8 GB SDRAM, 256 GB SSD, Windows 10 Home (15-dk0020nr, Shadow Black/Acid Green).",4299.019,admin2,categoria4);
+            Producto p7 = new Producto("HP Pavilion Gaming","Portátil Micro-EDGE de 15.6 pulgadas, procesador Intel Core i5-9300H, NVIDIA GeForce GTX 1650 (4 GB), 8 GB SDRAM, 256 GB SSD, Windows 10 Home (15-dk0020nr, Shadow Black/Acid Green).",4299.019,admin2);
+            p7.setCategoria(categoria4);
             p7.setUnidades(2);
             admin2.getProductos().add(p7);
             Imagen i17 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652631481/uploads/Hp-pavilion_i5v0t7.png");
@@ -668,7 +692,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es26);
             especificacionServicio.registrarEspecificacion(es27);
 
-            Producto p8 = new Producto("Acer Nitro","Portátil para videojuegos con Intel Core i5-10300H, unidad de procesamiento de gráficos NVIDIA GeForce RTX 3050, pantalla IPS FHD de 15.6 pulgadas con frecuencia de actualización de 144 Hz, 8 GB DDR4, unidad de estado sólido SSD NVMe de 256 GB, Intel Wi-Fi 6, teclado retroiluminado.",3059.356,admin2,categoria4);
+            Producto p8 = new Producto("Acer Nitro","Portátil para videojuegos con Intel Core i5-10300H, unidad de procesamiento de gráficos NVIDIA GeForce RTX 3050, pantalla IPS FHD de 15.6 pulgadas con frecuencia de actualización de 144 Hz, 8 GB DDR4, unidad de estado sólido SSD NVMe de 256 GB, Intel Wi-Fi 6, teclado retroiluminado.",3059.356,admin2);
+            p8.setCategoria(categoria4);
             p8.setUnidades(4);
             admin2.getProductos().add(p8);
             Imagen i20 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652631558/uploads/Acer-N5_c5q6qw.png");
@@ -706,7 +731,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es31);
 
                         //==================== TECLADOS ====================//
-            Producto p9 = new Producto("VSG Pulsar QWERTY","Teclado VSG de alto rendimiento permite que puedas disfrutar de horas ilimitadas de juegos. Está diseñado especialmente para que puedas expresar tanto tus habilidades como tu estilo. Podrás mejorar tu experiencia de gaming, ya seas un aficionado o todo un experto, y hacer que tus jugadas alcancen otro nivel.",104.077,admin2,categoria2);
+            Producto p9 = new Producto("VSG Pulsar QWERTY","Teclado VSG de alto rendimiento permite que puedas disfrutar de horas ilimitadas de juegos. Está diseñado especialmente para que puedas expresar tanto tus habilidades como tu estilo. Podrás mejorar tu experiencia de gaming, ya seas un aficionado o todo un experto, y hacer que tus jugadas alcancen otro nivel.",104.077,admin2);
+            p9.setCategoria(categoria2);
             p9.setUnidades(5);
             admin2.getProductos().add(p9);
             Imagen i23 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652631653/uploads/Pulsar_fnv8do.png");
@@ -743,7 +769,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es34);
             especificacionServicio.registrarEspecificacion(es35);
 
-            Producto p10 = new Producto("Redragon K585 DITI","Teclado mecánico RGB para juegos con una sola mano, teclado profesional para juegos tipo C con 7 teclas macro integradas, reposa muñecas desmontable, interruptor rojo lineal, 42 teclas.",148.599,admin2,categoria2);
+            Producto p10 = new Producto("Redragon K585 DITI","Teclado mecánico RGB para juegos con una sola mano, teclado profesional para juegos tipo C con 7 teclas macro integradas, reposa muñecas desmontable, interruptor rojo lineal, 42 teclas.",148.599,admin2);
+            p10.setCategoria(categoria2);
             p10.setUnidades(5);
             admin2.getProductos().add(p10);
             Imagen i26 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652631775/uploads/Diti-k585_tacwhb.png");
@@ -781,7 +808,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es39);
 
             Producto p11 = new Producto("Redragon K617 Fizz","Slim Fresh K617: el nuevo teclado con cable de diseño del 60% de Redragon en un estilo refrescante con una oferta económica sin obviedad. Compacto 61 teclas con teclas seleccionadas, dedicadas a FPS Gamers y un trabajo eficiente.\n" +
-                    "Interruptores rojos intercambiables en caliente: la mayoría de los interruptores mecánicos silenciosos, los desplazamientos lineales y suaves hacen que cada clic sea fácil de registrar. Intercambiable en caliente con otros interruptores Redragon.",234.999,3,true,admin1,u,categoria2);
+                    "Interruptores rojos intercambiables en caliente: la mayoría de los interruptores mecánicos silenciosos, los desplazamientos lineales y suaves hacen que cada clic sea fácil de registrar. Intercambiable en caliente con otros interruptores Redragon.",234.999,u);
+            p11.setUnidades(2);
+            p11.setCategoria(categoria2);
+            p11.setAdministrador(admin1);
+            p11.setEstado(true);
             admin1.getProductos().add(p11);
             u.getProductos().add(p11);
             Imagen i29 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652631886/uploads/K617_xjfo8q.png");
@@ -819,7 +850,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es42);
             especificacionServicio.registrarEspecificacion(es43);
 
-            Producto p12 = new Producto("Logitech Serie G G413 QWERTY","Este teclado Logitech de alto rendimiento permite que puedas disfrutar de horas ilimitadas de juegos. Está diseñado especialmente para que puedas expresar tanto tus habilidades como tu estilo. Podrás mejorar tu experiencia de gaming, ya seas un aficionado o todo un experto, y hacer que tus jugadas alcancen otro nivel.",335.615,10,true,admin1,u,categoria2);
+            Producto p12 = new Producto("Logitech Serie G G413 QWERTY","Este teclado Logitech de alto rendimiento permite que puedas disfrutar de horas ilimitadas de juegos. Está diseñado especialmente para que puedas expresar tanto tus habilidades como tu estilo. Podrás mejorar tu experiencia de gaming, ya seas un aficionado o todo un experto, y hacer que tus jugadas alcancen otro nivel.",335.615,u);
+            p12.setUnidades(5);
+            p12.setCategoria(categoria2);
+            p12.setAdministrador(admin1);
+            p12.setEstado(true);
             admin1.getProductos().add(p12);
             u.getProductos().add(p12);
             Imagen i32 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652632022/uploads/L-G413_d9nm6x.png");
@@ -858,7 +893,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es47);
 
                         //==================== MOUSES ====================//
-            Producto p13 = new Producto("Logitech G Series Prodigy G203","Logitech diseña productos y experiencias que ocupan un lugar cotidiano en la vida de las personas, poniendo foco en la innovación y la calidad. Su objetivo es crear momentos verdaderamente únicos y significativos para sus usuarios. Los mouses Logitech se adaptan a la forma de tu mano para proporcionarte horas de comodidad.",95.999,2,true,admin1,u,categoria1);
+            Producto p13 = new Producto("Logitech G Series Prodigy G203","Logitech diseña productos y experiencias que ocupan un lugar cotidiano en la vida de las personas, poniendo foco en la innovación y la calidad. Su objetivo es crear momentos verdaderamente únicos y significativos para sus usuarios. Los mouses Logitech se adaptan a la forma de tu mano para proporcionarte horas de comodidad.",95.999,u);
+            p13.setUnidades(2);
+            p13.setCategoria(categoria1);
+            p13.setAdministrador(admin1);
+            p13.setEstado(true);
             admin1.getProductos().add(p13);
             u.getProductos().add(p13);
             Imagen i35 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652632138/uploads/g203_wcvrgc.png");
@@ -896,7 +935,11 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es50);
             especificacionServicio.registrarEspecificacion(es51);
 
-            Producto p14 = new Producto("Razer DeathAdder V2 Gaming","Desde 2005 Razer es la marca líder de estilo de vida para jugadores. Ha diseñado y construido el ecosistema de hardware, software y servicios más grande del mundo. La ubicación de cada botón y curva de los mouses Razer se crearon para adaptarse perfectamente a tu mano. Gracias a estos dispositivos, conseguirás una experiencia de juego cómoda y placentera.",130.609,5,true,admin1,u,categoria1);
+            Producto p14 = new Producto("Razer DeathAdder V2 Gaming","Desde 2005 Razer es la marca líder de estilo de vida para jugadores. Ha diseñado y construido el ecosistema de hardware, software y servicios más grande del mundo. La ubicación de cada botón y curva de los mouses Razer se crearon para adaptarse perfectamente a tu mano. Gracias a estos dispositivos, conseguirás una experiencia de juego cómoda y placentera.",130.609,u);
+            p14.setUnidades(3);
+            p14.setCategoria(categoria1);
+            p14.setAdministrador(admin1);
+            p14.setEstado(true);
             admin1.getProductos().add(p14);
             u.getProductos().add(p14);
             Imagen i38 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652632226/uploads/razer-vsg_a619sz.png");
@@ -934,7 +977,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es54);
             especificacionServicio.registrarEspecificacion(es55);
 
-            Producto p15 = new Producto("Logitech G Series Lightspeed G305 blue","Logitech diseña productos y experiencias que ocupan un lugar cotidiano en la vida de las personas, poniendo foco en la innovación y la calidad. Su objetivo es crear momentos verdaderamente únicos y significativos para sus usuarios. Los mouses Logitech se adaptan a la forma de tu mano para proporcionarte horas de comodidad.", 129.999,admin1,categoria1);
+            Producto p15 = new Producto("Logitech G Series Lightspeed G305 blue","Logitech diseña productos y experiencias que ocupan un lugar cotidiano en la vida de las personas, poniendo foco en la innovación y la calidad. Su objetivo es crear momentos verdaderamente únicos y significativos para sus usuarios. Los mouses Logitech se adaptan a la forma de tu mano para proporcionarte horas de comodidad.", 129.999,admin1);
+            p13.setCategoria(categoria1);
             p15.setUnidades(4);
             admin1.getProductos().add(p15);
             Imagen i41 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652632321/uploads/L305_ad86cg.png");
@@ -971,7 +1015,8 @@ public class InformacionPorDefecto implements CommandLineRunner {
             especificacionServicio.registrarEspecificacion(es58);
             especificacionServicio.registrarEspecificacion(es59);
 
-            Producto p16 = new Producto("Redragon Centrophorus2 M601-RGB","Redragon innova día a día en diseño y calidad. Su objetivo es producir equipamiento de alta gama para jugadores, con excelentes prestaciones y a un precio accesible. Los mouses Redragon son adecuados para todas las ocasiones, ya sea para entretenerse en el hogar o usarlo en el trabajo. Experimenta el diseño cómodo y elegante de este dispositivo.",70.019,admin1,categoria1);
+            Producto p16 = new Producto("Redragon Centrophorus2 M601-RGB","Redragon innova día a día en diseño y calidad. Su objetivo es producir equipamiento de alta gama para jugadores, con excelentes prestaciones y a un precio accesible. Los mouses Redragon son adecuados para todas las ocasiones, ya sea para entretenerse en el hogar o usarlo en el trabajo. Experimenta el diseño cómodo y elegante de este dispositivo.",70.019,admin1);
+            p16.setCategoria(categoria1);
             p16.setUnidades(4);
             admin1.getProductos().add(p16);
             Imagen i44 = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652632425/uploads/CETROPHORUS-RGB_qimbwn.png");
@@ -1052,7 +1097,9 @@ public class InformacionPorDefecto implements CommandLineRunner {
 
             //========================= PRUEBA PRODUCTOS ==================//
             Producto product = new Producto("Redragon K551RGB-BA","Tecnología antighost\n" +
-                    "El teclado está compuesto por interruptores antighosting. Esta cualidad es indispensable si necesitas darle un uso máximo al periférico. Gracias a esto evitarás fallas al tocar varias teclas al mismo tiempo.",335.615,10,u,categoria2);
+                    "El teclado está compuesto por interruptores antighosting. Esta cualidad es indispensable si necesitas darle un uso máximo al periférico. Gracias a esto evitarás fallas al tocar varias teclas al mismo tiempo.",335.615,u);
+            product.setCategoria(categoria2);
+            product.setUnidades(10);
             u.getProductos().add(product);
             Imagen img = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652632585/uploads/K551RGB-BA_saykmz.png");
             img.setProducto(product);
@@ -1065,7 +1112,9 @@ public class InformacionPorDefecto implements CommandLineRunner {
             imagenServicio.registrarImagen(img);
             especificacionServicio.registrarEspecificacion(esp);
 
-            Producto product1 = new Producto("Xtrike Me GK-979","Este teclado Xtrike Me de alto rendimiento permite que puedas disfrutar de horas ilimitadas de juegos. Está diseñado especialmente para que puedas expresar tanto tus habilidades como tu estilo.",139.005,2,u,categoria2);
+            Producto product1 = new Producto("Xtrike Me GK-979","Este teclado Xtrike Me de alto rendimiento permite que puedas disfrutar de horas ilimitadas de juegos. Está diseñado especialmente para que puedas expresar tanto tus habilidades como tu estilo.",139.005,u);
+            product1.setCategoria(categoria2);
+            product1.setUnidades(2);
             u.getProductos().add(product);
             Imagen imge = new Imagen("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652632611/uploads/Xtrike_mkxdmc.png");
             imge.setProducto(product1);
