@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Favorito {
+public class Favorito implements Serializable {
 
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//

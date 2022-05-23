@@ -14,7 +14,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
-public class Ciudad {
+public class Ciudad implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id
@@ -30,7 +30,7 @@ public class Ciudad {
     //================================= RELACIÓN CON LA ENTIDAD DIRECCIÓN =================================//
     @OneToMany(mappedBy = "ciudad")
     @ToString.Exclude
-    private List<Direccion> direcciones;
+    private transient List<Direccion> direcciones;
 
     //================================= CONSTRUCTOR  =================================//
     public Ciudad( String nombre) {

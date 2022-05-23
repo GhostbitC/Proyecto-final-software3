@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Usuario extends Persona {
+public class Usuario extends Persona implements Serializable {
     @Column(length = 10)
     private double saldo;
 
@@ -24,22 +24,22 @@ public class Usuario extends Persona {
     //================================= RELACION CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Compra> compras;
+    private transient List<Compra> compras;
 
     //================================= RELACIÓN CON LA ENTIDAD PRODUCTO =================================//
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
-    private List<Producto> productos;
+    private transient List<Producto> productos;
 
     //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
-    private List<Favorito> favoritos;
+    private transient List<Favorito> favoritos;
 
     //================================= RELACION CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Comentario> comentarios;
+    private transient List<Comentario> comentarios;
 
     //================================= RELACION CON LA ENTIDAD DIRECCION =================================//
     @OneToOne

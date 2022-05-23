@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Producto {
+public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,28 +55,28 @@ public class Producto {
     //================================= RELACIÓN CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude
-    private List<Comentario> comentarios;
+    private transient List<Comentario> comentarios;
 
     //================================= RELACIÓN CON LA ENTIDAD IMAGEN =================================//
     @OneToMany(mappedBy = "producto",fetch=FetchType.LAZY)
     @ToString.Exclude
-    private List<Imagen> imagenes;
+    private transient List<Imagen> imagenes;
 
     //================================= RELACIÓN CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     @ToString.Exclude
-    private List<Favorito> favoritos;
+    private transient List<Favorito> favoritos;
 
     //================================= RELACIÓN CON LA ENTIDAD ESPECIFICACIÓN =================================//
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude
-    private List<Especificacion> especificaciones;
+    private transient List<Especificacion> especificaciones;
 
     //================================= RELACIÓN CON LA ENTIDAD DETALLE COMPRA =================================//
     @OneToMany (mappedBy = "producto", cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
-    private List<DetalleCompra> listaDetalleCompra;
+    private transient List<DetalleCompra> listaDetalleCompra;
 
 
     public Producto(String nombre, String descripcion, double precio, Administrador administrador, Categoria categoria) {

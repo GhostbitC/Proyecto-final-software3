@@ -12,7 +12,7 @@ import java.util.*;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Compra {
+public class Compra implements Serializable {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
     @Id
@@ -43,7 +43,7 @@ public class Compra {
     @OneToMany (mappedBy = "compra", cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
-    private List<DetalleCompra> listaDetallesCompra;
+    private transient List<DetalleCompra> listaDetallesCompra;
 
     //================================= RELACIÓN CON LA ENTIDAD ENVÍO =================================//
     @ManyToOne
