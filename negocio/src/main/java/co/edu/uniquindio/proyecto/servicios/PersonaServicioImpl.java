@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class PersonaServicioImpl implements PersonaServicio{
+public class PersonaServicioImpl implements PersonaServicio, Serializable {
 
     @Autowired
     private PersonaRepo personaRepo;

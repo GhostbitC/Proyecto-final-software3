@@ -5,8 +5,10 @@ import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+
 @Service
-public class ImagenServicioImpl implements ImagenServicio{
+public class ImagenServicioImpl implements ImagenServicio, Serializable {
 
     private final ImagenRepo imagenRepo;
 

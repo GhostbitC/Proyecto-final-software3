@@ -7,10 +7,12 @@ import co.edu.uniquindio.proyecto.repositorios.ImagenRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 import java.util.*;
 
 @Service
-public class ProductoServicioImpl implements ProductoServicio {
+public class ProductoServicioImpl implements ProductoServicio, Serializable {
 
     private final ProductoRepo productoRepo;
     private final ComentarioRepo comentarioRepo;

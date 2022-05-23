@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Producto {
+public class Producto implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +50,7 @@ public class Producto {
 
     //================================= RELACIÓN CON LA ENTIDAD COMPRA =================================//
     @ManyToOne
-    private transient Compra compra;
+    private Compra compra;
 
     //================================= RELACIÓN CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "producto")
@@ -76,7 +76,7 @@ public class Producto {
     @OneToMany (mappedBy = "producto", cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
-    private transient List<DetalleCompra> listaDetalleCompra;
+    private List<DetalleCompra> listaDetalleCompra;
 
     public Producto(String nombre, String descripcion, double precio, Administrador administrador) {
         this.nombre = nombre;

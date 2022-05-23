@@ -5,8 +5,10 @@ import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.DireccionRepo;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+
 @Service
-public class DireccionServicioImpl implements DireccionServicio{
+public class DireccionServicioImpl implements DireccionServicio, Serializable {
 
     private final DireccionRepo direccionRepo;
 

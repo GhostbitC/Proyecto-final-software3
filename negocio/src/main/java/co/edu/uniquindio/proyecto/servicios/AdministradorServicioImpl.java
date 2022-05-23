@@ -4,10 +4,11 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
+import java.io.Serializable;
 import java.util.*;
 
 @Service
-public class AdministradorServicioImpl implements AdministradorServicio{
+public class AdministradorServicioImpl implements AdministradorServicio, Serializable {
 
     private final AdministradorRepo administradorRepo;
 
