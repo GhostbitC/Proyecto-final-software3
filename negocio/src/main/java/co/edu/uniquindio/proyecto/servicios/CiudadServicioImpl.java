@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class CiudadServicioImpl implements CiudadServicio{
+public class CiudadServicioImpl implements CiudadServicio {
 
     private final CiudadRepo ciudadRepo;
 

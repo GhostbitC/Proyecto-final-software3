@@ -4,10 +4,12 @@ import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 import java.util.*;
 
 @Service
-public class CompraServicioImpl implements CompraServicio {
+public class CompraServicioImpl implements CompraServicio, Serializable {
 
     private final CompraRepo compraRepo;
     private final UsuarioRepo usuarioRepo;

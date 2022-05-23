@@ -230,7 +230,7 @@
                     </div>
                 </div>
             </div>
-
+        </h:form>
 
             <div class="container" style="width: 100%;margin-top: 3%;">
                 <div class="card">
@@ -240,7 +240,6 @@
                         </div>
 
                         <div style="margin-top: 3%">
-
                             <p:dataTable value="#{usuarioBean.comprasSinComprobante}" var="compra"
                                          id="comprasPendientesTable" style="margin-bottom: 20px">
 
@@ -261,14 +260,25 @@
                                     <h6>#{compra.medioPago}</h6>
                                 </p:column>
 
+                                <p:column style="text-align: center" headerText="Subir imagen">
+                                    <h:form id="crear-producto">
+                                        <h:inputText id="link-imagen" value="#{usuarioBean.linkImagen}"/>
+                                        <input id="file-upload" type="file"/>
+
+                                        <p:commandButton ajax="false" value="Subir" action="#{usuarioBean.subirComprobante}"
+                                                     style="background: #542551;border-color: #542551"/>
+                                    </h:form>
+                                </p:column>
+
                                 <p:column style="text-align: center" headerText="Validar compra">
-                                    <p:commandButton action="#{usuarioBean.unirComprobanteCompra(compra.id)}"
+                                    <h:form>
+                                        <p:commandButton action="#{usuarioBean.unirComprobanteCompra(compra.id)}"
                                                      update="@form,comprasPendientesTable"
                                                      value="Validar" style="width: 50%;border-color: black!important;"/>
+                                    </h:form>
                                 </p:column>
 
                             </p:dataTable>
-
                         </div>
                     </div>
                 </div>
@@ -316,15 +326,8 @@
                     </div>
                 </div>
             </div>
-        </h:form>
 
-        <h:form id="crear-producto">
-            <h:inputText id="link-imagen" value="#{usuarioBean.linkImagen}"/>
-            <input id="file-upload" type="file"/>
 
-            <p:commandButton value="Subir" action="#{usuarioBean.subirComprobante}"
-                             style="background: #542551;border-color: #542551"/>
-        </h:form>
 
     </ui:define>
 </ui:composition>

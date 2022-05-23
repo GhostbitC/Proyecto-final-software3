@@ -43,7 +43,7 @@ public class Compra implements Serializable {
     @OneToMany (mappedBy = "compra", cascade = CascadeType.ALL)
     @ToString.Exclude
     @JsonIgnore
-    private List<DetalleCompra> listaDetallesCompra;
+    private transient List<DetalleCompra> listaDetallesCompra;
 
     //================================= RELACIÓN CON LA ENTIDAD ENVÍO =================================//
     @ManyToOne

@@ -51,11 +51,7 @@ public class AdministradorBean implements Serializable {
         this.productosSinAprobarUsuarios = obtenerProductosSinAprobar();
         this.productosPublicados = obtenerProductosPublicados();
     }
-
-    /***
-     * Metodo para obtener un administrador
-     * @return El administrador que se requiere
-     */
+    
     public Administrador obtenerAdministrador(){
 
         Administrador administradorEncontrado = new Administrador();
@@ -63,10 +59,7 @@ public class AdministradorBean implements Serializable {
         if(personaLogin!=null){
 
             try{
-
                 administradorEncontrado = administradorServicio.obtenerAdministrador(personaLogin.getId());
-                //personaLogin.toString();
-
             }catch (Exception e){
                 e.printStackTrace();
             }

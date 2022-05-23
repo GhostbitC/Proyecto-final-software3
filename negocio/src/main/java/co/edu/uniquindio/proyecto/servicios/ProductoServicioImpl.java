@@ -6,11 +6,11 @@ import co.edu.uniquindio.proyecto.repositorios.ImagenRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
 import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import org.springframework.stereotype.Service;
-
+import java.io.Serializable;
 import java.util.*;
 
 @Service
-public class ProductoServicioImpl implements ProductoServicio {
+public class ProductoServicioImpl implements ProductoServicio, Serializable {
 
     private final ProductoRepo productoRepo;
     private final ComentarioRepo comentarioRepo;
@@ -76,7 +76,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
         if (productoEncontrado!=null){
 
-            if(productoEncontrado.getImagenes()!=null && productoEncontrado.getImagenes().size()>0){
+            if(productoEncontrado.getImagenes()!=null && productoEncontrado.getImagenes().isEmpty()){
 
                 imagenRepo.deleteAll(productoEncontrado.getImagenes());
 
@@ -84,7 +84,7 @@ public class ProductoServicioImpl implements ProductoServicio {
 
             }
 
-            if(productoEncontrado.getComentarios()!=null && productoEncontrado.getComentarios().size()>0){
+            if(productoEncontrado.getComentarios()!=null && productoEncontrado.getComentarios().isEmpty()){
 
                 comentarioRepo.deleteAll(productoEncontrado.getComentarios());
 
@@ -149,12 +149,11 @@ public class ProductoServicioImpl implements ProductoServicio {
 
                     Integer calificacionAux = productoRepo.obtenerCalificacion(p.getId());
 
-                    if(calificacionAux!=null){
+                    if(calificacionAux!=null && calificacionAux>calificacion){
 
-                        if(calificacionAux>calificacion){
                             calificacion = calificacionAux;
                             productoEstrella = p;
-                        }
+
                     }
 
                 }
