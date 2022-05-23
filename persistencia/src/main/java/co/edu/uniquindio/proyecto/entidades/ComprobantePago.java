@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ComprobantePago implements Serializable {
+public class ComprobantePago {
 
     //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id

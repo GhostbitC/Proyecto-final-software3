@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Envio implements Serializable {
+public class Envio{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

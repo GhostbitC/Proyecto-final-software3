@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.entidades;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -10,8 +11,7 @@ import javax.validation.constraints.Positive;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @ToString
-
-public class DetalleCompra {
+public class DetalleCompra implements Serializable {
 
     //---------------------------------- ATRIBUTOS ----------------------
     @Id
