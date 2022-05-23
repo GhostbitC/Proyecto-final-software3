@@ -1,22 +1,23 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 
 public interface UsuarioServicio {
 
-    void registrarUsuario(Usuario u) throws Exception;
+    void registrarUsuario(Usuario u) throws ObjetoNoEncontradoException;
 
-    void actualizarUsuario(String email, String password, Usuario u) throws Exception;
+    void actualizarUsuario(String email, String password, Usuario u) throws ObjetoNoEncontradoException;
 
-    void eliminarUsuario(String email,String password) throws Exception;
+    void eliminarUsuario(String email,String password) throws ObjetoNoEncontradoException;
 
-    void cambiarPassword(String email,String password) throws Exception;
+    void cambiarPassword(String email,String password) throws ObjetoNoEncontradoException;
 
-    Usuario obtenerUsuario(int id) throws Exception;
+    Usuario obtenerUsuario(int id) throws ObjetoNoEncontradoException;
 
-    Usuario obtenerUsuarioNombre(String nombre) throws Exception;
+    Usuario obtenerUsuarioNombre(String nombre) throws ObjetoNoEncontradoException;
 
-    Usuario obtenerUsuarioEmail(String email) throws Exception;
+    Usuario obtenerUsuarioEmail(String email) throws ObjetoNoEncontradoException;
 
-    Usuario obtenerUsuarioEmailPassword(String email, String password) throws Exception;
+    Usuario obtenerUsuarioEmailPassword(String email, String password) throws ObjetoNoEncontradoException;
 }

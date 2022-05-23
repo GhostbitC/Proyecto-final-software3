@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.Direccion;
+import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.DireccionRepo;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,12 @@ public class DireccionServicioImpl implements DireccionServicio{
     }
 
     @Override
-    public void registrarDireccion(Direccion d) throws Exception {
+    public void registrarDireccion(Direccion d) throws ObjetoNoEncontradoException {
 
         if (d != null){
             direccionRepo.save(d);
         }else{
-            throw new Exception("No se pueden validar los datos");
+            throw new ObjetoNoEncontradoException("No se pueden validar los datos");
         }
     }
 }

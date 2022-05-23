@@ -1,35 +1,37 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
+
 import java.util.List;
 
 public interface ProductoServicio {
 
-    Producto registrarProducto(Producto p) throws Exception;
+    Producto registrarProducto(Producto p) throws ObjetoNoEncontradoException;
 
-    void actualizarProducto(Producto p,String nombre) throws Exception;
+    void actualizarProducto(Producto p,String nombre) throws ObjetoNoEncontradoException;
 
-    void actualizarProducto(Producto p) throws Exception;
+    void actualizarProducto(Producto p) throws ObjetoNoEncontradoException;
 
-    void eliminarProducto(int idProducto) throws Exception;
+    void eliminarProducto(int idProducto) throws ObjetoNoEncontradoException;
 
-    Producto obtenerProducto(int id) throws Exception;
+    Producto obtenerProducto(int id) throws ObjetoNoEncontradoException;
 
     List<Producto> buscarProductos(String cadena);
 
     List<Producto> listarProductosDestacados();
 
-    Producto obtenerProductoNombre(String nombre) throws Exception;
+    Producto obtenerProductoNombre(String nombre) throws ObjetoNoEncontradoException;
 
     Producto obtenerProductoEstrella(int idUsuario);
 
-    int obtenerCalificacionPromedio(int idProducto) throws Exception;
+    int obtenerCalificacionPromedio(int idProducto) throws ObjetoNoEncontradoException;
 
-    void ingresarComentario(Comentario c, Producto producto, Persona persona) throws Exception;
+    void ingresarComentario(Comentario c, Producto producto, Persona persona) throws ObjetoNoEncontradoException;
 
-    void registrarComentario(Comentario c) throws Exception;
+    void registrarComentario(Comentario c) throws ObjetoNoEncontradoException;
 
-    int[] obtenerPorcentaje(int idProducto) throws Exception;
+    int[] obtenerPorcentaje(int idProducto) throws ObjetoNoEncontradoException;
 
     List<Producto> listarProductos();
 

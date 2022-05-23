@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -25,17 +26,17 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
     @Override
-    public void crearCompra(Compra c) throws Exception {
+    public void crearCompra(Compra c) throws ObjetoNoEncontradoException {
 
         if (c !=null){
             compraRepo.save(c);
         }else{
-            throw new Exception("No se puede registrar esta compra");
+            throw new ObjetoNoEncontradoException("No se puede registrar esta compra");
         }
     }
 
     @Override
-    public void agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws Exception {
+    public void agregarCompra(ArrayList<ProductoCarrito> productoCarrito, Usuario usuario, String medioPago) throws ObjetoNoEncontradoException {
         try {
             Compra compra = new Compra();
             compra.setFechaVenta(new Date());
@@ -60,7 +61,7 @@ public class CompraServicioImpl implements CompraServicio {
                 }
             }
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            throw new ObjetoNoEncontradoException(e.getMessage());
         }
 
     }
@@ -74,23 +75,24 @@ public class CompraServicioImpl implements CompraServicio {
        }
     }
 
-    public Compra obtenerCompra(int idCompra) throws Exception{
+    public Compra obtenerCompra(int idCompra) throws ObjetoNoEncontradoException
+    {
 
         Optional<Compra> compraEncontrada = compraRepo.findById(idCompra);
 
         if (compraEncontrada.isEmpty()){
-            throw new Exception("La compra no existe");
+            throw new ObjetoNoEncontradoException("La compra no existe");
         }
 
         return compraEncontrada.get();
     }
 
-    public void agregarComprobanteCompra(int idCompra, ComprobantePago comprobantePago) throws Exception {
+    public void agregarComprobanteCompra(int idCompra, ComprobantePago comprobantePago) throws ObjetoNoEncontradoException {
 
         Compra compraEncontrada = obtenerCompra(idCompra);
 
         if(compraEncontrada==null){
-            throw new Exception("La compra no existe");
+            throw new ObjetoNoEncontradoException("La compra no existe");
         }
         compraEncontrada.setComprobantePago(comprobantePago);
         comprobantePago.setCompra(compraEncontrada);
@@ -114,22 +116,22 @@ public class CompraServicioImpl implements CompraServicio {
     }
 
     @Override
-    public Compra obtenerCompraUsuario(int idUsuario, int idCompra) throws Exception {
+    public Compra obtenerCompraUsuario(int idUsuario, int idCompra) throws ObjetoNoEncontradoException {
         Optional<Usuario> u = usuarioRepo.findById(idUsuario);
         Optional<Compra> c = compraRepo.findById(idCompra);
 
         if (u.isEmpty()){
-            throw new Exception("El usuario no existe");
+            throw new ObjetoNoEncontradoException("El usuario no existe");
         }
 
         if (c.isEmpty()){
-            throw new Exception("La compra no existe");
+            throw new ObjetoNoEncontradoException("La compra no existe");
         }
 
         Compra compraU = compraRepo.obtenerCompraUsuario(u.get().getId(),c.get().getId());
 
         if (compraU == null) {
-            throw new Exception("El usuario no cuenta con esta compra");
+            throw new ObjetoNoEncontradoException("El usuario no cuenta con esta compra");
         }
         return compraU;
     }

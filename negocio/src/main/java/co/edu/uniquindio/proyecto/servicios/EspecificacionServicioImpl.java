@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.Especificacion;
+import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.EspecificacionRepo;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,10 @@ public class EspecificacionServicioImpl implements EspecificacionServicio{
     }
 
     @Override
-    public void registrarEspecificacion(Especificacion e) throws Exception {
+    public void registrarEspecificacion(Especificacion e) throws ObjetoNoEncontradoException {
 
         if(e.getEspecificacion().length() > 500){
-            throw new Exception("No puede superar los 500 caracteres");
+            throw new ObjetoNoEncontradoException("No puede superar los 500 caracteres");
         }
         especificacionRepo.save(e);
     }

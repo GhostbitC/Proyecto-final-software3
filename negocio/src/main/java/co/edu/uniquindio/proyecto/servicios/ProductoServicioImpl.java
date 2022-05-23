@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.EspecificacionRepo;
 import co.edu.uniquindio.proyecto.repositorios.ImagenRepo;
 import co.edu.uniquindio.proyecto.repositorios.ProductoRepo;
@@ -29,10 +30,10 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public Producto registrarProducto(Producto p) throws Exception {
+    public Producto registrarProducto(Producto p) throws ObjetoNoEncontradoException {
 
         if (p.getNombre().length() >100){
-            throw new Exception("No se puede exceder los 100 caracteres");
+            throw new ObjetoNoEncontradoException("No se puede exceder los 100 caracteres");
         }
         p.setEstado(false);
 
@@ -40,7 +41,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public void actualizarProducto(Producto p, String nombre) throws Exception {
+    public void actualizarProducto(Producto p, String nombre) throws ObjetoNoEncontradoException {
 
         Producto productoEncontrado = obtenerProductoNombre(nombre);
 
@@ -55,23 +56,23 @@ public class ProductoServicioImpl implements ProductoServicio {
 
             productoRepo.save(productoEncontrado);
         }else {
-            throw new Exception("El producto a actualizar no existe");
+            throw new ObjetoNoEncontradoException("El producto a actualizar no existe");
         }
 
     }
 
     @Override
-    public void actualizarProducto(Producto p) throws Exception {
+    public void actualizarProducto(Producto p) throws ObjetoNoEncontradoException {
 
         if (p !=null){
             productoRepo.save(p);
         }else{
-            throw new Exception("No se encontraron registros");
+            throw new ObjetoNoEncontradoException("No se encontraron registros");
         }
     }
 
     @Override
-    public void eliminarProducto(int idProducto) throws Exception {
+    public void eliminarProducto(int idProducto) throws ObjetoNoEncontradoException {
 
         Producto productoEncontrado = obtenerProducto(idProducto);
 
@@ -106,31 +107,29 @@ public class ProductoServicioImpl implements ProductoServicio {
             productoRepo.save(productoEncontrado);
             productoRepo.delete(productoEncontrado);
         }else{
-            throw new Exception("El producto a eliminar no existe");
+            throw new ObjetoNoEncontradoException("El producto a eliminar no existe");
         }
     }
 
     @Override
-    public Producto obtenerProducto(int id) throws Exception {
+    public Producto obtenerProducto(int id) throws ObjetoNoEncontradoException {
 
         Optional<Producto> productoEncontrado = productoRepo.findById(id);
 
         if (productoEncontrado.isEmpty()){
-            throw new Exception("El producto buscado no existe");
+            throw new ObjetoNoEncontradoException("El producto buscado no existe");
         }
-
         return productoEncontrado.get();
     }
 
     @Override
-    public Producto obtenerProductoNombre(String nombre) throws Exception {
+    public Producto obtenerProductoNombre(String nombre) throws ObjetoNoEncontradoException {
 
         Producto productoEncontrado = productoRepo.obtenerProductoNombre(nombre);
 
         if (productoEncontrado==null){
-            throw new Exception("El producto buscado no existe");
+            throw new ObjetoNoEncontradoException("El producto buscado no existe");
         }
-
         return productoEncontrado;
     }
 
@@ -163,7 +162,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int obtenerCalificacionPromedio(int idProducto) throws Exception {
+    public int obtenerCalificacionPromedio(int idProducto) throws ObjetoNoEncontradoException {
 
         Integer calification;
         Producto productoEncontrado= obtenerProducto(idProducto);
@@ -171,10 +170,8 @@ public class ProductoServicioImpl implements ProductoServicio {
         if (productoEncontrado!=null){
 
             calification = productoRepo.obtenerCalificacion(productoEncontrado.getId());
-
-
         }else{
-            throw new Exception("El producto no fue encontrado");
+            throw new ObjetoNoEncontradoException("El producto no fue encontrado");
         }
 
         return Objects.requireNonNullElse(calification, 0);
@@ -182,7 +179,7 @@ public class ProductoServicioImpl implements ProductoServicio {
     }
 
     @Override
-    public int[] obtenerPorcentaje(int idProducto) throws Exception{
+    public int[] obtenerPorcentaje(int idProducto) throws ObjetoNoEncontradoException {
 
         int general;
         int especifico;
@@ -203,24 +200,24 @@ public class ProductoServicioImpl implements ProductoServicio {
             }
 
         }else{
-            throw new Exception("El producto no existe");
+            throw new ObjetoNoEncontradoException("El producto no existe");
         }
         return promedios;
     }
 
     @Override
-    public void registrarComentario(Comentario c) throws Exception {
+    public void registrarComentario(Comentario c) throws ObjetoNoEncontradoException {
 
         try{
             c.setFechaComentario(new Date());
             comentarioRepo.save(c);
         }catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ObjetoNoEncontradoException(e.getMessage());
         }
     }
 
     @Override
-    public void ingresarComentario(Comentario c, Producto producto, Persona persona) throws Exception {
+    public void ingresarComentario(Comentario c, Producto producto, Persona persona) throws ObjetoNoEncontradoException {
 
         try {
             if (producto != null && persona != null) {
@@ -231,7 +228,7 @@ public class ProductoServicioImpl implements ProductoServicio {
                 comentarioRepo.save(c);
             }
         }catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new ObjetoNoEncontradoException(e.getMessage());
         }
     }
 

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.Imagen;
+import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,10 @@ public class ImagenServicioImpl implements ImagenServicio{
     }
 
     @Override
-    public void registrarImagen(Imagen i) throws Exception {
+    public void registrarImagen(Imagen i) throws ObjetoNoEncontradoException {
 
         if (i.getUrl().length() > 100){
-            throw  new Exception("La URL no es valida");
+            throw  new ObjetoNoEncontradoException("La URL no es valida");
         }
         imagenRepo.save(i);
     }
