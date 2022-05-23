@@ -3,9 +3,10 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface AdministradorServicio {
+public interface AdministradorServicio extends Serializable {
 
     void registrarAdministrador(Administrador a) throws ObjetoNoEncontradoException;
 

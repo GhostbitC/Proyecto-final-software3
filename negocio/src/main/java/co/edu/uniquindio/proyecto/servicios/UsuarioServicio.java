@@ -3,7 +3,9 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 
-public interface UsuarioServicio {
+import java.io.Serializable;
+
+public interface UsuarioServicio extends Serializable {
 
     void registrarUsuario(Usuario u) throws ObjetoNoEncontradoException;
 

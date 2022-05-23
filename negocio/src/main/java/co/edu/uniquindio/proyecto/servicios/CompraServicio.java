@@ -4,9 +4,10 @@ import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 
+import java.io.Serializable;
 import java.util.*;
 
-public interface CompraServicio {
+public interface CompraServicio extends Serializable {
 
     void crearCompra(Compra c) throws ObjetoNoEncontradoException;
 
