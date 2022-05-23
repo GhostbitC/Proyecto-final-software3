@@ -81,7 +81,7 @@ public class CompraServicioImpl implements CompraServicio {
         Optional<Compra> compraEncontrada = compraRepo.findById(idCompra);
 
         if (compraEncontrada.isEmpty()){
-            throw new ObjetoNoEncontradoException("La compra no existe");
+            throw new ObjetoNoEncontradoException("La compra no se encuentra registrada");
         }
 
         return compraEncontrada.get();
@@ -125,7 +125,7 @@ public class CompraServicioImpl implements CompraServicio {
         }
 
         if (c.isEmpty()){
-            throw new ObjetoNoEncontradoException("La compra no existe");
+            throw new ObjetoNoEncontradoException("La compra no existe en el sistema");
         }
 
         Compra compraU = compraRepo.obtenerCompraUsuario(u.get().getId(),c.get().getId());

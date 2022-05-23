@@ -140,7 +140,13 @@ class CompraServicioTest {
     @Test
     void enviarEmail() {
 
+        Boolean aux = false;
+
         emailService.enviarEmail("Prueba","Prueba", "sebastianquinteroosorio2104@gmail.com");
+        aux = true;
+
+        Assertions.assertNotNull(true);
+
     }
 
 }
