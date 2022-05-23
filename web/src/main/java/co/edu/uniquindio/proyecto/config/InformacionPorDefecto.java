@@ -336,67 +336,67 @@ public class InformacionPorDefecto implements CommandLineRunner {
             //---------------------------------- COMENTARIOS PRODUCTOS DESTACADOS -------------------------------//
 
             Comentario comentario1= new Comentario();
-            comentario1.setComentario("I've only had it a day but so far this machine is flawless. Very easy set up even if your not very computer literate.");
+            comentario1.setComent("I've only had it a day but so far this machine is flawless. Very easy set up even if your not very computer literate.");
             comentario1.setCalificacion(5);
             comentario1.setProducto(producto1);
             comentario1.setUsuario(u);
 
             Comentario comentario2= new Comentario();
-            comentario2.setComentario("Excelente equipo. Mejora mucho mi flujo de trabajo además su apariencia es muy elegante.");
+            comentario2.setComent("Excelente equipo. Mejora mucho mi flujo de trabajo además su apariencia es muy elegante.");
             comentario2.setCalificacion(3);
             comentario2.setProducto(producto1);
             comentario2.setUsuario(us);
 
             Comentario comentario3= new Comentario();
-            comentario3.setComentario("Cumple con todas las expectativas, lo que más me gusta es que puedes escoger diferentes modos de rendimiento que se aplican si estas conectado a la energía o no.");
+            comentario3.setComent("Cumple con todas las expectativas, lo que más me gusta es que puedes escoger diferentes modos de rendimiento que se aplican si estas conectado a la energía o no.");
             comentario3.setCalificacion(5);
             comentario3.setProducto(producto1);
             comentario3.setUsuario(u);
 
             Comentario comentario4= new Comentario();
-            comentario4.setComentario("If this mouse works, it's pretty fantastic. I like the layout, it's quick as heck, fairly lightweight for a wireless mouse, and the software, though not what I prefer, works fine for me.");
+            comentario4.setComent("If this mouse works, it's pretty fantastic. I like the layout, it's quick as heck, fairly lightweight for a wireless mouse, and the software, though not what I prefer, works fine for me.");
             comentario4.setCalificacion(5);
             comentario4.setProducto(producto2);
             comentario4.setUsuario(us);
 
             Comentario comentario5= new Comentario();
-            comentario5.setComentario("Super customizable y funcional. Llevo poco mas de un mes usandolo exclusivamente para gaming y programacion");
+            comentario5.setComent("Super customizable y funcional. Llevo poco mas de un mes usandolo exclusivamente para gaming y programacion");
             comentario5.setCalificacion(4);
             comentario5.setProducto(producto2);
             comentario5.setUsuario(u);
 
             Comentario comentario6= new Comentario();
-            comentario6.setComentario("Bought this product about 2 months back and I've already started facing problems. Its \"w\" key stops working in the middle of the games.");
+            comentario6.setComent("Bought this product about 2 months back and I've already started facing problems. Its \"w\" key stops working in the middle of the games.");
             comentario6.setCalificacion(2);
             comentario6.setProducto(producto3);
             comentario6.setUsuario(us);
 
             Comentario comentario7= new Comentario();
-            comentario7.setComentario("Ya realice la compra");
+            comentario7.setComent("Ya realice la compra");
             comentario7.setCalificacion(4);
             comentario7.setProducto(producto3);
             comentario7.setUsuario(u);
 
             Comentario comentario8= new Comentario();
-            comentario8.setComentario(" Its so good, i loved it, but for those who doesn't like clicky sound then don't buy cuz its bit loud.");
+            comentario8.setComent(" Its so good, i loved it, but for those who doesn't like clicky sound then don't buy cuz its bit loud.");
             comentario8.setCalificacion(4);
             comentario8.setProducto(producto4);
             comentario8.setUsuario(us);
 
             Comentario comentario9= new Comentario();
-            comentario9.setComentario("Cumple todo lo que promete, los switches funcionan muy bien y trae algunos de repuesto, recomendado.");
+            comentario9.setComent("Cumple todo lo que promete, los switches funcionan muy bien y trae algunos de repuesto, recomendado.");
             comentario9.setCalificacion(5);
             comentario9.setProducto(producto4);
             comentario9.setUsuario(u);
 
             Comentario comentario10= new Comentario();
-            comentario10.setComentario("Excelente teclado muy bueno, suena duro pero no es un problema.");
+            comentario10.setComent("Excelente teclado muy bueno, suena duro pero no es un problema.");
             comentario10.setCalificacion(5);
             comentario10.setProducto(producto5);
             comentario10.setUsuario(us);
 
             Comentario comentario11= new Comentario();
-            comentario11.setComentario("Encantado con tan maravilloso teclado, soy desarrollador y utilizar este keyboard es trabajar como los dioses, excelente. Me encanta porque es bastante ergonomico, las teclas se sienten demasiado bien al utilizarlo.");
+            comentario11.setComent("Encantado con tan maravilloso teclado, soy desarrollador y utilizar este keyboard es trabajar como los dioses, excelente. Me encanta porque es bastante ergonomico, las teclas se sienten demasiado bien al utilizarlo.");
             comentario11.setCalificacion(5);
             comentario11.setProducto(producto5);
             comentario11.setUsuario(u);
@@ -1035,13 +1035,13 @@ public class InformacionPorDefecto implements CommandLineRunner {
             compraServicio.crearCompra(c);
 
             Comentario c1= new Comentario();
-            c1.setComentario("Una bestia de audífonos, micrófono excelente, producto recomendado sobre todo para shooters, se escucha todo y sonido muy envolvente, y se reconoce fácilmente la dirección del enemigo. Nos vemos en valorant.");
+            c1.setComent("Una bestia de audífonos, micrófono excelente, producto recomendado sobre todo para shooters, se escucha todo y sonido muy envolvente, y se reconoce fácilmente la dirección del enemigo. Nos vemos en valorant.");
             c1.setCalificacion(5);
             c1.setProducto(p2);
             c1.setUsuario(us);
 
             Comentario c2= new Comentario();
-            c2.setComentario("Súper producto, de muy buena calidad, es muy ligero y de suave manejo.");
+            c2.setComent("Súper producto, de muy buena calidad, es muy ligero y de suave manejo.");
             c2.setCalificacion(5);
             c2.setProducto(p14);
             c2.setUsuario(u);

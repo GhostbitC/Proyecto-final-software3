@@ -4,8 +4,10 @@ import co.edu.uniquindio.proyecto.entidades.Especificacion;
 import co.edu.uniquindio.proyecto.repositorios.EspecificacionRepo;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+
 @Service
-public class EspecificacionServicioImpl implements EspecificacionServicio{
+public class EspecificacionServicioImpl implements EspecificacionServicio {
 
    private final EspecificacionRepo especificacionRepo;
 
@@ -16,7 +18,7 @@ public class EspecificacionServicioImpl implements EspecificacionServicio{
     @Override
     public void registrarEspecificacion(Especificacion e) throws Exception {
 
-        if(e.getEspecificacion().length() > 500){
+        if(e.getEspecification().length() > 500){
             throw new Exception("No puede superar los 500 caracteres");
         }
         especificacionRepo.save(e);

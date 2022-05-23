@@ -7,6 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ComprobantePagoRepo extends JpaRepository<ComprobantePago,Integer>{
 
-    @Query("select com.url from ComprobantePago com where com.compra.id=:idCompra")
-    String obtenerUrlCompra(Integer idCompra);
 }

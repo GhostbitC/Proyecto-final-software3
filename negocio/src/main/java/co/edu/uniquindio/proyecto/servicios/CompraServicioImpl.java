@@ -4,6 +4,8 @@ import co.edu.uniquindio.proyecto.dto.ProductoCarrito;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 import java.util.*;
 
 @Service

@@ -55,12 +55,12 @@ public class Producto implements Serializable {
     //================================= RELACIÓN CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "producto")
     @ToString.Exclude
-    private List<Comentario> comentarios;
+    private transient List<Comentario> comentarios;
 
     //================================= RELACIÓN CON LA ENTIDAD IMAGEN =================================//
     @OneToMany(mappedBy = "producto",fetch=FetchType.LAZY)
     @ToString.Exclude
-    private List<Imagen> imagenes;
+    private transient List<Imagen> imagenes;
 
     //================================= RELACIÓN CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)

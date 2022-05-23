@@ -3,10 +3,12 @@ package co.edu.uniquindio.proyecto.servicios;
 import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
+
+import java.io.Serializable;
 import java.util.*;
 
 @Service
-public class CiudadServicioImpl implements CiudadServicio{
+public class CiudadServicioImpl implements CiudadServicio {
 
     private final CiudadRepo ciudadRepo;
 
