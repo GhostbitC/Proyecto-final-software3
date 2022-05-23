@@ -18,6 +18,7 @@ co\edu\uniquindio\proyecto\servicios\CiudadServicioImpl.class
 co\edu\uniquindio\proyecto\servicios\PersonaServicio.class
 co\edu\uniquindio\proyecto\NegocioApplication.class
 co\edu\uniquindio\proyecto\servicios\CiudadServicio.class
+co\edu\uniquindio\proyecto\excepciones\ObjetoNoEncontradoException.class
 co\edu\uniquindio\proyecto\servicios\DireccionServicioImpl.class
 co\edu\uniquindio\proyecto\servicios\EspecificacionServicioImpl.class
 co\edu\uniquindio\proyecto\servicios\EspecificacionServicio.class

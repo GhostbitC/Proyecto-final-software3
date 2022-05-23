@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios;
 
 import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -87,13 +88,10 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     }
 
     @Override
-    public Administrador obtenerAdministrador(int id) throws Exception {
+    public Administrador obtenerAdministrador(int id) throws ObjetoNoEncontradoException {
         Optional<Administrador> administrador = administradorRepo.findById(id);
 
-        if(administrador.isEmpty()){
-            throw new Exception("No existe un administrador con el id ingresado");
-        }
-        return administrador.get();
+        return administrador.orElseThrow(() ->new ObjetoNoEncontradoException("No se encontraron registros en la base de datos"));
     }
 
     @Override
@@ -102,13 +100,13 @@ public class AdministradorServicioImpl implements AdministradorServicio{
     }
 
     @Override
-    public Administrador obtenerEmailPassword(String email, String password) throws Exception {
+    public Administrador obtenerEmailPassword(String email, String password) throws ObjetoNoEncontradoException {
 
         Administrador administrador =administradorRepo.findByEmailAndPassword(email, password);
 
         if(administrador == null){
 
-            throw new Exception("¡Ups! No te hemos podido encontrar");
+            throw new ObjetoNoEncontradoException("No se encontraron registros en la base de datos");
         }
         return administrador;
     }
