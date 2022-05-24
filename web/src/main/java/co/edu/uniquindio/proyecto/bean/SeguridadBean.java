@@ -110,7 +110,7 @@ public class SeguridadBean implements Serializable {
         this.subtotal = 0.0;
         this.usuario = new Usuario();
         this.direccion = new Direccion();
-        listaMisCompras = new ArrayList<>();
+        listaMisCompras = listarComprasUsuario();
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
@@ -145,11 +145,12 @@ public class SeguridadBean implements Serializable {
     }
 
     public List<Compra> listarComprasUsuario() {
+
+        List<Compra> comprasU = new ArrayList<>();
         if (persona != null) {
-            listaMisCompras = compraServicio.listarComprasUsuario(persona.getId());
-            return listaMisCompras;
+            comprasU = compraServicio.listarComprasUsuario(persona.getId());
         }
-        return null;
+        return comprasU;
     }
 
     public double calcularSubTotal(int indice) {

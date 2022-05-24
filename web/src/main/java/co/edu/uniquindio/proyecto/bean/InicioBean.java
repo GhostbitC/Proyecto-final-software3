@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 @ViewScoped
-public class inicioBean implements Serializable {
+public class InicioBean implements Serializable {
 
     private final ProductoServicio productoServicio;
 
@@ -31,7 +31,7 @@ public class inicioBean implements Serializable {
     @Setter
     private List<Producto> productosMayorPrecio;
 
-    public inicioBean(ProductoServicio productoServicio) {
+    public InicioBean(ProductoServicio productoServicio) {
         this.productoServicio = productoServicio;
     }
 

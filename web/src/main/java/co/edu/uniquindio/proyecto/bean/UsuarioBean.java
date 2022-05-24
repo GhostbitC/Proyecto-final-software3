@@ -247,7 +247,7 @@ public class UsuarioBean implements Serializable {
         return productos;
     }
 
-    public void eliminarProducto(int idProducto) throws Exception {
+    public void eliminarProducto(int idProducto) {
 
         if (personaLogin!=null){
             productoServicio.eliminarProducto(idProducto);
@@ -319,7 +319,8 @@ public class UsuarioBean implements Serializable {
                 String asunto = "Cambio de contraseña";
                 emailService.enviarEmail(asunto,mensaje,emailCliente);
             }else{
-                throw new Exception("No hemos encontrado tu cuenta");
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, "No hemos encontrado tu cuenta");
+                FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
             }
         } catch (Exception e) {
             e.printStackTrace();
