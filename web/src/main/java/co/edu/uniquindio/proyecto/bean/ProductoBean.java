@@ -104,7 +104,7 @@ public class ProductoBean implements Serializable {
     public String registrarProducto() {
 
         try {
-            if (personaLogin != null && seguridadBean.getRol().equals("admin") && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
+            if (seguridadBean.getRol().equals("admin") && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
 
                     producto.setAdministrador((Administrador) personaLogin);
                     producto.setEstado(true);
@@ -133,7 +133,7 @@ public class ProductoBean implements Serializable {
                     FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
             } else {
-                if (personaLogin != null && seguridadBean.getRol().equals("usuario") && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
+                if (personaLogin != null && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
 
                         producto.setUsuario((Usuario) personaLogin);
 
