@@ -11,7 +11,7 @@ import java.util.Date;
 public class EmailService{
 
     @Autowired
-    private transient JavaMailSender sender;
+    private JavaMailSender sender;
 
     public void enviarEmail(String asunto, String contenido, String destinatario){
         MimeMessage mensaje = sender.createMimeMessage();

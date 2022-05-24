@@ -133,7 +133,7 @@ public class ProductoBean implements Serializable {
                     FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
             } else {
-                if (personaLogin != null && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
+                if (!imagenes.isEmpty() && !especificaciones.isEmpty()) {
 
                         producto.setUsuario((Usuario) personaLogin);
 
