@@ -23,16 +23,13 @@ public class AdministradorBean implements Serializable {
     @Getter @Setter
     private Administrador administrador;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private List<Producto>productosSinAprobarUsuarios;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private List<Producto>productosPublicados;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private List<Compra>comprasUsuariosSinAprobar;
 
     @Value(value = "#{seguridadBean.persona}")
@@ -53,7 +50,7 @@ public class AdministradorBean implements Serializable {
     }
 
     /***
-     * Metodo para obtener un administrador
+     * Método para obtener un administrador
      * @return El administrador que se requiere
      */
     public Administrador obtenerAdministrador(){
@@ -88,8 +85,15 @@ public class AdministradorBean implements Serializable {
 
     public void aprobarCompra(int idCompra){
 
-        administradorServicio.aprobarCompra(idCompra, personaLogin.getId());
-        this.comprasUsuariosSinAprobar = obtenerComprasSinValidar();
+        Compra c = compraServicio.obtenerCompra(idCompra);
+
+        if (c!=null){
+            administradorServicio.aprobarCompra(idCompra, personaLogin.getId());
+
+            c = compraServicio.obtenerCompra(idCompra);
+            compraServicio.crearEnvio(c);
+            this.comprasUsuariosSinAprobar = obtenerComprasSinValidar();
+        }
     }
 
     public void eliminarProducto(int idProducto){

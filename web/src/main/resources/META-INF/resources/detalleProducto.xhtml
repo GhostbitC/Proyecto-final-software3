@@ -88,7 +88,7 @@
             <p:repeat value="#{detalleProductoBean.producto.especificaciones}" var="especificacion">
                <div class="title">
                    <ul>
-                       <li><h6 style="font-size: 14px">#{especificacion.especificacion}</h6></li>
+                       <li><h6 style="font-size: 14px">#{especificacion.especification}</h6></li>
                    </ul>
                </div>
             </p:repeat>
@@ -118,7 +118,7 @@
                                             <div class="col">
                                                 <div class="product-list-detail">
                                                     <h6>#{comentario.usuario.nombre}</h6>
-                                                    <h6>#{comentario.comentario}</h6>
+                                                    <h6>#{comentario.coment}</h6>
                                                     <p:rating readonly="true" value="#{comentario.calificacion}"/>
                                                     <p:divider></p:divider>
                                                 </div>
@@ -228,7 +228,7 @@
 
                     <div class="row" >
                         <div class="col">
-                            <p:inputTextarea value="#{detalleProductoBean.comentarioNuevo.comentario}" placeholder="Comentario" style="width: 100%"/>
+                            <p:inputTextarea value="#{detalleProductoBean.comentarioNuevo.coment}" placeholder="Comentario" style="width: 100%"/>
                         </div>
                         <div class="col-4">
                             <div class="container">

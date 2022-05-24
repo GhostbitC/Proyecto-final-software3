@@ -5,22 +5,24 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
-
 import java.io.Serializable;
+import java.time.*;
 import java.util.*;
 
 @Service
 public class CompraServicioImpl implements CompraServicio, Serializable {
 
     private final CompraRepo compraRepo;
+    private final EnvioRepo envioRepo;
     private final UsuarioRepo usuarioRepo;
     private final DetalleCompraRepo detalleCompraRepo;
     private final ProductoRepo productoRepo;
 
     private final ComprobantePagoRepo comprobantePagoRepo;
 
-    public CompraServicioImpl(CompraRepo compraRepo, UsuarioRepo usuarioRepo, DetalleCompraRepo detalleCompraRepo, ProductoRepo productoRepo, ComprobantePagoRepo comprobantePagoRepo) {
+    public CompraServicioImpl(CompraRepo compraRepo, EnvioRepo envioRepo, UsuarioRepo usuarioRepo, DetalleCompraRepo detalleCompraRepo, ProductoRepo productoRepo, ComprobantePagoRepo comprobantePagoRepo) {
         this.compraRepo = compraRepo;
+        this.envioRepo = envioRepo;
         this.usuarioRepo = usuarioRepo;
         this.detalleCompraRepo = detalleCompraRepo;
         this.productoRepo = productoRepo;
@@ -65,7 +67,32 @@ public class CompraServicioImpl implements CompraServicio, Serializable {
         } catch (Exception e) {
             throw new ObjetoNoEncontradoException(e.getMessage());
         }
+    }
 
+    @Override
+    public void crearEnvio(Compra c) throws ObjetoNoEncontradoException {
+
+        if (c!=null) {
+
+            int codEnvio= (int) (10000 + Math.random() * 90000);
+            Envio e = new Envio();
+            List<Compra> compras = new ArrayList<>();
+            LocalDate dateSend = LocalDate.now();
+            LocalDate dateA = dateSend.plusDays(7);
+            Duration tiempoAproximado = Duration.between(dateSend.atStartOfDay(), dateA.atStartOfDay());
+
+            c.setEnvio(e);
+            compras.add(c);
+            e.setId(codEnvio);
+            e.setFechaEnvio(dateSend);
+            e.setFechaAproximadaLlegada(dateA);
+            e.setTiempoAproximado(tiempoAproximado.toDays());
+            e.setCompras(compras);
+            e.setValor(7.699F);
+            envioRepo.save(e);
+        }else{
+            throw new ObjetoNoEncontradoException("No se encontraron usuarios con los datos proporcionados");
+        }
     }
 
     public void quitarUnidades (Integer codigoProducto, Integer unidadesComprada){

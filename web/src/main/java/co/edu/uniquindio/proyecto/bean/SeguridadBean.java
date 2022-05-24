@@ -21,6 +21,8 @@ public class SeguridadBean implements Serializable {
 
     private final PersonaServicio personaServicio;
 
+    private final CompraServicio compraServicio;
+
     private final CiudadServicio ciudadServicio;
 
     private final DireccionServicio direccionServicio;
@@ -33,9 +35,6 @@ public class SeguridadBean implements Serializable {
 
     @Getter @Setter
     private Persona persona;
-
-    @Getter @Setter
-    private Persona personaAux;
 
     @Getter @Setter
     private Usuario usuario;
@@ -62,32 +61,24 @@ public class SeguridadBean implements Serializable {
     private String rol;
 
     @Getter @Setter
-    private String nombreCompleto;
-
-    @Getter
-    @Setter
     private ArrayList<ProductoCarrito> productosCarrito;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private List<Compra> listaMisCompras;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private double subtotal;
 
-    private final CompraServicio compraServicio;
+    @Getter @Setter
+    private double subTotalF;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private String medioPago;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private ArrayList<String> mediosPago;
 
-    @Getter
-    @Setter
+    @Getter @Setter
     private List<Ciudad> ciudades;
 
     public SeguridadBean(UsuarioServicio usuarioServicio, PersonaServicio personaServicio, CiudadServicio ciudadServicio, DireccionServicio direccionServicio, CompraServicio compraServicio) {
@@ -98,16 +89,15 @@ public class SeguridadBean implements Serializable {
         this.compraServicio = compraServicio;
     }
 
-
     @PostConstruct
     public void inicializar() {
         autenticado = false;
         this.productosCarrito = new ArrayList<>();
         this.mediosPago = new ArrayList<>();
-        mediosPago.add("Tarjeta de crédito");
         mediosPago.add("Consignación");
         mediosPago.add("Saldo de cuenta");
         this.subtotal = 0.0;
+        this.subTotalF = 7.699;
         this.usuario = new Usuario();
         this.direccion = new Direccion();
         listaMisCompras = listarComprasUsuario();
@@ -170,6 +160,9 @@ public class SeguridadBean implements Serializable {
             productosCarrito.add(pc);
             this.subtotal= subtotal + (pc.getPrecio() * pc.getUnidades());
             this.subtotal = Math.round(subtotal*1000.0)/1000.0;
+
+            this.subTotalF= subTotalF + (pc.getPrecio() * pc.getUnidades());
+            this.subTotalF = Math.round(subTotalF*1000.0)/1000.0;
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "El producto se ha agregado a carrito");
             FacesContext.getCurrentInstance().addMessage("add-cart", fm);
         }
@@ -178,17 +171,24 @@ public class SeguridadBean implements Serializable {
     public void eliminarDelCarrito(int indice) {
         this.subtotal -= productosCarrito.get(indice).getPrecio();
         this.subtotal = Math.round(subtotal*1000.0)/1000.0;
+        this.subTotalF -= productosCarrito.get(indice).getPrecio();
+        this.subTotalF = Math.round(subTotalF*1000.0)/1000.0;
         productosCarrito.remove(indice);
         if (productosCarrito.isEmpty()){
             this.subtotal = 0.0;
+            this.subTotalF =7.699;
         }
     }
 
     public void actualizarSubtotal() {
         this.subtotal = 0.0;
+        this.subTotalF = 7.699;
         for (ProductoCarrito p : productosCarrito) {
             this.subtotal += p.getPrecio() * p.getUnidades();
             this.subtotal = Math.round(subtotal*1000.0)/1000.0;
+
+            this.subTotalF += p.getPrecio() * p.getUnidades();
+            this.subTotalF = Math.round(subTotalF*1000.0)/1000.0;
         }
     }
 
@@ -200,6 +200,10 @@ public class SeguridadBean implements Serializable {
                     productosCarrito.clear();
                     this.subtotal = 0.0;
                     this.subtotal = Math.round(subtotal*1000.0)/1000.0;
+
+                    this.subTotalF = 7.699;
+                    this.subTotalF = Math.round(subTotalF*1000.0)/1000.0;
+
                 } else {
                     FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, "Debe seleccionar un medio de pago para efectuar la compra");
                     FacesContext.getCurrentInstance().addMessage(MENSAJECOMPRA, fm);
