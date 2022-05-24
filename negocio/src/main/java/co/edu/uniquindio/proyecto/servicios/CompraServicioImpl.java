@@ -20,6 +20,8 @@ public class CompraServicioImpl implements CompraServicio, Serializable {
 
     private final ComprobantePagoRepo comprobantePagoRepo;
 
+    Random ran = new Random();
+
     public CompraServicioImpl(CompraRepo compraRepo, EnvioRepo envioRepo, UsuarioRepo usuarioRepo, DetalleCompraRepo detalleCompraRepo, ProductoRepo productoRepo, ComprobantePagoRepo comprobantePagoRepo) {
         this.compraRepo = compraRepo;
         this.envioRepo = envioRepo;
@@ -73,8 +75,6 @@ public class CompraServicioImpl implements CompraServicio, Serializable {
     public void crearEnvio(Compra c) throws ObjetoNoEncontradoException {
 
         if (c!=null) {
-
-            Random ran = new Random();
 
             int codEnvio= (10000 + ran.nextInt() * 90000);
             Envio e = new Envio();
