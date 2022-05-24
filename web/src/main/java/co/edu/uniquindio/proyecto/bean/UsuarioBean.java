@@ -26,11 +26,11 @@ public class UsuarioBean implements Serializable {
     @Getter
     private final CiudadServicio ciudadServicio;
 
-    private static final String mensajePersonalizado = "mensajePersonalizado";
+    private static final String MENSAJEPERSONALIZADO = "mensajePersonalizado";
 
-    private static final String mensajeConfirmacion = "Confirmación";
+    private static final String MENSAJECONFIRMACION = "Confirmación";
 
-    private static final String alerta = "Alerta";
+    private static final String ALERTA = "Alerta";
 
     @Getter @Setter
     private Usuario usuario;
@@ -109,12 +109,12 @@ public class UsuarioBean implements Serializable {
     public void registrarUsuario() {
         try {
             usuarioServicio.registrarUsuario(usuario);
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "¡Super! te registramos correctamente");
-            FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! te registramos correctamente");
+            FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
         } catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
         }
     }
 
@@ -125,8 +125,8 @@ public class UsuarioBean implements Serializable {
 
                     usuarioServicio.eliminarUsuario(personaLogin.getEmail(),personaLogin.getPassword());
 
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "¡Super! el usuario ha sido eliminado con exito");
-                    FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! el usuario ha sido eliminado con exito");
+                    FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
                     FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
                     return "/index?faces-redirect=true";
@@ -134,8 +134,8 @@ public class UsuarioBean implements Serializable {
             }
 
         }catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
         }
 
         return null;
@@ -150,15 +150,15 @@ public class UsuarioBean implements Serializable {
 
                 usuarioServicio.actualizarUsuario(personaLogin.getEmail(),personaLogin.getPassword(), usuario);
                 this.usuarioLogin= obtenerUsuario();
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "¡Super! el usuario se actualizo con exito");
-                FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! el usuario se actualizo con exito");
+                FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
                 return "/usuario/perfilUsuario?faces-redirect=true";
             }
 
         }catch(Exception e){
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
         }
         return null;
@@ -178,8 +178,8 @@ public class UsuarioBean implements Serializable {
             compraServicio.agregarComprobanteCompra(idCompra, comprobantePago);
             this.comprasSinComprobante = obtenerComprasSinComprobante();
         } catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
         }
     }
 
@@ -293,7 +293,7 @@ public class UsuarioBean implements Serializable {
     }
 
     public void showMessage() {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, mensajeConfirmacion, "La factura se ha enviado al correo electrónico vinculado a esta cuenta");
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, MENSAJECONFIRMACION, "La factura se ha enviado al correo electrónico vinculado a esta cuenta");
 
         PrimeFaces.current().dialog().showMessageDynamic(message);
     }
@@ -333,17 +333,17 @@ public class UsuarioBean implements Serializable {
 
             FacesMessage message;
             if (u!=null){
-                message = new FacesMessage(FacesMessage.SEVERITY_INFO, mensajeConfirmacion, "Revisa tu correo electrónico, te hemos enviado un email.");
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, MENSAJECONFIRMACION, "Revisa tu correo electrónico, te hemos enviado un email.");
 
             }else{
-                message = new FacesMessage(FacesMessage.SEVERITY_INFO, mensajeConfirmacion, "No se encontró el usuario");
+                message = new FacesMessage(FacesMessage.SEVERITY_INFO, MENSAJECONFIRMACION, "No se encontró el usuario");
 
             }
             PrimeFaces.current().dialog().showMessageDynamic(message);
 
         } catch (Exception e) {
             e.printStackTrace();
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, mensajeConfirmacion, e.getMessage());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, MENSAJECONFIRMACION, e.getMessage());
 
             PrimeFaces.current().dialog().showMessageDynamic(message);
         }

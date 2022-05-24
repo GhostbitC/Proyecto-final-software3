@@ -25,11 +25,11 @@ public class SeguridadBean implements Serializable {
 
     private final DireccionServicio direccionServicio;
 
-    private static final String mensajePersonalizado = "mensajePersonalizado";
+    private static final String MENSAJEPERSONALIZADO = "mensajePersonalizado";
 
-    private static final String alerta = "Alerta";
+    private static final String ALERTA = "Alerta";
 
-    private static final String messageCompra = "msj-compra";
+    private static final String MENSAJECOMPRA = "msj-compra";
 
     @Getter @Setter
     private Persona persona;
@@ -119,8 +119,8 @@ public class SeguridadBean implements Serializable {
         if (email!=null && password!=null) {
             try {
                 persona = personaServicio.login(email,password);
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "¡Super! ingreso correctamente");
-                FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! ingreso correctamente");
+                FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
                 if (persona instanceof Usuario){
                     rol="usuario";
@@ -131,8 +131,8 @@ public class SeguridadBean implements Serializable {
                 autenticado=true;
                return "/general?faces-redirect=true";
             } catch (Exception e) {
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
-                FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
             }
         }
         return null;
@@ -200,12 +200,12 @@ public class SeguridadBean implements Serializable {
                     this.subtotal = 0.0;
                     this.subtotal = Math.round(subtotal*1000.0)/1000.0;
                 } else {
-                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, "Debe seleccionar un medio de pago para efectuar la compra");
-                    FacesContext.getCurrentInstance().addMessage(messageCompra, fm);
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, "Debe seleccionar un medio de pago para efectuar la compra");
+                    FacesContext.getCurrentInstance().addMessage(MENSAJECOMPRA, fm);
                 }
             } catch (Exception e) {
-                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, "La compra no se ha podido efectuar correctamente: " + e.getMessage());
-                FacesContext.getCurrentInstance().addMessage(messageCompra, fm);
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, "La compra no se ha podido efectuar correctamente: " + e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(MENSAJECOMPRA, fm);
             }
         }
     }
@@ -218,8 +218,8 @@ public class SeguridadBean implements Serializable {
             direccionServicio.registrarDireccion(direccion);
             usuarioServicio.registrarUsuario(usuarioEncontrado);
         } catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
         }
     }
 
@@ -227,7 +227,7 @@ public class SeguridadBean implements Serializable {
         registrarDireccion();
         comprar();
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "La compra se ha registrado, te avisaremos cuando sea aprobada");
-        FacesContext.getCurrentInstance().addMessage(messageCompra, fm);
+        FacesContext.getCurrentInstance().addMessage(MENSAJECOMPRA, fm);
         return "/usuario/carrito?faces-redirect=true";
     }
 

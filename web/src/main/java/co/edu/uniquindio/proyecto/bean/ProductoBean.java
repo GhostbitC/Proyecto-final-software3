@@ -27,9 +27,9 @@ public class ProductoBean implements Serializable {
 
     private final EspecificacionServicio especificacionServicio;
 
-    private static final String mensajePersonalizado = "mensajePersonalizado";
+    private static final String MENSAJEPERSONALIZADO = "mensajePersonalizado";
 
-    private static final String alerta = "Alerta";
+    private static final String ALERTA = "Alerta";
 
     @Getter @Setter
     private Categoria categoria;
@@ -129,8 +129,8 @@ public class ProductoBean implements Serializable {
                     this.audifonos = obtenerAudifonos();
                     this.portatiles = obtenerPortatiles();
 
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "¡Super! el producto se creo correctamente");
-                    FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! el producto se creo correctamente");
+                    FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
             } else {
                 if (personaLogin != null && seguridadBean.getRol().equals("usuario") && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
@@ -157,13 +157,13 @@ public class ProductoBean implements Serializable {
                         this.audifonos = obtenerAudifonos();
                         this.portatiles = obtenerPortatiles();
 
-                        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "¡Super! el producto se creo correctamente");
-                        FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+                        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! el producto se creo correctamente");
+                        FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
         return null;
@@ -183,11 +183,11 @@ public class ProductoBean implements Serializable {
                 this.audifonos = obtenerAudifonos();
                 this.portatiles = obtenerPortatiles();
 
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "El producto se actualizo correctamente");
-                FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "El producto se actualizo correctamente");
+                FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
             } catch (Exception e) {
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, "No pudimos actualizar el producto");
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, "No pudimos actualizar el producto");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }
         }
