@@ -5,10 +5,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import javax.mail.internet.MimeMessage;
+import java.io.Serializable;
 import java.util.Date;
 
 @Service
-public class EmailService{
+public class EmailService implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Autowired
     private JavaMailSender sender;
