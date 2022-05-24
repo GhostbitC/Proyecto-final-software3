@@ -27,6 +27,10 @@ public class ProductoBean implements Serializable {
 
     private final EspecificacionServicio especificacionServicio;
 
+    private final String mensajePersonalizado = "mensajePersonalizado";
+
+    private final String alerta = "Alerta";
+
     @Getter @Setter
     private Categoria categoria;
 
@@ -100,8 +104,7 @@ public class ProductoBean implements Serializable {
     public String registrarProducto() {
 
         try {
-            if (personaLogin != null && seguridadBean.getRol().equals("admin")) {
-                if (!imagenes.isEmpty() && !especificaciones.isEmpty()) {
+            if (personaLogin != null && seguridadBean.getRol().equals("admin") && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
 
                     producto.setAdministrador((Administrador) personaLogin);
                     producto.setEstado(true);
@@ -126,12 +129,11 @@ public class ProductoBean implements Serializable {
                     this.audifonos = obtenerAudifonos();
                     this.portatiles = obtenerPortatiles();
 
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se creo correctamente");
-                    FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-                }
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "¡Super! el producto se creo correctamente");
+                    FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
+
             } else {
-                if (personaLogin != null && seguridadBean.getRol().equals("usuario")) {
-                    if (!imagenes.isEmpty() && !especificaciones.isEmpty()) {
+                if (personaLogin != null && seguridadBean.getRol().equals("usuario") && !imagenes.isEmpty() && !especificaciones.isEmpty()) {
 
                         producto.setUsuario((Usuario) personaLogin);
 
@@ -155,14 +157,13 @@ public class ProductoBean implements Serializable {
                         this.audifonos = obtenerAudifonos();
                         this.portatiles = obtenerPortatiles();
 
-                        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! el producto se creo correctamente");
-                        FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
-                    }
+                        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "¡Super! el producto se creo correctamente");
+                        FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
         return null;
@@ -182,11 +183,11 @@ public class ProductoBean implements Serializable {
                 this.audifonos = obtenerAudifonos();
                 this.portatiles = obtenerPortatiles();
 
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "El producto se actualizo correctamente");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "El producto se actualizo correctamente");
+                FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
 
             } catch (Exception e) {
-                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "No pudimos actualizar el producto");
+                FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, "No pudimos actualizar el producto");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }
         }
@@ -209,26 +210,26 @@ public class ProductoBean implements Serializable {
     }
 
     public List<Producto> obtenerTeclados(){
-        List<Producto> teclados;
-        teclados = productoServicio.listarTeclados();
-        return teclados;
+        List<Producto> listaTeclados;
+        listaTeclados = productoServicio.listarTeclados();
+        return listaTeclados;
     }
 
     public List<Producto> obtenerMouses(){
-        List<Producto> mouses;
-        mouses = productoServicio.listarMouses();
-        return mouses;
+        List<Producto> listaMouses;
+        listaMouses = productoServicio.listarMouses();
+        return listaMouses;
     }
 
     public List<Producto> obtenerAudifonos(){
-        List<Producto> audifonos;
-        audifonos = productoServicio.listarAudifonos();
-        return audifonos;
+        List<Producto> listaAudifonos;
+        listaAudifonos = productoServicio.listarAudifonos();
+        return listaAudifonos;
     }
 
     public List<Producto> obtenerPortatiles(){
-        List<Producto> portatiles;
-        portatiles = productoServicio.listarPortatiles();
-        return portatiles;
+        List<Producto> listaPortatiles;
+        listaPortatiles = productoServicio.listarPortatiles();
+        return listaPortatiles;
     }
 }

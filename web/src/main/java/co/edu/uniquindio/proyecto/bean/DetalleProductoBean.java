@@ -91,14 +91,14 @@ public class DetalleProductoBean implements Serializable {
 
                 List<Imagen> imagenes = producto.getImagenes();
 
-                if(imagenes.size()>0){
+                if(!imagenes.isEmpty()){
                     for(Imagen i:imagenes){
                         urlImagenes.add(i.getUrl());
                     }
                 }else{
-                    urlImagenes.add("default.png");
+                    urlImagenes.add("https://res.cloudinary.com/dtz8xwoku/image/upload/v1652632651/uploads/default_nyards.jpg");
                 }
-                personaCreadora = obtenerPersonaCreadora(id);
+                personaCreadora = obtenerPersonaCreadora();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -106,7 +106,7 @@ public class DetalleProductoBean implements Serializable {
         }
     }
 
-    public Persona obtenerPersonaCreadora(int idProducto) {
+    public Persona obtenerPersonaCreadora() {
 
         Persona aux;
 

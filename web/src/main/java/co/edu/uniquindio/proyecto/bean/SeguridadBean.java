@@ -25,6 +25,12 @@ public class SeguridadBean implements Serializable {
 
     private final DireccionServicio direccionServicio;
 
+    private final String mensajePersonalizado = "mensajePersonalizado";
+
+    private final String alerta = "Alerta";
+
+    private final String messageCompra = "msj-compra";
+
     @Getter @Setter
     private Persona persona;
 
@@ -42,7 +48,15 @@ public class SeguridadBean implements Serializable {
 
     @Getter @Setter
     @NotBlank
-    private String email,emailR,password;
+    private String email;
+
+    @Getter @Setter
+    @NotBlank
+    private String emailR;
+
+    @Getter @Setter
+    @NotBlank
+    private String password;
 
     @Getter @Setter
     private String rol;
@@ -105,8 +119,8 @@ public class SeguridadBean implements Serializable {
         if (email!=null && password!=null) {
             try {
                 persona = personaServicio.login(email,password);
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "¡Super! ingreso correctamente");
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, alerta, "¡Super! ingreso correctamente");
+                FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
 
                 if (persona instanceof Usuario){
                     rol="usuario";
@@ -117,8 +131,8 @@ public class SeguridadBean implements Serializable {
                 autenticado=true;
                return "/general?faces-redirect=true";
             } catch (Exception e) {
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-                FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
             }
         }
         return null;
@@ -186,12 +200,12 @@ public class SeguridadBean implements Serializable {
                     this.subtotal = 0.0;
                     this.subtotal = Math.round(subtotal*1000.0)/1000.0;
                 } else {
-                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Debe seleccionar un medio de pago para efectuar la compra");
-                    FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, "Debe seleccionar un medio de pago para efectuar la compra");
+                    FacesContext.getCurrentInstance().addMessage(messageCompra, fm);
                 }
             } catch (Exception e) {
-                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "La compra no se ha podido efectuar correctamente: " + e.getMessage());
-                FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, "La compra no se ha podido efectuar correctamente: " + e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(messageCompra, fm);
             }
         }
     }
@@ -204,8 +218,8 @@ public class SeguridadBean implements Serializable {
             direccionServicio.registrarDireccion(direccion);
             usuarioServicio.registrarUsuario(usuarioEncontrado);
         } catch (Exception e) {
-            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-            FacesContext.getCurrentInstance().addMessage("mensajePersonalizado", facesMsg);
+            FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, alerta, e.getMessage());
+            FacesContext.getCurrentInstance().addMessage(mensajePersonalizado, facesMsg);
         }
     }
 
@@ -213,7 +227,7 @@ public class SeguridadBean implements Serializable {
         registrarDireccion();
         comprar();
         FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Información", "La compra se ha registrado, te avisaremos cuando sea aprobada");
-        FacesContext.getCurrentInstance().addMessage("msj-compra", fm);
+        FacesContext.getCurrentInstance().addMessage(messageCompra, fm);
         return "/usuario/carrito?faces-redirect=true";
     }
 

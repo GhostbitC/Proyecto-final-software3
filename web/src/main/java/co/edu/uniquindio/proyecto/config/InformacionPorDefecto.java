@@ -92,16 +92,18 @@ public class InformacionPorDefecto implements CommandLineRunner, Serializable {
 
             //--------------------------- CATEGORÍAS ----------------------------//
 
-            Categoria categoria1 = new Categoria("Mouses","Periféricos",admin1);
+            String descripcionCategoria = "Periféricos";
+
+            Categoria categoria1 = new Categoria("Mouses", descripcionCategoria,admin1);
             categoriaServicio.registrarCategoria(categoria1);
 
-            Categoria categoria2 = new Categoria("Teclados","Periféricos",admin1);
+            Categoria categoria2 = new Categoria("Teclados", descripcionCategoria,admin1);
             categoriaServicio.registrarCategoria(categoria2);
 
-            Categoria categoria3 = new Categoria("Audífonos","Periféricos",admin1);
+            Categoria categoria3 = new Categoria("Audífonos", descripcionCategoria,admin1);
             categoriaServicio.registrarCategoria(categoria3);
 
-            Categoria categoria4 = new Categoria("Portátiles","Periféricos",admin1);
+            Categoria categoria4 = new Categoria("Portátiles", descripcionCategoria,admin1);
             categoriaServicio.registrarCategoria(categoria4);
 
             Categoria categoria5 = new Categoria("Destacados","Destacados",admin2);
