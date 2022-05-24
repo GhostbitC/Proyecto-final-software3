@@ -132,8 +132,7 @@ public class ProductoBean implements Serializable {
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! el producto se creo correctamente");
                     FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
-            } else {
-                if (!imagenes.isEmpty() && !especificaciones.isEmpty()) {
+            } else if (personaLogin!=null) {
 
                         producto.setUsuario((Usuario) personaLogin);
 
@@ -160,7 +159,6 @@ public class ProductoBean implements Serializable {
                         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! el producto se creo correctamente");
                         FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
                 }
-            }
         } catch (Exception e) {
             e.printStackTrace();
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
