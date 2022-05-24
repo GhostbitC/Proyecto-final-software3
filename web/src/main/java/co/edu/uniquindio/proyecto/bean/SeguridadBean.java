@@ -25,11 +25,11 @@ public class SeguridadBean implements Serializable {
 
     private final DireccionServicio direccionServicio;
 
-    private final String mensajePersonalizado = "mensajePersonalizado";
+    private static final String mensajePersonalizado = "mensajePersonalizado";
 
-    private final String alerta = "Alerta";
+    private static final String alerta = "Alerta";
 
-    private final String messageCompra = "msj-compra";
+    private static final String messageCompra = "msj-compra";
 
     @Getter @Setter
     private Persona persona;

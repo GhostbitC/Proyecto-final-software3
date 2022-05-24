@@ -27,9 +27,9 @@ public class ProductoBean implements Serializable {
 
     private final EspecificacionServicio especificacionServicio;
 
-    private final String mensajePersonalizado = "mensajePersonalizado";
+    private static final String mensajePersonalizado = "mensajePersonalizado";
 
-    private final String alerta = "Alerta";
+    private static final String alerta = "Alerta";
 
     @Getter @Setter
     private Categoria categoria;

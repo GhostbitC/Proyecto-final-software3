@@ -26,11 +26,11 @@ public class UsuarioBean implements Serializable {
     @Getter
     private final CiudadServicio ciudadServicio;
 
-    private final String mensajePersonalizado = "mensajePersonalizado";
+    private static final String mensajePersonalizado = "mensajePersonalizado";
 
-    private final String mensajeConfirmacion = "Confirmación";
+    private static final String mensajeConfirmacion = "Confirmación";
 
-    private final String alerta = "Alerta";
+    private static final String alerta = "Alerta";
 
     @Getter @Setter
     private Usuario usuario;
