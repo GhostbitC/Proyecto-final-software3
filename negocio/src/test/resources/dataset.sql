@@ -4,7 +4,7 @@ INSERT INTO ciudad VALUES (3,'Calarcá');
 
 INSERT INTO direccion VALUES (1,'27a','24-31',3);
 
-INSERT INTO usuario VALUES (1,'Quintero','1193409775','sebastianquinteroosorio2104@gmail.com','Botsorio','Sebastian','s123','04/01/2001',100.999,1);
+INSERT INTO usuario VALUES (1,'Quintero','1193409775','sebastianquinteroosorio2104@gmail.com','Botsorio','Sebastian','s123','04/01/2001',1);
 
 INSERT INTO administrador VALUES (2,'Piedrahita','1193421285','braianc.piedrahitar@uqvirtual.edu.co','Ghostbit','Braian','b123');
 
