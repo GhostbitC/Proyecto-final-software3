@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +15,12 @@ import java.util.List;
 @Getter
 @Setter
 public class Usuario extends Persona {
-    @Column(length = 10)
-    private double saldo;
 
     @Column(name = "fecha_nacimiento", nullable = false)
+    @NotBlank(message = "Debe seleccionar una fecha de nacimiento")
     private String fechaNacimiento;
 
-    //================================= RELACION CON LA ENTIDAD COMPRA =================================//
+    //================================= RELACIÓN CON LA ENTIDAD COMPRA =================================//
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @ToString.Exclude
     private transient List<Compra> compras;
@@ -29,21 +30,21 @@ public class Usuario extends Persona {
     @ToString.Exclude
     private List<Producto> productos;
 
-    //================================= RELACION CON LA ENTIDAD FAVORITO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD FAVORITO =================================//
     @OneToMany(mappedBy = "usuario")
     @ToString.Exclude
     private List<Favorito> favoritos;
 
-    //================================= RELACION CON LA ENTIDAD COMENTARIO =================================//
+    //================================= RELACIÓN CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Comentario> comentarios;
 
-    //================================= RELACION CON LA ENTIDAD DIRECCION =================================//
+    //================================= RELACIÓN CON LA ENTIDAD DIRECCIÓN =================================//
     @OneToOne
     private Direccion direccion;
 
-    //================================= CONSTRUCTOR  =================================//
+    //================================= CONSTRUCTOR =================================//
     public Usuario(String nombre,String apellido,String nickname, String password, String email,String fechaNacimiento) {
         super(nombre,apellido, nickname, password, email);
         this.fechaNacimiento = fechaNacimiento;

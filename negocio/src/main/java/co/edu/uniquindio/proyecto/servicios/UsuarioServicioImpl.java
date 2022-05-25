@@ -75,8 +75,6 @@ public class UsuarioServicioImpl implements UsuarioServicio, Serializable {
             throw new ObjetoNoEncontradoException("El usuario ya existe");
         }
 
-        u.setSaldo(0);
-
         usuarioRepo.save(u);
     }
 

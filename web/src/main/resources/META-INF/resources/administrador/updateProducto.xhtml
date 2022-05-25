@@ -86,6 +86,32 @@
                             <p:inputText id="unidades_producto" value="#{productoBean.producto.unidades}"
                                          style="width: 100%"/>
 
+                            <p:commandButton style="border-color: black!important;"
+                                             onclick="PF('dlg1').show()"
+                                             value="Imagen">
+                            </p:commandButton>
+
+                            <p:dataTable id="dt-products2" widgetVar="dtProducts" var="imagen"
+                                         value="#{productoBean.imagenes}"
+                                         reflow="true" styleClass="products-table"
+                                         selection="#{productoBean.linkImagen}"
+                                         rows="1">
+                                <p:autoUpdate/>
+                                <f:facet name="header">
+                                    <div class="products-table-header">
+                                        <span style="font-weight: bold">Imagenes</span>
+                                    </div>
+                                </f:facet>
+
+                                <p:column headerText="Imagen" style="font-family: 'Calibri',sans-serif">
+                                    <p:carousel numVisible="3" numScroll="3" >
+                                        <p:graphicImage value="#{imagen.url}" alt=""
+                                                        style="width: 100px; height: 100px;margin-left: 3%"/>
+
+                                    </p:carousel>
+                                </p:column>
+                            </p:dataTable>
+
                             <p:commandButton value="Especificación" action="#{productoBean.nuevaEspecificacion}"
                                              onclick="PF('Especificaciones').show()" style="background: #542551;border-color: black!important;">
                             </p:commandButton>
@@ -93,7 +119,7 @@
                             <p:dataTable id="dt-products1" widgetVar="dtProducts" var="especificacion"
                                          value="#{productoBean.especificaciones}"
                                          reflow="true" styleClass="products-table"
-                                         selection="#{productoBean.especificacion}"
+                                         selection="#{productoBean.especification}"
                                          rows="10">
                                 <p:autoUpdate/>
                                 <f:facet name="header">
@@ -103,7 +129,7 @@
                                 </f:facet>
 
                                 <p:column headerText="Especificacion" style="font-family: 'Calibri',sans-serif">
-                                    <h:outputText value="#{especificacion.especificacion}" style="font-family: 'Calibri',sans-serif"/>
+                                    <h:outputText value="#{especificacion.especification}" style="font-family: 'Calibri',sans-serif"/>
                                 </p:column>
                                 <p:column headerText="Borrar" style="font-family: 'Calibri',sans-serif">
                                     <p:commandButton icon="pi pi-trash"
@@ -115,7 +141,6 @@
                         </h:panelGrid>
                         <br/>
                         <br/>
-
 
                         <div class="container p-0">
                             <div class="row">
@@ -136,14 +161,6 @@
 
                     </h:form>
 
-                    <h:form id="crear-producto">
-                        <h:inputText id="link-imagen" value="#{productoBean.linkImagen}"/>
-                        <input id="file-upload" type="file"/>
-
-                        <p:commandButton value="Subir" action="#{productoBean.subirImagenes}"
-                                         style="background: #542551;border-color: #542551"/>
-                    </h:form>
-
                 </p:card>
             </div>
         </div>
@@ -155,7 +172,7 @@
                 <p:outputPanel id="panel1">
                     <p>
                         <p:outputLabel for="especificacion" value="Especificación:"/>
-                        <p:inputText id="especificacion" value="#{productoBean.especificacion.especificacion}"
+                        <p:inputText id="especificacion" value="#{productoBean.especificacion.especification}"
                                      style="width: 100%"/>
                     </p>
 
@@ -169,6 +186,23 @@
                 </p:commandButton>
             </h:form>
         </p:dialog>
+
+        <h:form id="crear-producto">
+            <p:dialog header="Imagenes" widgetVar="dlg1" minHeight="40" style="width: 20%;color: #542551" showEffect="fade">
+
+                <div class="row">
+                    <div class="col">
+                        <h:inputText id="link-imagen" value="#{productoBean.linkImagen}" style="visibility: hidden;position: fixed"/>
+                        <input id="file-upload" type="file"/>
+                    </div>
+
+                    <div class="col">
+                        <p:commandButton value="Subir" action="#{productoBean.subirImagenes()}"
+                                         style="background: #542551;border-color: #542551" onclick="PF('dlg1').hide()"/>
+                    </div>
+                </div>
+            </p:dialog>
+        </h:form>
 
     </ui:define>
 </ui:composition>

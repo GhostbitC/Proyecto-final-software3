@@ -95,7 +95,6 @@ public class SeguridadBean implements Serializable {
         this.productosCarrito = new ArrayList<>();
         this.mediosPago = new ArrayList<>();
         mediosPago.add("Consignación");
-        mediosPago.add("Saldo de cuenta");
         this.subtotal = 0.0;
         this.subTotalF = 7.699;
         this.usuario = new Usuario();
@@ -204,7 +203,7 @@ public class SeguridadBean implements Serializable {
                     this.subTotalF = 7.699;
                     this.subTotalF = Math.round(subTotalF*1000.0)/1000.0;
 
-                } else {
+                } else{
                     FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, "Debe seleccionar un medio de pago para efectuar la compra");
                     FacesContext.getCurrentInstance().addMessage(MENSAJECOMPRA, fm);
                 }

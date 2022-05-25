@@ -46,21 +46,18 @@ public class ProductoBean implements Serializable {
 
     @Getter @Setter
     private List<Producto> teclados;
-
     @Getter @Setter
     private List<Producto> mouses;
-
     @Getter @Setter
     private List<Producto> audifonos;
-
     @Getter @Setter
     private List<Producto> portatiles;
     @Getter @Setter
     private List<Especificacion> especificaciones;
     @Getter @Setter
     private Especificacion especificacion;
-
-    private ArrayList<Imagen> imagenes;
+    @Getter @Setter
+    private List<Imagen> imagenes;
     @Getter @Setter
     private List<Categoria> categorias;
     @Value(value = "#{seguridadBean.persona}")
@@ -93,12 +90,11 @@ public class ProductoBean implements Serializable {
 
     public void subirImagenes(){
 
-        if(linkImagen!=null && linkImagen.length()!=0){
+        if(linkImagen!=null && !linkImagen.isEmpty()){
 
             Imagen foto = new Imagen(linkImagen);
             imagenes.add(foto);
         }
-
     }
 
     public String registrarProducto() {
@@ -132,6 +128,8 @@ public class ProductoBean implements Serializable {
                     FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! el producto se creo correctamente");
                     FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
+                return "/administrador/perfilAdministrador?faces-redirect=true";
+
             } else if (personaLogin!=null) {
 
                         producto.setUsuario((Usuario) personaLogin);
@@ -158,6 +156,9 @@ public class ProductoBean implements Serializable {
 
                         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! el producto se creo correctamente");
                         FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
+
+                return "/usuario/perfilUsuario?faces-redirect=true";
+
                 }
         } catch (Exception e) {
             e.printStackTrace();

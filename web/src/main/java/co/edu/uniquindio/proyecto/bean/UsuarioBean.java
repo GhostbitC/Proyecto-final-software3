@@ -106,16 +106,19 @@ public class UsuarioBean implements Serializable {
         this.ciudades = ciudadServicio.listarCiudades();
     }
 
-    public void registrarUsuario() {
+    public String registrarUsuario() {
         try {
             usuarioServicio.registrarUsuario(usuario);
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! te registramos correctamente");
             FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
 
+            return "/loginUsuario?faces-redirect=true";
+
         } catch (Exception e) {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
             FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
         }
+        return null;
     }
 
     public String eliminarUsuario(){
@@ -137,7 +140,6 @@ public class UsuarioBean implements Serializable {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
             FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
         }
-
         return null;
     }
 
