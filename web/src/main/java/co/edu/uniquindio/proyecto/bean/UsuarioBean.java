@@ -126,16 +126,17 @@ public class UsuarioBean implements Serializable {
         try {
             if (personaLogin!=null) {
 
+                Usuario u = usuarioServicio.obtenerUsuario(personaLogin.getId());
+
+                if (u.getCompras().isEmpty()){
                     usuarioServicio.eliminarUsuario(personaLogin.getEmail(),personaLogin.getPassword());
-
-                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "¡Super! el usuario ha sido eliminado con exito");
-                    FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
-
                     FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
                     return "/index?faces-redirect=true";
-
+                }else{
+                    FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, "Cuenta con compras registradas en amazing store, por consiguiente no podemos eliminar la cuenta");
+                    FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
+                }
             }
-
         }catch (Exception e) {
             FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, e.getMessage());
             FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);

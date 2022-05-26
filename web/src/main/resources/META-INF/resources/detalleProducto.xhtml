@@ -65,11 +65,13 @@
 
                                 <h:form class="mt-4">
 
-                                    <p:commandButton value="Añadir al carrito" style="width: 50%;font-size: 18px;background:#542551;border-color: black !important;" update="@form"
-                                                     icon="pi pi-shopping-cart" iconPos="rigth"
-                                                     rendered="#{seguridadBean.autenticado}"
-                                                     action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.id, detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre,detalleProductoBean.producto.imagenPrincipal)}"/>
-                                    <p:growl for="add-cart" showDetail="true"/>
+                                    <div jsf:rendered="#{seguridadBean.rol =='usuario'}">
+                                        <p:commandButton value="Añadir al carrito" style="width: 50%;font-size: 18px;background:#542551;border-color: black !important;" update="@form"
+                                                         icon="pi pi-shopping-cart" iconPos="rigth"
+                                                         rendered="#{seguridadBean.autenticado}"
+                                                         action="#{seguridadBean.agregarAlCarrito(detalleProductoBean.producto.id, detalleProductoBean.producto.precio, detalleProductoBean.producto.nombre,detalleProductoBean.producto.imagenPrincipal)}"/>
+                                        <p:growl for="add-cart" showDetail="true"/>
+                                    </div>
                                 </h:form>
                             </div>
                         </div>
@@ -218,13 +220,12 @@
             </div>
         </div>
 
-        <div class="container" style="width: 100%;padding: 0;min-height: 100%;margin-top: 2%" jsf:rendered="#{seguridadBean.autenticado}">
+        <div class="container" style="width: 100%;padding: 0;min-height: 100%;margin-top: 2%" jsf:rendered="#{seguridadBean.autenticado and seguridadBean.rol == 'usuario'}">
             <div class="card" style="border: none">
                 <div class="card-body">
                     <div class="card-title">
                         <h5 style="color: #542551">Ingresa tu opinión</h5>
                     </div>
-
 
                     <div class="row" >
                         <div class="col">

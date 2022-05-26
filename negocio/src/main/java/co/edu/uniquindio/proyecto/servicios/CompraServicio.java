@@ -26,4 +26,5 @@ public interface CompraServicio extends Serializable {
 
     void crearEnvio(Compra c) throws ObjetoNoEncontradoException;
 
+
 }

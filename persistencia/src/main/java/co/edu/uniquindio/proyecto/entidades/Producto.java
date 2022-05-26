@@ -62,10 +62,6 @@ public class Producto implements Serializable{
     @ToString.Exclude
     private List<Imagen> imagenes;
 
-    //================================= RELACIÓN CON LA ENTIDAD FAVORITO =================================//
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private List<Favorito> favoritos;
 
     //================================= RELACIÓN CON LA ENTIDAD ESPECIFICACIÓN =================================//
     @OneToMany(mappedBy = "producto")

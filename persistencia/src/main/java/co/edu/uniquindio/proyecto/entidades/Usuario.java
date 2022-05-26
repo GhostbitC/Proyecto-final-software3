@@ -29,10 +29,6 @@ public class Usuario extends Persona {
     @ToString.Exclude
     private List<Producto> productos;
 
-    //================================= RELACIÓN CON LA ENTIDAD FAVORITO =================================//
-    @OneToMany(mappedBy = "usuario")
-    @ToString.Exclude
-    private List<Favorito> favoritos;
 
     //================================= RELACIÓN CON LA ENTIDAD COMENTARIO =================================//
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
@@ -48,7 +44,6 @@ public class Usuario extends Persona {
         super(nombre,apellido, nickname, password, email);
         this.fechaNacimiento = fechaNacimiento;
         this.compras= new ArrayList<>();
-        this.favoritos= new ArrayList<>();
         this.comentarios = new ArrayList<>();
         this.productos = new ArrayList<>();
     }

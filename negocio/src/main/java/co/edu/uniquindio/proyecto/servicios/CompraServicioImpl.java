@@ -17,7 +17,6 @@ public class CompraServicioImpl implements CompraServicio, Serializable {
     private final UsuarioRepo usuarioRepo;
     private final DetalleCompraRepo detalleCompraRepo;
     private final ProductoRepo productoRepo;
-
     private final ComprobantePagoRepo comprobantePagoRepo;
 
     Random ran = new Random();
@@ -50,7 +49,8 @@ public class CompraServicioImpl implements CompraServicio, Serializable {
             compra.setMedioPago(medioPago);
 
             compraRepo.save(compra);
-
+            usuario.getCompras().add(compra);
+            usuarioRepo.save(usuario);
             DetalleCompra detalle;
             List<DetalleCompra> lista = new ArrayList<>();
             for (ProductoCarrito p : productoCarrito) {

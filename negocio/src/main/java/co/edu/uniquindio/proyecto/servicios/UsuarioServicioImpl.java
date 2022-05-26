@@ -4,7 +4,6 @@ import co.edu.uniquindio.proyecto.entidades.*;
 import co.edu.uniquindio.proyecto.excepciones.ObjetoNoEncontradoException;
 import co.edu.uniquindio.proyecto.repositorios.*;
 import org.springframework.stereotype.Service;
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -12,15 +11,14 @@ import java.util.*;
 public class UsuarioServicioImpl implements UsuarioServicio, Serializable {
 
     private final UsuarioRepo usuarioRepo;
-    private final FavoritoRepo favoritoRepo;
 
     private  final DireccionRepo direccionRepo;
 
     private final ProductoServicio productoServicio;
 
-    public UsuarioServicioImpl(UsuarioRepo usuarioRepo, FavoritoRepo favoritoRepo, DireccionRepo direccionRepo, ProductoServicio productoServicio) {
+
+    public UsuarioServicioImpl(UsuarioRepo usuarioRepo, DireccionRepo direccionRepo, ProductoServicio productoServicio) {
         this.usuarioRepo = usuarioRepo;
-        this.favoritoRepo = favoritoRepo;
         this.direccionRepo = direccionRepo;
         this.productoServicio = productoServicio;
     }
@@ -78,7 +76,6 @@ public class UsuarioServicioImpl implements UsuarioServicio, Serializable {
         usuarioRepo.save(u);
     }
 
-
     @Override
     public void actualizarUsuario(String email, String password,Usuario u) {
 
@@ -105,32 +102,24 @@ public class UsuarioServicioImpl implements UsuarioServicio, Serializable {
         if (usuarioEncontrado != null){
 
             List<Producto>productosUsuario = usuarioEncontrado.getProductos();
-            List<Favorito>favoritos = usuarioEncontrado.getFavoritos();
 
-            if(productosUsuario!=null && productosUsuario.isEmpty()){
+            if(productosUsuario!=null && !productosUsuario.isEmpty()){
 
                 for(Producto p:usuarioEncontrado.getProductos()){
 
                     productoServicio.eliminarProducto(p.getId());
                 }
-
                 usuarioEncontrado.getProductos().clear();
             }
 
-            if(favoritos!=null && favoritos.isEmpty()){
-
-                favoritoRepo.deleteAll(usuarioEncontrado.getFavoritos());
-            }
 
             if(usuarioEncontrado.getDireccion()!=null){
-
                 Direccion direccionUsuario = usuarioEncontrado.getDireccion();
                 usuarioEncontrado.setDireccion(null);
                 usuarioRepo.save(usuarioEncontrado);
                 direccionRepo.delete(direccionUsuario);
                 usuarioRepo.delete(usuarioEncontrado);
             }else{
-
                 usuarioRepo.save(usuarioEncontrado);
                 usuarioRepo.delete(usuarioEncontrado);
             }

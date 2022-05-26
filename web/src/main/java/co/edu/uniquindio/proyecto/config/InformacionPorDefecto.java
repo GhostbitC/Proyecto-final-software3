@@ -1081,6 +1081,8 @@ public class InformacionPorDefecto implements CommandLineRunner, Serializable {
             c.setAdministrador(admin1);
             c.setEstado(true);
             compraServicio.crearCompra(c);
+            us.getCompras().add(c);
+            usuarioServicio.actualizarUsuario(us.getEmail(),us.getPassword(),us);
 
             Comentario c1= new Comentario();
             c1.setComent("Una bestia de audífonos, micrófono excelente, producto recomendado sobre todo para shooters, se escucha todo y sonido muy envolvente, y se reconoce fácilmente la dirección del enemigo. Nos vemos en valorant.");

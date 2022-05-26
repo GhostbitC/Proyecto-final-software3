@@ -14,7 +14,7 @@ import java.util.*;
 @ToString
 public class Compra implements Serializable {
 
-    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACION =================================//
+    //================================= ATRIBUTOS CON SU RESPECTIVA PARAMETRIZACIÓN =================================//
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
