@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto.bean;
 
 import co.edu.uniquindio.proyecto.entidades.*;
+import co.edu.uniquindio.proyecto.repositorios.EspecificacionRepo;
+import co.edu.uniquindio.proyecto.repositorios.ImagenRepo;
 import co.edu.uniquindio.proyecto.servicios.CategoriaProductoServicio;
 import co.edu.uniquindio.proyecto.servicios.EspecificacionServicio;
 import co.edu.uniquindio.proyecto.servicios.ImagenServicio;
@@ -26,6 +28,10 @@ public class ProductoBean implements Serializable {
     private final ProductoServicio productoServicio;
 
     private final EspecificacionServicio especificacionServicio;
+
+    private final ImagenRepo imagenRepo;
+
+    private final EspecificacionRepo especificacionRepo;
 
     private static final String MENSAJEPERSONALIZADO = "mensajePersonalizado";
 
@@ -65,11 +71,13 @@ public class ProductoBean implements Serializable {
     @Getter @Setter
     private String linkImagen;
 
-    public ProductoBean(ImagenServicio imagenServicio, CategoriaProductoServicio categoriaServicio, ProductoServicio productoServicio, EspecificacionServicio especificacionServicio) {
+    public ProductoBean(ImagenServicio imagenServicio, CategoriaProductoServicio categoriaServicio, ProductoServicio productoServicio, EspecificacionServicio especificacionServicio, ImagenRepo imagenRepo, EspecificacionRepo especificacionRepo) {
         this.imagenServicio = imagenServicio;
         this.categoriaServicio = categoriaServicio;
         this.productoServicio = productoServicio;
         this.especificacionServicio = especificacionServicio;
+        this.imagenRepo = imagenRepo;
+        this.especificacionRepo = especificacionRepo;
     }
 
     @PostConstruct
@@ -119,7 +127,7 @@ public class ProductoBean implements Serializable {
                     productoCreado.setEspecificaciones(especificaciones);
                     productoCreado.setImagenes(imagenes);
                     productoCreado.setEstado(true);
-                    productoServicio.registrarProducto(productoCreado);
+                    productoServicio.actualizarProducto(productoCreado);
                     this.teclados = obtenerTeclados();
                     this.mouses = obtenerMouses();
                     this.audifonos = obtenerAudifonos();
@@ -169,27 +177,51 @@ public class ProductoBean implements Serializable {
     }
 
 
-    public void actualizarProducto() {
+    public String actualizarProducto() {
 
         if (personaLogin != null) {
 
             try {
 
-                productoServicio.actualizarProducto(producto, productoN.getNombre());
+                Producto productoActualizado = productoServicio.obtenerProductoNombre(productoN.getNombre());
+
+                imagenRepo.deleteAll(productoActualizado.getImagenes());
+                especificacionRepo.deleteAll(productoActualizado.getEspecificaciones());
+                productoActualizado.getImagenes().clear();
+                productoActualizado.getEspecificaciones().clear();
+
+                for (Imagen i : imagenes) {
+                    i.setProducto(productoActualizado);
+                    imagenServicio.registrarImagen(i);
+                }
+
+                for (Especificacion e : especificaciones) {
+                    e.setProducto(productoActualizado);
+                    especificacionServicio.registrarEspecificacion(e);
+                }
+
+                productoActualizado.setEspecificaciones(especificaciones);
+                productoActualizado.setImagenes(imagenes);
+
+                productoServicio.actualizarProducto(productoActualizado, productoN.getNombre());
 
                 this.teclados = obtenerTeclados();
                 this.mouses = obtenerMouses();
                 this.audifonos = obtenerAudifonos();
                 this.portatiles = obtenerPortatiles();
 
-                FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, ALERTA, "El producto se actualizo correctamente");
-                FacesContext.getCurrentInstance().addMessage(MENSAJEPERSONALIZADO, facesMsg);
+                if (seguridadBean.getRol().equals("admin")){
+                    return "/administrador/perfilAdministrador?faces-redirect=true";
+                }else{
+                    return "/usuario/perfilUsuario?faces-redirect=true";
+                }
 
             } catch (Exception e) {
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, ALERTA, "No pudimos actualizar el producto");
                 FacesContext.getCurrentInstance().addMessage(null, msg);
             }
         }
+        return null;
     }
 
     public void nuevaEspecificacion() {

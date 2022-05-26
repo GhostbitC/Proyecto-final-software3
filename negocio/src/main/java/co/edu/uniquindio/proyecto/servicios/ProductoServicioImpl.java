@@ -78,7 +78,7 @@ public class ProductoServicioImpl implements ProductoServicio, Serializable {
 
         if (productoEncontrado!=null){
 
-            if(productoEncontrado.getImagenes()!=null && productoEncontrado.getImagenes().isEmpty()){
+            if(productoEncontrado.getImagenes()!=null && !productoEncontrado.getImagenes().isEmpty()){
 
                 imagenRepo.deleteAll(productoEncontrado.getImagenes());
 
@@ -86,7 +86,7 @@ public class ProductoServicioImpl implements ProductoServicio, Serializable {
 
             }
 
-            if(productoEncontrado.getComentarios()!=null && productoEncontrado.getComentarios().isEmpty()){
+            if(productoEncontrado.getComentarios()!=null && !productoEncontrado.getComentarios().isEmpty()){
 
                 comentarioRepo.deleteAll(productoEncontrado.getComentarios());
 
